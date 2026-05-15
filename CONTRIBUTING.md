@@ -1,4 +1,4 @@
-# Contributing to Allen Kim Portfolio
+# Contributing to Allen Portfolio
 
 ## 개발환경 설정
 

@@ -14,20 +14,20 @@ const inter = Inter({
 export const metadata = {
   metadataBase: new URL('https://allen-portfolio.vercel.app'),
   title: {
-    default: 'Allen Kim - Frontend Developer',
-    template: '%s | Allen Kim',
+    default: 'Allen - Frontend Developer',
+    template: '%s | Allen',
   },
   description:
     'Frontend Developer specializing in React, Next.js, and modern web experiences. Building clean, performant interfaces.',
   keywords: ['frontend developer', 'React', 'Next.js', 'Tailwind CSS', 'portfolio'],
-  authors: [{ name: 'Allen Kim' }],
-  creator: 'Allen Kim',
+  authors: [{ name: 'Allen' }],
+  creator: 'Allen',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://allen-portfolio.vercel.app',
-    siteName: 'Allen Kim Portfolio',
-    title: 'Allen Kim - Frontend Developer',
+    siteName: 'Allen Portfolio',
+    title: 'Allen - Frontend Developer',
     description:
       'Frontend Developer specializing in React, Next.js, and modern web experiences.',
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Allen Kim - Frontend Developer',
+        alt: 'Allen - Frontend Developer',
       },
     ],
   },
@@ -43,7 +43,7 @@ export const metadata = {
     card: 'summary_large_image',
     site: '@allen4911',
     creator: '@allen4911',
-    title: 'Allen Kim - Frontend Developer',
+    title: 'Allen - Frontend Developer',
     description: 'Frontend Developer specializing in React, Next.js, and modern web experiences.',
     images: ['/og-image.png'],
   },

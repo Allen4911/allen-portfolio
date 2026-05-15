@@ -13,7 +13,7 @@ jest.mock('next/link', () => {
 describe('HeroSection', () => {
   test('P1: renders profile image instead of AK text placeholder', () => {
     render(<HeroSection />)
-    const img = screen.getByAltText('Allen Kim')
+    const img = screen.getByAltText('Allen')
     expect(img).toBeInTheDocument()
     expect(img.tagName).toBe('IMG')
     expect(img).toHaveAttribute('src', expect.stringContaining('profile'))

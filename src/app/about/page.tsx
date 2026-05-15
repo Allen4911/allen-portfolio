@@ -85,7 +85,7 @@ export default function AboutPage() {
           >
             <Image
               src="/data/profile.webp"
-              alt="Allen Kim"
+              alt="Allen"
               width={400}
               height={400}
               data-testid="about-profile-image"
@@ -102,7 +102,7 @@ export default function AboutPage() {
               About
             </p>
             <h1 className="text-display-lg" style={{ marginBottom: '20px' }}>
-              Allen Kim
+              Allen
             </h1>
             <p className="text-body" style={{ marginBottom: '16px' }}>
               {"18년간 통신 시스템을 설계해온 엔지니어가 프론트엔드 개발로 전환했습니다. 임베디드부터 프로토콜 스택까지 수직 통합된 경험을 바탕으로, 동작 원리를 이해하는 개발자로서 깔끔한 인터페이스와 견고한 시스템을 만듭니다."}

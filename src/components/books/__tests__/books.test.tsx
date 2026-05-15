@@ -46,7 +46,7 @@ jest.mock('../../../../public/data/books.json', () => [
     description: '커버가 없는 책입니다',
     cover: null,
     lang: 'en',
-    author: 'Allen Kim',
+    author: 'Allen',
     views: 50,
     likes: 2,
     chapters: [
@@ -123,7 +123,7 @@ describe('카드 메타 — 작가명 렌더링', () => {
   test('작가명이 표시된다', () => {
     render(<BooksPage />)
     expect(screen.getByText('Test Author')).toBeInTheDocument()
-    expect(screen.getAllByText('Allen Kim')).toHaveLength(2)
+    expect(screen.getAllByText('Allen')).toHaveLength(2)
   })
 })
 

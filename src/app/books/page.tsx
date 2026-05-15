@@ -25,7 +25,7 @@ export default function BooksPage() {
         내가 쓴 책
       </h1>
       <p style={{ color: 'var(--color-ink-muted-48)', marginBottom: '48px' }}>
-        Allen Kim
+        Allen
       </p>
 
       <div

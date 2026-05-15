@@ -36,7 +36,7 @@ export default function HeroSection() {
               className="text-hero-display"
               style={{ marginBottom: '20px' }}
             >
-              Allen Kim
+              Allen
             </h1>
 
             <p
@@ -99,7 +99,7 @@ export default function HeroSection() {
             <div className="hero-photo-wrap">
               <img
                 src="/data/profile.webp"
-                alt="Allen Kim"
+                alt="Allen"
                 style={{
                   width: '100%',
                   height: '100%',
