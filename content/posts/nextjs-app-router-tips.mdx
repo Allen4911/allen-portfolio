@@ -1,0 +1,57 @@
+---
+title: "5 Next.js App Router Tips I Wish I Knew Earlier"
+description: "Practical patterns for layouts, loading states, and data fetching in the App Router."
+date: "2026-05-10"
+tags: ["nextjs", "react", "tips"]
+thumbnail: ""
+published: true
+draft: false
+---
+
+## 1. Parallel Routes for Complex Layouts
+
+Use `@slot` folders to render multiple pages in one layout simultaneously without nesting.
+
+```tsx
+// app/layout.tsx
+export default function Layout({
+  children,
+  sidebar,
+}: {
+  children: React.ReactNode
+  sidebar: React.ReactNode
+}) {
+  return (
+    <div className="grid grid-cols-4">
+      <aside>{sidebar}</aside>
+      <main className="col-span-3">{children}</main>
+    </div>
+  )
+}
+```
+
+## 2. Use `loading.tsx` Aggressively
+
+Every route that fetches data should have a `loading.tsx`. It wraps automatically in a `<Suspense>` boundary.
+
+## 3. Server Actions > API Routes for Mutations
+
+For form submissions and simple mutations, Server Actions remove the need for a separate API layer.
+
+## 4. Cache Busting with `revalidatePath`
+
+After a mutation, call `revalidatePath('/your-route')` to invalidate cached pages on demand.
+
+## 5. `generateMetadata` for Dynamic SEO
+
+```tsx
+export async function generateMetadata({ params }: Props) {
+  const post = await getPost(params.slug)
+  return {
+    title: post.title,
+    description: post.description,
+  }
+}
+```
+
+These five patterns alone cut my boilerplate by half.
