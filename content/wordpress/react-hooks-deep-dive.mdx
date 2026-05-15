@@ -1,0 +1,278 @@
+---
+title: "React Hooks Deep Dive: Real-World Patterns and Pitfalls"
+description: "React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management."
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.
+
+## useState Pitfalls
+
+### Pitfall 1: Partial Update of Object State
+
+```jsx
+// Wrong pattern — other fields disappear
+const [user, setUser] = useState({ name: 'Allen', age: 30 });
+setUser({ name: 'Kim Allen' }); // age disappears!
+
+// Correct pattern
+setUser(prev => ({ ...prev, name: 'Kim Allen' }));
+```
+
+### Pitfall 2: Stale Closure Values
+
+```jsx
+// Problem: count is always 0
+const [count, setCount] = useState(0);
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(count + 1); // count is always the initial value 0
+  }, 1000);
+  return () => clearInterval(timer);
+}, []); // empty dependency array — count never updates
+
+// Fix: functional update
+setCount(prev => prev + 1);
+```
+
+### Pitfall 3: Expensive Initial State
+
+```jsx
+// heavyComputation runs on every render
+const [data, setData] = useState(heavyComputation());
+
+// Pass initializer function — runs only once
+const [data, setData] = useState(() => heavyComputation());
+```
+
+## useEffect Comprehensive Guide
+
+### Dependency Array Rules
+
+```jsx
+useEffect(() => { /* runs on every render */ });
+useEffect(() => { /* runs once on mount */ }, []);
+useEffect(() => { /* runs when a or b changes */ }, [a, b]);
+```
+
+### When Cleanup is Needed
+
+```jsx
+useEffect(() => {
+  const controller = new AbortController();
+  
+  fetch('/api/data', { signal: controller.signal })
+    .then(r => r.json())
+    .then(setData)
+    .catch(err => {
+      if (err.name !== 'AbortError') console.error(err);
+    });
+
+  return () => controller.abort(); // cancel request on unmount
+}, []);
+```
+
+### Event Listener Cleanup
+
+```jsx
+useEffect(() => {
+  const handleResize = () => setWidth(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+```
+
+## Using useCallback and useMemo Correctly
+
+### useCallback — Stabilize Function References
+
+```jsx
+// Unnecessary useCallback — only overhead for simple functions
+const handleClick = useCallback(() => setCount(c => c + 1), []);
+
+// Needed when: function passed as props to a child component
+const ExpensiveChild = memo(({ onSubmit }) => { /* ... */ });
+
+function Parent() {
+  const handleSubmit = useCallback((data) => {
+    submitToApi(data);
+  }, []); // no dependencies if submitToApi is stable
+  
+  return <ExpensiveChild onSubmit={handleSubmit} />;
+}
+```
+
+### useMemo — Cache Computed Results
+
+```jsx
+// Memoize only expensive computations
+const sortedList = useMemo(
+  () => list.slice().sort((a, b) => a.date - b.date),
+  [list]
+);
+
+// Unnecessary useMemo — just use count * 2 directly
+const doubled = useMemo(() => count * 2, [count]);
+```
+
+## Managing Complex State with useReducer
+
+Consider `useReducer` when you have 3 or more related `useState`s:
+
+```typescript
+type State = {
+  data: User[] | null;
+  loading: boolean;
+  error: string | null;
+};
+
+type Action =
+  | { type: 'FETCH_START' }
+  | { type: 'FETCH_SUCCESS'; payload: User[] }
+  | { type: 'FETCH_ERROR'; error: string };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'FETCH_START':
+      return { ...state, loading: true, error: null };
+    case 'FETCH_SUCCESS':
+      return { data: action.payload, loading: false, error: null };
+    case 'FETCH_ERROR':
+      return { ...state, loading: false, error: action.error };
+  }
+}
+
+function UserList() {
+  const [state, dispatch] = useReducer(reducer, {
+    data: null, loading: false, error: null
+  });
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_START' });
+    fetchUsers()
+      .then(data => dispatch({ type: 'FETCH_SUCCESS', payload: data }))
+      .catch(err => dispatch({ type: 'FETCH_ERROR', error: err.message }));
+  }, []);
+}
+```
+
+## Custom Hook Design Principles
+
+### Principle 1: Single Responsibility
+
+```typescript
+// Bad pattern — too many responsibilities
+function useEverything() {
+  const user = useUser();
+  const theme = useTheme();
+  const locale = useLocale();
+  // ...
+}
+
+// Good pattern — each with its own role
+function useUser(userId: string) { /* user data only */ }
+function useTheme() { /* theme only */ }
+```
+
+### Principle 2: Reusable Data Fetching Hooks
+
+```typescript
+function useFetch<T>(url: string) {
+  const [state, dispatch] = useReducer(fetchReducer<T>, {
+    data: null, loading: true, error: null
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+    
+    fetch(url)
+      .then(r => r.json())
+      .then(data => {
+        if (!cancelled) dispatch({ type: 'SUCCESS', data });
+      })
+      .catch(err => {
+        if (!cancelled) dispatch({ type: 'ERROR', error: err.message });
+      });
+
+    return () => { cancelled = true; };
+  }, [url]);
+
+  return state;
+}
+
+// Usage
+function UserProfile({ userId }: { userId: string }) {
+  const { data: user, loading, error } = useFetch<User>(`/api/users/${userId}`);
+  
+  if (loading) return <Spinner />;
+  if (error) return <Error message={error} />;
+  return <div>{user?.name}</div>;
+}
+```
+
+### Principle 3: Hook Composition
+
+```typescript
+function useUserWithPosts(userId: string) {
+  const { data: user } = useFetch<User>(`/api/users/${userId}`);
+  const { data: posts } = useFetch<Post[]>(
+    user ? `/api/users/${user.id}/posts` : null
+  );
+  
+  return { user, posts };
+}
+```
+
+## Two Uses of useRef
+
+### 1. DOM Reference
+
+```tsx
+function FocusInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  
+  return (
+    &lt;>
+      <input ref={inputRef} />
+      <button onClick={() => inputRef.current?.focus()}>
+        Focus
+      </button>
+    </>
+  );
+}
+```
+
+### 2. Storing Values Without Triggering Re-renders
+
+```tsx
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+  const timerRef = useRef<number | null>(null); // doesn't cause re-renders
+  
+  const start = () => {
+    timerRef.current = window.setInterval(() => {
+      setSeconds(s => s + 1);
+    }, 1000);
+  };
+  
+  const stop = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+  
+  return <div>{seconds}s <button onClick={start}>Start</button> <button onClick={stop}>Stop</button></div>;
+}
+```
+
+## Performance Optimization Checklist
+
+- [ ] Use `useCallback` for functions passed to `memo()`-wrapped components
+- [ ] Cache expensive computation results with `useMemo`
+- [ ] Check reference equality when putting arrays/objects in dependency arrays
+- [ ] Include functions defined inside `useEffect` in dependencies
+- [ ] Identify unnecessary renders with React DevTools Profiler
+
+The key to React Hooks is clearly understanding what each hook does and managing dependency arrays honestly. Enabling the `exhaustive-deps` rule from `eslint-plugin-react-hooks` catches missing dependencies at compile time.

@@ -1,0 +1,188 @@
+---
+title: "Test it works"
+description: "Logging into the WordPress admin every time you want to post is friction. When publishing feels like work, you write less. This setup removes that friction: write a .md file, push it, and GitHub Actio"
+date: "2026-05-15"
+tags:
+  - "automation"
+published: true
+draft: false
+wp_id: 491
+---
+
+> Write in Markdown, `git push`, and your WordPress blog updates automatically. No plugins, no admin panel — just code. This post was updated via PUT to verify the pipeline.
+
+---
+
+## Why Automate WordPress Publishing?
+
+Logging into the WordPress admin every time you want to post is friction. When publishing feels like work, you write less. This setup removes that friction: write a `.md` file, push it, and GitHub Actions handles the rest — including image uploads, category tagging, and Telegram notifications.
+
+---
+
+## How the Pipeline Works
+
+```
+Markdown file (git push)
+  → GitHub Actions detects changed .md files
+    → Python script converts Markdown → HTML
+      → Images uploaded to WP Media Library
+        → POST /wp-json/wp/v2/posts (new) or PUT (update)
+          → wp_id written back to frontmatter
+            → Telegram notification sent
+```
+
+The script reads two frontmatter fields:
+
+```yaml
+---
+is_public: true   # true = publish, false = draft
+wp_id:            # auto-filled after first deploy
+---
+```
+
+After the first publish, GitHub Actions commits `wp_id` back to your file. Future pushes to that file become **updates** (PUT), not duplicate posts.
+
+---
+
+## Step 1 — WordPress Application Password
+
+In your WordPress admin: **Users → Profile → Application Passwords**
+
+Generate one and save it. This replaces your login password for API calls.
+
+```bash
+curl -s "https://yoursite.com/wp-json/wp/v2/users/me" \
+  -u "username:xxxx xxxx xxxx xxxx xxxx xxxx"
+```
+
+---
+
+## Step 2 — GitHub Secrets
+
+In your repo: **Settings → Secrets → Actions → New repository secret**
+
+| Secret | Value |
+|--------|-------|
+| `WP_SITE_URL` | `https://yoursite.com` |
+| `WP_USERNAME` | your WP username |
+| `WP_APP_PASSWORD` | the password from Step 1 |
+| `TELEGRAM_TOKEN` | your bot token |
+| `TELEGRAM_CHAT_ID` | your chat ID |
+
+---
+
+## Step 3 — The Workflow File
+
+`.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to WordPress
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -r scripts/requirements.txt
+
+      - id: changed
+        run: |
+          FILES=$(git diff --name-only HEAD~1 HEAD -- '*.md' | tr '\n' ' ')
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+
+      - if: steps.changed.outputs.files != ''
+        env:
+          WP_SITE_URL:     ${{ secrets.WP_SITE_URL }}
+          WP_USERNAME:     ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: python scripts/deploy.py ${{ steps.changed.outputs.files }}
+
+      - if: steps.changed.outputs.files != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || (git add -A && git commit -m "chore: update wp_id [skip ci]" && git push)
+```
+
+---
+
+## Step 4 — The Deploy Script
+
+`scripts/deploy.py` does three things:
+
+1. **Parses frontmatter** — reads `is_public` and `wp_id`
+2. **Converts Markdown → HTML** — with table, code, and TOC support
+3. **Uploads images** — scans `assets/` folder, uploads to WP Media Library
+
+Key function:
+
+```python
+def deploy_post(md_file):
+    text = md_file.read_text(encoding="utf-8")
+    meta, body = parse_frontmatter(text)
+    category_id = get_or_create_category(md_file.parent.name)
+    html = markdown.markdown(body, extensions=["tables", "fenced_code"])
+    status = "publish" if meta.get("is_public", True) else "draft"
+
+    if meta.get("wp_id"):
+        requests.put(f"{API}/posts/{meta['wp_id']}", json=payload, auth=AUTH)
+    else:
+        r = requests.post(f"{API}/posts", json=payload, auth=AUTH)
+        meta["wp_id"] = r.json()["id"]
+        write_frontmatter(md_file, meta, body)
+```
+
+---
+
+## Folder Structure
+
+```
+wordpress-blog/
+├── Automation/           → WP category "Automation"
+├── Build & Projects/     → WP category "Build & Projects"
+├── Make Money/
+├── Problem Solving/
+├── Prompts/
+├── Tools & Reviews/
+├── Books/
+└── scripts/
+    ├── deploy.py
+    └── requirements.txt
+```
+
+Each folder maps to a WordPress category. The folder name becomes the category name — no config needed.
+
+---
+
+## Publishing a Post
+
+```bash
+# New post
+echo "---\nis_public: true\nwp_id:\n---\n\n## My Post\n\nContent here." \
+  > Automation/my-post.md
+git add . && git commit -m "feat: add my post" && git push
+```
+
+GitHub Actions runs, creates the WP post, writes `wp_id` back. Next time you push that file, it updates the existing post instead of creating a duplicate.
+
+---
+
+## Result
+
+- Zero WordPress admin logins for publishing
+- Git history = content history (diff, revert, branch)
+- Telegram confirms every deploy in real time
+- Works for any WordPress site with the REST API enabled

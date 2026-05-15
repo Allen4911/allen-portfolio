@@ -1,0 +1,399 @@
+---
+title: "Satellite Communication LEO / MEO / GEO Comparison Analysis"
+description: "Satellite communication systems are classified as LEO, MEO, and GEO based on the orbital altitude at which the satellites operate. Each orbit has unique characteristics determined by the laws of physi"
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+## Overview
+
+Satellite communication systems are classified as LEO, MEO, and GEO based on the orbital altitude at which the satellites operate. Each orbit has unique characteristics determined by the laws of physics, simultaneously providing fundamental constraints and advantages throughout communication system design.
+
+---
+
+## Basic Orbital Parameters
+
+```
+                  ┌────────────────────────────────────────┐
+   GEO (35,786 km)│                   ★ GEO               │ Fixed point
+                  │                                        │
+                  │                                        │
+   MEO (~10,000 km│           ★ MEO band                  │ Several-hour period
+                  │         (GPS: 20,200 km)               │
+                  │                                        │
+   LEO (~550 km)  │   ★ LEO Constellation                  │ ~90 min period
+                  └────────────────────────────────────────┘
+                              Earth Surface
+```
+
+| Item | LEO | MEO | GEO |
+|------|-----|-----|-----|
+| Altitude | 200 ~ 2,000 km | 2,000 ~ 35,786 km | 35,786 km (fixed) |
+| Orbital Period | 90 ~ 127 min | 2 ~ 24 hours | 24 hours (geostationary) |
+| Satellite Speed | ~7.5 km/s | ~3.9 km/s | ~3.1 km/s |
+| One-Way Propagation Delay | 1 ~ 10 ms | 10 ~ 100 ms | ~270 ms |
+| Round-Trip RTT | 2 ~ 20 ms | 20 ~ 200 ms | ~540 ms |
+| Single Satellite Coverage | ~1,000 km radius | ~5,000 km radius | ~6,000 km radius |
+| Satellites for Global Coverage | Hundreds to thousands | Dozens | 3 (theoretical) |
+| Free Space Path Loss (Ka-band) | ~170 dB | ~185 dB | ~210 dB |
+
+---
+
+## 1. LEO (Low Earth Orbit)
+
+### Orbital Mechanics
+
+```
+Kepler's 3rd Law:  T² = (4π²/GM) × a³
+
+At 550 km altitude:
+  Semi-major axis a = 6,371 + 550 = 6,921 km
+  Orbital period T ≈ 95.5 min
+  Orbital speed v = 2πa/T ≈ 7.59 km/s
+```
+
+### Free Space Path Loss (FSPL)
+
+```python
+import math
+
+def fspl_dB(distance_km, freq_GHz):
+    c = 3e8
+    f = freq_GHz * 1e9
+    d = distance_km * 1e3
+    lam = c / f
+    return 20 * math.log10(4 * math.pi * d / lam)
+
+# Ka-band (26.5 GHz), path loss by altitude
+for alt in [550, 1200, 2000]:
+    loss = fspl_dB(alt, 26.5)
+    print(f"Altitude {alt:5d} km: {loss:.1f} dB")
+
+# Output:
+# Altitude   550 km: 170.3 dB
+# Altitude  1200 km: 176.0 dB
+# Altitude  2000 km: 179.5 dB
+```
+
+### LEO Doppler Characteristics
+
+LEO satellites experience the largest Doppler shifts due to their fast movement.
+
+```
+Max Doppler shift (Ka-band 26.5 GHz, LEO 550 km, overhead pass):
+
+  Δf_max = f_c × (v / c) = 26.5×10⁹ × (7590 / 3×10⁸) ≈ 670 kHz
+
+  ← Satellite approaching: +670 kHz
+  → Satellite receding:    -670 kHz
+  Overhead pass time: ~10 minutes (elevation angle ≥ 10°)
+```
+
+**Frequency shift correction methods:**
+- UE pre-compensation: Using GNSS position + satellite ephemeris
+- Network-based correction: Ground station removes common Doppler then maintains link
+- Wider OFDM subcarrier spacing: Pilot design accounting for Doppler
+
+### LEO Handover
+
+```
+LEO satellite visibility time: ~5 ~ 15 minutes (elevation ≥ 10°)
+
+Handover strategy:
+
+  [Satellite A] ──── Visibility window ────►[Satellite B]
+       │                                          │
+       │   ← Handover decision window →           │
+       └──── Soft handover ────────────────────────┘
+
+  - Inter-satellite handover frequency: ~6 times/hour
+  - With ISL: continuity maintained without going through ground gateway
+  - Make-before-break approach required
+```
+
+### Major LEO Systems
+
+| System | Operator | Satellites | Altitude | Features |
+|--------|----------|-----------|---------|---------|
+| Starlink | SpaceX | ~6,000+ | 550 km | ISL equipped, civilian/military dual-use |
+| OneWeb | Eutelsat | ~648 | 1,200 km | Broadband |
+| Kuiper | Amazon | 3,236 planned | 590~630 km | AWS integration |
+| Telesat Lightspeed | Telesat | 298 | 1,000 km | Enterprise-focused |
+
+---
+
+## 2. MEO (Medium Earth Orbit)
+
+### Orbital Mechanics
+
+```
+Typical altitude: 10,000 ~ 20,200 km
+
+GPS (20,200 km):
+  Orbital period ≈ 12 hours
+  Orbital speed ≈ 3.87 km/s
+
+O3b MEO (8,063 km):
+  Orbital period ≈ 4.8 hours
+  RTT ≈ 54 ms
+```
+
+### MEO Key Characteristics
+
+```
+Advantages:
+  ✓ Wider coverage than LEO (fewer satellites needed)
+  ✓ Lower propagation delay than GEO
+  ✓ Partial avoidance of Van Allen Belt
+  ✓ Reduced tracking equipment burden
+
+Disadvantages:
+  ✗ Passes through parts of Van Allen Belt → severe radiation environment
+  ✗ Still requires handover compared to GEO
+  ✗ More satellites needed than GEO
+```
+
+### Radiation Environment (Van Allen Belt)
+
+```
+Radiation intensity by altitude:
+
+    0         5,000      15,000      35,786 km
+    │─────────────────────────────────────────►
+    │                 ████████
+    │           ████████████████               ← Inner Van Allen Belt
+    │     ██████████████████████████████
+    │ ████████████████████████████████████████  ← Outer Van Allen Belt
+    └─────────────────────────────────────────
+    Low     High         Low         None
+
+MEO (~10,000 km) → Uses "slot" region between inner/outer belts
+Radiation-hardened (Rad-Hard) components required
+```
+
+### Major MEO Systems
+
+| System | Altitude | Purpose |
+|--------|---------|---------|
+| GPS (USA) | 20,200 km | Navigation |
+| GLONASS (Russia) | 19,100 km | Navigation |
+| Galileo (EU) | 23,222 km | Navigation |
+| BeiDou MEO (China) | 21,528 km | Navigation |
+| O3b / SES | 8,063 km | Broadband communications |
+
+---
+
+## 3. GEO (Geostationary Earth Orbit)
+
+### Orbital Mechanics
+
+```
+GEO condition: Orbital period = Earth's rotation period = 23h 56m 4s
+
+Geostationary altitude calculation:
+  T = 2π × √(a³/GM)
+  a = ∛(GM × T²/4π²)
+    = ∛(3.986×10¹⁴ × (86164)² / 4π²)
+    ≈ 42,164 km (from Earth's center)
+    = 42,164 - 6,371 ≈ 35,793 km (from Earth's surface)
+
+Fixed above equator → covers within ±81° latitude
+Cannot cover polar regions (elevation angle &lt; 5°)
+```
+
+### GEO Link Budget Example
+
+```python
+def link_budget(eirp_dBW, fspl_dB, gt_dB_K, bandwidth_MHz):
+    """
+    EIRP   : Transmit EIRP (dBW)
+    FSPL   : Free Space Path Loss (dB)
+    G/T    : Receive system figure of merit (dB/K)
+    BW     : Receive bandwidth (MHz)
+    """
+    k = -228.6  # Boltzmann constant (dBW/K/Hz)
+    bw_dBHz = 10 * math.log10(bandwidth_MHz * 1e6)
+
+    cn0 = eirp_dBW - fspl_dB + gt_dB_K - k  # C/N0 (dBHz)
+    cn  = cn0 - bw_dBHz                       # C/N  (dB)
+    return cn0, cn
+
+import math
+cn0, cn = link_budget(
+    eirp_dBW = 50,      # Satellite EIRP 50 dBW
+    fspl_dB  = 209.6,   # GEO Ka-band 26.5 GHz
+    gt_dB_K  = 18.0,    # Ground station G/T 18 dB/K
+    bandwidth_MHz = 36  # 36 MHz transponder
+)
+print(f"C/N₀: {cn0:.1f} dBHz")
+print(f"C/N : {cn:.1f} dB")
+```
+
+### Impact of GEO Propagation Delay
+
+```
+GEO RTT ≈ 540 ms
+
+TCP Performance Impact:
+  - With window size W = 64 KB:
+    Throughput = W / RTT = 65,536 × 8 / 0.54 ≈ 970 kbps
+    → TCP performance below 1 Mbps (even with hundreds of Mbps physical bandwidth)
+
+  Solutions:
+  ① PEP (Performance Enhancing Proxy): TCP splitting
+  ② Large TCP window (TCP SACK + window scaling)
+  ③ Switch to QUIC / UDP-based protocols
+  ④ DVB-S2X: Dedicated satellite transport standard (ACM, VCM)
+```
+
+---
+
+## Comprehensive Comparison: Communication Parameters
+
+### Link Quality Comparison
+
+| Parameter | LEO (550 km) | MEO (10,000 km) | GEO (35,786 km) |
+|-----------|-------------|-----------------|-----------------|
+| FSPL @ Ka (26.5 GHz) | 170.3 dB | 191.3 dB | 209.6 dB |
+| One-Way Propagation Delay | ~1.8 ms | ~33 ms | ~119 ms |
+| RTT | ~4 ms | ~66 ms | ~238 ms* |
+| Max Doppler @ Ka | ±670 kHz | ±344 kHz | &lt;±5 kHz |
+| Elevation Angle Rate | Fast (~1°/s) | Slow | Fixed |
+
+*Actual RTT ≈ 540 ms including atmospheric transit time
+
+### Service Suitability Matrix
+
+```
+                  LEO    MEO    GEO
+Real-time comms   ★★★   ★★☆   ★☆☆
+Broadband         ★★★   ★★☆   ★★☆
+Global coverage   ★★☆   ★★★   ★★★
+System cost       ★☆☆   ★★☆   ★★★
+Deployment ease   ★☆☆   ★★☆   ★★★
+Navigation/PNT    ☆☆☆   ★★★   ★★☆
+Polar coverage    ★★★   ★★☆   ☆☆☆
+Military surv.    ★★★   ★★☆   ★☆☆
+
+★★★ Excellent / ★★☆ Good / ★☆☆ Moderate / ☆☆☆ Not applicable
+```
+
+---
+
+## Military Communication Perspective
+
+### Survivability
+
+```
+Single GEO satellite:
+  ┌──────────┐
+  │ GEO SAT  │ ← Single point of failure
+  └────┬─────┘   Attack/jamming causes complete service outage
+       │
+  [All area terminals]
+
+LEO Constellation:
+  ★  ★  ★  ★  ★  ← Hundreds to thousands distributed
+     ★  ★  ★  ★
+  Service continues on remaining satellites even if some are hit
+  → Significantly higher military survivability
+```
+
+### Anti-Jamming Perspective
+
+| Item | LEO | GEO |
+|------|-----|-----|
+| Received Signal Strength | Strong (less path loss) | Weak |
+| Jamming Resistance | High link margin available | Insufficient margin |
+| Spot Beam Size | Small (tens to hundreds of km) | Wide (thousands of km) |
+| Beam Directivity | Narrow beam → higher G/T possible | Vulnerable to broadband jamming |
+| Frequency Hopping | Short visibility time exploitable | Long fixed period → easy to track |
+
+### Tactical Communication Scenario
+
+```
+Scenario: Maritime operation (surface ships + submarines + aircraft)
+
+    [LEO Satellite Constellation]
+          ↕ (low latency 4 ms)
+    ┌─────────────────────────────────┐
+    │  Surface Ship A ──── Surface Ship B│
+    │      │              │            │
+    │  Submarine (surfaced)│           │
+    │                  Aircraft (UAV)  │
+    └─────────────────────────────────┘
+
+LEO Advantages:
+  - Low latency → real-time tactical data link feasible
+  - Multi-path → jamming/strike resilience
+  - Spot beam → concentrated bandwidth
+  - Covers all ocean areas including polar regions
+```
+
+---
+
+## Orbit Selection Decision Guide
+
+```
+Orbit selection flow for communication system design:
+
+Service requirements
+    │
+    ├── Latency &lt; 50 ms required?
+    │       └── YES → LEO
+    │
+    ├── Polar region coverage needed?
+    │       └── YES → LEO or HEO (Molniya orbit)
+    │
+    ├── Minimize number of satellites?
+    │       └── YES → GEO (theoretically global with 3)
+    │
+    ├── Navigation/positioning purpose?
+    │       └── YES → MEO (GPS/GNSS standard)
+    │
+    ├── Military survivability top priority?
+    │       └── YES → LEO constellation
+    │
+    └── Fixed ground stations, simple operation?
+            └── YES → GEO
+```
+
+---
+
+## Future Directions
+
+### Hybrid Orbit Systems
+
+In the 6G era, multi-orbit integration architecture (not single orbit) is the standardization direction.
+
+```
+┌──────────────────────────────────────────────┐
+│           Multi-Layer Satellite Network       │
+│                                              │
+│  GEO (35,786 km)  ─── Wide-area broadcast/backhaul│
+│         │                                    │
+│  MEO (10,000 km)  ─── Navigation + medium backhaul│
+│         │                                    │
+│  LEO (550 km)     ─── Low-latency broadband  │
+│         │                                    │
+│  HAPS (20 km)     ─── Urban/disaster coverage│
+│         │                                    │
+│  Ground 5G/6G RAN ─── Final access           │
+└──────────────────────────────────────────────┘
+
+→ 3GPP Rel-19 / 6G: Heterogeneous orbit handover standardization planned
+```
+
+---
+
+## Reference Standards and Resources
+
+- ITU-R S.1328 — Satellite orbit parameter definitions
+- 3GPP TR 38.821 — NTN Solutions for NR
+- CCSDS 401.0-B — Radio Frequency and Modulation Systems
+- ESA ECSS-E-ST-50-05C — Radio Frequency and Modulation Standards
+- Pratt, T. et al., "Satellite Communications", 3rd Ed., Wiley
+- Maral, G. et al., "Satellite Communications Systems", 6th Ed., Wiley

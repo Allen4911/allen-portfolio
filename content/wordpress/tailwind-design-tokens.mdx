@@ -1,0 +1,284 @@
+---
+title: "Design Tokens with Tailwind CSS"
+description: "Design tokens are variables that represent design decisions — colors, spacing, typography — as code. Combining Tailwind CSS's configuration system with CSS variables allows systematic management of a "
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+Design tokens are variables that represent design decisions — colors, spacing, typography — as code. Combining Tailwind CSS's configuration system with CSS variables allows systematic management of a design system.
+
+## What Are Design Tokens?
+
+Design tokens are a shared language between designers and developers.
+
+```
+# Bad approach — magic values
+color: #3B82F6;
+margin: 16px;
+font-size: 14px;
+
+# Good approach — tokens
+color: brand-primary;
+margin: spacing-4;
+font-size: text-sm;
+```
+
+With tokens, design changes in one place reflect everywhere.
+
+## Defining Tokens via Tailwind Configuration
+
+Define tokens in `theme.extend` in `tailwind.config.js`:
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50:  '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',  // primary
+          600: '#2563eb',  // primary-hover
+          900: '#1e3a8a',
+        },
+        semantic: {
+          success: '#10b981',
+          warning: '#f59e0b',
+          error:   '#ef4444',
+          info:    '#3b82f6',
+        }
+      },
+      spacing: {
+        '4.5': '1.125rem',
+        '13':  '3.25rem',
+        '15':  '3.75rem',
+      },
+      fontSize: {
+        'display-xl': ['3.75rem', { lineHeight: '1', fontWeight: '700' }],
+        'display-lg': ['3rem',    { lineHeight: '1.05', fontWeight: '700' }],
+      },
+      borderRadius: {
+        'card': '0.75rem',
+        'button': '0.5rem',
+      },
+      boxShadow: {
+        'card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        'card-hover': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+      }
+    }
+  }
+};
+```
+
+## CSS Variables + Tailwind Integration
+
+Use CSS variables for dark mode support:
+
+```css
+/* globals.css */
+:root {
+  --color-bg-primary:   #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-border:       #e5e7eb;
+  --color-accent:       #3b82f6;
+}
+
+[data-theme="dark"] {
+  --color-bg-primary:   #111827;
+  --color-bg-secondary: #1f2937;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-border:       #374151;
+  --color-accent:       #60a5fa;
+}
+```
+
+```javascript
+// tailwind.config.js — expose CSS variables as Tailwind classes
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'bg-primary':   'var(--color-bg-primary)',
+        'bg-secondary': 'var(--color-bg-secondary)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'border-base':  'var(--color-border)',
+        'accent':       'var(--color-accent)',
+      }
+    }
+  }
+};
+```
+
+Now using `bg-bg-primary`, `text-text-primary` classes automatically switches themes:
+
+```jsx
+<div className="bg-bg-primary text-text-primary border border-border-base">
+  ...
+</div>
+```
+
+## Component Token Pattern
+
+Defining dedicated tokens per component improves consistency:
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      // Button component tokens
+      'btn-primary-bg':    '#3b82f6',
+      'btn-primary-text':  '#ffffff',
+      'btn-primary-hover': '#2563eb',
+      'btn-sm-px':         '0.75rem',
+      'btn-sm-py':         '0.375rem',
+      'btn-md-px':         '1rem',
+      'btn-md-py':         '0.5rem',
+    }
+  }
+};
+```
+
+## Defining Component Classes with @layer
+
+Extract repeated class combinations with `@layer components`:
+
+```css
+/* globals.css */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-button
+           transition-colors duration-200 focus:outline-none focus:ring-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600
+           focus:ring-brand-500 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-white text-gray-700 border border-gray-300
+           hover:bg-gray-50 focus:ring-brand-500;
+  }
+  
+  .btn-sm { @apply px-3 py-1.5 text-sm; }
+  .btn-md { @apply px-4 py-2 text-base; }
+  .btn-lg { @apply px-6 py-3 text-lg; }
+  
+  .card {
+    @apply bg-bg-primary rounded-card shadow-card p-6
+           border border-border-base;
+  }
+  
+  .card-hover {
+    @apply card hover:shadow-card-hover transition-shadow duration-200;
+  }
+}
+```
+
+Usage:
+
+```jsx
+<button className="btn-primary btn-md">Submit</button>
+<div className="card-hover">...</div>
+```
+
+## Semantic Token Layers
+
+Structuring tokens into 3 levels makes them easier to manage:
+
+```
+Layer 1: Primitive Tokens
+   blue-500: #3b82f6
+
+Layer 2: Semantic Tokens
+   color-interactive-primary: blue-500
+
+Layer 3: Component Tokens
+   button-primary-background: color-interactive-primary
+```
+
+```javascript
+// tokens/primitive.js
+export const primitive = {
+  blue: { 500: '#3b82f6', 600: '#2563eb' },
+  red:  { 500: '#ef4444', 600: '#dc2626' },
+};
+
+// tokens/semantic.js
+import { primitive } from './primitive';
+export const semantic = {
+  'interactive-primary':       primitive.blue[500],
+  'interactive-primary-hover': primitive.blue[600],
+  'interactive-danger':        primitive.red[500],
+};
+
+// tailwind.config.js
+import { semantic } from './tokens/semantic';
+module.exports = {
+  theme: { extend: { colors: semantic } }
+};
+```
+
+## Token Documentation
+
+You can automatically extract token lists from `tailwind.config.js`:
+
+```javascript
+// scripts/generate-token-docs.js
+const config = require('./tailwind.config');
+
+const colors = config.theme.extend.colors;
+console.log('# Color Tokens');
+Object.entries(colors).forEach(([name, value]) => {
+  if (typeof value === 'string') {
+    console.log(`- \`text-${name}\` / \`bg-${name}\`: ${value}`);
+  }
+});
+```
+
+## Practical Dark Mode Implementation
+
+```jsx
+// hooks/useTheme.ts
+'use client';
+import { useState, useEffect } from 'react';
+
+export function useTheme() {
+  const [theme, setTheme] = useState&lt;'light' | 'dark'>('light');
+  
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark' : 'light';
+    setTheme(saved ?? preferred);
+  }, []);
+  
+  const toggle = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    localStorage.setItem('theme', next);
+    document.documentElement.setAttribute('data-theme', next);
+  };
+  
+  return { theme, toggle };
+}
+```
+
+## Checklist
+
+- [ ] Separate color palette into primitive → semantic two levels
+- [ ] Implement dark mode with CSS variables (more stable than class toggling)
+- [ ] Extract repeated combinations with `@layer components`
+- [ ] Support variant props for components (`size`, `variant`)
+- [ ] No hardcoded token values — centrally managed in tailwind.config
+
+The real power of Tailwind CSS is not in utility classes alone. The combination of design token management through the configuration system and component extraction via `@layer` is the key to maintaining design consistency in large-scale projects.

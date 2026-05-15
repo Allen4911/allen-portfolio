@@ -1,0 +1,235 @@
+---
+title: "team agents triple crown strategy"
+description: "| Tool | Responsibility | Analogy | |------|---------------|---------| | gstack | Strategy + quality validation | CEO + QA team | | GSD | Project structuring + execution management | PM + Kanban board"
+date: "2026-05-15"
+tags:
+  - "problem-solving"
+published: true
+draft: false
+wp_id: 503
+---
+
+> Writing code with Claude Code is easy. But "just build it and see" projects lose direction as they grow. Triple Crown solves this by enforcing a strategy → plan → execute → verify pipeline.
+
+![Triple Crown Strategy — AI Agent Team Management](https://picsum.photos/seed/triple-crown-ai-agents/1200/500)
+
+---
+
+## TL;DR
+
+| Tool | Responsibility | Analogy |
+|------|---------------|---------|
+| **gstack** | Strategy + quality validation | CEO + QA team |
+| **GSD** | Project structuring + execution management | PM + Kanban board |
+| **Superpowers** | Coding methodology enforcement | Senior dev code review |
+
+Each can be used independently, but **connected as a pipeline**, "giving tasks to AI" transforms into "running an AI team."
+
+![](assets//07-4-triple-crown.png)
+---
+
+## Why You Need This
+
+Tell Claude Code "build me a real-time collaborative editor" and it writes code immediately. The problems:
+
+- No priority on where to start
+- If direction shifts mid-way, start over
+- Ship without tests, then hit a bug avalanche later
+- Claude says "done" but only half of it actually works
+
+Triple Crown **structurally blocks** all four of these problems.
+
+---
+
+## The Full Flow: A 5-Phase Pipeline
+
+```
+Phase 1: Strategy ───────────── gstack (/cso → /autoplan)
+    ↓
+Phase 2: Project Structuring ── GSD (/gsd:new-project → /gsd:plan-phase)
+    ↓
+Phase 3: Implementation ──────── GSD + Superpowers (/gsd:execute-phase)
+    ↓
+Phase 4: Validation ─────────── GSD + gstack (/gsd:validate-phase → /review → /qa)
+    ↓
+Phase 5: Completion ─────────── gstack + GSD (/ship → /gsd:complete-milestone)
+```
+
+Here's what the actual development pipeline looks like with a real example:
+
+![](assets/07-4-triple-crown-dev.png)
+
+Let's walk through each phase with concrete examples.
+
+---
+
+## Phase 1: Strategy — "Is This Worth Building?"
+
+Before writing a single line of code, set the **direction** first.
+
+### /cso — CEO-Level Review
+
+```
+"I want to build a real-time collaborative editor."
+
+Claude's analysis:
+  Business value: ★★★★☆
+  - Needs differentiation vs. Google Docs, Notion
+  - Recommended MVP scope: text editing + cursor sharing only
+
+  Priority:
+  - P0: Text sync engine (CRDT)
+  - P1: Cursor position sharing
+  - P2: Comments → defer to v2
+```
+
+The key is defining **"this first"** order, not "build everything."
+
+### /autoplan — Auto-Generate Execution Plan
+
+Once /cso defines scope, it automatically runs CEO, architecture, and engineering reviews to produce an actionable plan — not just a task list, but a plan with timelines and dependencies.
+
+---
+
+## Phase 2: Project Structuring — "In What Order?"
+
+Bring /autoplan's output into GSD's framework.
+
+```bash
+/gsd:new-project   → Create project
+/gsd:new-milestone → Set milestone
+/gsd:plan-phase 1  → Break down detailed tasks per phase
+```
+
+GSD's biggest value: plans are **saved as files** in `.planning/`. Even if the conversation ends or the session resets, the plan persists.
+
+```
+.planning/
+  ├── ROADMAP.md
+  └── milestones/
+      └── M1/
+          ├── phase-1/PLAN.md   ← Tasks, completion criteria, assumptions
+          ├── phase-2/PLAN.md
+          └── phase-3/PLAN.md
+```
+
+---
+
+## Phase 3: Implementation — "How Do We Build It Well?"
+
+This is where Triple Crown's true value shows. GSD manages **what**, Superpowers enforces **how**.
+
+### TDD Skill — Tests First
+
+```
+Task: "Set up WebSocket server"
+
+1. Red:    Write the failing test first
+2. Green:  Minimal code to pass the test
+3. Refactor: Clean up, verify no regressions
+```
+
+Without Superpowers, Claude writes code first and asks "should I add tests too?" With Superpowers, it **always writes tests first**.
+
+### Debugging Skill — Science Over Intuition
+
+```
+Problem: "Text gets corrupted during simultaneous edits"
+
+1. Observe:   Document reproduction conditions
+2. Hypothesize: List candidate causes (3)
+3. Verify:    Test one by one → WebSocket message ordering confirmed
+4. Fix:       Add sequence numbers + regression test
+```
+
+Prevents the vicious cycle of fixing by feel and breaking something else.
+
+### Parallel Agents — Work as a Team Simultaneously
+
+In a team environment, distribute independent tasks across agents:
+
+- Seoyeon → Server sync handler
+- Sua → Editor UI component
+- Minjun → Interface definition between both
+
+Parallel execution cuts time while pre-defined interfaces prevent merge conflicts.
+
+---
+
+## Phase 4: Validation — "Is It Actually Done?"
+
+Verify from two perspectives.
+
+### GSD Validation: Completion vs. Plan
+
+```bash
+/gsd:validate-phase 1
+
+  Task 1: Initialize Yjs document model          ✅
+  Task 2: Set up WebSocket server                ✅
+  Task 3: Client-server synchronization          ✅
+  Task 4: Offline + reconnect handling           ✅
+  Task 5: Concurrent edit conflict testing       ✅
+
+  Completion: 100% | Goal achieved: ✅
+```
+
+### gstack Validation: Code Quality + Feature Behavior
+
+```bash
+/review  → Code review (missing error handling, security issues, etc.)
+/qa      → Feature testing (11/12 passing, 1 performance issue)
+```
+
+"Did we do everything planned?" + "Does what we built actually work?" — these are different questions, so both are necessary.
+
+---
+
+## Phase 5: Completion — Ship and Move On
+
+```bash
+/ship                     → Create PR, prepare deployment
+/gsd:complete-milestone   → Update milestone status
+```
+
+---
+
+## Triple Crown in a Team Environment
+
+Assign each phase to the right team agent for maximum efficiency:
+
+![](assets/07-4-team-triple-crown.png)
+
+Each phase has a clear owner:
+- **Phase 1 (Strategy)**: Team lead + PM set direction
+- **Phase 2 (Structuring)**: PM structures project, researcher investigates tech
+- **Phase 3 (Implementation)**: Developer + designer implement in parallel
+- **Phase 4 (Validation)**: Reviewer checks code, PM verifies against plan
+- **Phase 5 (Completion)**: Team lead deploys, PM closes out milestone
+
+---
+
+## When to Use It — Application Criteria
+
+Triple Crown doesn't need to be applied to every task.
+
+| Task Size | Recommended Combo | Example |
+|-----------|-------------------|---------|
+| **Small** (under 1 hour) | Direct, no tools | Typo fix, config change |
+| **Medium** (half a day) | gstack only | Bug fix, small feature addition |
+| **Large** (1–3 days) | gstack + Superpowers | New feature module, API |
+| **X-Large** (1+ week) | **Full Triple Crown** | New service, major refactor |
+
+---
+
+## Key Takeaways
+
+Triple Crown = **"what and why"** (gstack) → **"in what order"** (GSD) → **"how well"** (Superpowers)
+
+Connect the three tools as a pipeline and you get:
+- Coding without direction → /cso catches it
+- Proceeding without a plan → GSD structures it
+- Chasing speed without quality → Superpowers enforces it
+- Thinking you're done when you're not → double validation blocks it
+
+This is the workflow that moves from the era of "telling AI to write code" to the era of **running an AI team**.

@@ -1,0 +1,380 @@
+---
+title: "5G System Architecture Analysis"
+description: "5G NR (New Radio) is the next-generation mobile communication system whose first standard was finalized in 3GPP Rel-15 (2018). Compared to LTE, it targets the following goals:"
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+## Overview
+
+5G NR (New Radio) is the next-generation mobile communication system whose first standard was finalized in 3GPP Rel-15 (2018). Compared to LTE, it targets the following goals:
+
+| Metric | LTE (4G) | 5G NR Target |
+|--------|----------|--------------|
+| Peak Downlink Speed | ~1 Gbps | 20 Gbps |
+| User Experience Speed | ~10 Mbps | 100 Mbps |
+| Latency (E2E) | ~10 ms | &lt; 1 ms |
+| Connection Density | 10⁵ /km² | 10⁶ /km² |
+| Mobility | 350 km/h | 500 km/h |
+| Energy Efficiency | Baseline | 100x improvement |
+
+---
+
+## Overall System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    5G Overall System Architecture                │
+│                                                                 │
+│  ┌──────────┐    Uu     ┌─────────────┐   N2/N3   ┌──────────┐ │
+│  │   UE     │◄─────────►│   gNB (RAN) │◄──────────►│  5GC     │ │
+│  │ (Device) │           │             │           │  (Core)   │ │
+│  └──────────┘           └──────┬──────┘           └──────────┘ │
+│                                │                               │
+│                           Xn (inter-gNB)                        │
+│                                │                               │
+│                         ┌──────▼──────┐                        │
+│                         │ Neighbor gNB│                        │
+│                         └─────────────┘                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1. 5G Core Network (5GC)
+
+The 5GC adopts a **Service-Based Architecture (SBA)** compared to LTE's EPC (Evolved Packet Core). All functions are separated as microservices.
+
+### Key Network Functions (NF)
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                    Service Based Interface (SBI)               │
+│                    (HTTP/2 + JSON/Protobuf)                    │
+├────────┬────────┬────────┬────────┬────────┬────────┬─────────┤
+│  AMF   │  SMF   │  UPF   │  PCF   │  UDM   │  NRF   │  AUSF  │
+│Mobility│Session │Packet  │Policy  │Subscriber│Function│ Auth  │
+│Mgmt    │Mgmt    │Forward │Control │ Data   │Registry│        │
+└────────┴────────┴────────┴────────┴────────┴────────┴─────────┘
+```
+
+| NF | Role | LTE Equivalent |
+|----|------|----------------|
+| AMF | Mobility/Access/Security Management | MME |
+| SMF | PDU Session Management, IP Allocation | SGW-C + PGW-C |
+| UPF | User Plane Packet Forwarding | SGW-U + PGW-U |
+| PCF | Policy/QoS Control | PCRF |
+| UDM | Subscriber Profile Storage | HSS |
+| NRF | NF Registration/Discovery (Service Mesh) | None (new) |
+| AUSF | Authentication Server | Part of HSS |
+| NSSF | Network Slice Selection | None (new) |
+
+### Control Plane / User Plane Separation (CUPS)
+
+```
+Control Plane:    UE ─── AMF ─── SMF ─── PCF/UDM
+                              (signaling path)
+
+User Plane:       UE ─── UPF ─── DN (Internet/IMS)
+                              (data path)
+
+→ UPF can be placed at the edge (MEC) → ultra-low latency services
+```
+
+---
+
+## 2. gNB (Next Generation NodeB) Architecture
+
+### CU / DU / RU Separation (Open RAN)
+
+```
+┌────────────────────────────────────────────────────────┐
+│                    gNB Function Split                   │
+│                                                        │
+│  ┌─────────────────┐                                   │
+│  │    gNB-CU        │  ← RRC, PDCP (F1 interface)     │
+│  │ (Centralized Unit)│    Central management of DUs    │
+│  └────────┬────────┘                                   │
+│           │ F1-C / F1-U                                │
+│  ┌────────▼────────┐                                   │
+│  │    gNB-DU        │  ← RLC, MAC, partial PHY         │
+│  │ (Distributed Unit)│   Geographically distributed    │
+│  └────────┬────────┘                                   │
+│           │ Open Fronthaul (eCPRI)                     │
+│  ┌────────▼────────┐                                   │
+│  │    RU            │  ← RF, Antenna, partial PHY (FFT)│
+│  │ (Radio Unit)     │   Installed at antenna site      │
+│  └─────────────────┘                                   │
+└────────────────────────────────────────────────────────┘
+```
+
+### Protocol Stack (NR)
+
+```
+Control Plane (UE ↔ AMF):          User Plane (UE ↔ UPF):
+
+  ┌──────────┐                        ┌──────────┐
+  │   NAS    │  ← Mobility/Session    │   IP     │  ← User data
+  ├──────────┤     Management         ├──────────┤
+  │   RRC    │  ← Radio Resource      │   SDAP   │  ← QoS Flow mapping
+  ├──────────┤     Control            ├──────────┤
+  │   PDCP   │  ← Encryption,         │   PDCP   │  ← Encryption, ROHC
+  ├──────────┤     Header Compress    ├──────────┤
+  │   RLC    │  ← ARQ, Seg/Reassem   │   RLC    │
+  ├──────────┤                        ├──────────┤
+  │   MAC    │  ← Scheduling, HARQ   │   MAC    │
+  ├──────────┤                        ├──────────┤
+  │   PHY    │  ← OFDM, Mod/Demod    │   PHY    │
+  └──────────┘                        └──────────┘
+```
+
+---
+
+## 3. Physical Layer (PHY) Key Characteristics
+
+### NR Numerology
+
+5G NR allows flexible subcarrier spacing configuration.
+
+| μ | SCS (kHz) | Symbols/Slot | Slot Duration | Primary Use |
+|---|-----------|--------------|---------------|-------------|
+| 0 | 15 | 14 | 1 ms | FR1, LTE compatible |
+| 1 | 30 | 14 | 0.5 ms | FR1 general NR |
+| 2 | 60 | 14 | 0.25 ms | FR1/FR2 |
+| 3 | 120 | 14 | 0.125 ms | FR2 (mmWave) |
+| 4 | 240 | 14 | 0.0625 ms | FR2 reference signals |
+
+```python
+def slot_duration_us(mu):
+    """Calculate NR slot duration"""
+    scs_kHz = 15 * (2 ** mu)        # subcarrier spacing
+    slot_per_subframe = 2 ** mu      # slots per subframe
+    slot_duration = 1000 / slot_per_subframe  # in ms
+    return scs_kHz, slot_duration
+
+for mu in range(5):
+    scs, dur = slot_duration_us(mu)
+    print(f"μ={mu}: SCS={scs:4d} kHz, slot={dur:.4f} ms")
+
+# μ=0: SCS=  15 kHz, slot=1.0000 ms
+# μ=1: SCS=  30 kHz, slot=0.5000 ms
+# μ=2: SCS=  60 kHz, slot=0.2500 ms
+# μ=3: SCS= 120 kHz, slot=0.1250 ms
+# μ=4: SCS= 240 kHz, slot=0.0625 ms
+```
+
+### Frequency Ranges (FR)
+
+```
+FR1 (Sub-6 GHz): 410 MHz ~ 7.125 GHz
+  - Can reuse existing LTE bands
+  - Favorable for wide-area coverage
+  - Max bandwidth: 100 MHz
+
+FR2 (mmWave): 24.25 GHz ~ 52.6 GHz
+  - Ultra-wideband (up to 400 MHz / carrier)
+  - Capable of ultra-high speeds (tens of Gbps)
+  - High attenuation and poor diffraction → beamforming required
+```
+
+---
+
+## 4. Massive MIMO & Beamforming
+
+### Antenna Configuration
+
+```
+LTE (4G): 4T4R or 8T8R antennas
+
+5G NR (Massive MIMO):
+  ┌─────────────────────────────┐
+  │  ● ● ● ● ● ● ● ● (8 cols) │
+  │  ● ● ● ● ● ● ● ●           │ → Typical: 64TRX (8×8 panel)
+  │  ● ● ● ● ● ● ● ●           │   Max: 256TRX
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ● (8 rows) │
+  └─────────────────────────────┘
+```
+
+### Beamforming Types
+
+```
+Analog Beamforming:
+  [ADC/DAC]─[Phase Shifter]─[Antenna]
+  → Simple, low cost, single beam only
+
+Digital Beamforming:
+  Independent ADC/DAC per antenna
+  [Digital Processing]─[ADC/DAC]─[Antenna]
+  → Multiple simultaneous beams, flexible, high cost
+
+Hybrid Beamforming (mainstream in 5G NR):
+  [Digital Precoder]─[Analog Phase Shifter]─[Antenna Subarray]
+  → Compromise: few digital chains + many analog phase shifters
+```
+
+```python
+import numpy as np
+
+def hybrid_beamforming_weight(N_antenna, N_beam, angles_deg):
+    """
+    N_antenna: number of antennas
+    N_beam:    number of simultaneous beams
+    angles_deg: direction of each beam (degrees)
+    """
+    d = 0.5  # antenna spacing (in wavelengths)
+    W = np.zeros((N_antenna, N_beam), dtype=complex)
+
+    for i, theta in enumerate(angles_deg):
+        theta_rad = np.deg2rad(theta)
+        # analog steering vector
+        steering = np.exp(1j * 2 * np.pi * d *
+                          np.arange(N_antenna) * np.sin(theta_rad))
+        W[:, i] = steering / np.sqrt(N_antenna)
+
+    return W
+
+# 8 antennas, 3 beams (-30°, 0°, +30°)
+W = hybrid_beamforming_weight(8, 3, [-30, 0, 30])
+print(f"Beamforming weight matrix shape: {W.shape}")  # (8, 3)
+```
+
+---
+
+## 5. Network Slicing
+
+A single physical infrastructure is logically separated to provide customized networks per service.
+
+```
+Physical Infrastructure (shared)
+┌───────────────────────────────────────────────────┐
+│  Compute   Storage   Network   RAN   Core          │
+└───────────────────────────────────────────────────┘
+                    ↕ Virtualization (NFV/SDN)
+┌──────────────┬──────────────┬──────────────────────┐
+│   Slice 1    │   Slice 2    │     Slice 3          │
+│   eMBB       │   URLLC      │     mMTC             │
+│  (Broadband) │ (Ultra-Low   │  (Massive IoT)       │
+│              │  Latency)    │                       │
+│ ↑ 20 Gbps   │ ↓ &lt;1 ms     │ ↑ 10⁶ dev/km²        │
+│  Smartphone  │  Autonomous  │  Sensors/Meters      │
+│  AR/VR       │  Driving     │  Smart City          │
+└──────────────┴──────────────┴──────────────────────┘
+```
+
+### S-NSSAI (Single-Network Slice Selection Assistance Information)
+
+```
+S-NSSAI = SST (8-bit) + SD (24-bit, optional)
+
+Standard SST values:
+  SST=1: eMBB (Enhanced Mobile Broadband)
+  SST=2: URLLC (Ultra-Reliable Low Latency)
+  SST=3: MIoT (Massive IoT)
+  SST=4: V2X (Vehicle-to-Everything)
+```
+
+---
+
+## 6. QoS Architecture
+
+### 5QI (5G QoS Identifier)
+
+```
+QoS Flow ─── PDCP Encryption ─── RLC ─── MAC ─── PHY
+
+5QI examples:
+  5QI=1:  GBR,     Conversational Voice, Latency=100ms, Loss=10⁻²
+  5QI=5:  Non-GBR, IMS Signaling,        Latency=100ms, Loss=10⁻⁶
+  5QI=9:  Non-GBR, Internet Data,         Latency=300ms, Loss=10⁻⁶
+  5QI=80: Non-GBR, Low-Latency Gaming,   Latency=10ms,  Loss=10⁻⁶
+```
+
+---
+
+## 7. 5G Security Architecture
+
+```
+5G Authentication Procedure (5G-AKA / EAP-AKA'):
+
+ UE            AUSF          UDM            AMF
+  │                                           │
+  │────── Registration Request ──────────────►│
+  │                           │◄──────────────│
+  │                           │  Nudm_UEAuth  │
+  │                           │  (SUPI/SUCI)  │
+  │             │◄────────────│               │
+  │             │  Auth Vec   │               │
+  │◄────────────┤             │               │
+  │  Auth Req   │                             │
+  │  (RAND,AUTN)│                             │
+  │────────────►│                             │
+  │  Auth Resp  │                             │
+  │  (RES*)     │                             │
+  │             │──────── Auth Confirm ───────►│
+  │             │                             │
+  └─── Key Agreement Complete (Kseaf → Kamf → Krrc/Kup) ┘
+
+Encryption Algorithms:
+  - NR: NEA0(null), NEA1(SNOW 3G), NEA2(AES-128), NEA3(ZUC)
+  - Integrity: NIA1(SNOW 3G), NIA2(HMAC-SHA-256 based), NIA3(ZUC)
+```
+
+---
+
+## 8. Modem SW Development Perspective
+
+### Layer-by-Layer Development Points
+
+```
+PHY Layer:
+  - LDPC/Polar channel coding implementation
+  - HARQ process management
+  - Beam management (Beam Measurement/Report/Switch)
+  - UCI (Uplink Control Information) encoding
+
+MAC Layer:
+  - Scheduler interface (UL/DL grant processing)
+  - BSR (Buffer Status Report) generation
+  - SR (Scheduling Request) triggering
+  - Timing Advance management
+
+RLC Layer:
+  - AM mode: ARQ retransmission window management
+  - Segmentation/Reassembly processing
+  - PDCP duplication support
+
+PDCP Layer:
+  - ROHC header compression (IP/UDP/RTP)
+  - Encryption/Decryption (AES-CTR, SNOW 3G)
+  - Integrity verification (Control Plane)
+  - Out-of-order delivery processing
+```
+
+### Key 5G Features by 3GPP Release
+
+| Release | Key Features |
+|---------|-------------|
+| Rel-15 (2018) | 5G NR 1st standard, NSA/SA, eMBB-focused |
+| Rel-16 (2020) | URLLC, V2X, IAB, NR-U, Positioning |
+| Rel-17 (2022) | NTN, Reduced Capability (RedCap), Enhanced Sidelink |
+| Rel-18 (2024) | 5G-Advanced, AI/ML Radio, XR Optimization |
+| Rel-19 / 6G | TN/NTN Integration, Sub-THz Exploration |
+
+---
+
+## Reference Standards
+
+- 3GPP TS 38.300 — NR Overall Description
+- 3GPP TS 38.401 — NG-RAN Architecture
+- 3GPP TS 23.501 — System Architecture for 5G
+- 3GPP TS 38.211/212/213/214 — NR Physical Layer
+- 3GPP TS 38.321 — NR MAC Protocol
+- 3GPP TS 38.322 — NR RLC Protocol
+- 3GPP TS 38.323 — NR PDCP Protocol

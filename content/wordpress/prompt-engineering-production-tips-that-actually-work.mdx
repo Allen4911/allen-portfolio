@@ -1,0 +1,172 @@
+---
+title: "10 Prompt Engineering Tips That Actually Work in Production"
+description: "Most prompt engineering advice falls into one of two traps: it's either too vague ('be clear and specific!') or too tied to specific tricks that stop working after a model update. This guide is differ"
+date: "2026-05-15"
+tags:
+  - "prompts"
+published: true
+draft: false
+wp_id: 529
+---
+
+Most prompt engineering advice falls into one of two traps: it's either too vague ("be clear and specific!") or too tied to specific tricks that stop working after a model update. This guide is different. These are patterns that have held up across model versions, across use cases, and — most importantly — in production systems where consistency matters.
+
+These aren't theoretical. Each one comes from real experience building LLM-powered applications where flaky prompts cost users time and companies money.
+
+---
+
+## 1. State Your Output Format Before the Task
+
+Most engineers put output format instructions at the end of the prompt. This is backwards. Models attend to early context more strongly, and specifying format first sets a frame for everything that follows.
+
+**Instead of:**
+```
+Analyze the following customer feedback and tell me the sentiment, key themes, and urgency level. Return JSON.
+
+Feedback: {text}
+```
+
+**Do this:**
+```
+Return a JSON object with this exact structure:
+{"sentiment": "positive|negative|neutral", "themes": ["..."], "urgency": "low|medium|high"}
+
+Analyze this customer feedback:
+{text}
+```
+
+The model's generation is shaped by its expectations about where it's going. Telling it the destination first produces more reliable structure.
+
+---
+
+## 2. Use Negative Examples Sparingly — But Use Them
+
+Positive examples ("here's what good output looks like") are well-understood. Negative examples ("here's what I don't want") are underused and often more efficient when you're trying to correct a specific failure mode.
+
+If your model keeps adding unsolicited caveats or disclaimers, one well-placed negative example does more than five lines of instruction text:
+
+```
+Do NOT do this:
+User: What's the capital of France?
+Assistant: While I can provide information about geography, it's important to note that geopolitical situations can change. The current capital of France is Paris, though...
+
+DO this:
+User: What's the capital of France?
+Assistant: Paris.
+```
+
+The key: use negative examples to address *actual* failure modes you've observed, not hypothetical ones. Over-specifying constraints you don't need creates fragility.
+
+---
+
+## 3. Separate Instruction from Context with Clear Delimiters
+
+When your prompt mixes instructions and variable content (user input, retrieved documents, data), use explicit structural markers. This reduces injection risks and makes prompts easier to maintain.
+
+```
+<instructions>
+Summarize the document below in 3 bullet points. Focus on action items.
+</instructions>
+
+<document>
+{retrieved_content}
+</document>
+```
+
+XML-style tags work well because models have been trained extensively on structured markup and parse it reliably. Avoid using the same delimiters you'd expect to appear in user content.
+
+---
+
+## 4. Build a Small Eval Set Before You Optimize
+
+This is the tip that separates professional prompt engineers from everyone else: don't iterate on your prompt without a way to measure whether you're improving.
+
+Before you write your second draft, collect 20–30 representative examples with expected outputs. These don't need to cover every edge case — they need to cover your *common case* and your *known hard cases*. Run your prompt against this set before and after every change.
+
+Without this, you're flying blind. You'll fix the failure you just noticed while accidentally breaking three things you weren't testing.
+
+Even a simple script that runs your prompt against a JSON file of test cases and prints pass/fail will save you hours of iteration time.
+
+---
+
+## 5. Chain-of-Thought Is Not Just for Hard Math
+
+Chain-of-thought prompting — asking the model to "think step by step" — is often presented as a technique for multi-step reasoning tasks. But it helps with a much broader class of problems: anything where you want the model to consider multiple factors before committing to an answer.
+
+Adding "Think through this carefully before responding" or "Consider both sides before giving your recommendation" to classification prompts, summarization prompts, and decision prompts consistently reduces confident-but-wrong outputs.
+
+The mechanism: by generating reasoning text before the conclusion, the model's final output is conditioned on a richer intermediate representation. You're not just getting a better answer — you're making the model's process more visible, which makes debugging easier.
+
+---
+
+## 6. Temperature Is a Last Resort
+
+When output is too variable, most engineers reach for a lower temperature setting. Temperature reduction is a blunt instrument. It makes outputs more deterministic but also more likely to be formulaic and less likely to handle edge cases well.
+
+Before reducing temperature, try these first:
+- Add more specific constraints to the prompt
+- Include examples of the variance you want to eliminate
+- Structure the output more explicitly
+
+Temperature should be set based on use case, not as a debugging tool. Creative tasks: 0.7–1.0. Factual extraction: 0.0–0.3. Classification: 0.0. Most application tasks land somewhere in the 0.2–0.5 range.
+
+---
+
+## 7. System Prompts Are Your Ground Rules, Not Your Instructions
+
+The system prompt (or "instructions" in some interfaces) is not just a bigger instruction field. It's where you establish the model's persona, constraints, and operating parameters. User-turn instructions are for task-specific guidance.
+
+Think of it this way: the system prompt answers "who are you and what are the rules?" The user turn answers "what should you do right now?"
+
+Conflating these creates inconsistency. If your system prompt says "always be concise" and your user turn includes a detailed task that requires a long response, you'll get unpredictable behavior. Keep ground rules in the system prompt and task instructions in the user turn.
+
+---
+
+## 8. Test With Adversarial Inputs Early
+
+Users will input things you didn't anticipate. Before going to production, deliberately test your prompt with inputs designed to break it:
+
+- **Empty input**: What happens when the field is blank?
+- **Irrelevant input**: What if someone pastes random text?
+- **Prompt injection attempts**: "Ignore previous instructions and..."
+- **Extreme length**: Very short (one word) and very long inputs
+- **Off-language**: Input in a language you didn't design for
+
+These tests often reveal that your carefully crafted prompt has implicit assumptions that break in unexpected ways. Finding this in testing is much better than finding it in production.
+
+---
+
+## 9. Version Your Prompts Like Code
+
+Prompts drift. You make a small change to "fix" something and two weeks later you can't remember what it said before. Treat your prompts with the same discipline you'd apply to source code:
+
+- Store prompts in version control
+- Write a commit message explaining *why* you changed something, not just what changed
+- Tag versions that go to production
+- Never make prompt changes in a production system without testing first
+
+This sounds obvious, but the vast majority of teams I've seen manage prompts as strings in a database or — worse — hardcoded in application logic with no history. When a regression appears after a model update or a prompt change, having clean version history is the difference between a 10-minute fix and a two-day investigation.
+
+---
+
+## 10. Measure Latency and Cost Per Prompt, Not Per Session
+
+When optimizing LLM applications, it's tempting to look at aggregate metrics. But the actionable unit is the individual prompt: how many input tokens, how many output tokens, what's the median and p95 latency?
+
+Common findings when you measure at this level:
+- System prompts are 3x longer than they need to be
+- Output length is unbounded when it should be constrained
+- You're making three LLM calls where one would do
+- Retrieved context is included even when it's not relevant
+
+Set up logging that captures token counts and latency per prompt type from day one. Retrofitting this visibility into an existing system is painful. The cost of adding it from the start is low.
+
+---
+
+## The Meta-Principle
+
+All of these tips reduce to one thing: **treat your prompt as the interface between your application logic and the model's capabilities, and engineer it accordingly.**
+
+A prompt is not a magic incantation. It's a specification. The more precisely you can specify what you need, test whether you're getting it, and iterate based on evidence, the better your results will be — and the more stable they'll be as models evolve.
+
+The field moves fast. The underlying principles don't.

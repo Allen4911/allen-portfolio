@@ -1,0 +1,109 @@
+---
+title: "Build Log: I Made a Real App Using Only Claude Code (Here's What Actually Happened)"
+description: "I've been a developer for a while. I know how to write code. So when I decided to try building a complete side project almost entirely through Claude Code, I expected it to be a productivity experimen"
+date: "2026-05-15"
+tags:
+  - "build"
+published: true
+draft: false
+wp_id: 545
+---
+
+I've been a developer for a while. I know how to write code. So when I decided to try building a complete side project almost entirely through Claude Code, I expected it to be a productivity experiment — maybe 20-30% faster than doing it myself.
+
+I was wrong about the magnitude. Here's the honest build log of what happened, including the parts that went sideways.
+
+## The Project: A Personal Portfolio With AI-Assisted Development
+
+The goal was straightforward: build a modern portfolio site in Next.js with i18n support, a contact form, dark mode, and good SEO. Nothing groundbreaking. But I wanted to do it differently — instead of writing the code myself, I'd treat Claude Code as a pair programmer who does most of the typing while I focus on architecture and decisions.
+
+**Stack:** Next.js 14, TypeScript, Tailwind CSS, Formspree for contact form handling, Jest for testing.
+
+## Week 1: Setup and First Shock
+
+The first thing that surprised me was how much Claude Code understands about project conventions without being told. I ran `claude` in an empty directory, described what I wanted, and watched it scaffold a complete Next.js project with sensible defaults, a testing setup, and even a GitHub Actions CI workflow.
+
+I didn't ask for the CI workflow. It just added it because it was the right thing to do.
+
+The first week was mostly me learning how to communicate with Claude Code effectively. Early mistakes:
+
+**Too vague:** "Make the homepage look good" → produces something, but not what you had in mind.
+
+**Too specific:** "Use `flex` with `gap-4` and `items-center` on line 23 of `HeroSection.tsx`" → you're basically writing the code yourself.
+
+The sweet spot: describe the *what* and *why*, leave the *how* open. "The hero section needs to immediately communicate that this is a developer portfolio. It should feel professional but not corporate. Use the existing color scheme."
+
+## Week 2: TDD Became Non-Negotiable
+
+I'd done test-driven development before but never rigorously. With Claude Code, TDD became the natural workflow because it gives the AI a clear success criterion.
+
+Here's the pattern that worked:
+
+1. I describe a feature in plain language
+2. Claude Code writes a failing test first
+3. I read the test — does it actually capture what I want?
+4. If yes, Claude Code implements to make it pass
+5. We refactor if needed
+
+The contact form implementation went through this cycle cleanly:
+
+```
+Me: "Add a contact form that submits to Formspree. Email validation required. 
+     Button should be disabled while submitting. Show success/error states."
+
+Claude Code: [writes test first, covering validation, submission states, 
+             accessibility attributes]
+             [runs test — RED]
+             [implements ContactForm component]
+             [runs test — GREEN]
+```
+
+The test coverage this produced was genuinely better than what I'd have written for myself. Accessibility attributes I would have forgotten (`aria-required`, `role="alert"`) were in the tests before the implementation existed.
+
+## Week 3: Dark Mode and i18n — Where Things Got Interesting
+
+Dark mode with Tailwind's class strategy sounds simple. It's mostly simple. But it gets fiddly when you have 12 different components and need to make sure `dark:` variants are applied consistently.
+
+I tried to spec this vaguely. That was a mistake. Claude Code implemented dark mode in the first component it touched, but when I said "add dark mode to the rest," it made inconsistent choices about which text colors to use in dark mode.
+
+The fix: write a brief style guide for dark mode before implementation. "In dark mode: backgrounds use `gray-900`/`gray-800`, text uses `gray-100`/`gray-300`, accents use the same blue but at lower opacity." One reference document, consistent output.
+
+i18n was a better experience because the requirement was concrete: Korean and English, toggle in the nav, all visible text should be translatable. Claude Code implemented a context-based approach with a `useLanguage` hook that turned out to be cleaner than what I'd have designed under time pressure.
+
+## What Claude Code Is Bad At
+
+Honest assessment of where it struggled:
+
+**Long-horizon planning.** If I say "now implement phases 3 through 7," the output gets inconsistent. Better to work phase by phase and review each one.
+
+**Knowing when to stop.** Occasionally Claude Code would add features I didn't ask for — a toast notification system, additional Tailwind plugins, extra test utilities. Usually fine, sometimes introduced complexity I had to clean up.
+
+**CSS edge cases.** Cross-browser rendering quirks, Safari-specific flexbox issues, scroll behavior on mobile — these required me to open a browser and actually look, then describe the problem precisely. "On mobile, the nav overlaps the hero section by 8px on iOS" gets a fix. "The nav looks weird on mobile" does not.
+
+## The Numbers
+
+After about 4 weeks of weekend development:
+
+- **Lines of code written by me:** Probably 200-300, mostly configuration and one-off fixes
+- **Lines of code written by Claude Code:** ~4,000
+- **Test coverage:** 84 tests passing
+- **Time spent:** ~15 hours of my time, across 4 weekends
+- **Estimated time if I'd done it alone:** 35-40 hours
+
+The time savings were real. But the bigger win was focus — I spent my hours on architecture, product decisions, and quality review rather than syntax and boilerplate.
+
+## Lessons for Your Next AI-Assisted Build
+
+**Start with tests.** If you can't write a test for a feature, you don't understand it well enough to implement it. Use this as a design checkpoint.
+
+**Commit frequently.** Claude Code works best in small increments. Commit after each feature so you have a rollback point and can review diffs clearly.
+
+**Read everything it writes.** The code will be mostly good. But "mostly" means some percentage is subtly wrong, uses a deprecated API, or doesn't quite handle an edge case you care about. You're still the engineer; Claude Code is the implementer.
+
+**Describe context, not just requirements.** "We're building for developers who value clean, minimal design" produces better output than "make it look clean."
+
+The experiment convinced me that AI-assisted development isn't about replacing developer judgment — it's about spending your judgment on the parts that actually require it.
+
+---
+
+*The portfolio mentioned in this post is live at [allenkim.dev]. Source code is on GitHub.*

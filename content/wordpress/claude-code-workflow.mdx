@@ -1,0 +1,242 @@
+---
+title: "AI-Assisted Development with Claude Code"
+description: "Claude Code is an AI coding agent that runs in the terminal. It's not just a code generation tool — it's an autonomous development partner that reads and writes files, executes commands, and handles G"
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+Claude Code is an AI coding agent that runs in the terminal. It's not just a code generation tool — it's an autonomous development partner that reads and writes files, executes commands, and handles Git operations. This post summarizes the experience of actually integrating Claude Code into a team development environment.
+
+## Basic Usage Patterns
+
+### Interactive Session
+
+```bash
+claude                    # start interactive session
+claude "refactor this function"  # single command execution
+claude -p "code review"   # pipe input
+```
+
+### Leveraging Project Context
+
+Claude Code automatically reads `CLAUDE.md` in the current directory at startup. Define project rules, prohibited patterns, and the tech stack there to avoid repeating explanations at the start of every conversation.
+
+```markdown
+# CLAUDE.md example
+## Prohibitions
+- No any types
+- No console.log commits
+- No implementation code without tests
+
+## Tech Stack
+- Next.js 14 App Router
+- TypeScript strict
+- Tailwind CSS
+```
+
+## TDD Workflow
+
+Combining Claude Code with TDD achieves high reliability.
+
+### Step 1: Write Tests First
+
+```bash
+claude "Write tests for the EmailValidator class first.
+Include valid email, empty string, and string without @ cases."
+```
+
+Claude generates `__tests__/EmailValidator.test.ts`:
+
+```typescript
+describe('EmailValidator', () => {
+  it('passes valid email', () => {
+    expect(EmailValidator.validate('user@example.com')).toBe(true);
+  });
+  
+  it('rejects empty string', () => {
+    expect(EmailValidator.validate('')).toBe(false);
+  });
+  
+  it('rejects string without @', () => {
+    expect(EmailValidator.validate('notanemail')).toBe(false);
+  });
+});
+```
+
+### Step 2: Confirm Failure
+
+```bash
+npm test -- EmailValidator  # RED: confirm 3 failures
+```
+
+### Step 3: Implement
+
+```bash
+claude "Implement EmailValidator to pass the tests"
+npm test -- EmailValidator  # GREEN: confirm 3 passes
+```
+
+## Multi-Agent Pattern
+
+For complex projects, run multiple Claude Code instances in parallel with tmux.
+
+```bash
+# tmux layout
+tmux new-session -s dev
+tmux split-window -h
+tmux split-window -v
+
+# Pane 0: implementation
+# Pane 1: testing/review
+# Pane 2: documentation/analysis
+```
+
+The key to role separation is configuring different `CLAUDE.md` for each agent:
+
+```markdown
+# Reviewer Agent CLAUDE.md
+You are a code reviewer.
+- Do not write implementation code directly
+- Only point out bugs, security vulnerabilities, and performance issues
+- Record review results in REVIEW.md
+```
+
+## Git Operation Automation
+
+Claude Code directly executes Git commands. Safe usage patterns:
+
+### Commit Automation
+
+```bash
+claude "Commit the changes.
+Convention: use feat/fix/refactor/docs/test prefixes"
+```
+
+Claude analyzes `git diff` and generates an appropriate commit message:
+
+```
+feat: Add EmailValidator class and write 3 tests
+
+- Implement email format validation logic
+- Handle empty string and missing @ cases
+- 100% unit test pass rate
+```
+
+### PR Creation
+
+```bash
+claude "Create a PR with the changes in this branch.
+base: main, reviewer: @teamlead"
+```
+
+## Automation with Hooks
+
+Setting Hooks in `settings.json` automatically responds to Claude Code events:
+
+### Auto lint on code save
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "npm run lint --fix" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Telegram notification on task completion
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -s -X POST '$TELEGRAM_API' -d 'chat_id=$CHAT_ID&text=Claude+task+complete'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Context Management
+
+Claude Code's context window is finite. How to manage it efficiently in long sessions:
+
+### /clear Strategy
+
+Save important decisions to a file, then reset context with `/clear`:
+
+```bash
+claude "Save the decisions from this session to SESSION_NOTES.md"
+# /clear
+claude "Read SESSION_NOTES.md and continue the work"
+```
+
+### Compressed Summary
+
+```bash
+claude "Summarize the work done so far in 3 lines, and save
+a checkpoint for the next session to CHECKPOINT.md"
+```
+
+## Practical Tips
+
+### Specific instructions yield better results
+
+```bash
+# Bad instruction
+claude "Fix this code"
+
+# Good instruction  
+claude "Fix the bug in the formatDate function in src/utils/date.js
+that fails to convert UTC time to KST (+9:00).
+After fixing, verify that all existing tests still pass."
+```
+
+### Break tasks into small units
+
+Requesting too much in a single conversation makes errors hard to track. It's safer to separate by feature unit and verify each one.
+
+### Delegate verification to Claude
+
+```bash
+claude "Run the full test suite to verify the code I just wrote
+doesn't break existing functionality, and report the results"
+```
+
+## Security Considerations
+
+- Register dangerous commands in `settings.json`'s `permissions.deny`
+- Explicitly add `.env` files to `.gitignore` so Claude cannot read them
+- Manage production database credentials only via environment variables
+- The `--dangerously-skip-permissions` flag should only be used in CI environments
+
+```json
+{
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(DROP TABLE *)"
+    ]
+  }
+}
+```
+
+## Summary
+
+The core value of Claude Code is automating repetitive tasks and creating an immediate feedback loop. By training Claude on project rules with CLAUDE.md, automating validation with Hooks, and ensuring reliability with TDD workflows, AI transforms from a simple tool into an environment where it can collaborate like a real team member.

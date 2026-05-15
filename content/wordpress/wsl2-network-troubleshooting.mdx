@@ -1,0 +1,173 @@
+---
+title: "WSL2 Network Issues: What Caused Them and How I Actually Fixed Them"
+description: "WSL2 is excellent until it isn't. The virtualized network stack that makes WSL2 faster than WSL1 for most things is also the source of a class of networking issues that can waste a lot of time to diag"
+date: "2026-05-15"
+tags:
+  - "problem-solving"
+published: true
+draft: false
+---
+
+WSL2 is excellent until it isn't. The virtualized network stack that makes WSL2 faster than WSL1 for most things is also the source of a class of networking issues that can waste a lot of time to diagnose.
+
+This is a writeup of the specific problems I hit, what caused them, and the fixes that actually worked — not the ones that appeared in Stack Overflow answers from 2021 that no longer apply.
+
+## The Setup
+
+Windows 11, WSL2 running Ubuntu 22.04, development work involving local servers, SSH connections, Docker containers, and a Tailscale VPN for remote access.
+
+If that sounds like your setup, you've probably hit at least one of the issues below.
+
+## Problem 1: WSL2 Can't Reach the Internet After Resuming From Sleep
+
+**Symptom:** After waking from sleep or hibernation, WSL2 loses internet connectivity. `ping 8.8.8.8` from inside WSL2 fails. Restarting WSL2 (`wsl --shutdown` then reopening) fixes it, but it's annoying.
+
+**Cause:** WSL2 uses a virtual Hyper-V network adapter. When Windows resumes from sleep, the virtual adapter doesn't always reinitialize correctly, and DNS resolution or routing breaks.
+
+**Fix that actually worked:**
+
+Create a `.wslconfig` file at `C:\Users\<username>\.wslconfig`:
+
+```ini
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+firewall=true
+autoProxy=true
+```
+
+The `mirrored` networking mode (introduced in Windows 11 22H2) makes WSL2 share the Windows host's network interfaces directly instead of using a virtual adapter. This eliminates the sleep/resume issue entirely because there's no separate virtual adapter to get confused.
+
+If you're on an older Windows version that doesn't support mirrored mode, the workaround is to add a task in Windows Task Scheduler that runs `wsl --shutdown` on system resume. Not elegant, but reliable.
+
+## Problem 2: Localhost Services on Windows Not Accessible From WSL2
+
+**Symptom:** A server running on Windows (e.g., a database on port 5432 or a local API on port 8080) isn't reachable from inside WSL2 via `localhost`.
+
+**Cause:** In standard NAT mode, WSL2 has its own IP address and `localhost` inside WSL2 refers to the WSL2 VM, not the Windows host. The Windows host has a different IP (usually `172.x.x.x` range, visible via `ip route | grep default`).
+
+**Fix:**
+
+With `networkingMode=mirrored` (see above), this problem disappears — `localhost` inside WSL2 correctly resolves to the Windows host.
+
+Without mirrored mode, use the Windows host IP:
+
+```bash
+# Inside WSL2, get the Windows host IP
+WINDOWS_HOST=$(ip route | grep default | awk '{print $3}')
+echo $WINDOWS_HOST  # typically 172.x.x.1
+
+# Connect to Windows localhost service
+psql -h $WINDOWS_HOST -p 5432 -U postgres
+```
+
+Or add it to your `.bashrc`:
+```bash
+export WINDOWS_HOST=$(ip route | grep default | awk '{print $3}')
+```
+
+## Problem 3: SSH into WSL2 From External Machines Doesn't Work
+
+**Symptom:** You want to SSH directly into WSL2 from another machine (or from Windows itself). You've started `sshd` inside WSL2, but connections are refused or time out.
+
+**Cause:** WSL2's virtual network is behind NAT. Port 22 on your Windows machine's external IP is Windows's SSH server (or nothing), not WSL2's.
+
+**Fix — Port Forwarding (Standard Mode):**
+
+Run this in an elevated PowerShell prompt:
+
+```powershell
+# Get WSL2's current IP (changes on restart)
+$wsl_ip = (wsl hostname -I).Trim().Split()[0]
+
+# Forward Windows port 2222 to WSL2 port 22
+netsh interface portproxy add v4tov4 `
+    listenport=2222 `
+    listenaddress=0.0.0.0 `
+    connectport=22 `
+    connectaddress=$wsl_ip
+
+# Allow through Windows firewall
+netsh advfirewall firewall add rule `
+    name="WSL2 SSH" `
+    dir=in `
+    action=allow `
+    protocol=TCP `
+    localport=2222
+```
+
+The WSL2 IP changes on every restart, so you need to re-run this. Automate it with a startup script or a Task Scheduler task that runs at login.
+
+**Fix — Mirrored Mode:**
+
+With `networkingMode=mirrored`, WSL2's ports are directly accessible on the Windows host's IP. SSH on port 22 inside WSL2 is reachable on port 22 of the Windows machine's IP. No port forwarding needed.
+
+## Problem 4: Tailscale Inside WSL2 Not Working
+
+**Symptom:** Tailscale is installed on Windows. You want services running inside WSL2 to be reachable via Tailscale, or you want WSL2 to be reachable as a Tailscale node.
+
+**This one's more nuanced.** Options:
+
+**Option A: Use Windows Tailscale from WSL2**
+
+If Tailscale is running on Windows, WSL2 can reach other Tailscale nodes via the Windows host IP:
+
+```bash
+# From WSL2, reach a Tailscale peer
+curl http://100.x.x.x:8080  # works if Windows Tailscale is running
+```
+
+But your WSL2 instance isn't a Tailscale node — it's just piggybacking on Windows.
+
+**Option B: Tailscale in Mirrored Mode**
+
+With mirrored networking, installing Tailscale inside WSL2 as a second node works much more cleanly. WSL2's ports are accessible on the Tailscale IP of the Windows machine.
+
+This is what I use: Tailscale on Windows, mirrored networking, and WSL2 services accessible via the Windows Tailscale IP. No Tailscale installation needed inside WSL2.
+
+## Problem 5: DNS Resolution Fails for Internal Hostnames
+
+**Symptom:** `ping google.com` works, but internal hostnames (corporate VPN, local network) don't resolve.
+
+**Cause:** WSL2 auto-generates `/etc/resolv.conf` pointing to a Hyper-V virtual DNS server. This often doesn't forward queries for private DNS zones.
+
+**Fix:**
+
+Disable automatic DNS management in `/etc/wsl.conf`:
+
+```ini
+[network]
+generateResolvConf = false
+```
+
+Then create `/etc/resolv.conf` manually with the DNS servers you need:
+
+```
+nameserver 8.8.8.8
+nameserver 1.1.1.1
+# Add your internal DNS server if needed:
+# nameserver 192.168.1.1
+```
+
+Make it immutable so WSL2 doesn't overwrite it:
+
+```bash
+sudo chattr +i /etc/resolv.conf
+```
+
+## Summary
+
+Most WSL2 networking issues come from the virtual network adapter in standard NAT mode. The single most impactful change you can make:
+
+```ini
+# C:\Users\<username>\.wslconfig
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+```
+
+This fixes the sleep/resume issue, the localhost accessibility issue, and simplifies port forwarding. It requires Windows 11 22H2 or later.
+
+For everything else — DNS, SSH access, VPN integration — the fixes above are stable and don't require reapplying after Windows updates.
+
+If you're hitting a WSL2 networking issue not covered here, the diagnostic starting point is always: `ip route`, `cat /etc/resolv.conf`, and checking whether `networkingMode=mirrored` is an option for your Windows version.

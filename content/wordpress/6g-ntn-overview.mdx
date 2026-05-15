@@ -1,0 +1,241 @@
+---
+title: "6G NTN (Non-Terrestrial Network) Overview"
+description: "NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te"
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+## Overview
+
+NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace terrestrial networks. NTN standardization began with 5G NR Rel-17, and in 6G, the complete integration of terrestrial and non-terrestrial networks (Unified Terrestrial and Non-Terrestrial Network) is a core objective.
+
+---
+
+## NTN Platform Classification
+
+| Platform | Altitude | Coverage Radius | One-Way Propagation Delay |
+|----------|----------|-----------------|--------------------------|
+| LEO Satellite | 200 ~ 2,000 km | ~1,000 km | 1 ~ 10 ms |
+| MEO Satellite | 2,000 ~ 35,786 km | ~5,000 km | 10 ~ 100 ms |
+| GEO Satellite | 35,786 km | ~6,000 km | ~270 ms |
+| HAPS | 20 ~ 50 km (stratosphere) | ~200 km | &lt; 1 ms |
+| UAV / Drone | Below a few hundred meters | A few km | Negligible |
+
+---
+
+## 6G NTN Architecture
+
+```
+          ┌──────────────────────────────────────────────┐
+          │              6G Core Network (5GC/6GC)        │
+          └──────────┬──────────────────┬────────────────┘
+                     │                  │
+           ┌─────────▼────────┐  ┌──────▼──────────────┐
+           │  Terrestrial RAN │  │   NTN RAN (gNB-sat) │
+           │  (Ground BSs)    │  │  LEO / MEO / GEO    │
+           └─────────┬────────┘  └──────┬──────────────┘
+                     │                  │
+             ┌───────▼──────────────────▼───────┐
+             │         UE / IoT Terminal          │
+             │  (Smartphones, Ships, Aircraft,    │
+             │   IoT devices, etc.)               │
+             └───────────────────────────────────┘
+```
+
+### Key Interfaces
+
+- **Uu (Air Interface)**: UE ↔ Satellite gNB
+- **F1 / E1**: DU-CU split architecture (processing can be centralized on ground)
+- **Feeder Link**: Satellite ↔ Ground Station (Gateway)
+- **Service Link**: Satellite ↔ UE (Terminal)
+- **ISL (Inter-Satellite Link)**: Direct satellite-to-satellite communication (Starlink style)
+
+---
+
+## Key Technical Challenges
+
+### 1. Large Propagation Delay
+
+LEO one-way delay can reach up to ~10 ms; GEO is ~270 ms, resulting in much larger RTTs compared to terrestrial networks.
+
+**Impact and Countermeasures:**
+
+```
+Problem: HARQ Stop-and-Wait → significant throughput drop
+  └─ LEO (600km) RTT ≈ 4 ms × 2 = ~8 ms
+  └─ GEO RTT ≈ 270 ms × 2 = ~540 ms
+
+Countermeasures:
+  ① Disable HARQ (Rel-17 NTN: extended HARQ retransmission count)
+  ② Allow Extended HARQ Round-Trip Time
+  ③ Delegate retransmission to upper layer ARQ (RLC AM)
+```
+
+### 2. Doppler Shift
+
+LEO satellites travel at approximately 7.5 km/s, causing frequency shifts of up to tens of kHz.
+
+```python
+# Doppler shift calculation example
+def doppler_shift(freq_hz, velocity_ms, angle_deg):
+    """
+    freq_hz    : carrier frequency (Hz)
+    velocity_ms: satellite velocity (m/s)
+    angle_deg  : angle between satellite motion and line-of-sight
+    """
+    import math
+    c = 3e8  # speed of light (m/s)
+    theta = math.radians(angle_deg)
+    delta_f = freq_hz * (velocity_ms / c) * math.cos(theta)
+    return delta_f
+
+# LEO satellite (7500 m/s), Ka-band (20 GHz), head-on pass
+shift = doppler_shift(20e9, 7500, 0)
+print(f"Max Doppler shift: {shift/1e3:.1f} kHz")  # ≈ 500 kHz
+```
+
+**Countermeasures:**
+- UE-side or network-side pre-compensation
+- Prediction-based correction using satellite ephemeris
+- Wide guard-band design
+
+### 3. Timing Advance (TA)
+
+TA values hundreds of times larger than terrestrial systems are required.
+
+| System | Max TA Range |
+|--------|-------------|
+| Terrestrial LTE/NR | ~0.67 ms (up to ~100 km) |
+| LEO NTN (Rel-17) | ~27 ms (600 km altitude) |
+| GEO NTN | ~541 ms |
+
+- 3GPP Rel-17: Extended TA range (up to 66,460 Tc steps → extended for NTN)
+- UE self pre-compensation based on GNSS introduced
+
+---
+
+## 3GPP NTN Standardization Roadmap
+
+```
+Rel-15 (2019) ─┐
+               │  NTN study started (TR 38.811)
+Rel-16 (2020) ─┤
+               │  NTN channel models, system parameter study
+Rel-17 (2022) ─┤
+               │  ★ First NTN standardization complete
+               │  - 5G NR NTN (satellite)
+               │  - IoT NTN (NB-IoT / eMTC)
+               │  - HARQ/TA/Doppler handling
+Rel-18 (2024) ─┤
+               │  NTN Enhancement
+               │  - UE Direct-to-Satellite (D2S)
+               │  - Mobility/handover improvement
+               │  - Multi-beam support
+Rel-19 / 6G ──┘
+               ★ Full TN/NTN integration (Unified Network)
+               - AI-based channel prediction
+               - Sub-THz / THz band exploration
+               - Intelligent Inter-Satellite Links (ISL)
+```
+
+---
+
+## 6G NTN Key Technologies
+
+### 1. Integrated Access and Backhaul (IAB) in NTN
+
+Architecture combining terrestrial base stations and satellites for wireless backhaul.
+
+```
+[GEO/MEO Satellite]
+     │ Backhaul link (Feeder)
+     ▼
+[LEO Satellite Constellation — ISL]
+     │ Service link
+     ▼
+[HAPS / UAV]
+     │ Last segment
+     ▼
+[Ground UE / IoT Terminal]
+```
+
+### 2. AI/ML-Based Satellite Channel Estimation
+
+```python
+# Conceptual AI channel prediction flow
+class NTNChannelPredictor:
+    """
+    Satellite ephemeris + measurement feedback → predict next slot channel
+    """
+    def predict(self, ephemeris, prev_csi, weather_info):
+        # 1. Pre-compute Doppler/delay from orbit data
+        predicted_delay = self._calc_propagation(ephemeris)
+        predicted_doppler = self._calc_doppler(ephemeris)
+
+        # 2. Predict channel coefficients with ML model
+        channel_coeff = self.model.forward(
+            prev_csi, predicted_delay, predicted_doppler
+        )
+        return channel_coeff
+```
+
+### 3. Multi-Beam / Spot-Beam Technology
+
+```
+Satellite antenna coverage example (LEO, 600 km altitude)
+
+     Satellite
+      ↓↓↓ (multi spot-beams)
+  ┌───┬───┬───┐
+  │ 1 │ 2 │ 3 │  ← Each beam: ~100 km diameter
+  ├───┼───┼───┤
+  │ 4 │ 5 │ 6 │
+  ├───┼───┼───┤
+  │ 7 │ 8 │ 9 │
+  └───┴───┴───┘
+
+- Frequency Reuse: minimize interference between adjacent beams
+- Beam Hopping: dynamically allocate beam resources based on demand
+- Digital Beamforming: flexible beam formation based on RFSoC
+```
+
+---
+
+## NTN vs Terrestrial Network Comparison
+
+| Item | Terrestrial 5G | LEO NTN | GEO NTN |
+|------|---------------|---------|---------|
+| Coverage | Limited (urban-centric) | Near-global | Global |
+| Propagation Delay | &lt; 1 ms | 1~10 ms | ~270 ms |
+| Throughput | Several Gbps | Hundreds Mbps~Gbps | Tens~Hundreds Mbps |
+| Handover | Rare and fast | Very frequent (every seconds) | Rare |
+| Doppler | Negligible | Very large | Small |
+| Deployment Cost | High (dense areas) | Low (wide area) | Low (global) |
+| Disaster/Maritime/Aviation | Unavailable | Available | Available |
+
+---
+
+## Military Perspective (Military NTN)
+
+6G NTN is emerging as a key technology not only for civilian but also military communications.
+
+| Element | Description |
+|---------|-------------|
+| **LEO Constellation** | Lower latency and higher survivability vs. single GEO |
+| **Anti-Jamming** | Frequency hopping + spread spectrum + AI-based adaptive waveform |
+| **LPI/LPD** | Ultra-narrow spot beams, short burst transmissions |
+| **Direct Terminal Access** | Tactical terminals ↔ direct satellite access (no ground infrastructure) |
+| **ISL Utilization** | Satellite-to-satellite data relay without ground gateways |
+
+---
+
+## Reference Standards and Documents
+
+- 3GPP TR 38.811 — Study on NR NTN
+- 3GPP TS 38.300 — NR Overall Description (NTN additions in Rel-17)
+- 3GPP TR 38.821 — Solutions for NR to support NTN
+- ITU-R M.2514 — IMT-2020 Satellite Component
+- ETSI TR 103 611 — 5G NTN Use Cases

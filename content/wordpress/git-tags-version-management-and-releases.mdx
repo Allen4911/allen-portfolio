@@ -1,0 +1,280 @@
+---
+title: "Git Tags — Version Management and Releases"
+description: "When working on any serious project, you need a way to mark specific points in your code history — release versions, milestones, stable builds. Git tags do exactly that."
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+When working on any serious project, you need a way to mark specific points in your code history — release versions, milestones, stable builds. Git tags do exactly that.
+
+A tag is a reference to a specific commit, primarily used to mark release versions. Think of it as a bookmark that never moves.
+
+
+## Why Use Tags?
+
+- Mark release versions (v1.0.0, v2.1.0)
+- Store code snapshots at specific points
+- Manage deployment history
+- Auto-generate release pages on GitHub
+
+Tags are similar to branches in that they point to commits, but unlike branches, they stay fixed after creation.
+
+## Tag Types
+
+
+### 1. Lightweight Tag
+
+A simple pointer to a commit — just a name, nothing else.
+
+```bash
+git tag v1.0.0
+git tag v1.0.0 a1b2c3d
+```
+
+### 2. Annotated Tag (Recommended)
+
+A complete Git object that stores the author, date, and a message.
+
+```bash
+git tag -a v1.0.0 -m "First official release"
+git tag -a v1.0.0 a1b2c3d -m "message"
+```
+
+Annotated tags support GPG signing and are the recommended choice for official releases.
+
+## Creating Tags
+
+Tag the current commit:
+
+```bash
+git tag -a v1.0.0 -m "First official release"
+```
+
+Tag a past commit:
+
+```bash
+git log --oneline
+git tag -a v1.0.0 a1b2c3d -m "User authentication feature release"
+```
+
+A real-world tag message might look like this:
+
+```bash
+git tag -a v1.0.0 -m "Release v1.0.0
+
+Key Features:
+- User authentication (login/signup)
+- Profile management
+- Dashboard
+
+Bug Fixes:
+- Login session expiration issue
+- Responsive UI improvements"
+```
+
+## Viewing Tags
+
+```bash
+git tag                        # list all tags
+git tag --sort=v:refname       # sort by version number
+git tag -l "v1.*"              # filter by pattern
+git show v1.0.0                # detailed info for a tag
+git tag -n                     # one-line summaries
+git log --oneline --decorate   # commits with tag labels
+```
+
+## Deleting Tags
+
+Local:
+
+```bash
+git tag -d v1.0.0
+```
+
+Remote:
+
+```bash
+git push origin --delete v1.0.0
+```
+
+Tags cannot be edited after creation. To fix a tag message, delete and recreate it:
+
+```bash
+git tag -d v1.0.0
+git tag -a v1.0.0 -m "Corrected message"
+git push origin v1.0.0 --force
+```
+
+## Pushing Tags to Remote
+
+```bash
+git push origin v1.0.0          # push a single tag
+git push origin --tags          # push all tags
+git push origin --follow-tags   # push annotated tags only
+```
+
+A typical release flow:
+
+```bash
+git add .
+git commit -m "chore: v1.0.0 release preparation"
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin main
+git push origin v1.0.0
+```
+
+## Checking Out Tags
+
+Navigate to a tag (read-only detached HEAD):
+
+```bash
+git checkout v1.0.0
+```
+
+Create a branch from a tag for hotfixes:
+
+```bash
+git checkout -b hotfix-v1.0.1 v1.0.0
+git add .
+git commit -m "fix: urgent bug fix"
+git tag -a v1.0.1 -m "Hotfix release"
+git push origin hotfix-v1.0.1
+git push origin v1.0.1
+```
+
+Compare two versions:
+
+```bash
+git diff v1.0.0 v2.0.0
+git log v1.0.0..v2.0.0
+```
+
+## Semantic Versioning (SemVer)
+
+
+The standard format is **v[MAJOR].[MINOR].[PATCH]**:
+
+| Increment | When | Example |
+|-----------|------|---------|
+| **MAJOR** | Breaking API changes | v1.5.3 → v2.0.0 |
+| **MINOR** | Backward-compatible new features | v1.5.3 → v1.6.0 |
+| **PATCH** | Backward-compatible bug fixes | v1.5.3 → v1.5.4 |
+
+Pre-release labels are also common:
+
+```
+v1.0.0-alpha
+v1.0.0-beta
+v1.0.0-rc.1
+```
+
+## GitHub Releases
+
+
+
+Push a tag and GitHub automatically creates a release page:
+
+```bash
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin v1.0.0
+```
+
+You can also create releases through the GitHub web UI: Repository → Releases → Create new release → Select tag → Add notes → Publish.
+
+## Complete Release Workflow
+
+
+```bash
+# 1. Create release branch from develop
+git checkout develop
+git checkout -b release/v1.0.0
+
+# 2. Bump version
+git add .
+git commit -m "chore: bump version to 1.0.0"
+
+# 3. Merge to main
+git checkout main
+git merge --no-ff release/v1.0.0
+git push origin main
+
+# 4. Tag the release
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin v1.0.0
+
+# 5. Merge back to develop
+git checkout develop
+git merge --no-ff release/v1.0.0
+git push origin develop
+
+# 6. Clean up
+git branch -d release/v1.0.0
+```
+
+## Hotfix Workflow
+
+```bash
+git checkout -b hotfix/v1.0.1 v1.0.0
+
+# fix the bug
+git add .
+git commit -m "fix: login bug emergency fix"
+
+git checkout main
+git merge --no-ff hotfix/v1.0.1
+git push origin main
+
+git tag -a v1.0.1 -m "Hotfix: login bug fix"
+git push origin v1.0.1
+
+git checkout develop
+git merge --no-ff hotfix/v1.0.1
+git push origin develop
+
+git branch -d hotfix/v1.0.1
+```
+
+## Command Reference
+
+```bash
+# Creation
+git tag v1.0.0                              # lightweight
+git tag -a v1.0.0 -m "message"              # annotated
+git tag -a v1.0.0 <commit> -m "message"     # tag past commit
+
+# Viewing
+git tag                          # list all
+git tag -l "v1.*"                # filter
+git show v1.0.0                  # details
+
+# Deletion
+git tag -d v1.0.0                # local
+git push origin --delete v1.0.0  # remote
+
+# Pushing
+git push origin v1.0.0           # single tag
+git push origin --tags           # all tags
+git push origin --follow-tags    # annotated only
+
+# Navigation
+git checkout v1.0.0              # read-only
+git checkout -b <branch> v1.0.0  # new branch from tag
+git diff v1.0.0 v2.0.0           # compare versions
+```
+
+## Best Practices
+
+1. Always use annotated tags for releases
+2. Write meaningful, detailed messages
+3. Follow semantic versioning conventions
+4. Push tags separately — they don't travel with `git push` by default
+5. Never modify publicly released tags
+6. Maintain a CHANGELOG alongside your tags
+7. Verify your latest tag before creating a new one
+
+---
+
+Git tags are a small feature with outsized impact on your release workflow. Once you start using them consistently, you'll wonder how you ever shipped software without them.

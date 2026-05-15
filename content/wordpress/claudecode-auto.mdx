@@ -1,0 +1,111 @@
+---
+title: "Mastering Team Automation with Claude Code: A Practical Guide to Agents and Remote Control"
+description: "This book is a hands-on guide to moving beyond using Claude AI alone and operating multiple AIs simultaneously as a team."
+date: "2026-05-15"
+tags:
+  - "books"
+published: true
+draft: false
+wp_id: 519
+---
+
+![Mastering Team Automation with Claude Code](assets/claudecode_auto.png)
+
+
+---
+
+## What Is This Book?
+
+This book is a hands-on guide to **moving beyond using Claude AI alone and operating multiple AIs simultaneously as a team**.
+
+The typical way people use AI looks like this:
+
+```
+Me → Ask Claude → Get answer → Ask again → ...
+```
+
+This book makes the following possible:
+
+```
+Me (giving instructions from a smartphone)
+  ↓
+Team Lead AI → distributes tasks simultaneously to Planner AI, Developer AI, Reviewer AI
+```
+
+**Three core technologies:**
+
+- **Claude Code** — An AI that directly reads and writes files from the terminal
+- **TMUX** — Splits the screen into multiple panes to run several AIs at once
+- **Remote-Control** — Remotely command the AIs on your computer from your smartphone
+
+**One-line summary**: *Build a 6-member AI development team on your own computer, and command it from anywhere via smartphone.*
+
+---
+
+## What Becomes Possible
+
+**Assign work during your morning commute**
+Send "fix the payment module bug" from your smartphone, and by the time you arrive at the office, the AI has already fixed the code.
+
+**Six tasks run simultaneously**
+While the Planner AI writes design documents, the Developer AI writes code, and the Reviewer AI checks quality — no waiting in line.
+
+**Work continues even if a conversation is interrupted**
+Even after starting a new session, the AI loads the previous context from files. "Where were we again?" becomes a thing of the past.
+
+**The AI handles deployment too**
+Code writing → Testing → Review → PR creation flows as one continuous process. Humans only give final approval.
+
+---
+
+## How Is This Possible?
+
+Three technologies are combined.
+
+**TMUX — Run multiple AIs in parallel**
+Split the terminal screen into 6 panes and run Claude AI independently in each one. Each takes a different role and works simultaneously.
+
+![Team Structure|675](./assets/01-2-team-concept.png)
+
+**CLAUDE.md — Assign roles to each AI**
+A configuration file each AI reads at startup. It clearly defines role boundaries, like "You are the developer — system design is not your job."
+
+**Remote-Control — Turn your smartphone into a remote control**
+Connect to the AIs running on your computer from your smartphone. Code and files never leave your machine; only the communication channel uses the internet.
+
+---
+
+## Book Structure
+
+| Chapter | Title | What You Learn |
+|---------|-------|----------------|
+| Ch. 1 | Introduction | Why team agents are needed, overview of the full architecture |
+| Ch. 2 | Environment Setup | Installing Ubuntu/WSL2, Claude Code, and TMUX |
+| Ch. 3 | Building the Team | Creating 6 panes with TMUX, assigning roles via CLAUDE.md |
+| Ch. 4 | Remote-Control | Enabling remote control, configuring server mode |
+| Ch. 5 | Mobile Connection | Connecting via smartphone app, push notifications |
+| Ch. 6 | Core Tools | Installing and using gstack, superpowers, gsd, and RTK |
+| Ch. 7 | Real-World Operation | Team instruction flow, Bot Mode, Triple Crown strategy |
+| Ch. 8 | Troubleshooting | Auth errors, session recovery, conflict prevention |
+| Ch. 9 | Closing | Future directions and next steps |
+
+Each chapter builds on the previous one. Chapter 2 lays the foundation, Chapters 3–5 build the team, and Chapters 6–7 bring it to a production-ready level.
+
+---
+
+## What You'll Have When You Finish
+
+**Technical capabilities you'll gain**
+- A 6-member AI team environment built on Ubuntu + TMUX + Claude Code
+- A remote control system accessible from your smartphone at any time
+- A Triple Crown workflow combining gstack · superpowers · gsd
+
+**How your way of working will change**
+- From someone who "asks AI questions" to someone who "commands an AI team"
+- An environment where work progresses even when you're away from your desk
+- A solo development setup that runs planning, development, and review simultaneously
+
+**What this book truly teaches**
+Tools keep changing. Something may replace TMUX, and a better AI than Claude may emerge. But the concepts of **role separation, parallel execution, remote control, and context retention** are valid in any era. This book is the process of implementing those concepts with the most practical tools available today.
+
+[📖 Get the Book on Gumroad](https://1299310798132.gumroad.com/l/igyjc)

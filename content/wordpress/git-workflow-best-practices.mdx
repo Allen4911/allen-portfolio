@@ -1,0 +1,295 @@
+---
+title: "Git Workflow Best Practices"
+description: "Git is not just a tool — it's the language of team collaboration. This post covers Git workflow patterns that clearly manage code change history and enable fast collaboration and safe deployment."
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+Git is not just a tool — it's the language of team collaboration. This post covers Git workflow patterns that clearly manage code change history and enable fast collaboration and safe deployment.
+
+## Branching Strategy
+
+### GitHub Flow (Small teams, fast deployment)
+
+```
+main (always deployable)
+  ├── feature/user-auth
+  ├── fix/login-500-error
+  └── chore/update-deps
+```
+
+1. Create branch from `main`
+2. Work complete → create PR
+3. Review + CI passes → merge to `main`
+4. Deploy immediately
+
+**When to use:** Web services, SaaS, continuous deployment environments
+
+### Git Flow (Complex release management)
+
+```
+main        (production)
+develop     (integration branch)
+  ├── feature/payment-api
+  ├── feature/notification
+  └── release/v2.3.0
+        └── hotfix/critical-bug → main + develop
+```
+
+**When to use:** Mobile apps, products with fixed release cycles
+
+### Trunk-Based Development (Large teams)
+
+All developers work directly on `main`. Use Feature Flags to hide incomplete features:
+
+```javascript
+// Feature flag example
+if (featureFlags.isEnabled('new-checkout')) {
+  return <NewCheckoutFlow />;
+}
+return <LegacyCheckoutFlow />;
+```
+
+## Commit Convention (Conventional Commits)
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Type List
+
+| type | Purpose |
+|------|---------|
+| `feat` | Add new feature |
+| `fix` | Bug fix |
+| `refactor` | Code improvement without behavior change |
+| `perf` | Performance improvement |
+| `test` | Add/modify tests |
+| `docs` | Documentation change |
+| `chore` | Build, dependency, config changes |
+| `ci` | CI/CD configuration change |
+| `revert` | Revert previous commit |
+
+### Good Commit Messages
+
+```bash
+# Bad examples
+git commit -m "fix"
+git commit -m "fix bug"
+git commit -m "done"
+
+# Good example
+git commit -m "fix(auth): fix bug returning 500 on login failure
+
+The server returned 500 when /api/me was called with an expired session.
+Fixed to correctly handle JWT validation failure as 401.
+
+Fixes #234"
+```
+
+**Principles:**
+- Subject line under 50 chars, start with present tense verb
+- Explain "why" not "what"
+- Reference related issue numbers
+
+## Effective Pull Requests
+
+### PR Size
+
+Large PRs are hard to review. Appropriate size reviewable in a day:
+
+```
+Ideal:    200~400 lines changed
+Acceptable: 400~800 lines changed
+Danger:   800+ lines → consider splitting
+```
+
+### PR Description Template
+
+```markdown
+## Changes
+- Added user profile update API (PATCH /api/users/:id)
+- Support name, email, bio field changes
+- Added re-authentication logic when email changes
+
+## Reason for Change
+Users couldn't modify their profile information after registration
+because there was no profile update feature.
+
+## How to Test
+1. `npm test -- --grep "profile update"`
+2. Postman: PATCH /api/users/1 with { "name": "new name" }
+
+## Screenshots (for UI changes)
+[image]
+
+## Checklist
+- [x] Tests written
+- [x] Documentation updated
+- [ ] Migration required (none)
+```
+
+## Frequently Used Git Commands
+
+### Temporarily Saving Work
+
+```bash
+# When switching to another branch while working
+git stash push -m "WIP: implementing payment module"
+
+# View saved list
+git stash list
+
+# Restore most recent stash
+git stash pop
+
+# Restore specific stash
+git stash apply stash@{2}
+```
+
+### Modifying Commits
+
+```bash
+# Modify last commit message
+git commit --amend -m "fix(auth): fix login bug"
+
+# Add file to last commit
+git add forgotten-file.js
+git commit --amend --no-edit
+
+# Caution: amending a pushed commit requires force push (dangerous in team work)
+```
+
+### Browsing Change History
+
+```bash
+# Change history for a specific file
+git log --follow -p src/utils/date.js
+
+# When a specific string was added/removed
+git log -S "formatDate" --patch
+
+# Who wrote this line
+git blame src/utils/date.js
+
+# Specific date range
+git log --after="2024-01-01" --before="2024-03-31"
+```
+
+### Recovering from Mistakes
+
+```bash
+# Unstage (keep file changes)
+git restore --staged file.js
+
+# Cancel file change (restore to last commit state)
+git restore file.js
+
+# Cancel commit (keep changes)
+git reset --soft HEAD~1
+
+# Cancel commit (delete changes too) — caution!
+git reset --hard HEAD~1
+
+# To revert an already-pushed commit (safely with new commit)
+git revert HEAD
+```
+
+### Interactive Rebase
+
+```bash
+# Clean up last 3 commits
+git rebase -i HEAD~3
+
+# In editor:
+# pick → squash (merge with previous commit)
+# pick → reword (modify message)
+# pick → drop (delete commit)
+# pick → edit (split commit)
+```
+
+## CI/CD Integration Strategy
+
+```yaml
+# .github/workflows/pr-check.yml
+name: PR Check
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test -- --coverage
+      - run: npm run build
+      
+      - name: Coverage Report
+        uses: codecov/codecov-action@v4
+```
+
+## Security Considerations
+
+```bash
+# Must include in .gitignore
+.env
+.env.local
+*.pem
+*.key
+node_modules/
+.DS_Store
+
+# Remove already committed sensitive information (BFG Repo-Cleaner)
+bfg --delete-files .env
+bfg --replace-text passwords.txt
+
+# After commit, always rotate credentials
+```
+
+### Installing git-secrets (prevention)
+
+```bash
+git secrets --install
+git secrets --register-aws  # register AWS key patterns
+git secrets --add 'password\s*=\s*.+'
+```
+
+## Team Standard Configuration
+
+```bash
+# Recommended .gitconfig settings
+[core]
+  autocrlf = input        # auto convert CRLF → LF
+  editor = code --wait
+
+[pull]
+  rebase = true           # rebase as default on pull
+
+[push]
+  default = current       # push only current branch
+
+[alias]
+  lg = log --oneline --graph --decorate --all
+  st = status -s
+  co = checkout
+  br = branch
+  unstage = restore --staged
+```
+
+The heart of Git workflow is "does the history make sense later?" A clean commit history makes bug tracking, feature rollback, and onboarding new team members all much easier. Team-wide rules matter more than the tools themselves.

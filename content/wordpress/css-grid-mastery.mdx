@@ -1,0 +1,296 @@
+---
+title: "CSS Grid Mastery Guide"
+description: "CSS Grid is a two-dimensional layout system. While Flexbox handles one dimension (row or column), Grid controls rows and columns simultaneously. Its core strength is implementing complex layouts with "
+date: "2026-05-15"
+tags:
+  - "study"
+published: true
+draft: false
+---
+
+CSS Grid is a two-dimensional layout system. While Flexbox handles one dimension (row or column), Grid controls rows and columns simultaneously. Its core strength is implementing complex layouts with CSS alone, without changing the HTML structure.
+
+## When to Use Grid vs Flexbox
+
+```
+Use Flexbox when:
+- Navigation bars (horizontal alignment)
+- Aligning content inside cards
+- One-dimensional item placement
+
+Use Grid when:
+- Full page layouts
+- Dashboards, galleries
+- Two-dimensional layouts where both rows and columns matter
+```
+
+## Basic Concepts
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr; /* 3 cols: fixed, flexible, flexible */
+  grid-template-rows: auto 1fr auto;    /* 3 rows: auto, flexible, auto */
+  gap: 16px;                            /* row + column gap */
+}
+```
+
+### The fr Unit
+
+`fr` represents a fraction of available space:
+
+```css
+/* Equal thirds */
+grid-template-columns: 1fr 1fr 1fr;
+
+/* 2:1:1 ratio */
+grid-template-columns: 2fr 1fr 1fr;
+
+/* Fixed + flexible */
+grid-template-columns: 300px 1fr; /* sidebar + main */
+```
+
+### repeat()
+
+```css
+/* 12-column grid */
+grid-template-columns: repeat(12, 1fr);
+
+/* Auto-fit for responsive layouts */
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+```
+
+`auto-fill` keeps empty columns, `auto-fit` fills remaining space.
+
+## Item Placement
+
+### Placement by Line Number
+
+```css
+.header {
+  grid-column: 1 / -1; /* from first to last column */
+  grid-row: 1;
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 2 / 4; /* rows 2 through 3 */
+}
+
+.main {
+  grid-column: 2 / -1;
+  grid-row: 2;
+}
+```
+
+### Sizing with span
+
+```css
+.wide-item {
+  grid-column: span 2;  /* spans 2 columns */
+  grid-row: span 3;     /* spans 3 rows */
+}
+```
+
+### grid-template-areas
+
+The most readable way to define layouts:
+
+```css
+.layout {
+  display: grid;
+  grid-template-areas:
+    "header  header  header"
+    "sidebar main    main  "
+    "sidebar footer  footer";
+  grid-template-columns: 250px 1fr 1fr;
+  grid-template-rows: 60px 1fr 50px;
+  min-height: 100vh;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }
+```
+
+## Responsive Layouts
+
+### Responsive Without Media Queries
+
+```css
+/* Card grid: column count adjusts automatically with screen size */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+/* 
+  Narrow screen: 1 column (each card minimum 300px)
+  Medium screen: 2 columns (600px+)
+  Wide screen:   3 columns (900px+)
+*/
+```
+
+### Combining Media Queries with grid-template-areas
+
+```css
+.page {
+  display: grid;
+  gap: 16px;
+  
+  /* Mobile: single column */
+  grid-template-areas:
+    "header"
+    "main"
+    "sidebar"
+    "footer";
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .page {
+    grid-template-areas:
+      "header  header"
+      "sidebar main  "
+      "footer  footer";
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page {
+    grid-template-areas:
+      "header  header  header"
+      "sidebar main    ads   "
+      "footer  footer  footer";
+    grid-template-columns: 250px 1fr 200px;
+  }
+}
+```
+
+## Alignment
+
+### Container-Level Alignment
+
+```css
+.container {
+  /* Column direction (vertical) */
+  align-items: start | end | center | stretch;
+  
+  /* Row direction (horizontal) */
+  justify-items: start | end | center | stretch;
+  
+  /* Both directions at once */
+  place-items: center; /* align-items + justify-items */
+  
+  /* Position of entire grid (within container) */
+  align-content: start | end | center | space-between | space-around;
+  justify-content: start | end | center | space-between | space-around;
+}
+```
+
+### Individual Item Alignment
+
+```css
+.item {
+  align-self: start | end | center | stretch;
+  justify-self: start | end | center | stretch;
+  place-self: center;
+}
+```
+
+## Practical Patterns
+
+### Perfect Center Alignment
+
+```css
+.centered {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+```
+
+### Card Layout (Image + Text)
+
+```css
+.card {
+  display: grid;
+  grid-template-rows: 200px 1fr auto; /* image | body | button */
+}
+
+/* Image always fixed height, button stays at bottom even as body grows */
+.card-image  { grid-row: 1; }
+.card-body   { grid-row: 2; }
+.card-footer { grid-row: 3; }
+```
+
+### Newspaper-Style Grid
+
+```css
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+}
+
+.featured {
+  grid-column: span 2;
+  grid-row: span 2; /* 4x size */
+}
+
+.secondary {
+  grid-column: span 2;
+}
+```
+
+### Holy Grail Layout
+
+```css
+body {
+  display: grid;
+  grid-template:
+    "header" 60px
+    "main"   1fr
+    "footer" 50px
+    / 1fr;
+  min-height: 100vh;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-areas: "nav content aside";
+}
+```
+
+## Subgrid (CSS Grid Level 2)
+
+```css
+.parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.child {
+  display: grid;
+  grid-template-columns: subgrid; /* inherits parent grid columns */
+  grid-column: span 3;
+}
+```
+
+Subgrid aligns nested elements to the parent's grid lines. Useful for aligning card content across multiple cards.
+
+## Grid Inspector
+
+Chrome DevTools → Elements → select element → click `grid` badge in Styles panel to display grid overlay. You can visually inspect numbered lines and area names — essential for debugging.
+
+## Browser Support
+
+CSS Grid is supported in all modern browsers (except IE 11). If IE 11 support is needed, the `-ms-grid` prefixed version exists but has limited functionality. Since most projects have dropped IE support, you can freely use standard Grid.
+
+CSS Grid and Flexbox are not competing technologies. Using Grid for page layout and Flexbox for component internals is the currently most widely adopted pattern.
