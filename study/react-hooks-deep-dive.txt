@@ -1,0 +1,333 @@
+2:I[2972,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],""]
+3:I[446,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],"default"]
+5:I[4707,[],""]
+7:I[6423,[],""]
+8:I[4152,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"LanguageProvider"]
+9:I[9445,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"default"]
+4:T2173,# React Hooks — Deep Dive
+
+## The Core Mental Model: Closures Over Snapshots
+
+Every React render creates a **snapshot** of props and state. Hooks are closures captured at that snapshot. This one idea explains most hook bugs.
+
+```js
+function Counter() {
+  const [count, setCount] = useState(0)
+
+  // This setTimeout closes over the *snapshot* of count at render time
+  function handleAlertClick() {
+    setTimeout(() => {
+      alert('You clicked: ' + count)  // Always the count at click time
+    }, 3000)
+  }
+
+  return <button onClick={handleAlertClick}>Click me</button>
+}
+```
+
+If you click when count is 0, then increment to 5, the alert still shows 0. That's not a bug — it's the snapshot model working correctly.
+
+---
+
+## useState — Beyond the Basics
+
+### Functional Updates
+
+When new state depends on previous state, always use the functional form:
+
+```js
+// ❌ Stale closure risk
+setCount(count + 1)
+
+// ✅ Always reads the latest state
+setCount(prev => prev + 1)
+```
+
+This matters inside `useCallback`, `useEffect`, and async handlers where the closure may be stale.
+
+### Object State Patterns
+
+React does **not** shallow-merge object state (unlike class `setState`). You must spread manually:
+
+```js
+const [user, setUser] = useState({ name: 'Allen', age: 30 })
+
+// ❌ Replaces entire state — loses other fields
+setUser({ age: 31 })
+
+// ✅ Spread to preserve other fields
+setUser(prev => ({ ...prev, age: 31 }))
+```
+
+### Lazy Initialization
+
+For expensive initial computations, pass a function (not a value):
+
+```js
+// ❌ parseSavedData runs on every render, result discarded after first
+const [data, setData] = useState(parseSavedData(rawJSON))
+
+// ✅ Function runs only once on mount
+const [data, setData] = useState(() => parseSavedData(rawJSON))
+```
+
+---
+
+## useEffect — The Synchronization Primitive
+
+`useEffect` is not a lifecycle hook. It's a **synchronization mechanism** — it keeps external systems (DOM, network, timers) in sync with React state.
+
+```js
+useEffect(() => {
+  // Effect: setup / subscribe
+  const sub = websocket.subscribe(userId, onMessage)
+
+  // Cleanup: runs before next effect and on unmount
+  return () => sub.unsubscribe()
+}, [userId, onMessage]) // Re-run when these change
+```
+
+### Dependency Array Rules
+
+| Dependency | Behavior |
+|-----------|----------|
+| Omitted | Runs after every render |
+| `[]` | Runs once on mount |
+| `[a, b]` | Runs when a or b changes |
+
+The ESLint rule `exhaustive-deps` enforces that all variables used inside the effect appear in the array. **Follow it.** Suppressing it with `// eslint-disable` almost always introduces stale closure bugs.
+
+### Common Effect Patterns
+
+**Data fetching with cleanup:**
+```js
+useEffect(() => {
+  let cancelled = false
+
+  async function fetchUser() {
+    const data = await getUser(userId)
+    if (!cancelled) setUser(data)  // Guard against race conditions
+  }
+
+  fetchUser()
+  return () => { cancelled = true }
+}, [userId])
+```
+
+**Event listener:**
+```js
+useEffect(() => {
+  function handleResize() {
+    setWidth(window.innerWidth)
+  }
+  window.addEventListener('resize', handleResize)
+  return () => window.removeEventListener('resize', handleResize)
+}, [])
+```
+
+---
+
+## useRef — Two Distinct Uses
+
+### 1. Accessing DOM Nodes
+
+```jsx
+function AutoFocusInput() {
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
+
+  return <input ref={inputRef} />
+}
+```
+
+### 2. Mutable Instance Variable
+
+A ref is the only way to hold a mutable value that **doesn't trigger re-renders**:
+
+```js
+function Timer() {
+  const [count, setCount] = useState(0)
+  const intervalRef = useRef(null)
+
+  function start() {
+    intervalRef.current = setInterval(() => {
+      setCount(c => c + 1)
+    }, 1000)
+  }
+
+  function stop() {
+    clearInterval(intervalRef.current)
+  }
+
+  return <><button onClick={start}>Start</button><button onClick={stop}>Stop</button></>
+}
+```
+
+Use refs for: timer IDs, previous values, scroll positions, abort controllers — anything that needs to persist across renders without causing re-renders.
+
+---
+
+## useCallback and useMemo — When to Memoize
+
+Both hooks trade memory for computation. They're **not free** — use them only when you have a measured performance problem.
+
+### useCallback — Stable Function References
+
+```js
+// ❌ New function reference on every render → child always re-renders
+const handleSubmit = () => { submitForm(data) }
+
+// ✅ Same reference unless 'data' changes
+const handleSubmit = useCallback(() => {
+  submitForm(data)
+}, [data])
+```
+
+**When it matters:** Only useful when the function is passed to a memoized child (`React.memo`) or appears in another hook's dependency array.
+
+### useMemo — Expensive Computations
+
+```js
+// ❌ filteredItems recomputed on every render
+const filteredItems = items.filter(i => i.active && i.category === cat)
+
+// ✅ Only recomputed when items or cat changes
+const filteredItems = useMemo(
+  () => items.filter(i => i.active && i.category === cat),
+  [items, cat]
+)
+```
+
+**Rule of thumb:** Profile first. Memoize only if:
+- The computation is measurably slow (>1ms)
+- The result is used in a dependency array of another hook
+- The result is passed as props to `React.memo` components
+
+---
+
+## useReducer — State Machines for Complex State
+
+When state transitions are complex or involve multiple sub-values, `useReducer` beats `useState`:
+
+```js
+const initialState = { count: 0, loading: false, error: null }
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT': return { ...state, count: state.count + 1 }
+    case 'FETCH_START': return { ...state, loading: true, error: null }
+    case 'FETCH_SUCCESS': return { ...state, loading: false, count: action.payload }
+    case 'FETCH_ERROR': return { ...state, loading: false, error: action.error }
+    default: return state
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  async function fetchCount() {
+    dispatch({ type: 'FETCH_START' })
+    try {
+      const count = await api.getCount()
+      dispatch({ type: 'FETCH_SUCCESS', payload: count })
+    } catch (e) {
+      dispatch({ type: 'FETCH_ERROR', error: e.message })
+    }
+  }
+
+  return (
+    <div>
+      {state.loading && <Spinner />}
+      {state.error && <Error message={state.error} />}
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+    </div>
+  )
+}
+```
+
+---
+
+## Custom Hooks — Extracting Stateful Logic
+
+Custom hooks are the primary reuse mechanism in React. Any function that starts with `use` and calls built-in hooks is a custom hook.
+
+```js
+// useFetch — generic data fetching with loading/error states
+function useFetch(url) {
+  const [state, dispatch] = useReducer(
+    (s, a) => ({ ...s, ...a }),
+    { data: null, loading: true, error: null }
+  )
+
+  useEffect(() => {
+    let cancelled = false
+    dispatch({ loading: true, error: null })
+
+    fetch(url)
+      .then(r => r.json())
+      .then(data => { if (!cancelled) dispatch({ data, loading: false }) })
+      .catch(err => { if (!cancelled) dispatch({ error: err.message, loading: false }) })
+
+    return () => { cancelled = true }
+  }, [url])
+
+  return state
+}
+
+// Usage
+function UserProfile({ userId }) {
+  const { data, loading, error } = useFetch(`/api/users/${userId}`)
+
+  if (loading) return <Spinner />
+  if (error) return <Error message={error} />
+  return <Profile user={data} />
+}
+```
+
+---
+
+## Common Hook Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| `setCount(count + 1)` in async handler | Use `setCount(c => c + 1)` |
+| Missing dependency in `useEffect` | Add it or extract to a ref |
+| Calling a hook inside a condition | Move condition inside the hook |
+| Creating objects/arrays in JSX deps | Memoize with `useMemo` or move outside component |
+| Using `useLayoutEffect` when `useEffect` works | `useLayoutEffect` blocks paint — only for DOM measurements |
+
+---
+
+## Hook Decision Guide
+
+```
+Need reactive value?
+  └─ One value → useState
+  └─ Multiple related values + complex transitions → useReducer
+
+Need a side effect?
+  └─ After render, okay to be async → useEffect
+  └─ Before paint, DOM measurement → useLayoutEffect
+
+Need DOM access?
+  └─ useRef
+
+Need to persist value without re-render?
+  └─ useRef
+
+Need stable function reference?
+  └─ useCallback (only if passed to memo'd child or in dep array)
+
+Need to cache computation?
+  └─ useMemo (only if provably expensive)
+
+Repeating same stateful logic?
+  └─ Extract to custom hook
+```6:["slug","react-hooks-deep-dive","d"]
+0:["c3TR-NcUo4Af6CJBNqM92",[[["",{"children":["study",{"children":[["slug","react-hooks-deep-dive","d"],{"children":["__PAGE__?{\"slug\":\"react-hooks-deep-dive\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["study",{"children":[["slug","react-hooks-deep-dive","d"],{"children":["__PAGE__",{},[["$L1",[["$","section",null,{"style":{"backgroundColor":"#272729","padding":"80px 22px"},"aria-label":"Study note: React Hooks — Deep Dive","children":["$","div",null,{"style":{"maxWidth":"780px","margin":"0 auto"},"children":[["$","$L2",null,{"href":"/study","style":{"display":"inline-flex","alignItems":"center","gap":"6px","color":"#2997ff","fontSize":"14px","letterSpacing":"-0.224px","textDecoration":"none","marginBottom":"40px"},"className":"back-link","children":"← Back to Study"}],["$","div",null,{"style":{"display":"flex","gap":"12px","alignItems":"center","marginBottom":"20px","flexWrap":"wrap"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#3a3a3c] text-[#cccccc] bg-transparent\n        \n      ","children":"React"}],["$","span",null,{"style":{"fontSize":"12px","color":"#cccccc"},"children":"12 min read"}],["$","span",null,{"style":{"fontSize":"12px","color":"#7a7a7a"},"children":"2026-04-20"}]]}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#ffffff","marginBottom":"20px"},"className":"note-title","children":"React Hooks — Deep Dive"}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#cccccc"},"children":"A thorough look at useState, useEffect, useCallback, useMemo, and useRef — when to use each and the mental model behind closures in hooks."}]]}]}],["$","section",null,{"style":{"backgroundColor":"#ffffff","padding":"80px 22px","colorScheme":"light","color":"#1d1d1f"},"aria-label":"Note content","children":["$","div",null,{"style":{"maxWidth":"680px","margin":"0 auto"},"children":[["$","$L3",null,{"content":"$4"}],["$","div",null,{"style":{"display":"flex","gap":"8px","flexWrap":"wrap","marginTop":"48px","paddingTop":"32px","borderTop":"1px solid #e0e0e0"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"React"}],["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"Hooks"}],["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"JavaScript"}]]}],["$","div",null,{"style":{"marginTop":"48px"},"children":["$","$L2",null,{"href":"/study","className":"link-primary","children":"← Back to Study Notes"}]}]]}]}],["$","style",null,{"children":"\n        .back-link:hover {\n          text-decoration: underline;\n        }\n        @media (max-width: 640px) {\n          .note-title {\n            font-size: 28px !important;\n          }\n        }\n      "}]],null],null],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children","$6","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/18cd0df080ff1cc0.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","className":"__variable_52456e","children":["$","body",null,{"className":"font-sans antialiased","children":["$","$L8",null,{"children":[["$","$L9",null,{}],["$","main",null,{"className":"pt-nav","children":["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","section",null,{"style":{"minHeight":"calc(100vh - 44px)","backgroundColor":"#f5f5f7","display":"flex","alignItems":"center","justifyContent":"center","padding":"80px 22px","textAlign":"center"},"aria-label":"Page not found","children":["$","div",null,{"style":{"maxWidth":"480px"},"children":[["$","p",null,{"style":{"fontSize":"14px","fontWeight":"400","lineHeight":"1.43","color":"#7a7a7a","textTransform":"uppercase","letterSpacing":"0.08em","marginBottom":"16px"},"children":"404"}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#1d1d1f","marginBottom":"16px"},"children":"Page not found."}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#7a7a7a","marginBottom":"40px"},"children":"The page you are looking for does not exist or has been moved."}],["$","$L2",null,{"href":"/","className":"btn-primary","children":"Go home"}]]}]}],"notFoundStyles":[]}]}],["$","footer",null,{"className":"tile-parchment","style":{"paddingTop":"64px","paddingLeft":"22px","paddingRight":"22px","paddingBottom":"32px"},"children":[["$","div",null,{"style":{"maxWidth":"980px","margin":"0 auto"},"children":[["$","div",null,{"style":{"display":"grid","gridTemplateColumns":"repeat(4, 1fr)","gap":"24px","marginBottom":"48px"},"className":"footer-grid","children":[["$","div","About",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"About"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","About me",{"children":["$","$L2",null,{"href":"/about","className":"footer-link","children":"About me"}]}],["$","li","Skills",{"children":["$","$L2",null,{"href":"/about#skills","className":"footer-link","children":"Skills"}]}],["$","li","Timeline",{"children":["$","$L2",null,{"href":"/about#timeline","className":"footer-link","children":"Timeline"}]}]]}]]}],["$","div","Projects",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Projects"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","OpenClaw Bridge",{"children":["$","$L2",null,{"href":"/projects/openclaw-bridge","className":"footer-link","children":"OpenClaw Bridge"}]}],["$","li","Developer Portfolio",{"children":["$","$L2",null,{"href":"/projects/allen-portfolio","className":"footer-link","children":"Developer Portfolio"}]}],["$","li","Study Notes App",{"children":["$","$L2",null,{"href":"/projects/study-notes","className":"footer-link","children":"Study Notes App"}]}]]}]]}],["$","div","Study",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Study"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","React",{"children":["$","$L2",null,{"href":"/study?category=React","className":"footer-link","children":"React"}]}],["$","li","Next.js",{"children":["$","$L2",null,{"href":"/study?category=Next.js","className":"footer-link","children":"Next.js"}]}],["$","li","JavaScript",{"children":["$","$L2",null,{"href":"/study?category=JavaScript","className":"footer-link","children":"JavaScript"}]}],["$","li","CSS",{"children":["$","$L2",null,{"href":"/study?category=CSS","className":"footer-link","children":"CSS"}]}]]}]]}],["$","div","Contact",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Contact"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","Email",{"children":["$","a",null,{"href":"mailto:kjkim4911@gmail.com","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"Email"}]}],["$","li","GitHub",{"children":["$","a",null,{"href":"https://github.com/Allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"GitHub"}]}],["$","li","LinkedIn",{"children":["$","a",null,{"href":"https://www.linkedin.com/in/allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"LinkedIn"}]}]]}]]}]]}],["$","div",null,{"style":{"height":"1px","backgroundColor":"var(--color-hairline)","marginBottom":"24px"}}],["$","div",null,{"style":{"display":"flex","justifyContent":"space-between","alignItems":"center","flexWrap":"wrap","gap":"8px"},"children":[["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Copyright 2026 Allen Kim. All rights reserved."}],["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Built with Next.js and Tailwind CSS"}]]}]]}],["$","style",null,{"children":"\n        .footer-link {\n          color: var(--color-ink-muted-80);\n          display: block;\n          font-size: 12px;\n          font-weight: 400;\n          letter-spacing: -0.12px;\n          line-height: 2.41;\n          text-decoration: none;\n        }\n\n        .footer-link:hover {\n          color: var(--color-primary) !important;\n        }\n\n        @media (max-width: 640px) {\n          .footer-grid {\n            grid-template-columns: repeat(2, 1fr) !important;\n          }\n        }\n\n        @media (max-width: 400px) {\n          .footer-grid {\n            grid-template-columns: 1fr !important;\n          }\n        }\n      "}]]}]]}]}]}]],null],null],["$La",null]]]]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"React Hooks — Deep Dive | Allen Kim"}],["$","meta","3",{"name":"description","content":"A thorough look at useState, useEffect, useCallback, useMemo, and useRef — when to use each and the mental model behind closures in hooks."}],["$","meta","4",{"name":"author","content":"Allen Kim"}],["$","meta","5",{"name":"keywords","content":"frontend developer,React,Next.js,Tailwind CSS,portfolio"}],["$","meta","6",{"name":"creator","content":"Allen Kim"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","meta","8",{"property":"og:title","content":"Allen Kim - Frontend Developer"}],["$","meta","9",{"property":"og:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","10",{"property":"og:url","content":"https://allen-portfolio.vercel.app"}],["$","meta","11",{"property":"og:site_name","content":"Allen Kim Portfolio"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Allen Kim - Frontend Developer"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:site","content":"@allen4911"}],["$","meta","20",{"name":"twitter:creator","content":"@allen4911"}],["$","meta","21",{"name":"twitter:title","content":"Allen Kim - Frontend Developer"}],["$","meta","22",{"name":"twitter:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","23",{"name":"twitter:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","24",{"name":"next-size-adjust"}]]
+1:null

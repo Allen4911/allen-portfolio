@@ -1,0 +1,53 @@
+[
+  {
+    "id": "openclaw-bridge",
+    "title": "OpenClaw Bridge",
+    "category": "Automation",
+    "description": "Telegram-to-Claude CLI bridge for team coordination",
+    "longDescription": "A real-time bridge connecting Telegram messaging to Claude CLI sessions via the OpenClaw platform. Built to coordinate a virtual development team across multiple tmux panes, routing messages to specific AI agents based on message prefixes. Handles multi-pane broadcasting, context resets, and response routing, enabling async human-AI team workflows without context switching.",
+    "tech": ["Node.js", "Telegram Bot API", "Claude API", "Bash", "tmux"],
+    "image": "/images/projects/openclaw-bridge.svg",
+    "github": "https://github.com/bettep-dev/openclaw-claude-bridge",
+    "demo": null,
+    "featured": true,
+    "icon": "BC",
+    "color": "#272729",
+    "problem": "Coordinating multiple AI agents across terminal panes required constant manual switching and repeated commands.",
+    "solution": "Automated message routing parses mention syntax and pipes messages to the correct tmux pane in real time.",
+    "result": "5x faster team coordination with zero context-switch overhead."
+  },
+  {
+    "id": "allen-portfolio",
+    "title": "Developer Portfolio",
+    "category": "Frontend",
+    "description": "Apple-design-system inspired developer portfolio built with Next.js 14",
+    "longDescription": "A focused implementation of Apple's product-page design language applied to a developer portfolio. Features alternating light and dark full-bleed sections, SF Pro-inspired typography, a single Action Blue accent, Framer Motion reveal animations, and polished responsive layouts. Built with Next.js 14 App Router, Tailwind CSS custom design tokens, and server components by default.",
+    "tech": ["Next.js 14", "Tailwind CSS", "Framer Motion", "React", "Design Tokens"],
+    "image": "/images/projects/allen-portfolio.svg",
+    "github": "https://github.com/Allen4911/allen-portfolio",
+    "demo": "https://allen-portfolio.vercel.app",
+    "featured": true,
+    "icon": "AP",
+    "color": "#f5f5f7",
+    "problem": "Generic portfolio templates rarely communicate design taste or technical depth.",
+    "solution": "Applied Apple's design token system across spacing, typography, elevation, and page rhythm as a portfolio showcase.",
+    "result": "A cleaner portfolio surface with product-style hierarchy and focused case-study flow."
+  },
+  {
+    "id": "study-notes",
+    "title": "Study Notes App",
+    "category": "Fullstack",
+    "description": "Markdown-based study note system with upload, search, and reading time",
+    "longDescription": "A personal knowledge system that renders markdown study notes with syntax highlighting, generates reading time estimates, and supports category filtering. Features a drag-and-drop upload modal for adding new notes, language-ready structure, and an offline-first architecture using local file storage.",
+    "tech": ["React", "Markdown", "rehype-highlight", "i18n", "reading-time"],
+    "image": "/images/projects/study-notes.svg",
+    "github": null,
+    "demo": null,
+    "featured": true,
+    "icon": "SN",
+    "color": "#272729",
+    "problem": "Study notes were scattered across tools, paper, and code comments with no unified retrieval.",
+    "solution": "Centralized a markdown-first system with category taxonomy, search, and reading-time metadata.",
+    "result": "A personal knowledge base organized across core frontend categories."
+  }
+]

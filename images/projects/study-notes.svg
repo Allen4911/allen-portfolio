@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" width="620" height="340">
+  <!-- Background -->
+  <rect width="620" height="340" fill="#1c1c1e"/>
+
+  <!-- Top bar -->
+  <rect width="620" height="44" fill="#111113"/>
+  <circle cx="20" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="22" r="6" fill="#28ca41"/>
+  <text x="310" y="27" text-anchor="middle" fill="#666" font-size="12" font-family="system-ui, sans-serif">Study Notes App — localhost:3000</text>
+
+  <!-- Sidebar -->
+  <rect x="0" y="44" width="180" height="296" fill="#111113" stroke="#333" stroke-width="1"/>
+  <text x="20" y="68" fill="#888" font-size="9" font-family="system-ui, sans-serif" font-weight="600">CATEGORIES</text>
+
+  <rect x="12" y="76" width="156" height="28" rx="6" fill="#0071e3" opacity="0.2"/>
+  <text x="24" y="95" fill="#0071e3" font-size="11" font-family="system-ui, sans-serif" font-weight="600">All Notes</text>
+  <text x="148" y="95" text-anchor="end" fill="#0071e3" font-size="10" font-family="system-ui, sans-serif">42</text>
+
+  <text x="24" y="120" fill="#ccc" font-size="11" font-family="system-ui, sans-serif">JavaScript</text>
+  <text x="164" y="120" text-anchor="end" fill="#666" font-size="10" font-family="system-ui, sans-serif">12</text>
+
+  <text x="24" y="142" fill="#ccc" font-size="11" font-family="system-ui, sans-serif">React</text>
+  <text x="164" y="142" text-anchor="end" fill="#666" font-size="10" font-family="system-ui, sans-serif">8</text>
+
+  <text x="24" y="164" fill="#ccc" font-size="11" font-family="system-ui, sans-serif">TypeScript</text>
+  <text x="164" y="164" text-anchor="end" fill="#666" font-size="10" font-family="system-ui, sans-serif">7</text>
+
+  <text x="24" y="186" fill="#ccc" font-size="11" font-family="system-ui, sans-serif">Algorithm</text>
+  <text x="164" y="186" text-anchor="end" fill="#666" font-size="10" font-family="system-ui, sans-serif">9</text>
+
+  <text x="24" y="208" fill="#ccc" font-size="11" font-family="system-ui, sans-serif">CSS</text>
+  <text x="164" y="208" text-anchor="end" fill="#666" font-size="10" font-family="system-ui, sans-serif">6</text>
+
+  <!-- Search bar in sidebar -->
+  <rect x="12" y="220" width="156" height="28" rx="6" fill="#1c1c1e" stroke="#444" stroke-width="1"/>
+  <text x="24" y="239" fill="#666" font-size="10" font-family="system-ui, sans-serif">Search notes...</text>
+
+  <!-- Upload button -->
+  <rect x="12" y="300" width="156" height="30" rx="8" fill="#272729" stroke="#444" stroke-width="1"/>
+  <text x="90" y="319" text-anchor="middle" fill="#0071e3" font-size="10" font-family="system-ui, sans-serif" font-weight="600">+ Upload Note</text>
+
+  <!-- Main content area -->
+  <rect x="180" y="44" width="440" height="296" fill="#1c1c1e"/>
+
+  <!-- Note cards -->
+  <rect x="196" y="56" width="200" height="108" rx="8" fill="#272729" stroke="#444" stroke-width="1"/>
+  <text x="210" y="76" fill="#888" font-size="8" font-family="system-ui, sans-serif">JavaScript · 8 min read</text>
+  <text x="210" y="94" fill="#fff" font-size="12" font-family="system-ui, sans-serif" font-weight="600">클로저와 스코프</text>
+  <text x="210" y="110" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">클로저는 함수가 선언될 때의 렉시컬</text>
+  <text x="210" y="122" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">스코프를 기억하는 메커니즘...</text>
+  <rect x="210" y="138" width="44" height="16" rx="4" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+  <text x="232" y="150" text-anchor="middle" fill="#0071e3" font-size="8" font-family="system-ui, sans-serif">JS</text>
+
+  <rect x="408" y="56" width="200" height="108" rx="8" fill="#272729" stroke="#444" stroke-width="1"/>
+  <text x="422" y="76" fill="#888" font-size="8" font-family="system-ui, sans-serif">React · 12 min read</text>
+  <text x="422" y="94" fill="#fff" font-size="12" font-family="system-ui, sans-serif" font-weight="600">useEffect 완전 정복</text>
+  <text x="422" y="110" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">의존성 배열 이해부터 cleanup까지</text>
+  <text x="422" y="122" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">useEffect의 모든 것을 다룬다...</text>
+  <rect x="422" y="138" width="52" height="16" rx="4" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+  <text x="448" y="150" text-anchor="middle" fill="#28ca41" font-size="8" font-family="system-ui, sans-serif">React</text>
+
+  <rect x="196" y="176" width="200" height="108" rx="8" fill="#272729" stroke="#444" stroke-width="1"/>
+  <text x="210" y="196" fill="#888" font-size="8" font-family="system-ui, sans-serif">TypeScript · 6 min read</text>
+  <text x="210" y="214" fill="#fff" font-size="12" font-family="system-ui, sans-serif" font-weight="600">제네릭 타입 활용</text>
+  <text x="210" y="230" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">타입 안전성과 재사용성을 동시에</text>
+  <text x="210" y="242" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">잡는 Generic 패턴 정리...</text>
+  <rect x="210" y="258" width="52" height="16" rx="4" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+  <text x="236" y="270" text-anchor="middle" fill="#ffbd2e" font-size="8" font-family="system-ui, sans-serif">TypeScript</text>
+
+  <rect x="408" y="176" width="200" height="108" rx="8" fill="#272729" stroke="#444" stroke-width="1"/>
+  <text x="422" y="196" fill="#888" font-size="8" font-family="system-ui, sans-serif">Algorithm · 15 min read</text>
+  <text x="422" y="214" fill="#fff" font-size="12" font-family="system-ui, sans-serif" font-weight="600">이진 탐색 트리 구현</text>
+  <text x="422" y="230" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">BST 삽입/삭제/탐색 알고리즘</text>
+  <text x="422" y="242" fill="#aaa" font-size="9" font-family="system-ui, sans-serif">JavaScript로 구현하기...</text>
+  <rect x="422" y="258" width="52" height="16" rx="4" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+  <text x="448" y="270" text-anchor="middle" fill="#ff6b6b" font-size="8" font-family="system-ui, sans-serif">Algorithm</text>
+</svg>

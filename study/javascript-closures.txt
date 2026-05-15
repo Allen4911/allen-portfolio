@@ -1,0 +1,296 @@
+2:I[2972,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],""]
+3:I[446,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],"default"]
+5:I[4707,[],""]
+7:I[6423,[],""]
+8:I[4152,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"LanguageProvider"]
+9:I[9445,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"default"]
+4:T1b77,# JavaScript Closures — Complete Mental Model
+
+## What a Closure Actually Is
+
+A closure is a function bundled with its **lexical environment** — the scope chain at the point where the function was *defined*, not where it's called.
+
+```js
+function outer() {
+  const secret = 42  // Lives in outer's scope
+
+  function inner() {
+    console.log(secret)  // inner "closes over" secret
+  }
+
+  return inner  // Return the function, scope travels with it
+}
+
+const fn = outer()  // outer() has returned, its stack frame is gone
+fn()  // 42 — but secret is still alive, held by the closure
+```
+
+The garbage collector cannot collect `secret` because `inner` holds a live reference to it through its closure. The scope lives as long as the function lives.
+
+---
+
+## Factory Functions — Closures for Encapsulation
+
+The classic use case: create private state that only your returned functions can access.
+
+```js
+function makeCounter(start = 0) {
+  let count = start  // Private — no external access
+
+  return {
+    increment() { count++ },
+    decrement() { count-- },
+    reset()     { count = start },
+    value()     { return count },
+  }
+}
+
+const counter = makeCounter(10)
+counter.increment()
+counter.increment()
+console.log(counter.value())  // 12
+console.log(counter.count)    // undefined — truly private
+```
+
+Each call to `makeCounter` creates a **new closure** with its own `count`:
+
+```js
+const a = makeCounter()
+const b = makeCounter()
+a.increment()
+a.increment()
+console.log(a.value())  // 2
+console.log(b.value())  // 0 — independent state
+```
+
+---
+
+## Memoization — Closures for Caching
+
+```js
+function memoize(fn) {
+  const cache = new Map()  // Closed over by the returned function
+
+  return function(...args) {
+    const key = JSON.stringify(args)
+    if (cache.has(key)) {
+      console.log('cache hit')
+      return cache.get(key)
+    }
+    const result = fn(...args)
+    cache.set(key, result)
+    return result
+  }
+}
+
+const expensiveCalc = memoize((n) => {
+  // Simulate expensive computation
+  return n * n
+})
+
+expensiveCalc(4)  // Computed: 16
+expensiveCalc(4)  // cache hit: 16
+expensiveCalc(5)  // Computed: 25
+```
+
+---
+
+## The Closure-in-Loop Gotcha
+
+This is the most common closure bug in JavaScript. Every interviewer asks about it.
+
+```js
+// ❌ Classic bug
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100)
+}
+// Prints: 3, 3, 3
+// All three callbacks close over the *same* i (var is function-scoped)
+// By the time they run, the loop has ended and i === 3
+```
+
+**Fix 1: Use `let` (block-scoped — creates new binding per iteration)**
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 100)
+}
+// Prints: 0, 1, 2  ✓
+```
+
+**Fix 2: IIFE to capture the value**
+```js
+for (var i = 0; i < 3; i++) {
+  ;(function(j) {
+    setTimeout(() => console.log(j), 100)
+  })(i)
+}
+// Prints: 0, 1, 2  ✓ — j is a new variable per IIFE call
+```
+
+**Fix 3: Extract to a factory function**
+```js
+function makeLogger(n) {
+  return () => console.log(n)  // n is captured at call time
+}
+
+for (var i = 0; i < 3; i++) {
+  setTimeout(makeLogger(i), 100)
+}
+// Prints: 0, 1, 2  ✓
+```
+
+---
+
+## Module Pattern — Closures for Information Hiding
+
+Before ES modules, closures were the primary way to create modules with private state:
+
+```js
+const UserStore = (function() {
+  // Private — inaccessible outside this IIFE
+  let users = []
+  let nextId = 1
+
+  function validate(user) {
+    return user.name && user.email
+  }
+
+  // Public API
+  return {
+    add(user) {
+      if (!validate(user)) throw new Error('Invalid user')
+      users.push({ ...user, id: nextId++ })
+    },
+    getAll() {
+      return [...users]  // Return copy, not reference
+    },
+    findById(id) {
+      return users.find(u => u.id === id)
+    },
+    count() {
+      return users.length
+    }
+  }
+})()
+
+UserStore.add({ name: 'Allen', email: 'a@example.com' })
+console.log(UserStore.count())  // 1
+console.log(UserStore.users)    // undefined — private
+```
+
+---
+
+## Partial Application and Currying
+
+Closures enable partial application — fixing some arguments and returning a function for the rest:
+
+```js
+function multiply(a) {
+  return function(b) {  // Closes over a
+    return a * b
+  }
+}
+
+const double = multiply(2)
+const triple = multiply(3)
+
+double(5)  // 10
+triple(5)  // 15
+
+// Arrow function shorthand
+const add = a => b => a + b
+
+const add10 = add(10)
+add10(5)   // 15
+add10(20)  // 30
+```
+
+Real-world example — a generic API caller with a base URL pre-configured:
+
+```js
+function createApiClient(baseURL) {
+  async function request(method, path, body) {
+    const res = await fetch(`${baseURL}${path}`, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined,
+    })
+    if (!res.ok) throw new Error(`${method} ${path} → ${res.status}`)
+    return res.json()
+  }
+
+  return {
+    get:    (path) => request('GET', path),
+    post:   (path, body) => request('POST', path, body),
+    put:    (path, body) => request('PUT', path, body),
+    delete: (path) => request('DELETE', path),
+  }
+}
+
+const api = createApiClient('https://api.example.com')
+const users = await api.get('/users')
+await api.post('/users', { name: 'Allen' })
+```
+
+---
+
+## Closures in React Hooks
+
+React hooks rely entirely on closures. Each render creates new closures, which is why the rules of hooks (no conditionals, no loops) exist — React tracks hooks by call order, and the closures must be stable.
+
+```js
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    // This closure captures 'value' at this render's snapshot
+    const timer = setTimeout(() => {
+      setDebouncedValue(value)  // Always the 'value' from *this* effect's render
+    }, delay)
+
+    return () => clearTimeout(timer)  // Cleanup closes over 'timer'
+  }, [value, delay])
+
+  return debouncedValue
+}
+```
+
+---
+
+## Memory Considerations
+
+Closures can leak memory if they inadvertently hold large objects:
+
+```js
+function processLargeData() {
+  const bigArray = new Array(1_000_000).fill(0)  // 8 MB
+
+  // ❌ This closure holds bigArray alive indefinitely
+  return () => console.log(bigArray.length)
+}
+
+// ✅ Only keep what you need
+function processLargeData() {
+  const bigArray = new Array(1_000_000).fill(0)
+  const length = bigArray.length  // Extract what's needed
+  // bigArray can now be GC'd after the function returns
+
+  return () => console.log(length)
+}
+```
+
+Watch for closures inside event listeners that aren't cleaned up, and closures that reference DOM nodes holding large subtrees.
+
+---
+
+## Mental Model Summary
+
+1. **A closure = function + its birth scope**
+2. The captured scope lives as long as the closure lives
+3. Multiple closures over the same scope share the same variables (gotcha in loops with `var`)
+4. `let`/`const` in loops creates per-iteration bindings — no sharing
+5. Factory functions + closures = the OOP pattern without classes
+6. React hooks = closures over render snapshots6:["slug","javascript-closures","d"]
+0:["c3TR-NcUo4Af6CJBNqM92",[[["",{"children":["study",{"children":[["slug","javascript-closures","d"],{"children":["__PAGE__?{\"slug\":\"javascript-closures\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["study",{"children":[["slug","javascript-closures","d"],{"children":["__PAGE__",{},[["$L1",[["$","section",null,{"style":{"backgroundColor":"#272729","padding":"80px 22px"},"aria-label":"Study note: JavaScript Closures Explained","children":["$","div",null,{"style":{"maxWidth":"780px","margin":"0 auto"},"children":[["$","$L2",null,{"href":"/study","style":{"display":"inline-flex","alignItems":"center","gap":"6px","color":"#2997ff","fontSize":"14px","letterSpacing":"-0.224px","textDecoration":"none","marginBottom":"40px"},"className":"back-link","children":"← Back to Study"}],["$","div",null,{"style":{"display":"flex","gap":"12px","alignItems":"center","marginBottom":"20px","flexWrap":"wrap"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#3a3a3c] text-[#cccccc] bg-transparent\n        \n      ","children":"JavaScript"}],["$","span",null,{"style":{"fontSize":"12px","color":"#cccccc"},"children":"10 min read"}],["$","span",null,{"style":{"fontSize":"12px","color":"#7a7a7a"},"children":"2026-04-05"}]]}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#ffffff","marginBottom":"20px"},"className":"note-title","children":"JavaScript Closures Explained"}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#cccccc"},"children":"Closures are one of the most powerful and misunderstood features in JavaScript. Here's the complete mental model."}]]}]}],["$","section",null,{"style":{"backgroundColor":"#ffffff","padding":"80px 22px","colorScheme":"light","color":"#1d1d1f"},"aria-label":"Note content","children":["$","div",null,{"style":{"maxWidth":"680px","margin":"0 auto"},"children":[["$","$L3",null,{"content":"$4"}],["$","div",null,{"style":{"display":"flex","gap":"8px","flexWrap":"wrap","marginTop":"48px","paddingTop":"32px","borderTop":"1px solid #e0e0e0"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"JavaScript"}],["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"Fundamentals"}]]}],["$","div",null,{"style":{"marginTop":"48px"},"children":["$","$L2",null,{"href":"/study","className":"link-primary","children":"← Back to Study Notes"}]}]]}]}],["$","style",null,{"children":"\n        .back-link:hover {\n          text-decoration: underline;\n        }\n        @media (max-width: 640px) {\n          .note-title {\n            font-size: 28px !important;\n          }\n        }\n      "}]],null],null],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children","$6","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/18cd0df080ff1cc0.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","className":"__variable_52456e","children":["$","body",null,{"className":"font-sans antialiased","children":["$","$L8",null,{"children":[["$","$L9",null,{}],["$","main",null,{"className":"pt-nav","children":["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","section",null,{"style":{"minHeight":"calc(100vh - 44px)","backgroundColor":"#f5f5f7","display":"flex","alignItems":"center","justifyContent":"center","padding":"80px 22px","textAlign":"center"},"aria-label":"Page not found","children":["$","div",null,{"style":{"maxWidth":"480px"},"children":[["$","p",null,{"style":{"fontSize":"14px","fontWeight":"400","lineHeight":"1.43","color":"#7a7a7a","textTransform":"uppercase","letterSpacing":"0.08em","marginBottom":"16px"},"children":"404"}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#1d1d1f","marginBottom":"16px"},"children":"Page not found."}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#7a7a7a","marginBottom":"40px"},"children":"The page you are looking for does not exist or has been moved."}],["$","$L2",null,{"href":"/","className":"btn-primary","children":"Go home"}]]}]}],"notFoundStyles":[]}]}],["$","footer",null,{"className":"tile-parchment","style":{"paddingTop":"64px","paddingLeft":"22px","paddingRight":"22px","paddingBottom":"32px"},"children":[["$","div",null,{"style":{"maxWidth":"980px","margin":"0 auto"},"children":[["$","div",null,{"style":{"display":"grid","gridTemplateColumns":"repeat(4, 1fr)","gap":"24px","marginBottom":"48px"},"className":"footer-grid","children":[["$","div","About",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"About"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","About me",{"children":["$","$L2",null,{"href":"/about","className":"footer-link","children":"About me"}]}],["$","li","Skills",{"children":["$","$L2",null,{"href":"/about#skills","className":"footer-link","children":"Skills"}]}],["$","li","Timeline",{"children":["$","$L2",null,{"href":"/about#timeline","className":"footer-link","children":"Timeline"}]}]]}]]}],["$","div","Projects",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Projects"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","OpenClaw Bridge",{"children":["$","$L2",null,{"href":"/projects/openclaw-bridge","className":"footer-link","children":"OpenClaw Bridge"}]}],["$","li","Developer Portfolio",{"children":["$","$L2",null,{"href":"/projects/allen-portfolio","className":"footer-link","children":"Developer Portfolio"}]}],["$","li","Study Notes App",{"children":["$","$L2",null,{"href":"/projects/study-notes","className":"footer-link","children":"Study Notes App"}]}]]}]]}],["$","div","Study",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Study"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","React",{"children":["$","$L2",null,{"href":"/study?category=React","className":"footer-link","children":"React"}]}],["$","li","Next.js",{"children":["$","$L2",null,{"href":"/study?category=Next.js","className":"footer-link","children":"Next.js"}]}],["$","li","JavaScript",{"children":["$","$L2",null,{"href":"/study?category=JavaScript","className":"footer-link","children":"JavaScript"}]}],["$","li","CSS",{"children":["$","$L2",null,{"href":"/study?category=CSS","className":"footer-link","children":"CSS"}]}]]}]]}],["$","div","Contact",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Contact"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","Email",{"children":["$","a",null,{"href":"mailto:kjkim4911@gmail.com","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"Email"}]}],["$","li","GitHub",{"children":["$","a",null,{"href":"https://github.com/Allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"GitHub"}]}],["$","li","LinkedIn",{"children":["$","a",null,{"href":"https://www.linkedin.com/in/allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"LinkedIn"}]}]]}]]}]]}],["$","div",null,{"style":{"height":"1px","backgroundColor":"var(--color-hairline)","marginBottom":"24px"}}],["$","div",null,{"style":{"display":"flex","justifyContent":"space-between","alignItems":"center","flexWrap":"wrap","gap":"8px"},"children":[["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Copyright 2026 Allen Kim. All rights reserved."}],["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Built with Next.js and Tailwind CSS"}]]}]]}],["$","style",null,{"children":"\n        .footer-link {\n          color: var(--color-ink-muted-80);\n          display: block;\n          font-size: 12px;\n          font-weight: 400;\n          letter-spacing: -0.12px;\n          line-height: 2.41;\n          text-decoration: none;\n        }\n\n        .footer-link:hover {\n          color: var(--color-primary) !important;\n        }\n\n        @media (max-width: 640px) {\n          .footer-grid {\n            grid-template-columns: repeat(2, 1fr) !important;\n          }\n        }\n\n        @media (max-width: 400px) {\n          .footer-grid {\n            grid-template-columns: 1fr !important;\n          }\n        }\n      "}]]}]]}]}]}]],null],null],["$La",null]]]]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"JavaScript Closures Explained | Allen Kim"}],["$","meta","3",{"name":"description","content":"Closures are one of the most powerful and misunderstood features in JavaScript. Here's the complete mental model."}],["$","meta","4",{"name":"author","content":"Allen Kim"}],["$","meta","5",{"name":"keywords","content":"frontend developer,React,Next.js,Tailwind CSS,portfolio"}],["$","meta","6",{"name":"creator","content":"Allen Kim"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","meta","8",{"property":"og:title","content":"Allen Kim - Frontend Developer"}],["$","meta","9",{"property":"og:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","10",{"property":"og:url","content":"https://allen-portfolio.vercel.app"}],["$","meta","11",{"property":"og:site_name","content":"Allen Kim Portfolio"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Allen Kim - Frontend Developer"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:site","content":"@allen4911"}],["$","meta","20",{"name":"twitter:creator","content":"@allen4911"}],["$","meta","21",{"name":"twitter:title","content":"Allen Kim - Frontend Developer"}],["$","meta","22",{"name":"twitter:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","23",{"name":"twitter:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","24",{"name":"next-size-adjust"}]]
+1:null

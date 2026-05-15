@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="en" class="__variable_52456e"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/18cd0df080ff1cc0.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js"/><script src="/_next/static/chunks/fd9d1056-a9394cb017d46d98.js" async=""></script><script src="/_next/static/chunks/117-118f6a419bea4402.js" async=""></script><script src="/_next/static/chunks/main-app-ffa6af37ba9353a2.js" async=""></script><script src="/_next/static/chunks/972-5bbca60610fae4e0.js" async=""></script><script src="/_next/static/chunks/102-cf39145a37bdb390.js" async=""></script><script src="/_next/static/chunks/218-941771bf334f03dc.js" async=""></script><script src="/_next/static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js" async=""></script><script src="/_next/static/chunks/app/layout-1e6aeb44436ddc9a.js" async=""></script><title>위성 통신 LEO/MEO/GEO 차이점 분석 | Allen Kim</title><meta name="description" content="LEO, MEO, GEO 위성 궤도별 물리적 특성과 통신 파라미터 차이를 비교 분석합니다. 링크 버짓, 전파 지연, 도플러 특성, 핸드오버 전략, 군용/민간 적용 사례를 정리합니다."/><meta name="author" content="Allen Kim"/><meta name="keywords" content="frontend developer,React,Next.js,Tailwind CSS,portfolio"/><meta name="creator" content="Allen Kim"/><meta name="robots" content="index, follow"/><meta property="og:title" content="Allen Kim - Frontend Developer"/><meta property="og:description" content="Frontend Developer specializing in React, Next.js, and modern web experiences."/><meta property="og:url" content="https://allen-portfolio.vercel.app"/><meta property="og:site_name" content="Allen Kim Portfolio"/><meta property="og:locale" content="en_US"/><meta property="og:image" content="https://allen-portfolio.vercel.app/og-image.png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Allen Kim - Frontend Developer"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:site" content="@allen4911"/><meta name="twitter:creator" content="@allen4911"/><meta name="twitter:title" content="Allen Kim - Frontend Developer"/><meta name="twitter:description" content="Frontend Developer specializing in React, Next.js, and modern web experiences."/><meta name="twitter:image" content="https://allen-portfolio.vercel.app/og-image.png"/><meta name="next-size-adjust"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="font-sans antialiased"><nav role="navigation" aria-label="Global navigation" style="position:fixed;top:0;left:0;right:0;z-index:50;height:44px;background-color:var(--color-surface-black);backdrop-filter:none;-webkit-backdrop-filter:none"><div style="max-width:1440px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><a aria-label="Allen Kim Home" style="color:var(--color-on-dark);font-size:17px;font-weight:600;letter-spacing:-0.374px;line-height:1;text-decoration:none;flex-shrink:0" href="/">Allen</a><div aria-hidden="false" style="display:flex;align-items:center;gap:28px" class="hidden-mobile"><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/about">About</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/projects">Projects</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/books">Books</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/study">Study</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/contact">Contact</a></div><div style="display:flex;align-items:center;gap:16px"><button aria-label="Switch to dark mode" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="dark-mode-toggle">☽</button><button aria-label="Switch to Korean (KO)" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="lang-toggle">KO</button><a style="background-color:var(--color-primary);color:var(--color-on-dark);font-size:12px;font-weight:400;letter-spacing:-0.12px;padding:7px 14px;border-radius:9999px;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:center" class="hire-cta" href="/contact">Hire me</a><button aria-label="Open menu" aria-expanded="false" class="hamburger-btn" style="background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px"><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span></button></div></div></nav><style>
+        @media (min-width: 835px) {
+          .hamburger-btn { display: none; }
+        }
+
+        @media (max-width: 834px) {
+          .hidden-mobile {
+            display: none !important;
+          }
+          .hamburger-btn {
+            display: flex;
+          }
+          .mobile-menu {
+            display: block !important;
+          }
+        }
+
+        .nav-desktop-link:hover {
+          color: var(--color-on-dark) !important;
+        }
+
+        .hire-cta:active {
+          transform: scale(0.95);
+        }
+      </style><main class="pt-nav"><section style="background-color:#272729;padding:80px 22px" aria-label="Study note: 위성 통신 LEO/MEO/GEO 차이점 분석"><div style="max-width:780px;margin:0 auto"><a style="display:inline-flex;align-items:center;gap:6px;color:#2997ff;font-size:14px;letter-spacing:-0.224px;text-decoration:none;margin-bottom:40px" class="back-link" href="/study">← Back to Study</a><div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap"><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#3a3a3c] text-[#cccccc] bg-transparent
+        
+      ">Satellite Communication</span><span style="font-size:12px;color:#cccccc">9 min read</span><span style="font-size:12px;color:#7a7a7a">2026-03-09</span></div><h1 style="font-size:40px;font-weight:600;line-height:1.10;letter-spacing:0;color:#ffffff;margin-bottom:20px" class="note-title">위성 통신 LEO/MEO/GEO 차이점 분석</h1><p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#cccccc">LEO, MEO, GEO 위성 궤도별 물리적 특성과 통신 파라미터 차이를 비교 분석합니다. 링크 버짓, 전파 지연, 도플러 특성, 핸드오버 전략, 군용/민간 적용 사례를 정리합니다.</p></div></section><section style="background-color:#ffffff;padding:80px 22px;color-scheme:light;color:#1d1d1f" aria-label="Note content"><div style="max-width:680px;margin:0 auto"><div class="markdown-body" style="color-scheme:light;color:#1d1d1f"><h1 style="font-size:34px;font-weight:600;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:20px;margin-top:40px">위성 통신 LEO / MEO / GEO 차이점 분석</h1>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">개요</h2>
+<p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:16px">위성 통신 시스템은 위성이 운용되는 궤도 고도에 따라 LEO, MEO, GEO로 분류됩니다. 각 궤도는 물리 법칙에 의해 결정되는 고유한 특성을 가지며, 이는 통신 시스템 설계 전반에 걸쳐 근본적인 제약과 장점을 동시에 제공합니다.</p>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">궤도별 기본 파라미터</h2>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">                  ┌────────────────────────────────────────┐
+   GEO (35,786 km)│                   ★ GEO               │ 고정점 유지
+                  │                                        │
+                  │                                        │
+   MEO (~10,000 km│           ★ MEO 대역                  │ 수 시간 주기
+                  │         (GPS: 20,200 km)               │
+                  │                                        │
+   LEO (~550 km)  │   ★ LEO 군집                          │ ~90분 주기
+                  └────────────────────────────────────────┘
+                              지구 표면
+</code></pre>
+<table style="width:100%;border-collapse:collapse;margin-bottom:24px;margin-top:8px;font-size:15px;line-height:1.47"><thead style="background-color:#f5f5f7"><tr><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">항목</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">LEO</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">MEO</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">GEO</th></tr></thead><tbody><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">고도</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">200 ~ 2,000 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">2,000 ~ 35,786 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">35,786 km (고정)</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">공전 주기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">90 ~ 127분</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">2 ~ 24시간</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">24시간 (정지)</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">위성 속도</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~7.5 km/s</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~3.9 km/s</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~3.1 km/s</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">편도 전파 지연</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">1 ~ 10 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">10 ~ 100 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~270 ms</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">왕복 RTT</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">2 ~ 20 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">20 ~ 200 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~540 ms</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">단일 위성 커버리지</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~1,000 km 반경</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~5,000 km 반경</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~6,000 km 반경</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">글로벌 커버리지에 필요한 위성 수</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">수백 ~ 수천 기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">수십 기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">3 기 (이론상)</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">자유공간 경로손실 (Ka-band)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~170 dB</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~185 dB</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~210 dB</td></tr></tbody></table>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">1. LEO (Low Earth Orbit)</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">궤도 역학</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">케플러 제3법칙:  T² = (4π²/GM) × a³
+
+고도 550 km 기준:
+  반장축 a = 6,371 + 550 = 6,921 km
+  공전 주기 T ≈ 95.5분
+  궤도 속도 v = 2πa/T ≈ 7.59 km/s
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">자유공간 경로손실 (FSPL)</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code class="hljs language-python" style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px"><span class="hljs-keyword">import</span> math
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">fspl_dB</span>(<span class="hljs-params">distance_km, freq_GHz</span>):
+    c = <span class="hljs-number">3e8</span>
+    f = freq_GHz * <span class="hljs-number">1e9</span>
+    d = distance_km * <span class="hljs-number">1e3</span>
+    lam = c / f
+    <span class="hljs-keyword">return</span> <span class="hljs-number">20</span> * math.log10(<span class="hljs-number">4</span> * math.pi * d / lam)
+
+<span class="hljs-comment"># Ka-band (26.5 GHz), 고도별 경로손실</span>
+<span class="hljs-keyword">for</span> alt <span class="hljs-keyword">in</span> [<span class="hljs-number">550</span>, <span class="hljs-number">1200</span>, <span class="hljs-number">2000</span>]:
+    loss = fspl_dB(alt, <span class="hljs-number">26.5</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;고도 <span class="hljs-subst">{alt:5d}</span> km: <span class="hljs-subst">{loss:<span class="hljs-number">.1</span>f}</span> dB&quot;</span>)
+
+<span class="hljs-comment"># 출력:</span>
+<span class="hljs-comment"># 고도   550 km: 170.3 dB</span>
+<span class="hljs-comment"># 고도  1200 km: 176.0 dB</span>
+<span class="hljs-comment"># 고도  2000 km: 179.5 dB</span>
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">LEO 도플러 특성</h3>
+<p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:16px">LEO 위성은 빠른 이동으로 인해 가장 큰 도플러 편이가 발생합니다.</p>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">최대 도플러 편이 (Ka-band 26.5 GHz, LEO 550 km, 수직 통과):
+
+  Δf_max = f_c × (v / c) = 26.5×10⁹ × (7590 / 3×10⁸) ≈ 670 kHz
+
+  ← 위성 접근 시: +670 kHz
+  → 위성 이탈 시: -670 kHz
+  수직 통과 시간: 약 10분 (仰角 10° 이상 기준)
+</code></pre>
+<p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:16px"><strong style="font-weight:600;color:#1d1d1f">주파수 편이 보정 방법:</strong></p>
+<ul style="padding-left:24px;margin-bottom:16px;list-style-type:disc">
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">UE 사전 보정 (Pre-compensation): GNSS 위치 + 위성 궤도력(Ephemeris) 활용</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">네트워크 기반 보정: 지상국에서 공통 도플러 제거 후 링크 유지</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">OFDM 서브캐리어 간격 확대: 도플러 대비 파일럿 설계</li>
+</ul>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">LEO 핸드오버</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">LEO 위성 가시 시간: 약 5 ~ 15분 (仰角 10° 기준)
+
+핸드오버 전략:
+
+  [위성 A] ──── 가시 시간 ────►[위성 B]
+      │                             │
+      │   ← 핸드오버 결정 구간 →    │
+      └──── 소프트 핸드오버 ────────┘
+
+  - 위성간 핸드오버 빈도: ~6 회/시간
+  - ISL(위성 간 링크) 활용 시 지상국 거치지 않고 연속성 유지
+  - Make-before-break 방식 필수
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">LEO 대표 시스템</h3>
+<table style="width:100%;border-collapse:collapse;margin-bottom:24px;margin-top:8px;font-size:15px;line-height:1.47"><thead style="background-color:#f5f5f7"><tr><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">시스템</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">운영사</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">위성 수</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">고도</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">특징</th></tr></thead><tbody><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Starlink</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">SpaceX</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~6,000기+</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">550 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">ISL 탑재, 민간/군 겸용</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">OneWeb</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Eutelsat</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~648기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">1,200 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">광대역 브로드밴드</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Kuiper</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Amazon</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">3,236기 계획</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">590~630 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">AWS 연동</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Telesat Lightspeed</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Telesat</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">298기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">1,000 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">엔터프라이즈 특화</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">ANASIS-계획</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">한국 (군)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">—</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">LEO 검토 중</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">전술 통신</td></tr></tbody></table>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">2. MEO (Medium Earth Orbit)</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">궤도 역학</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">대표 고도: 10,000 ~ 20,200 km
+
+GPS (20,200 km):
+  공전 주기 ≈ 12시간
+  궤도 속도 ≈ 3.87 km/s
+
+O3b MEO (8,063 km):
+  공전 주기 ≈ 4.8시간
+  RTT ≈ 54 ms
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">MEO 주요 특성</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">장점:
+  ✓ LEO 대비 넓은 커버리지 (위성 수 적게 필요)
+  ✓ GEO 대비 낮은 전파 지연
+  ✓ 반알렌대(Van Allen Belt) 일부 회피 가능
+  ✓ 지상 추적 장비 부담 완화
+
+단점:
+  ✗ 반알렌대 일부 구간 통과 → 방사선 환경 심각
+  ✗ LEO 대비 여전히 핸드오버 필요
+  ✗ GEO 대비 더 많은 위성 필요
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">방사선 환경 (Van Allen Belt)</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">고도별 방사선 강도:
+
+    0         5,000      15,000      35,786 km
+    │─────────────────────────────────────────►
+    │                 ████████
+    │           ████████████████               ← 내부 Van Allen 대
+    │     ██████████████████████████████
+    │ ████████████████████████████████████████  ← 외부 Van Allen 대
+    └─────────────────────────────────────────
+    낮음   높음         낮음         없음
+
+MEO(~10,000 km) → 내/외부 대 사이 &quot;슬롯&quot; 구간 활용
+방사선 강화 부품(Rad-Hard) 필수
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">MEO 대표 시스템</h3>
+<table style="width:100%;border-collapse:collapse;margin-bottom:24px;margin-top:8px;font-size:15px;line-height:1.47"><thead style="background-color:#f5f5f7"><tr><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">시스템</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">고도</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">용도</th></tr></thead><tbody><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">GPS (미국)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">20,200 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">항법</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">GLONASS (러시아)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">19,100 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">항법</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">Galileo (EU)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">23,222 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">항법</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">BeiDou MEO (중국)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">21,528 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">항법</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">O3b / SES</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">8,063 km</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">브로드밴드 통신</td></tr></tbody></table>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">3. GEO (Geostationary Earth Orbit)</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">궤도 역학</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">GEO 조건: 공전 주기 = 지구 자전 주기 = 23시간 56분 4초
+
+정지 궤도 고도 계산:
+  T = 2π × √(a³/GM)
+  a = ∛(GM × T²/4π²)
+    = ∛(3.986×10¹⁴ × (86164)² / 4π²)
+    ≈ 42,164 km (지구 중심 기준)
+    = 42,164 - 6,371 ≈ 35,793 km (지표 기준)
+
+적도 상공 고정 → 위도 ±81° 이내 커버
+극지방 커버 불가 (仰角 &lt; 5°)
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">GEO 링크 버짓 예시</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code class="hljs language-python" style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px"><span class="hljs-keyword">def</span> <span class="hljs-title function_">link_budget</span>(<span class="hljs-params">eirp_dBW, fspl_dB, gt_dB_K, bandwidth_MHz</span>):
+    <span class="hljs-string">&quot;&quot;&quot;
+    EIRP   : 송신 등가등방복사전력 (dBW)
+    FSPL   : 자유공간 경로손실 (dB)
+    G/T    : 수신 시스템 성능 지수 (dB/K)
+    BW     : 수신 대역폭 (MHz)
+    &quot;&quot;&quot;</span>
+    k = -<span class="hljs-number">228.6</span>  <span class="hljs-comment"># 볼츠만 상수 (dBW/K/Hz)</span>
+    bw_dBHz = <span class="hljs-number">10</span> * math.log10(bandwidth_MHz * <span class="hljs-number">1e6</span>)
+
+    cn0 = eirp_dBW - fspl_dB + gt_dB_K - k  <span class="hljs-comment"># C/N0 (dBHz)</span>
+    cn  = cn0 - bw_dBHz                       <span class="hljs-comment"># C/N  (dB)</span>
+    <span class="hljs-keyword">return</span> cn0, cn
+
+<span class="hljs-keyword">import</span> math
+cn0, cn = link_budget(
+    eirp_dBW = <span class="hljs-number">50</span>,      <span class="hljs-comment"># 위성 EIRP 50 dBW</span>
+    fspl_dB  = <span class="hljs-number">209.6</span>,   <span class="hljs-comment"># GEO Ka-band 26.5 GHz</span>
+    gt_dB_K  = <span class="hljs-number">18.0</span>,    <span class="hljs-comment"># 지상국 G/T 18 dB/K</span>
+    bandwidth_MHz = <span class="hljs-number">36</span>  <span class="hljs-comment"># 36 MHz 트랜스폰더</span>
+)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;C/N₀: <span class="hljs-subst">{cn0:<span class="hljs-number">.1</span>f}</span> dBHz&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;C/N : <span class="hljs-subst">{cn:<span class="hljs-number">.1</span>f}</span> dB&quot;</span>)
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">GEO 전파 지연의 영향</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">GEO RTT ≈ 540 ms
+
+TCP 성능 영향:
+  - 윈도우 크기 W = 64 KB 기준:
+    처리량 = W / RTT = 65,536 × 8 / 0.54 ≈ 970 kbps
+    → 1 Mbps도 안 되는 TCP 성능 (물리 대역폭이 수백 Mbps여도)
+
+  해결책:
+  ① PEP (Performance Enhancing Proxy): TCP 분할
+  ② 대용량 TCP 윈도우 (TCP SACK + 윈도우 스케일링)
+  ③ QUIC / UDP 기반 프로토콜로 전환
+  ④ DVB-S2X: 전용 위성 전송 표준 (ACM, VCM)
+</code></pre>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">종합 비교: 통신 파라미터</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">링크 품질 비교</h3>
+<table style="width:100%;border-collapse:collapse;margin-bottom:24px;margin-top:8px;font-size:15px;line-height:1.47"><thead style="background-color:#f5f5f7"><tr><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">파라미터</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">LEO (550 km)</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">MEO (10,000 km)</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">GEO (35,786 km)</th></tr></thead><tbody><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">FSPL @ Ka (26.5 GHz)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">170.3 dB</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">191.3 dB</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">209.6 dB</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">편도 전파 지연</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~1.8 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~33 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~119 ms</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">RTT</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~4 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~66 ms</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">~238 ms*</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">도플러 편이 최대 @ Ka</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">±670 kHz</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">±344 kHz</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">±5 kHz 미만</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">仰角 변화 속도</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">빠름 (~1°/s)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">느림</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">고정</td></tr></tbody></table>
+<p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:16px">*대기권 통과 시간 포함 시 실제 RTT ≈ 540 ms</p>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">서비스 적합성 매트릭스</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">                  LEO    MEO    GEO
+실시간 통신        ★★★   ★★☆   ★☆☆
+광대역 브로드밴드  ★★★   ★★☆   ★★☆
+글로벌 커버리지    ★★☆   ★★★   ★★★
+시스템 비용        ★☆☆   ★★☆   ★★★
+배포 용이성        ★☆☆   ★★☆   ★★★
+항법/측위          ☆☆☆   ★★★   ★★☆
+극지방 커버        ★★★   ★★☆   ☆☆☆
+생존성(군용)       ★★★   ★★☆   ★☆☆
+
+★★★ 우수 / ★★☆ 양호 / ★☆☆ 보통 / ☆☆☆ 불가/불리
+</code></pre>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">군용 통신 관점 비교</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">생존성 (Survivability)</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">GEO 단일 위성:
+  ┌──────────┐
+  │ GEO SAT  │ ← 단일 장애점 (Single Point of Failure)
+  └────┬─────┘   공격/재밍 시 전체 서비스 중단
+       │
+  [전 지역 단말]
+
+LEO 군집:
+  ★  ★  ★  ★  ★  ← 수백~수천 기 분산
+     ★  ★  ★  ★
+  어느 위성이 피격되어도 나머지로 서비스 지속
+  → 군사적 생존성 현저히 높음
+</code></pre>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">항재밍 관점</h3>
+<table style="width:100%;border-collapse:collapse;margin-bottom:24px;margin-top:8px;font-size:15px;line-height:1.47"><thead style="background-color:#f5f5f7"><tr><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">항목</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">LEO</th><th style="border:1px solid #e0e0e0;padding:10px 14px;font-weight:600;text-align:left;color:#1d1d1f">GEO</th></tr></thead><tbody><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">수신 신호 강도</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">강함 (경로손실 적음)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">약함</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">재밍 대응</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">높은 링크 마진 활용</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">마진 부족</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">스팟빔 크기</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">소형 (수십~수백 km)</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">광역 (수천 km)</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">재밍 지향성</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">좁은 빔 → 높은 G/T 가능</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">광대역 재밍에 취약</td></tr><tr><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">주파수 도약</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">짧은 가시 시간 활용</td><td style="border:1px solid #e0e0e0;padding:10px 14px;color:#1d1d1f">장시간 고정 → 추적 용이</td></tr></tbody></table>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">전술 통신 시나리오</h3>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">시나리오: 해상 작전 (수상함 + 잠수함 + 항공기)
+
+    [LEO 위성 군집]
+          ↕ (저지연 4 ms)
+    ┌─────────────────────────────────┐
+    │  수상함 A ──── 수상함 B         │
+    │      │              │           │
+    │  잠수함 (부상 시)   │           │
+    │                  항공기 (UAV)   │
+    └─────────────────────────────────┘
+
+LEO 장점:
+  - 저지연 → 실시간 전술 데이터링크 가능
+  - 다중 경로 → 재밍/피격 대응
+  - 스팟빔 → 집중 대역폭 제공
+  - 극지방 포함 전 해역 커버
+</code></pre>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">궤도 선택 의사결정 가이드</h2>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">통신 시스템 설계 시 궤도 선택 흐름:
+
+서비스 요구사항
+    │
+    ├── 지연 &lt; 50 ms 필수?
+    │       └── YES → LEO
+    │
+    ├── 극지방 커버 필요?
+    │       └── YES → LEO 또는 HEO (몰니야 궤도)
+    │
+    ├── 위성 수 최소화?
+    │       └── YES → GEO (3기로 이론상 글로벌)
+    │
+    ├── 항법/측위 목적?
+    │       └── YES → MEO (GPS/GNSS 표준)
+    │
+    ├── 군용 생존성 최우선?
+    │       └── YES → LEO 군집
+    │
+    └── 고정 지상국, 단순 운용?
+            └── YES → GEO
+</code></pre>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">미래 발전 방향</h2>
+<h3 style="font-size:21px;font-weight:600;line-height:1.19;letter-spacing:0.231px;color:#1d1d1f;margin-bottom:12px;margin-top:28px">하이브리드 궤도 시스템</h3>
+<p style="font-size:17px;font-weight:400;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:16px">6G 시대에는 단일 궤도가 아닌 다중 궤도 통합 구조가 표준화 방향입니다.</p>
+<pre style="background-color:#1e1e2e;border-radius:8px;padding:20px;overflow:auto;margin-bottom:24px;margin-top:8px;font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;white-space:pre;line-height:1.6;letter-spacing:0px;font-size:14px"><code style="font-family:Menlo, Consolas, &quot;Courier New&quot;, monospace;color:#cdd6f4;font-size:14px">┌──────────────────────────────────────────────┐
+│           Multi-Layer Satellite Network       │
+│                                              │
+│  GEO (35,786 km)  ─── 광역 브로드캐스트/백홀 │
+│         │                                    │
+│  MEO (10,000 km)  ─── 항법 + 중용량 백홀    │
+│         │                                    │
+│  LEO (550 km)     ─── 저지연 브로드밴드      │
+│         │                                    │
+│  HAPS (20 km)     ─── 도심/재난 구간 보완    │
+│         │                                    │
+│  지상 5G/6G RAN   ─── 최종 액세스            │
+└──────────────────────────────────────────────┘
+
+→ 3GPP Rel-19 / 6G: 이종 궤도 핸드오버 표준화 예정
+</code></pre>
+<hr style="border:none;border-top:1px solid #e0e0e0;margin:32px 0"/>
+<h2 style="font-size:28px;font-weight:600;line-height:1.14;letter-spacing:-0.28px;color:#1d1d1f;margin-bottom:16px;margin-top:36px">참고 표준 및 자료</h2>
+<ul style="padding-left:24px;margin-bottom:16px;list-style-type:disc">
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">ITU-R S.1328 — 위성 궤도 파라미터 정의</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">3GPP TR 38.821 — NTN Solutions for NR</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">CCSDS 401.0-B — Radio Frequency and Modulation Systems</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">ESA ECSS-E-ST-50-05C — Radio Frequency and Modulation Standards</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">Pratt, T. et al., &quot;Satellite Communications&quot;, 3rd Ed., Wiley</li>
+<li style="font-size:17px;line-height:1.47;letter-spacing:-0.374px;color:#1d1d1f;margin-bottom:4px">Maral, G. et al., &quot;Satellite Communications Systems&quot;, 6th Ed., Wiley</li>
+</ul></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:1px solid #e0e0e0"><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent
+        
+      ">Satellite Communication</span><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent
+        
+      ">Network</span><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent
+        
+      ">Protocol</span><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent
+        
+      ">Research</span><span class="
+        inline-flex items-center
+        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]
+        px-[10px] py-[4px] rounded-full
+        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent
+        
+      ">Military</span></div><div style="margin-top:48px"><a class="link-primary" href="/study">← Back to Study Notes</a></div></div></section><style>
+        .back-link:hover {
+          text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+          .note-title {
+            font-size: 28px !important;
+          }
+        }
+      </style></main><footer class="tile-parchment" style="padding-top:64px;padding-left:22px;padding-right:22px;padding-bottom:32px"><div style="max-width:980px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px;margin-bottom:48px" class="footer-grid"><div><p class="text-caption-strong" style="margin-bottom:12px">About</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/about">About me</a></li><li><a class="footer-link" href="/about#skills">Skills</a></li><li><a class="footer-link" href="/about#timeline">Timeline</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Projects</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/projects/openclaw-bridge">OpenClaw Bridge</a></li><li><a class="footer-link" href="/projects/allen-portfolio">Developer Portfolio</a></li><li><a class="footer-link" href="/projects/study-notes">Study Notes App</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Study</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/study?category=React">React</a></li><li><a class="footer-link" href="/study?category=Next.js">Next.js</a></li><li><a class="footer-link" href="/study?category=JavaScript">JavaScript</a></li><li><a class="footer-link" href="/study?category=CSS">CSS</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Contact</p><ul style="list-style:none;padding:0;margin:0"><li><a href="mailto:kjkim4911@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-link">Email</a></li><li><a href="https://github.com/Allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li><li><a href="https://www.linkedin.com/in/allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li></ul></div></div><div style="height:1px;background-color:var(--color-hairline);margin-bottom:24px"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Copyright 2026 Allen Kim. All rights reserved.</p><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Built with Next.js and Tailwind CSS</p></div></div><style>
+        .footer-link {
+          color: var(--color-ink-muted-80);
+          display: block;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.12px;
+          line-height: 2.41;
+          text-decoration: none;
+        }
+
+        .footer-link:hover {
+          color: var(--color-primary) !important;
+        }
+
+        @media (max-width: 640px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style></footer><script src="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/18cd0df080ff1cc0.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[2846,[],\"\"]\n5:I[2972,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"102\",\"static/chunks/102-cf39145a37bdb390.js\",\"218\",\"static/chunks/218-941771bf334f03dc.js\",\"812\",\"static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js\"],\"\"]\n6:I[446,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"102\",\"static/chunks/102-cf39145a37bdb390.js\",\"218\",\"static/chunks/218-941771bf334f03dc.js\",\"812\",\"static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js\"],\"default\"]\n8:I[4707,[],\"\"]\na:I[6423,[],\"\"]\nb:I[4152,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-1e6aeb44436ddc9a.js\"],\"LanguageProvider\"]\nc:I[9445,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-1e6aeb44436ddc9a.js\"],\"default\"]\ne:I[1060,[],\"\"]\n7:T337f,"])</script><script>self.__next_f.push([1,"# 위성 통신 LEO / MEO / GEO 차이점 분석\n\n## 개요\n\n위성 통신 시스템은 위성이 운용되는 궤도 고도에 따라 LEO, MEO, GEO로 분류됩니다. 각 궤도는 물리 법칙에 의해 결정되는 고유한 특성을 가지며, 이는 통신 시스템 설계 전반에 걸쳐 근본적인 제약과 장점을 동시에 제공합니다.\n\n---\n\n## 궤도별 기본 파라미터\n\n```\n                  ┌────────────────────────────────────────┐\n   GEO (35,786 km)│                   ★ GEO               │ 고정점 유지\n                  │                                        │\n                  │                                        │\n   MEO (~10,000 km│           ★ MEO 대역                  │ 수 시간 주기\n                  │         (GPS: 20,200 km)               │\n                  │                                        │\n   LEO (~550 km)  │   ★ LEO 군집                          │ ~90분 주기\n                  └────────────────────────────────────────┘\n                              지구 표면\n```\n\n| 항목 | LEO | MEO | GEO |\n|------|-----|-----|-----|\n| 고도 | 200 ~ 2,000 km | 2,000 ~ 35,786 km | 35,786 km (고정) |\n| 공전 주기 | 90 ~ 127분 | 2 ~ 24시간 | 24시간 (정지) |\n| 위성 속도 | ~7.5 km/s | ~3.9 km/s | ~3.1 km/s |\n| 편도 전파 지연 | 1 ~ 10 ms | 10 ~ 100 ms | ~270 ms |\n| 왕복 RTT | 2 ~ 20 ms | 20 ~ 200 ms | ~540 ms |\n| 단일 위성 커버리지 | ~1,000 km 반경 | ~5,000 km 반경 | ~6,000 km 반경 |\n| 글로벌 커버리지에 필요한 위성 수 | 수백 ~ 수천 기 | 수십 기 | 3 기 (이론상) |\n| 자유공간 경로손실 (Ka-band) | ~170 dB | ~185 dB | ~210 dB |\n\n---\n\n## 1. LEO (Low Earth Orbit)\n\n### 궤도 역학\n\n```\n케플러 제3법칙:  T² = (4π²/GM) × a³\n\n고도 550 km 기준:\n  반장축 a = 6,371 + 550 = 6,921 km\n  공전 주기 T ≈ 95.5분\n  궤도 속도 v = 2πa/T ≈ 7.59 km/s\n```\n\n### 자유공간 경로손실 (FSPL)\n\n```python\nimport math\n\ndef fspl_dB(distance_km, freq_GHz):\n    c = 3e8\n    f = freq_GHz * 1e9\n    d = distance_km * 1e3\n    lam = c / f\n    return 20 * math.log10(4 * math.pi * d / lam)\n\n# Ka-band (26.5 GHz), 고도별 경로손실\nfor alt in [550, 1200, 2000]:\n    loss = fspl_dB(alt, 26.5)\n    print(f\"고도 {alt:5d} km: {loss:.1f} dB\")\n\n# 출력:\n# 고도   550 km: 170.3 dB\n# 고도  1200 km: 176.0 dB\n# 고도  2000 km: 179.5 dB\n```\n\n### LEO 도플러 특성\n\nLEO 위성은 빠른 이동으로 인해 가장 큰 도플러 편이가 발생합니다.\n\n```\n최대 도플러 편이 (Ka-band 26.5 GHz, LEO 550 km, 수직 통과):\n\n  Δf_max = f_c × (v / c) = 26.5×10⁹ × (7590 / 3×10⁸) ≈ 670 kHz\n\n  ← 위성 접근 시: +670 kHz\n  → 위성 이탈 시: -670 kHz\n  수직 통과 시간: 약 10분 (仰角 10° 이상 기준)\n```\n\n**주파수 편이 보정 방법:**\n- UE 사전 보정 (Pre-compensation): GNSS 위치 + 위성 궤도력(Ephemeris) 활용\n- 네트워크 기반 보정: 지상국에서 공통 도플러 제거 후 링크 유지\n- OFDM 서브캐리어 간격 확대: 도플러 대비 파일럿 설계\n\n### LEO 핸드오버\n\n```\nLEO 위성 가시 시간: 약 5 ~ 15분 (仰角 10° 기준)\n\n핸드오버 전략:\n\n  [위성 A] ──── 가시 시간 ────►[위성 B]\n      │                             │\n      │   ← 핸드오버 결정 구간 →    │\n      └──── 소프트 핸드오버 ────────┘\n\n  - 위성간 핸드오버 빈도: ~6 회/시간\n  - ISL(위성 간 링크) 활용 시 지상국 거치지 않고 연속성 유지\n  - Make-before-break 방식 필수\n```\n\n### LEO 대표 시스템\n\n| 시스템 | 운영사 | 위성 수 | 고도 | 특징 |\n|--------|--------|---------|------|------|\n| Starlink | SpaceX | ~6,000기+ | 550 km | ISL 탑재, 민간/군 겸용 |\n| OneWeb | Eutelsat | ~648기 | 1,200 km | 광대역 브로드밴드 |\n| Kuiper | Amazon | 3,236기 계획 | 590~630 km | AWS 연동 |\n| Telesat Lightspeed | Telesat | 298기 | 1,000 km | 엔터프라이즈 특화 |\n| ANASIS-계획 | 한국 (군) | — | LEO 검토 중 | 전술 통신 |\n\n---\n\n## 2. MEO (Medium Earth Orbit)\n\n### 궤도 역학\n\n```\n대표 고도: 10,000 ~ 20,200 km\n\nGPS (20,200 km):\n  공전 주기 ≈ 12시간\n  궤도 속도 ≈ 3.87 km/s\n\nO3b MEO (8,063 km):\n  공전 주기 ≈ 4.8시간\n  RTT ≈ 54 ms\n```\n\n### MEO 주요 특성\n\n```\n장점:\n  ✓ LEO 대비 넓은 커버리지 (위성 수 적게 필요)\n  ✓ GEO 대비 낮은 전파 지연\n  ✓ 반알렌대(Van Allen Belt) 일부 회피 가능\n  ✓ 지상 추적 장비 부담 완화\n\n단점:\n  ✗ 반알렌대 일부 구간 통과 → 방사선 환경 심각\n  ✗ LEO 대비 여전히 핸드오버 필요\n  ✗ GEO 대비 더 많은 위성 필요\n```\n\n### 방사선 환경 (Van Allen Belt)\n\n```\n고도별 방사선 강도:\n\n    0         5,000      15,000      35,786 km\n    │─────────────────────────────────────────►\n    │                 ████████\n    │           ████████████████               ← 내부 Van Allen 대\n    │     ██████████████████████████████\n    │ ████████████████████████████████████████  ← 외부 Van Allen 대\n    └─────────────────────────────────────────\n    낮음   높음         낮음         없음\n\nMEO(~10,000 km) → 내/외부 대 사이 \"슬롯\" 구간 활용\n방사선 강화 부품(Rad-Hard) 필수\n```\n\n### MEO 대표 시스템\n\n| 시스템 | 고도 | 용도 |\n|--------|------|------|\n| GPS (미국) | 20,200 km | 항법 |\n| GLONASS (러시아) | 19,100 km | 항법 |\n| Galileo (EU) | 23,222 km | 항법 |\n| BeiDou MEO (중국) | 21,528 km | 항법 |\n| O3b / SES | 8,063 km | 브로드밴드 통신 |\n\n---\n\n## 3. GEO (Geostationary Earth Orbit)\n\n### 궤도 역학\n\n```\nGEO 조건: 공전 주기 = 지구 자전 주기 = 23시간 56분 4초\n\n정지 궤도 고도 계산:\n  T = 2π × √(a³/GM)\n  a = ∛(GM × T²/4π²)\n    = ∛(3.986×10¹⁴ × (86164)² / 4π²)\n    ≈ 42,164 km (지구 중심 기준)\n    = 42,164 - 6,371 ≈ 35,793 km (지표 기준)\n\n적도 상공 고정 → 위도 ±81° 이내 커버\n극지방 커버 불가 (仰角 \u003c 5°)\n```\n\n### GEO 링크 버짓 예시\n\n```python\ndef link_budget(eirp_dBW, fspl_dB, gt_dB_K, bandwidth_MHz):\n    \"\"\"\n    EIRP   : 송신 등가등방복사전력 (dBW)\n    FSPL   : 자유공간 경로손실 (dB)\n    G/T    : 수신 시스템 성능 지수 (dB/K)\n    BW     : 수신 대역폭 (MHz)\n    \"\"\"\n    k = -228.6  # 볼츠만 상수 (dBW/K/Hz)\n    bw_dBHz = 10 * math.log10(bandwidth_MHz * 1e6)\n\n    cn0 = eirp_dBW - fspl_dB + gt_dB_K - k  # C/N0 (dBHz)\n    cn  = cn0 - bw_dBHz                       # C/N  (dB)\n    return cn0, cn\n\nimport math\ncn0, cn = link_budget(\n    eirp_dBW = 50,      # 위성 EIRP 50 dBW\n    fspl_dB  = 209.6,   # GEO Ka-band 26.5 GHz\n    gt_dB_K  = 18.0,    # 지상국 G/T 18 dB/K\n    bandwidth_MHz = 36  # 36 MHz 트랜스폰더\n)\nprint(f\"C/N₀: {cn0:.1f} dBHz\")\nprint(f\"C/N : {cn:.1f} dB\")\n```\n\n### GEO 전파 지연의 영향\n\n```\nGEO RTT ≈ 540 ms\n\nTCP 성능 영향:\n  - 윈도우 크기 W = 64 KB 기준:\n    처리량 = W / RTT = 65,536 × 8 / 0.54 ≈ 970 kbps\n    → 1 Mbps도 안 되는 TCP 성능 (물리 대역폭이 수백 Mbps여도)\n\n  해결책:\n  ① PEP (Performance Enhancing Proxy): TCP 분할\n  ② 대용량 TCP 윈도우 (TCP SACK + 윈도우 스케일링)\n  ③ QUIC / UDP 기반 프로토콜로 전환\n  ④ DVB-S2X: 전용 위성 전송 표준 (ACM, VCM)\n```\n\n---\n\n## 종합 비교: 통신 파라미터\n\n### 링크 품질 비교\n\n| 파라미터 | LEO (550 km) | MEO (10,000 km) | GEO (35,786 km) |\n|----------|-------------|-----------------|-----------------|\n| FSPL @ Ka (26.5 GHz) | 170.3 dB | 191.3 dB | 209.6 dB |\n| 편도 전파 지연 | ~1.8 ms | ~33 ms | ~119 ms |\n| RTT | ~4 ms | ~66 ms | ~238 ms* |\n| 도플러 편이 최대 @ Ka | ±670 kHz | ±344 kHz | ±5 kHz 미만 |\n| 仰角 변화 속도 | 빠름 (~1°/s) | 느림 | 고정 |\n\n*대기권 통과 시간 포함 시 실제 RTT ≈ 540 ms\n\n### 서비스 적합성 매트릭스\n\n```\n                  LEO    MEO    GEO\n실시간 통신        ★★★   ★★☆   ★☆☆\n광대역 브로드밴드  ★★★   ★★☆   ★★☆\n글로벌 커버리지    ★★☆   ★★★   ★★★\n시스템 비용        ★☆☆   ★★☆   ★★★\n배포 용이성        ★☆☆   ★★☆   ★★★\n항법/측위          ☆☆☆   ★★★   ★★☆\n극지방 커버        ★★★   ★★☆   ☆☆☆\n생존성(군용)       ★★★   ★★☆   ★☆☆\n\n★★★ 우수 / ★★☆ 양호 / ★☆☆ 보통 / ☆☆☆ 불가/불리\n```\n\n---\n\n## 군용 통신 관점 비교\n\n### 생존성 (Survivability)\n\n```\nGEO 단일 위성:\n  ┌──────────┐\n  │ GEO SAT  │ ← 단일 장애점 (Single Point of Failure)\n  └────┬─────┘   공격/재밍 시 전체 서비스 중단\n       │\n  [전 지역 단말]\n\nLEO 군집:\n  ★  ★  ★  ★  ★  ← 수백~수천 기 분산\n     ★  ★  ★  ★\n  어느 위성이 피격되어도 나머지로 서비스 지속\n  → 군사적 생존성 현저히 높음\n```\n\n### 항재밍 관점\n\n| 항목 | LEO | GEO |\n|------|-----|-----|\n| 수신 신호 강도 | 강함 (경로손실 적음) | 약함 |\n| 재밍 대응 | 높은 링크 마진 활용 | 마진 부족 |\n| 스팟빔 크기 | 소형 (수십~수백 km) | 광역 (수천 km) |\n| 재밍 지향성 | 좁은 빔 → 높은 G/T 가능 | 광대역 재밍에 취약 |\n| 주파수 도약 | 짧은 가시 시간 활용 | 장시간 고정 → 추적 용이 |\n\n### 전술 통신 시나리오\n\n```\n시나리오: 해상 작전 (수상함 + 잠수함 + 항공기)\n\n    [LEO 위성 군집]\n          ↕ (저지연 4 ms)\n    ┌─────────────────────────────────┐\n    │  수상함 A ──── 수상함 B         │\n    │      │              │           │\n    │  잠수함 (부상 시)   │           │\n    │                  항공기 (UAV)   │\n    └─────────────────────────────────┘\n\nLEO 장점:\n  - 저지연 → 실시간 전술 데이터링크 가능\n  - 다중 경로 → 재밍/피격 대응\n  - 스팟빔 → 집중 대역폭 제공\n  - 극지방 포함 전 해역 커버\n```\n\n---\n\n## 궤도 선택 의사결정 가이드\n\n```\n통신 시스템 설계 시 궤도 선택 흐름:\n\n서비스 요구사항\n    │\n    ├── 지연 \u003c 50 ms 필수?\n    │       └── YES → LEO\n    │\n    ├── 극지방 커버 필요?\n    │       └── YES → LEO 또는 HEO (몰니야 궤도)\n    │\n    ├── 위성 수 최소화?\n    │       └── YES → GEO (3기로 이론상 글로벌)\n    │\n    ├── 항법/측위 목적?\n    │       └── YES → MEO (GPS/GNSS 표준)\n    │\n    ├── 군용 생존성 최우선?\n    │       └── YES → LEO 군집\n    │\n    └── 고정 지상국, 단순 운용?\n            └── YES → GEO\n```\n\n---\n\n## 미래 발전 방향\n\n### 하이브리드 궤도 시스템\n\n6G 시대에는 단일 궤도가 아닌 다중 궤도 통합 구조가 표준화 방향입니다.\n\n```\n┌──────────────────────────────────────────────┐\n│           Multi-Layer Satellite Network       │\n│                                              │\n│  GEO (35,786 km)  ─── 광역 브로드캐스트/백홀 │\n│         │                                    │\n│  MEO (10,000 km)  ─── 항법 + 중용량 백홀    │\n│         │                                    │\n│  LEO (550 km)     ─── 저지연 브로드밴드      │\n│         │                                    │\n│  HAPS (20 km)     ─── 도심/재난 구간 보완    │\n│         │                                    │\n│  지상 5G/6G RAN   ─── 최종 액세스            │\n└──────────────────────────────────────────────┘\n\n→ 3GPP Rel-19 / 6G: 이종 궤도 핸드오버 표준화 예정\n```\n\n---\n\n## 참고 표준 및 자료\n\n- ITU-R S.1328 — 위성 궤도 파라미터 정의\n- 3GPP TR 38.821 — NTN Solutions for NR\n- CCSDS 401.0-B — Radio Frequency and Modulation Systems\n- ESA ECSS-E-ST-50-05C — Radio Frequency and Modulation Standards\n- Pratt, T. et al., \"Satellite Communications\", 3rd Ed., Wiley\n- Maral, G. et al., \"Satellite Communications Systems\", 6th Ed., Wiley"])</script><script>self.__next_f.push([1,"9:[\"slug\",\"satellite-leo-meo-geo-comparison\",\"d\"]\nf:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L3\",null,{\"buildId\":\"c3TR-NcUo4Af6CJBNqM92\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"study\",\"satellite-leo-meo-geo-comparison\"],\"initialTree\":[\"\",{\"children\":[\"study\",{\"children\":[[\"slug\",\"satellite-leo-meo-geo-comparison\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"satellite-leo-meo-geo-comparison\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"study\",{\"children\":[[\"slug\",\"satellite-leo-meo-geo-comparison\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",[[\"$\",\"section\",null,{\"style\":{\"backgroundColor\":\"#272729\",\"padding\":\"80px 22px\"},\"aria-label\":\"Study note: 위성 통신 LEO/MEO/GEO 차이점 분석\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"780px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"$L5\",null,{\"href\":\"/study\",\"style\":{\"display\":\"inline-flex\",\"alignItems\":\"center\",\"gap\":\"6px\",\"color\":\"#2997ff\",\"fontSize\":\"14px\",\"letterSpacing\":\"-0.224px\",\"textDecoration\":\"none\",\"marginBottom\":\"40px\"},\"className\":\"back-link\",\"children\":\"← Back to Study\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"12px\",\"alignItems\":\"center\",\"marginBottom\":\"20px\",\"flexWrap\":\"wrap\"},\"children\":[[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#3a3a3c] text-[#cccccc] bg-transparent\\n        \\n      \",\"children\":\"Satellite Communication\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"#cccccc\"},\"children\":\"9 min read\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"12px\",\"color\":\"#7a7a7a\"},\"children\":\"2026-03-09\"}]]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"40px\",\"fontWeight\":\"600\",\"lineHeight\":\"1.10\",\"letterSpacing\":\"0\",\"color\":\"#ffffff\",\"marginBottom\":\"20px\"},\"className\":\"note-title\",\"children\":\"위성 통신 LEO/MEO/GEO 차이점 분석\"}],[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"17px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.47\",\"letterSpacing\":\"-0.374px\",\"color\":\"#cccccc\"},\"children\":\"LEO, MEO, GEO 위성 궤도별 물리적 특성과 통신 파라미터 차이를 비교 분석합니다. 링크 버짓, 전파 지연, 도플러 특성, 핸드오버 전략, 군용/민간 적용 사례를 정리합니다.\"}]]}]}],[\"$\",\"section\",null,{\"style\":{\"backgroundColor\":\"#ffffff\",\"padding\":\"80px 22px\",\"colorScheme\":\"light\",\"color\":\"#1d1d1f\"},\"aria-label\":\"Note content\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"680px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"$L6\",null,{\"content\":\"$7\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"8px\",\"flexWrap\":\"wrap\",\"marginTop\":\"48px\",\"paddingTop\":\"32px\",\"borderTop\":\"1px solid #e0e0e0\"},\"children\":[[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\\n        \\n      \",\"children\":\"Satellite Communication\"}],[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\\n        \\n      \",\"children\":\"Network\"}],[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\\n        \\n      \",\"children\":\"Protocol\"}],[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\\n        \\n      \",\"children\":\"Research\"}],[\"$\",\"span\",null,{\"className\":\"\\n        inline-flex items-center\\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\\n        px-[10px] py-[4px] rounded-full\\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\\n        \\n      \",\"children\":\"Military\"}]]}],[\"$\",\"div\",null,{\"style\":{\"marginTop\":\"48px\"},\"children\":[\"$\",\"$L5\",null,{\"href\":\"/study\",\"className\":\"link-primary\",\"children\":\"← Back to Study Notes\"}]}]]}]}],[\"$\",\"style\",null,{\"children\":\"\\n        .back-link:hover {\\n          text-decoration: underline;\\n        }\\n        @media (max-width: 640px) {\\n          .note-title {\\n            font-size: 28px !important;\\n          }\\n        }\\n      \"}]],null],null],null]},[null,[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"study\",\"children\",\"$9\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$La\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"study\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$La\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/18cd0df080ff1cc0.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"className\":\"__variable_52456e\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[\"$\",\"$Lb\",null,{\"children\":[[\"$\",\"$Lc\",null,{}],[\"$\",\"main\",null,{\"className\":\"pt-nav\",\"children\":[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$La\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"section\",null,{\"style\":{\"minHeight\":\"calc(100vh - 44px)\",\"backgroundColor\":\"#f5f5f7\",\"display\":\"flex\",\"alignItems\":\"center\",\"justifyContent\":\"center\",\"padding\":\"80px 22px\",\"textAlign\":\"center\"},\"aria-label\":\"Page not found\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"480px\"},\"children\":[[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.43\",\"color\":\"#7a7a7a\",\"textTransform\":\"uppercase\",\"letterSpacing\":\"0.08em\",\"marginBottom\":\"16px\"},\"children\":\"404\"}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"40px\",\"fontWeight\":\"600\",\"lineHeight\":\"1.10\",\"letterSpacing\":\"0\",\"color\":\"#1d1d1f\",\"marginBottom\":\"16px\"},\"children\":\"Page not found.\"}],[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"17px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.47\",\"letterSpacing\":\"-0.374px\",\"color\":\"#7a7a7a\",\"marginBottom\":\"40px\"},\"children\":\"The page you are looking for does not exist or has been moved.\"}],[\"$\",\"$L5\",null,{\"href\":\"/\",\"className\":\"btn-primary\",\"children\":\"Go home\"}]]}]}],\"notFoundStyles\":[]}]}],[\"$\",\"footer\",null,{\"className\":\"tile-parchment\",\"style\":{\"paddingTop\":\"64px\",\"paddingLeft\":\"22px\",\"paddingRight\":\"22px\",\"paddingBottom\":\"32px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"980px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"grid\",\"gridTemplateColumns\":\"repeat(4, 1fr)\",\"gap\":\"24px\",\"marginBottom\":\"48px\"},\"className\":\"footer-grid\",\"children\":[[\"$\",\"div\",\"About\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"About\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"About me\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/about\",\"className\":\"footer-link\",\"children\":\"About me\"}]}],[\"$\",\"li\",\"Skills\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/about#skills\",\"className\":\"footer-link\",\"children\":\"Skills\"}]}],[\"$\",\"li\",\"Timeline\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/about#timeline\",\"className\":\"footer-link\",\"children\":\"Timeline\"}]}]]}]]}],[\"$\",\"div\",\"Projects\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Projects\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"OpenClaw Bridge\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/projects/openclaw-bridge\",\"className\":\"footer-link\",\"children\":\"OpenClaw Bridge\"}]}],[\"$\",\"li\",\"Developer Portfolio\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/projects/allen-portfolio\",\"className\":\"footer-link\",\"children\":\"Developer Portfolio\"}]}],[\"$\",\"li\",\"Study Notes App\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/projects/study-notes\",\"className\":\"footer-link\",\"children\":\"Study Notes App\"}]}]]}]]}],[\"$\",\"div\",\"Study\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Study\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"React\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/study?category=React\",\"className\":\"footer-link\",\"children\":\"React\"}]}],[\"$\",\"li\",\"Next.js\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/study?category=Next.js\",\"className\":\"footer-link\",\"children\":\"Next.js\"}]}],[\"$\",\"li\",\"JavaScript\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/study?category=JavaScript\",\"className\":\"footer-link\",\"children\":\"JavaScript\"}]}],[\"$\",\"li\",\"CSS\",{\"children\":[\"$\",\"$L5\",null,{\"href\":\"/study?category=CSS\",\"className\":\"footer-link\",\"children\":\"CSS\"}]}]]}]]}],[\"$\",\"div\",\"Contact\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Contact\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"Email\",{\"children\":[\"$\",\"a\",null,{\"href\":\"mailto:kjkim4911@gmail.com\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"Email\"}]}],[\"$\",\"li\",\"GitHub\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://github.com/Allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"GitHub\"}]}],[\"$\",\"li\",\"LinkedIn\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://www.linkedin.com/in/allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"LinkedIn\"}]}]]}]]}]]}],[\"$\",\"div\",null,{\"style\":{\"height\":\"1px\",\"backgroundColor\":\"var(--color-hairline)\",\"marginBottom\":\"24px\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"justifyContent\":\"space-between\",\"alignItems\":\"center\",\"flexWrap\":\"wrap\",\"gap\":\"8px\"},\"children\":[[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Copyright 2026 Allen Kim. All rights reserved.\"}],[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Built with Next.js and Tailwind CSS\"}]]}]]}],[\"$\",\"style\",null,{\"children\":\"\\n        .footer-link {\\n          color: var(--color-ink-muted-80);\\n          display: block;\\n          font-size: 12px;\\n          font-weight: 400;\\n          letter-spacing: -0.12px;\\n          line-height: 2.41;\\n          text-decoration: none;\\n        }\\n\\n        .footer-link:hover {\\n          color: var(--color-primary) !important;\\n        }\\n\\n        @media (max-width: 640px) {\\n          .footer-grid {\\n            grid-template-columns: repeat(2, 1fr) !important;\\n          }\\n        }\\n\\n        @media (max-width: 400px) {\\n          .footer-grid {\\n            grid-template-columns: 1fr !important;\\n          }\\n        }\\n      \"}]]}]]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$Ld\"],\"globalErrorComponent\":\"$e\",\"missingSlots\":\"$Wf\"}]\n"])</script><script>self.__next_f.push([1,"d:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"위성 통신 LEO/MEO/GEO 차이점 분석 | Allen Kim\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"LEO, MEO, GEO 위성 궤도별 물리적 특성과 통신 파라미터 차이를 비교 분석합니다. 링크 버짓, 전파 지연, 도플러 특성, 핸드오버 전략, 군용/민간 적용 사례를 정리합니다.\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Allen Kim\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"frontend developer,React,Next.js,Tailwind CSS,portfolio\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Allen Kim\"}],[\"$\",\"meta\",\"7\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Allen Kim - Frontend Developer\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Frontend Developer specializing in React, Next.js, and modern web experiences.\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:url\",\"content\":\"https://allen-portfolio.vercel.app\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:site_name\",\"content\":\"Allen Kim Portfolio\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:locale\",\"content\":\"en_US\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:image\",\"content\":\"https://allen-portfolio.vercel.app/og-image.png\"}],[\"$\",\"meta\",\"14\",{\"property\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"15\",{\"property\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"16\",{\"property\":\"og:image:alt\",\"content\":\"Allen Kim - Frontend Developer\"}],[\"$\",\"meta\",\"17\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"19\",{\"name\":\"twitter:site\",\"content\":\"@allen4911\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:creator\",\"content\":\"@allen4911\"}],[\"$\",\"meta\",\"21\",{\"name\":\"twitter:title\",\"content\":\"Allen Kim - Frontend Developer\"}],[\"$\",\"meta\",\"22\",{\"name\":\"twitter:description\",\"content\":\"Frontend Developer specializing in React, Next.js, and modern web experiences.\"}],[\"$\",\"meta\",\"23\",{\"name\":\"twitter:image\",\"content\":\"https://allen-portfolio.vercel.app/og-image.png\"}],[\"$\",\"meta\",\"24\",{\"name\":\"next-size-adjust\"}]]\n"])</script><script>self.__next_f.push([1,"4:null\n"])</script></body></html>

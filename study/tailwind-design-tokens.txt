@@ -1,0 +1,335 @@
+2:I[2972,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],""]
+3:I[446,["972","static/chunks/972-5bbca60610fae4e0.js","102","static/chunks/102-cf39145a37bdb390.js","218","static/chunks/218-941771bf334f03dc.js","812","static/chunks/app/study/%5Bslug%5D/page-b70b9b005a321db3.js"],"default"]
+5:I[4707,[],""]
+7:I[6423,[],""]
+8:I[4152,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"LanguageProvider"]
+9:I[9445,["972","static/chunks/972-5bbca60610fae4e0.js","185","static/chunks/app/layout-1e6aeb44436ddc9a.js"],"default"]
+4:T22be,# Design Tokens with Tailwind CSS
+
+## Why a Token System Beats Ad Hoc Classes
+
+Design tokens are the single source of truth for every visual decision: color, spacing, typography, shadow, border radius. When encoded in `tailwind.config.js`, they become type-safe utility classes used everywhere.
+
+Without tokens: `style={{ color: '#1D4ED8' }}` scattered through 40 components, impossible to change globally.
+With tokens: `text-brand` in 40 components, one line changed in config to update all 40.
+
+---
+
+## Complete tailwind.config.js Structure
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',  // or 'media'
+  theme: {
+    // 'extend' adds to defaults; root-level replaces them
+    colors: {
+      // Replace default colors with your system
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: '#ffffff',
+      black: '#000000',
+    },
+    extend: {
+      colors: {
+        // Brand palette
+        brand: {
+          50:  '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',
+          700: '#1d4ed8',   // primary action
+          900: '#1e3a8a',
+        },
+        // Semantic tokens (reference brand by value)
+        canvas: '#0A0F1E',
+        'canvas-card': '#111827',
+        'text-primary': '#F1F5F9',
+        'text-muted': '#94A3B8',
+        'border-subtle': '#1E293B',
+        accent: '#1D4ED8',
+        'accent-hover': '#3B82F6',
+      },
+
+      // Spacing scale (extends default 0-96)
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
+      },
+
+      // Typography system
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      fontSize: {
+        // [size, { lineHeight, letterSpacing, fontWeight }]
+        'display-xl': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'display-lg': ['2.5rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        'display':    ['2rem',   { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        'heading':    ['1.5rem', { lineHeight: '1.4' }],
+        'subheading': ['1.25rem',{ lineHeight: '1.5' }],
+        'body-lg':    ['1.125rem',{ lineHeight: '1.7' }],
+        'body':       ['1rem',   { lineHeight: '1.6' }],
+        'body-sm':    ['0.875rem',{ lineHeight: '1.5' }],
+        'caption':    ['0.75rem',{ lineHeight: '1.4', letterSpacing: '0.02em' }],
+      },
+
+      // Border radius
+      borderRadius: {
+        'card': '16px',
+        'button': '8px',
+        'badge': '100px',
+      },
+
+      // Box shadows
+      boxShadow: {
+        'card': '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+        'card-hover': '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
+        'glow': '0 0 20px rgba(59, 130, 246, 0.3)',
+        'glow-strong': '0 0 40px rgba(59, 130, 246, 0.5)',
+      },
+
+      // Animation
+      transitionDuration: {
+        'fast': '150ms',
+        'base': '250ms',
+        'slow': '400ms',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.4s ease-out',
+        'slide-up': 'slideUp 0.4s ease-out',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(16px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+---
+
+## Component Variant Patterns
+
+### Pattern 1: Class Variance Authority (CVA)
+
+```bash
+npm install class-variance-authority
+```
+
+```tsx
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const button = cva(
+  // Base classes (always applied)
+  'inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2',
+  {
+    variants: {
+      variant: {
+        primary:  'bg-accent text-white hover:bg-accent-hover',
+        secondary:'bg-canvas-card text-text-primary border border-border-subtle hover:border-accent',
+        ghost:    'text-text-muted hover:text-text-primary hover:bg-canvas-card',
+        danger:   'bg-red-600 text-white hover:bg-red-700',
+      },
+      size: {
+        sm:  'h-8 px-3 text-body-sm rounded-button',
+        md:  'h-10 px-4 text-body rounded-button',
+        lg:  'h-12 px-6 text-body-lg rounded-button',
+        xl:  'h-14 px-8 text-subheading rounded-button',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+      size: 'md',
+    },
+  }
+)
+
+interface ButtonProps extends VariantProps<typeof button> {
+  children: React.ReactNode
+  disabled?: boolean
+  onClick?: () => void
+}
+
+export function Button({ variant, size, children, ...props }: ButtonProps) {
+  return (
+    <button className={button({ variant, size })} {...props}>
+      {children}
+    </button>
+  )
+}
+```
+
+Usage:
+```jsx
+<Button variant="primary" size="lg">Get Started</Button>
+<Button variant="ghost" size="sm">Cancel</Button>
+```
+
+---
+
+## Dark Mode Implementation
+
+### Strategy 1: Class-based (recommended for user toggle)
+
+```js
+// tailwind.config.js
+darkMode: 'class'  // add/remove 'dark' class on <html>
+```
+
+```jsx
+// components/ThemeToggle.jsx
+'use client'
+import { useState, useEffect } from 'react'
+
+export function ThemeToggle() {
+  const [dark, setDark] = useState(false)
+
+  useEffect(() => {
+    // Persist preference
+    const saved = localStorage.getItem('theme')
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setDark(true)
+      document.documentElement.classList.add('dark')
+    }
+  }, [])
+
+  function toggle() {
+    setDark(d => {
+      const next = !d
+      document.documentElement.classList.toggle('dark', next)
+      localStorage.setItem('theme', next ? 'dark' : 'light')
+      return next
+    })
+  }
+
+  return (
+    <button onClick={toggle} aria-label="Toggle theme">
+      {dark ? '☀️' : '🌙'}
+    </button>
+  )
+}
+```
+
+Using dark: prefix in components:
+```jsx
+<div className="bg-white dark:bg-canvas text-gray-900 dark:text-text-primary">
+  <Card className="border border-gray-200 dark:border-border-subtle shadow-card dark:shadow-none">
+    <h2 className="text-heading text-gray-900 dark:text-text-primary">Title</h2>
+    <p className="text-body text-gray-600 dark:text-text-muted">Description</p>
+  </Card>
+</div>
+```
+
+---
+
+## Responsive Utilities
+
+Tailwind's breakpoints are **mobile-first**: unprefixed = all sizes, prefix = that size and up.
+
+```js
+// tailwind.config.js - custom breakpoints
+screens: {
+  'xs': '375px',
+  'sm': '640px',
+  'md': '768px',
+  'lg': '1024px',
+  'xl': '1280px',
+  '2xl': '1536px',
+}
+```
+
+```jsx
+// Responsive grid: 1 col → 2 col → 3 col
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {projects.map(p => <ProjectCard key={p.id} {...p} />)}
+</div>
+
+// Responsive typography
+<h1 className="text-display lg:text-display-lg xl:text-display-xl">
+  Hello World
+</h1>
+
+// Show/hide at breakpoints
+<nav className="hidden md:flex gap-6">...</nav>
+<button className="md:hidden">☰</button>
+```
+
+---
+
+## Animation Patterns
+
+```jsx
+// Fade in on mount
+<div className="animate-fade-in">
+  <HeroSection />
+</div>
+
+// Scroll-triggered animation (with Intersection Observer)
+function AnimatedCard({ children }) {
+  const [visible, setVisible] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.1 }
+    )
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-slow ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+---
+
+## Practical Token Usage Reference
+
+```jsx
+// A typical portfolio card using the full token system
+function StudyCard({ title, excerpt, category, date, readingTime }) {
+  return (
+    <article className="
+      bg-canvas-card border border-border-subtle rounded-card
+      p-6 shadow-card hover:shadow-card-hover hover:border-accent
+      transition-all duration-base cursor-pointer
+      animate-fade-in
+    ">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-caption font-medium text-accent bg-brand-900 px-2 py-0.5 rounded-badge">
+          {category}
+        </span>
+        <span className="text-caption text-text-muted">{readingTime}</span>
+      </div>
+      <h3 className="text-heading text-text-primary mb-2 line-clamp-2">{title}</h3>
+      <p className="text-body-sm text-text-muted line-clamp-3">{excerpt}</p>
+      <p className="text-caption text-text-muted mt-4">{date}</p>
+    </article>
+  )
+}
+```6:["slug","tailwind-design-tokens","d"]
+0:["c3TR-NcUo4Af6CJBNqM92",[[["",{"children":["study",{"children":[["slug","tailwind-design-tokens","d"],{"children":["__PAGE__?{\"slug\":\"tailwind-design-tokens\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["study",{"children":[["slug","tailwind-design-tokens","d"],{"children":["__PAGE__",{},[["$L1",[["$","section",null,{"style":{"backgroundColor":"#272729","padding":"80px 22px"},"aria-label":"Study note: Design Tokens with Tailwind CSS","children":["$","div",null,{"style":{"maxWidth":"780px","margin":"0 auto"},"children":[["$","$L2",null,{"href":"/study","style":{"display":"inline-flex","alignItems":"center","gap":"6px","color":"#2997ff","fontSize":"14px","letterSpacing":"-0.224px","textDecoration":"none","marginBottom":"40px"},"className":"back-link","children":"← Back to Study"}],["$","div",null,{"style":{"display":"flex","gap":"12px","alignItems":"center","marginBottom":"20px","flexWrap":"wrap"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#3a3a3c] text-[#cccccc] bg-transparent\n        \n      ","children":"CSS"}],["$","span",null,{"style":{"fontSize":"12px","color":"#cccccc"},"children":"9 min read"}],["$","span",null,{"style":{"fontSize":"12px","color":"#7a7a7a"},"children":"2026-04-10"}]]}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#ffffff","marginBottom":"20px"},"className":"note-title","children":"Design Tokens with Tailwind CSS"}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#cccccc"},"children":"How to encode a full design system (spacing, color, typography) into Tailwind config and why this approach beats arbitrary values every time."}]]}]}],["$","section",null,{"style":{"backgroundColor":"#ffffff","padding":"80px 22px","colorScheme":"light","color":"#1d1d1f"},"aria-label":"Note content","children":["$","div",null,{"style":{"maxWidth":"680px","margin":"0 auto"},"children":[["$","$L3",null,{"content":"$4"}],["$","div",null,{"style":{"display":"flex","gap":"8px","flexWrap":"wrap","marginTop":"48px","paddingTop":"32px","borderTop":"1px solid #e0e0e0"},"children":[["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"CSS"}],["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"Tailwind"}],["$","span",null,{"className":"\n        inline-flex items-center\n        text-[12px] font-[400] leading-[1.0] tracking-[-0.12px]\n        px-[10px] py-[4px] rounded-full\n        border border-[#e0e0e0] text-[#7a7a7a] bg-transparent\n        \n      ","children":"Design Systems"}]]}],["$","div",null,{"style":{"marginTop":"48px"},"children":["$","$L2",null,{"href":"/study","className":"link-primary","children":"← Back to Study Notes"}]}]]}]}],["$","style",null,{"children":"\n        .back-link:hover {\n          text-decoration: underline;\n        }\n        @media (max-width: 640px) {\n          .note-title {\n            font-size: 28px !important;\n          }\n        }\n      "}]],null],null],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children","$6","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children","study","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/18cd0df080ff1cc0.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","className":"__variable_52456e","children":["$","body",null,{"className":"font-sans antialiased","children":["$","$L8",null,{"children":[["$","$L9",null,{}],["$","main",null,{"className":"pt-nav","children":["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L7",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","section",null,{"style":{"minHeight":"calc(100vh - 44px)","backgroundColor":"#f5f5f7","display":"flex","alignItems":"center","justifyContent":"center","padding":"80px 22px","textAlign":"center"},"aria-label":"Page not found","children":["$","div",null,{"style":{"maxWidth":"480px"},"children":[["$","p",null,{"style":{"fontSize":"14px","fontWeight":"400","lineHeight":"1.43","color":"#7a7a7a","textTransform":"uppercase","letterSpacing":"0.08em","marginBottom":"16px"},"children":"404"}],["$","h1",null,{"style":{"fontSize":"40px","fontWeight":"600","lineHeight":"1.10","letterSpacing":"0","color":"#1d1d1f","marginBottom":"16px"},"children":"Page not found."}],["$","p",null,{"style":{"fontSize":"17px","fontWeight":"400","lineHeight":"1.47","letterSpacing":"-0.374px","color":"#7a7a7a","marginBottom":"40px"},"children":"The page you are looking for does not exist or has been moved."}],["$","$L2",null,{"href":"/","className":"btn-primary","children":"Go home"}]]}]}],"notFoundStyles":[]}]}],["$","footer",null,{"className":"tile-parchment","style":{"paddingTop":"64px","paddingLeft":"22px","paddingRight":"22px","paddingBottom":"32px"},"children":[["$","div",null,{"style":{"maxWidth":"980px","margin":"0 auto"},"children":[["$","div",null,{"style":{"display":"grid","gridTemplateColumns":"repeat(4, 1fr)","gap":"24px","marginBottom":"48px"},"className":"footer-grid","children":[["$","div","About",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"About"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","About me",{"children":["$","$L2",null,{"href":"/about","className":"footer-link","children":"About me"}]}],["$","li","Skills",{"children":["$","$L2",null,{"href":"/about#skills","className":"footer-link","children":"Skills"}]}],["$","li","Timeline",{"children":["$","$L2",null,{"href":"/about#timeline","className":"footer-link","children":"Timeline"}]}]]}]]}],["$","div","Projects",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Projects"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","OpenClaw Bridge",{"children":["$","$L2",null,{"href":"/projects/openclaw-bridge","className":"footer-link","children":"OpenClaw Bridge"}]}],["$","li","Developer Portfolio",{"children":["$","$L2",null,{"href":"/projects/allen-portfolio","className":"footer-link","children":"Developer Portfolio"}]}],["$","li","Study Notes App",{"children":["$","$L2",null,{"href":"/projects/study-notes","className":"footer-link","children":"Study Notes App"}]}]]}]]}],["$","div","Study",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Study"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","React",{"children":["$","$L2",null,{"href":"/study?category=React","className":"footer-link","children":"React"}]}],["$","li","Next.js",{"children":["$","$L2",null,{"href":"/study?category=Next.js","className":"footer-link","children":"Next.js"}]}],["$","li","JavaScript",{"children":["$","$L2",null,{"href":"/study?category=JavaScript","className":"footer-link","children":"JavaScript"}]}],["$","li","CSS",{"children":["$","$L2",null,{"href":"/study?category=CSS","className":"footer-link","children":"CSS"}]}]]}]]}],["$","div","Contact",{"children":[["$","p",null,{"className":"text-caption-strong","style":{"marginBottom":"12px"},"children":"Contact"}],["$","ul",null,{"style":{"listStyle":"none","padding":0,"margin":0},"children":[["$","li","Email",{"children":["$","a",null,{"href":"mailto:kjkim4911@gmail.com","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"Email"}]}],["$","li","GitHub",{"children":["$","a",null,{"href":"https://github.com/Allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"GitHub"}]}],["$","li","LinkedIn",{"children":["$","a",null,{"href":"https://www.linkedin.com/in/allen4911","target":"_blank","rel":"noopener noreferrer","className":"footer-link","children":"LinkedIn"}]}]]}]]}]]}],["$","div",null,{"style":{"height":"1px","backgroundColor":"var(--color-hairline)","marginBottom":"24px"}}],["$","div",null,{"style":{"display":"flex","justifyContent":"space-between","alignItems":"center","flexWrap":"wrap","gap":"8px"},"children":[["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Copyright 2026 Allen Kim. All rights reserved."}],["$","p",null,{"className":"text-fine-print","style":{"color":"var(--color-ink-muted-48)"},"children":"Built with Next.js and Tailwind CSS"}]]}]]}],["$","style",null,{"children":"\n        .footer-link {\n          color: var(--color-ink-muted-80);\n          display: block;\n          font-size: 12px;\n          font-weight: 400;\n          letter-spacing: -0.12px;\n          line-height: 2.41;\n          text-decoration: none;\n        }\n\n        .footer-link:hover {\n          color: var(--color-primary) !important;\n        }\n\n        @media (max-width: 640px) {\n          .footer-grid {\n            grid-template-columns: repeat(2, 1fr) !important;\n          }\n        }\n\n        @media (max-width: 400px) {\n          .footer-grid {\n            grid-template-columns: 1fr !important;\n          }\n        }\n      "}]]}]]}]}]}]],null],null],["$La",null]]]]
+a:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Design Tokens with Tailwind CSS | Allen Kim"}],["$","meta","3",{"name":"description","content":"How to encode a full design system (spacing, color, typography) into Tailwind config and why this approach beats arbitrary values every time."}],["$","meta","4",{"name":"author","content":"Allen Kim"}],["$","meta","5",{"name":"keywords","content":"frontend developer,React,Next.js,Tailwind CSS,portfolio"}],["$","meta","6",{"name":"creator","content":"Allen Kim"}],["$","meta","7",{"name":"robots","content":"index, follow"}],["$","meta","8",{"property":"og:title","content":"Allen Kim - Frontend Developer"}],["$","meta","9",{"property":"og:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","10",{"property":"og:url","content":"https://allen-portfolio.vercel.app"}],["$","meta","11",{"property":"og:site_name","content":"Allen Kim Portfolio"}],["$","meta","12",{"property":"og:locale","content":"en_US"}],["$","meta","13",{"property":"og:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Allen Kim - Frontend Developer"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:site","content":"@allen4911"}],["$","meta","20",{"name":"twitter:creator","content":"@allen4911"}],["$","meta","21",{"name":"twitter:title","content":"Allen Kim - Frontend Developer"}],["$","meta","22",{"name":"twitter:description","content":"Frontend Developer specializing in React, Next.js, and modern web experiences."}],["$","meta","23",{"name":"twitter:image","content":"https://allen-portfolio.vercel.app/og-image.png"}],["$","meta","24",{"name":"next-size-adjust"}]]
+1:null
