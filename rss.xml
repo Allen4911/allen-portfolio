@@ -16,6 +16,310 @@
     </item>
 
     <item>
+      <title><![CDATA[WSL2 Network Issues: What Caused Them and How I Actually Fixed Them]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/wsl2-network-troubleshooting</link>
+      <guid>https://allen-portfolio.vercel.app/blog/wsl2-network-troubleshooting</guid>
+      <description><![CDATA[WSL2 is excellent until it isn't. The virtualized network stack that makes WSL2 faster than WSL1 for most things is also the source of a class of networking issues that can waste a lot of time to diag]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Migrating React Projects to TypeScript]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/typescript-migration-guide</link>
+      <guid>https://allen-portfolio.vercel.app/blog/typescript-migration-guide</guid>
+      <description><![CDATA[Migrating a JavaScript React project to TypeScript is not about changing everything at once. The realistic strategy is to gradually convert files while maintaining stability. This guide covers pattern]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[At registration:]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/the-system-prompt-that-turns-claude-into-a-senior-code-reviewer</link>
+      <guid>https://allen-portfolio.vercel.app/blog/the-system-prompt-that-turns-claude-into-a-senior-code-reviewer</guid>
+      <description><![CDATA[Code review is one of the most valuable — and most time-consuming — parts of software development. A good senior engineer doesn't just spot bugs. They flag architectural issues, question naming choice]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[the lean startup by eric ries]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/the-lean-startup-by-eric-ries</link>
+      <guid>https://allen-portfolio.vercel.app/blog/the-lean-startup-by-eric-ries</guid>
+      <description><![CDATA[I picked up this book expecting another Silicon Valley hype fest. What I got instead was a surprisingly rigorous methodology that changed how I think about building anything — not just tech companies.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[team agents triple crown strategy]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/team-agents-triple-crown-strategy</link>
+      <guid>https://allen-portfolio.vercel.app/blog/team-agents-triple-crown-strategy</guid>
+      <description><![CDATA[| Tool | Responsibility | Analogy | |------|---------------|---------| | gstack | Strategy + quality validation | CEO + QA team | | GSD | Project structuring + execution management | PM + Kanban board]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Design Tokens with Tailwind CSS]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/tailwind-design-tokens</link>
+      <guid>https://allen-portfolio.vercel.app/blog/tailwind-design-tokens</guid>
+      <description><![CDATA[Design tokens are variables that represent design decisions — colors, spacing, typography — as code. Combining Tailwind CSS's configuration system with CSS variables allows systematic management of a ]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Satellite Communication LEO / MEO / GEO Comparison Analysis]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/satellite-leo-meo-geo-comparison</link>
+      <guid>https://allen-portfolio.vercel.app/blog/satellite-leo-meo-geo-comparison</guid>
+      <description><![CDATA[Satellite communication systems are classified as LEO, MEO, and GEO based on the orbital altitude at which the satellites operate. Each orbit has unique characteristics determined by the laws of physi]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Xilinx RFSoC Platform Overview]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/rfsoc-xilinx-intro</link>
+      <guid>https://allen-portfolio.vercel.app/blog/rfsoc-xilinx-intro</guid>
+      <description><![CDATA[Xilinx RFSoC (Radio Frequency System-on-Chip) is a platform that integrates high-speed ADCs/DACs, an FPGA fabric, and an ARM processor into a single chip. Compared to traditional separate RF front-end]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[React Hooks Deep Dive: Real-World Patterns and Pitfalls]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/react-hooks-deep-dive</link>
+      <guid>https://allen-portfolio.vercel.app/blog/react-hooks-deep-dive</guid>
+      <description><![CDATA[React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[10 Prompt Engineering Tips That Actually Work in Production]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/prompt-engineering-production-tips-that-actually-work</link>
+      <guid>https://allen-portfolio.vercel.app/blog/prompt-engineering-production-tips-that-actually-work</guid>
+      <description><![CDATA[Most prompt engineering advice falls into one of two traps: it's either too vague ('be clear and specific!') or too tied to specific tricks that stop working after a model update. This guide is differ]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Open RAN Architecture Overview]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/open-ran-architecture</link>
+      <guid>https://allen-portfolio.vercel.app/blog/open-ran-architecture</guid>
+      <description><![CDATA[Open RAN (Open Radio Access Network) is a technology paradigm that separates the hardware and software of mobile base stations and ensures interoperability through open interfaces. It opens up the tra]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[mise/tasks/deploy]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/npm-vs-mise-which-task-runner-should-power-your-dev-workflow</link>
+      <guid>https://allen-portfolio.vercel.app/blog/npm-vs-mise-which-task-runner-should-power-your-dev-workflow</guid>
+      <description><![CDATA[One-line verdict: npm scripts are the safe default for JavaScript projects where portability and zero-setup matter, but mise tasks win if you want a proper task runner with dependency graphs, parallel]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Next.js 14 App Router Patterns]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/nextjs-app-router-patterns</link>
+      <guid>https://allen-portfolio.vercel.app/blog/nextjs-app-router-patterns</guid>
+      <description><![CDATA[Next.js 14's App Router is a new routing system designed around React Server Components (RSC). It differs conceptually from the pages/ directory approach, and misunderstanding the correct patterns lea]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Military Satellite Communication System Architecture]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/military-satcom-overview</link>
+      <guid>https://allen-portfolio.vercel.app/blog/military-satcom-overview</guid>
+      <description><![CDATA[Military Satellite Communication (MILSATCOM), unlike commercial satellite communications, has Anti-Jamming (AJ), Low Probability of Intercept/Detection (LPI/LPD), and high availability as core require]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Ctrl+B, D                    # Detach session (keeps running in background)]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/mastering-tmux-terminal-splitting-for-ai-multi-agent-systems</link>
+      <guid>https://allen-portfolio.vercel.app/blog/mastering-tmux-terminal-splitting-for-ai-multi-agent-systems</guid>
+      <description><![CDATA[TMUX (Terminal Multiplexer) is a tool that lets you run multiple terminals simultaneously inside a single terminal. Like a tabbed browser, it splits your terminal into tabs, divides the screen into pa]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[LTE Protocol Stack Architecture Analysis]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/lte-protocol-stack</link>
+      <guid>https://allen-portfolio.vercel.app/blog/lte-protocol-stack</guid>
+      <description><![CDATA[The LTE (Long Term Evolution) Radio Access Layer is composed of multiple sublayers. This document summarizes the role and interaction of each layer.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Understanding JavaScript Closures]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/javascript-closures</link>
+      <guid>https://allen-portfolio.vercel.app/blog/javascript-closures</guid>
+      <description><![CDATA[Closures are one of the most frequently misunderstood concepts in JavaScript. They're a staple of interview questions, but more importantly, they're patterns you use every day. This post focuses on ho]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[i built a telegram bot that notifies me of price drops heres how]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/i-built-a-telegram-bot-that-notifies-me-of-price-drops-heres-how</link>
+      <guid>https://allen-portfolio.vercel.app/blog/i-built-a-telegram-bot-that-notifies-me-of-price-drops-heres-how</guid>
+      <description><![CDATA[I got tired of manually checking prices. Specifically, I was watching a mechanical keyboard on a few different sites for about three weeks, refreshing the page every day like some kind of discount-obs]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[or]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/how-to-fix-port-already-in-use-errors-in-nodejs</link>
+      <guid>https://allen-portfolio.vercel.app/blog/how-to-fix-port-already-in-use-errors-in-nodejs</guid>
+      <description><![CDATA[You run node server.js and immediately hit this wall:]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[.env]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/how-to-automate-your-daily-workflow-with-python-scripts</link>
+      <guid>https://allen-portfolio.vercel.app/blog/how-to-automate-your-daily-workflow-with-python-scripts</guid>
+      <description><![CDATA[I used to start every morning the same way: open my email, copy numbers from three different spreadsheets into a summary report, rename and sort a folder full of downloaded files, check a handful of w]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Test it works]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/how-to-auto-deploy-wordpress-posts-with-github-actions</link>
+      <guid>https://allen-portfolio.vercel.app/blog/how-to-auto-deploy-wordpress-posts-with-github-actions</guid>
+      <description><![CDATA[Logging into the WordPress admin every time you want to post is friction. When publishing feels like work, you write less. This setup removes that friction: write a .md file, push it, and GitHub Actio]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[how i made 2000 in 30 days selling ai generated digital products on gumroad]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/how-i-made-2000-in-30-days-selling-ai-generated-digital-products-on-gumroad</link>
+      <guid>https://allen-portfolio.vercel.app/blog/how-i-made-2000-in-30-days-selling-ai-generated-digital-products-on-gumroad</guid>
+      <description><![CDATA[I'll be straight with you: $2,000 in 30 days sounds like a headline designed to get clicks. But this is a real account of what I did, what it cost, how many hours I put in, and — critically — what alm]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Git Workflow Best Practices]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/git-workflow-best-practices</link>
+      <guid>https://allen-portfolio.vercel.app/blog/git-workflow-best-practices</guid>
+      <description><![CDATA[Git is not just a tool — it's the language of team collaboration. This post covers Git workflow patterns that clearly manage code change history and enable fast collaboration and safe deployment.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Git Tags — Version Management and Releases]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/git-tags-version-management-and-releases</link>
+      <guid>https://allen-portfolio.vercel.app/blog/git-tags-version-management-and-releases</guid>
+      <description><![CDATA[When working on any serious project, you need a way to mark specific points in your code history — release versions, milestones, stable builds. Git tags do exactly that.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Git Stash — A Complete Guide to Temporarily Saving Your Work]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/git-stash-temporary-storage-guide</link>
+      <guid>https://allen-portfolio.vercel.app/blog/git-stash-temporary-storage-guide</guid>
+      <description><![CDATA[Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you've been working on the wrong branch? Git Stash is the tool that saves ]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[cursor ai vs github copilot which ai coding assistant is actually worth it]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/cursor-ai-vs-github-copilot-which-ai-coding-assistant-is-actually-worth-it</link>
+      <guid>https://allen-portfolio.vercel.app/blog/cursor-ai-vs-github-copilot-which-ai-coding-assistant-is-actually-worth-it</guid>
+      <description><![CDATA[One-line verdict: Cursor AI wins for developers who want a deeply integrated AI-first coding environment, while GitHub Copilot is the safer, more portable choice for teams already embedded in the GitH]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[CSS Grid Mastery Guide]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/css-grid-mastery</link>
+      <guid>https://allen-portfolio.vercel.app/blog/css-grid-mastery</guid>
+      <description><![CDATA[CSS Grid is a two-dimensional layout system. While Flexbox handles one dimension (row or column), Grid controls rows and columns simultaneously. Its core strength is implementing complex layouts with ]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Mastering Team Automation with Claude Code: A Practical Guide to Agents and Remote Control]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/claudecode-auto</link>
+      <guid>https://allen-portfolio.vercel.app/blog/claudecode-auto</guid>
+      <description><![CDATA[This book is a hands-on guide to moving beyond using Claude AI alone and operating multiple AIs simultaneously as a team.]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[CLAUDE.md & Hooks: Configuring Claude Code Behavior]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/claude-md-hooks-guide</link>
+      <guid>https://allen-portfolio.vercel.app/blog/claude-md-hooks-guide</guid>
+      <description><![CDATA[Claude Code is not just an AI coding assistant. Through the CLAUDE.md file and Hooks system, you can finely control AI behavior per project. This guide covers configuration patterns immediately usable]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[AI-Assisted Development with Claude Code]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/claude-code-workflow</link>
+      <guid>https://allen-portfolio.vercel.app/blog/claude-code-workflow</guid>
+      <description><![CDATA[Claude Code is an AI coding agent that runs in the terminal. It's not just a code generation tool — it's an autonomous development partner that reads and writes files, executes commands, and handles G]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[claude code vs cursor which ai coding tool is worth your money in 2025]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/claude-code-vs-cursor-which-ai-coding-tool-is-worth-your-money-in-2025</link>
+      <guid>https://allen-portfolio.vercel.app/blog/claude-code-vs-cursor-which-ai-coding-tool-is-worth-your-money-in-2025</guid>
+      <description><![CDATA[One-line verdict: Claude Code wins for developers who want a powerful terminal-native AI that works across any editor and handles complex multi-file reasoning, while Cursor is the better pick if you w]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Build Log: I Made a Real App Using Only Claude Code (Here's What Actually Happened)]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/building-app-with-claude-code</link>
+      <guid>https://allen-portfolio.vercel.app/blog/building-app-with-claude-code</guid>
+      <description><![CDATA[I've been a developer for a while. I know how to write code. So when I decided to try building a complete side project almost entirely through Claude Code, I expected it to be a productivity experimen]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[How I Built an AI-Powered Automation Workflow That Saves Me 3 Hours Every Day]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/ai-workflow-automation</link>
+      <guid>https://allen-portfolio.vercel.app/blog/ai-workflow-automation</guid>
+      <description><![CDATA[Last year, I was spending an embarrassing amount of time on repetitive tasks — checking emails, summarizing meeting notes, triaging GitHub issues, and drafting routine responses. Not hard work, just t]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[AI Engineering by Chip Huyen: The Best Technical Book on Building LLM Applications in 2025]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/ai-engineering-chip-huyen-book-review</link>
+      <guid>https://allen-portfolio.vercel.app/blog/ai-engineering-chip-huyen-book-review</guid>
+      <description><![CDATA[If you've spent time building anything with large language models — a chatbot, an internal tool, a production pipeline — you've almost certainly run into the messy gap between 'this works in the demo']]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[Evaluating AI Agent Systems: Metrics and Failure Modes]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/ai-agent-evaluation</link>
+      <guid>https://allen-portfolio.vercel.app/blog/ai-agent-evaluation</guid>
+      <description><![CDATA[Deploying an AI Agent to production is harder in terms of designing the evaluation framework than in model selection. This post summarizes failure patterns and measurement metrics encountered while op]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[6G NTN (Non-Terrestrial Network) Overview]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/6g-ntn-overview</link>
+      <guid>https://allen-portfolio.vercel.app/blog/6g-ntn-overview</guid>
+      <description><![CDATA[NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[5G System Architecture Analysis]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/5g-system-architecture</link>
+      <guid>https://allen-portfolio.vercel.app/blog/5g-system-architecture</guid>
+      <description><![CDATA[5G NR (New Radio) is the next-generation mobile communication system whose first standard was finalized in 3GPP Rel-15 (2018). Compared to LTE, it targets the following goals:]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[5 ways to make real money with ai tools in 2025 no coding required]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/5-ways-to-make-real-money-with-ai-tools-in-2025-no-coding-required</link>
+      <guid>https://allen-portfolio.vercel.app/blog/5-ways-to-make-real-money-with-ai-tools-in-2025-no-coding-required</guid>
+      <description><![CDATA[I want to be upfront: none of these are passive income in the 'set it and forget it' sense. They're all active income streams where AI dramatically reduces the time required — and in some cases makes ]]></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
       <title><![CDATA[5 Next.js App Router Tips I Wish I Knew Earlier]]></title>
       <link>https://allen-portfolio.vercel.app/blog/nextjs-app-router-tips</link>
       <guid>https://allen-portfolio.vercel.app/blog/nextjs-app-router-tips</guid>

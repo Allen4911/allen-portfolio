@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="en" class="__variable_52456e"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/755c628ae67952ee.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js"/><script src="/_next/static/chunks/fd9d1056-a9394cb017d46d98.js" async=""></script><script src="/_next/static/chunks/117-118f6a419bea4402.js" async=""></script><script src="/_next/static/chunks/main-app-ffa6af37ba9353a2.js" async=""></script><script src="/_next/static/chunks/972-5bbca60610fae4e0.js" async=""></script><script src="/_next/static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js" async=""></script><script src="/_next/static/chunks/app/layout-c52e51a74c5d6c63.js" async=""></script><title>React Hooks Deep Dive: Real-World Patterns and Pitfalls — Allen | Allen</title><meta name="description" content="React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management."/><meta name="author" content="Allen"/><meta name="keywords" content="frontend developer,React,Next.js,Tailwind CSS,portfolio"/><meta name="creator" content="Allen"/><meta name="robots" content="index, follow"/><meta property="og:title" content="React Hooks Deep Dive: Real-World Patterns and Pitfalls"/><meta property="og:description" content="React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management."/><meta property="og:type" content="article"/><meta property="article:published_time" content="2026-05-15"/><meta property="article:tag" content="study"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="React Hooks Deep Dive: Real-World Patterns and Pitfalls"/><meta name="twitter:description" content="React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management."/><meta name="next-size-adjust"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="font-sans antialiased"><nav role="navigation" aria-label="Global navigation" style="position:fixed;top:0;left:0;right:0;z-index:50;height:44px;background-color:var(--color-surface-black);backdrop-filter:none;-webkit-backdrop-filter:none"><div style="max-width:1440px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><a aria-label="Allen Home" style="color:var(--color-on-dark);font-size:17px;font-weight:600;letter-spacing:-0.374px;line-height:1;text-decoration:none;flex-shrink:0" href="/">Allen</a><div aria-hidden="false" style="display:flex;align-items:center;gap:28px" class="hidden-mobile"><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/about">About</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/projects">Projects</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/books">Books</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/blog">Blog</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/study">Study</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/contact">Contact</a></div><div style="display:flex;align-items:center;gap:16px"><button aria-label="Switch to dark mode" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="dark-mode-toggle">☽</button><button aria-label="Switch to Korean (KO)" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="lang-toggle">KO</button><a style="background-color:var(--color-primary);color:var(--color-on-dark);font-size:12px;font-weight:400;letter-spacing:-0.12px;padding:7px 14px;border-radius:9999px;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:center" class="hire-cta" href="/contact">Hire me</a><button aria-label="Open menu" aria-expanded="false" class="hamburger-btn" style="background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px"><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span></button></div></div></nav><style>
+        @media (min-width: 835px) {
+          .hamburger-btn { display: none; }
+        }
+
+        @media (max-width: 834px) {
+          .hidden-mobile {
+            display: none !important;
+          }
+          .hamburger-btn {
+            display: flex;
+          }
+          .mobile-menu {
+            display: block !important;
+          }
+        }
+
+        .nav-desktop-link:hover {
+          color: var(--color-on-dark) !important;
+        }
+
+        .hire-cta:active {
+          transform: scale(0.95);
+        }
+      </style><main class="pt-nav"><div style="position:fixed;top:44px;left:0;right:0;height:2px;z-index:40;background-color:rgba(255,255,255,0.06)"><div style="height:100%;width:0%;background-color:var(--color-primary, #0071e3);transition:width 0.1s linear"></div></div><main style="padding-top:80px;min-height:100vh"><div style="max-width:1100px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 220px;gap:64px;align-items:start" class="post-layout"><div><a style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:32px" href="/blog">← All posts</a><header style="margin-bottom:48px"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><a style="font-size:11px;font-weight:500;color:var(--color-primary, #0071e3);background-color:rgba(0,113,227,0.1);border-radius:6px;padding:3px 8px;text-decoration:none" href="/blog/tag/study">study</a></div><h1 style="font-size:clamp(28px, 4vw, 44px);font-weight:700;letter-spacing:-0.04em;line-height:1.15;margin:0 0 20px">React Hooks Deep Dive: Real-World Patterns and Pitfalls</h1><div style="display:flex;gap:12px;font-size:13px;color:rgba(255,255,255,0.4)"><time dateTime="2026-05-15">May 15, 2026</time><span>·</span><span>5 min read</span></div></header><article class="mdx-prose"><p>React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.</p>
+<h2>useState Pitfalls</h2>
+<h3>Pitfall 1: Partial Update of Object State</h3>
+<pre><code class="language-jsx">// Wrong pattern — other fields disappear
+const [user, setUser] = useState({ name: &#x27;Allen&#x27;, age: 30 });
+setUser({ name: &#x27;Kim Allen&#x27; }); // age disappears!
+
+// Correct pattern
+setUser(prev =&gt; ({ ...prev, name: &#x27;Kim Allen&#x27; }));
+</code></pre>
+<h3>Pitfall 2: Stale Closure Values</h3>
+<pre><code class="language-jsx">// Problem: count is always 0
+const [count, setCount] = useState(0);
+useEffect(() =&gt; {
+  const timer = setInterval(() =&gt; {
+    setCount(count + 1); // count is always the initial value 0
+  }, 1000);
+  return () =&gt; clearInterval(timer);
+}, []); // empty dependency array — count never updates
+
+// Fix: functional update
+setCount(prev =&gt; prev + 1);
+</code></pre>
+<h3>Pitfall 3: Expensive Initial State</h3>
+<pre><code class="language-jsx">// heavyComputation runs on every render
+const [data, setData] = useState(heavyComputation());
+
+// Pass initializer function — runs only once
+const [data, setData] = useState(() =&gt; heavyComputation());
+</code></pre>
+<h2>useEffect Comprehensive Guide</h2>
+<h3>Dependency Array Rules</h3>
+<pre><code class="language-jsx">useEffect(() =&gt; { /* runs on every render */ });
+useEffect(() =&gt; { /* runs once on mount */ }, []);
+useEffect(() =&gt; { /* runs when a or b changes */ }, [a, b]);
+</code></pre>
+<h3>When Cleanup is Needed</h3>
+<pre><code class="language-jsx">useEffect(() =&gt; {
+  const controller = new AbortController();
+  
+  fetch(&#x27;/api/data&#x27;, { signal: controller.signal })
+    .then(r =&gt; r.json())
+    .then(setData)
+    .catch(err =&gt; {
+      if (err.name !== &#x27;AbortError&#x27;) console.error(err);
+    });
+
+  return () =&gt; controller.abort(); // cancel request on unmount
+}, []);
+</code></pre>
+<h3>Event Listener Cleanup</h3>
+<pre><code class="language-jsx">useEffect(() =&gt; {
+  const handleResize = () =&gt; setWidth(window.innerWidth);
+  window.addEventListener(&#x27;resize&#x27;, handleResize);
+  return () =&gt; window.removeEventListener(&#x27;resize&#x27;, handleResize);
+}, []);
+</code></pre>
+<h2>Using useCallback and useMemo Correctly</h2>
+<h3>useCallback — Stabilize Function References</h3>
+<pre><code class="language-jsx">// Unnecessary useCallback — only overhead for simple functions
+const handleClick = useCallback(() =&gt; setCount(c =&gt; c + 1), []);
+
+// Needed when: function passed as props to a child component
+const ExpensiveChild = memo(({ onSubmit }) =&gt; { /* ... */ });
+
+function Parent() {
+  const handleSubmit = useCallback((data) =&gt; {
+    submitToApi(data);
+  }, []); // no dependencies if submitToApi is stable
+  
+  return &lt;ExpensiveChild onSubmit={handleSubmit} /&gt;;
+}
+</code></pre>
+<h3>useMemo — Cache Computed Results</h3>
+<pre><code class="language-jsx">// Memoize only expensive computations
+const sortedList = useMemo(
+  () =&gt; list.slice().sort((a, b) =&gt; a.date - b.date),
+  [list]
+);
+
+// Unnecessary useMemo — just use count * 2 directly
+const doubled = useMemo(() =&gt; count * 2, [count]);
+</code></pre>
+<h2>Managing Complex State with useReducer</h2>
+<p>Consider <code>useReducer</code> when you have 3 or more related <code>useState</code>s:</p>
+<pre><code class="language-typescript">type State = {
+  data: User[] | null;
+  loading: boolean;
+  error: string | null;
+};
+
+type Action =
+  | { type: &#x27;FETCH_START&#x27; }
+  | { type: &#x27;FETCH_SUCCESS&#x27;; payload: User[] }
+  | { type: &#x27;FETCH_ERROR&#x27;; error: string };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case &#x27;FETCH_START&#x27;:
+      return { ...state, loading: true, error: null };
+    case &#x27;FETCH_SUCCESS&#x27;:
+      return { data: action.payload, loading: false, error: null };
+    case &#x27;FETCH_ERROR&#x27;:
+      return { ...state, loading: false, error: action.error };
+  }
+}
+
+function UserList() {
+  const [state, dispatch] = useReducer(reducer, {
+    data: null, loading: false, error: null
+  });
+
+  useEffect(() =&gt; {
+    dispatch({ type: &#x27;FETCH_START&#x27; });
+    fetchUsers()
+      .then(data =&gt; dispatch({ type: &#x27;FETCH_SUCCESS&#x27;, payload: data }))
+      .catch(err =&gt; dispatch({ type: &#x27;FETCH_ERROR&#x27;, error: err.message }));
+  }, []);
+}
+</code></pre>
+<h2>Custom Hook Design Principles</h2>
+<h3>Principle 1: Single Responsibility</h3>
+<pre><code class="language-typescript">// Bad pattern — too many responsibilities
+function useEverything() {
+  const user = useUser();
+  const theme = useTheme();
+  const locale = useLocale();
+  // ...
+}
+
+// Good pattern — each with its own role
+function useUser(userId: string) { /* user data only */ }
+function useTheme() { /* theme only */ }
+</code></pre>
+<h3>Principle 2: Reusable Data Fetching Hooks</h3>
+<pre><code class="language-typescript">function useFetch&lt;T&gt;(url: string) {
+  const [state, dispatch] = useReducer(fetchReducer&lt;T&gt;, {
+    data: null, loading: true, error: null
+  });
+
+  useEffect(() =&gt; {
+    let cancelled = false;
+    
+    fetch(url)
+      .then(r =&gt; r.json())
+      .then(data =&gt; {
+        if (!cancelled) dispatch({ type: &#x27;SUCCESS&#x27;, data });
+      })
+      .catch(err =&gt; {
+        if (!cancelled) dispatch({ type: &#x27;ERROR&#x27;, error: err.message });
+      });
+
+    return () =&gt; { cancelled = true; };
+  }, [url]);
+
+  return state;
+}
+
+// Usage
+function UserProfile({ userId }: { userId: string }) {
+  const { data: user, loading, error } = useFetch&lt;User&gt;(`/api/users/${userId}`);
+  
+  if (loading) return &lt;Spinner /&gt;;
+  if (error) return &lt;Error message={error} /&gt;;
+  return &lt;div&gt;{user?.name}&lt;/div&gt;;
+}
+</code></pre>
+<h3>Principle 3: Hook Composition</h3>
+<pre><code class="language-typescript">function useUserWithPosts(userId: string) {
+  const { data: user } = useFetch&lt;User&gt;(`/api/users/${userId}`);
+  const { data: posts } = useFetch&lt;Post[]&gt;(
+    user ? `/api/users/${user.id}/posts` : null
+  );
+  
+  return { user, posts };
+}
+</code></pre>
+<h2>Two Uses of useRef</h2>
+<h3>1. DOM Reference</h3>
+<pre><code class="language-tsx">function FocusInput() {
+  const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+  
+  return (
+    &amp;lt;&gt;
+      &lt;input ref={inputRef} /&gt;
+      &lt;button onClick={() =&gt; inputRef.current?.focus()}&gt;
+        Focus
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<h3>2. Storing Values Without Triggering Re-renders</h3>
+<pre><code class="language-tsx">function Timer() {
+  const [seconds, setSeconds] = useState(0);
+  const timerRef = useRef&lt;number | null&gt;(null); // doesn&#x27;t cause re-renders
+  
+  const start = () =&gt; {
+    timerRef.current = window.setInterval(() =&gt; {
+      setSeconds(s =&gt; s + 1);
+    }, 1000);
+  };
+  
+  const stop = () =&gt; {
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+  
+  return &lt;div&gt;{seconds}s &lt;button onClick={start}&gt;Start&lt;/button&gt; &lt;button onClick={stop}&gt;Stop&lt;/button&gt;&lt;/div&gt;;
+}
+</code></pre>
+<h2>Performance Optimization Checklist</h2>
+<ul>
+<li>[ ] Use <code>useCallback</code> for functions passed to <code>memo()</code>-wrapped components</li>
+<li>[ ] Cache expensive computation results with <code>useMemo</code></li>
+<li>[ ] Check reference equality when putting arrays/objects in dependency arrays</li>
+<li>[ ] Include functions defined inside <code>useEffect</code> in dependencies</li>
+<li>[ ] Identify unnecessary renders with React DevTools Profiler</li>
+</ul>
+<p>The key to React Hooks is clearly understanding what each hook does and managing dependency arrays honestly. Enabling the <code>exhaustive-deps</code> rule from <code>eslint-plugin-react-hooks</code> catches missing dependencies at compile time.</p></article><nav aria-label="Post navigation" style="margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1fr;gap:24px"><a style="text-decoration:none" href="/blog/rfsoc-xilinx-intro"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">← Previous</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">Xilinx RFSoC Platform Overview</span></a><a style="text-decoration:none;text-align:right" href="/blog/prompt-engineering-production-tips-that-actually-work"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">Next →</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">10 Prompt Engineering Tips That Actually Work in Production</span></a></nav></div><aside class="toc-aside"></aside></div><style>
+          .post-layout {
+            grid-template-columns: 1fr 220px;
+          }
+          @media (max-width: 900px) {
+            .post-layout {
+              grid-template-columns: 1fr !important;
+            }
+            .toc-aside {
+              display: none;
+            }
+          }
+          .mdx-prose h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 2.5em 0 0.8em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 2em 0 0.6em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose p {
+            font-size: 16px;
+            line-height: 1.75;
+            margin: 0 0 1.25em;
+            color: rgba(255,255,255,0.82);
+          }
+          .mdx-prose a {
+            color: var(--color-primary, #0071e3);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
+          .mdx-prose pre {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+          }
+          .mdx-prose code {
+            font-family: &#x27;SF Mono&#x27;, &#x27;Fira Code&#x27;, monospace;
+            font-size: 13.5px;
+          }
+          .mdx-prose :not(pre) &gt; code {
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 13px;
+          }
+          .mdx-prose ul, .mdx-prose ol {
+            padding-left: 1.5em;
+            margin: 0 0 1.25em;
+          }
+          .mdx-prose li {
+            font-size: 16px;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 0.4em;
+          }
+          .mdx-prose blockquote {
+            border-left: 3px solid var(--color-primary, #0071e3);
+            margin: 1.5em 0;
+            padding: 12px 20px;
+            background: rgba(0,113,227,0.06);
+            border-radius: 0 8px 8px 0;
+          }
+          .mdx-prose blockquote p {
+            margin: 0;
+            color: rgba(255,255,255,0.7);
+          }
+          .mdx-prose img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1.5em 0;
+          }
+          .mdx-prose hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 2em 0;
+          }
+        </style></main></main><footer class="tile-parchment" style="padding-top:64px;padding-left:22px;padding-right:22px;padding-bottom:32px"><div style="max-width:980px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px;margin-bottom:48px" class="footer-grid"><div><p class="text-caption-strong" style="margin-bottom:12px">About</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/about">About me</a></li><li><a class="footer-link" href="/about#skills">Skills</a></li><li><a class="footer-link" href="/about#timeline">Timeline</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Projects</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/projects/openclaw-bridge">OpenClaw Bridge</a></li><li><a class="footer-link" href="/projects/allen-portfolio">Developer Portfolio</a></li><li><a class="footer-link" href="/projects/study-notes">Study Notes App</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Study</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/study?category=React">React</a></li><li><a class="footer-link" href="/study?category=Next.js">Next.js</a></li><li><a class="footer-link" href="/study?category=JavaScript">JavaScript</a></li><li><a class="footer-link" href="/study?category=CSS">CSS</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Contact</p><ul style="list-style:none;padding:0;margin:0"><li><a href="mailto:kjkim4911@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-link">Email</a></li><li><a href="https://github.com/Allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li><li><a href="https://www.linkedin.com/in/allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li></ul></div></div><div style="height:1px;background-color:var(--color-hairline);margin-bottom:24px"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Copyright 2026 Allen. All rights reserved.</p><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Built with Next.js and Tailwind CSS</p></div></div><style>
+        .footer-link {
+          color: var(--color-ink-muted-80);
+          display: block;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.12px;
+          line-height: 2.41;
+          text-decoration: none;
+        }
+
+        .footer-link:hover {
+          color: var(--color-primary) !important;
+        }
+
+        @media (max-width: 640px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style></footer><script src="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/755c628ae67952ee.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[2846,[],\"\"]\n5:I[3883,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\n6:I[2972,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"\"]\n8:I[5539,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\na:I[4707,[],\"\"]\nc:I[6423,[],\"\"]\nd:I[4152,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"LanguageProvider\"]\ne:I[9445,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"default\"]\n10:I[1060,[],\"\"]\n9:T9ee,"])</script><script>self.__next_f.push([1,"\n          .post-layout {\n            grid-template-columns: 1fr 220px;\n          }\n          @media (max-width: 900px) {\n            .post-layout {\n              grid-template-columns: 1fr !important;\n            }\n            .toc-aside {\n              display: none;\n            }\n          }\n          .mdx-prose h2 {\n            font-size: 24px;\n            font-weight: 700;\n            letter-spacing: -0.03em;\n            margin: 2.5em 0 0.8em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose h3 {\n            font-size: 18px;\n            font-weight: 600;\n            margin: 2em 0 0.6em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose p {\n            font-size: 16px;\n            line-height: 1.75;\n            margin: 0 0 1.25em;\n            color: rgba(255,255,255,0.82);\n          }\n          .mdx-prose a {\n            color: var(--color-primary, #0071e3);\n            text-decoration: underline;\n            text-underline-offset: 3px;\n          }\n          .mdx-prose pre {\n            background: rgba(255,255,255,0.05);\n            border: 1px solid rgba(255,255,255,0.08);\n            border-radius: 10px;\n            padding: 20px;\n            overflow-x: auto;\n            margin: 1.5em 0;\n          }\n          .mdx-prose code {\n            font-family: 'SF Mono', 'Fira Code', monospace;\n            font-size: 13.5px;\n          }\n          .mdx-prose :not(pre) \u003e code {\n            background: rgba(255,255,255,0.08);\n            border-radius: 4px;\n            padding: 2px 6px;\n            font-size: 13px;\n          }\n          .mdx-prose ul, .mdx-prose ol {\n            padding-left: 1.5em;\n            margin: 0 0 1.25em;\n          }\n          .mdx-prose li {\n            font-size: 16px;\n            line-height: 1.75;\n            color: rgba(255,255,255,0.82);\n            margin-bottom: 0.4em;\n          }\n          .mdx-prose blockquote {\n            border-left: 3px solid var(--color-primary, #0071e3);\n            margin: 1.5em 0;\n            padding: 12px 20px;\n            background: rgba(0,113,227,0.06);\n            border-radius: 0 8px 8px 0;\n          }\n          .mdx-prose blockquote p {\n            margin: 0;\n            color: rgba(255,255,255,0.7);\n          }\n          .mdx-prose img {\n            max-width: 100%;\n            border-radius: 10px;\n            margin: 1.5em 0;\n          }\n          .mdx-prose hr {\n            border: none;\n            border-top: 1px solid rgba(255,255,255,0.08);\n            margin: 2em 0;\n          }\n        "])</script><script>self.__next_f.push([1,"b:[\"slug\",\"react-hooks-deep-dive\",\"d\"]\n11:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L3\",null,{\"buildId\":\"tQQeqY93pI4KdkL63qoNf\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"blog\",\"react-hooks-deep-dive\"],\"initialTree\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"react-hooks-deep-dive\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"react-hooks-deep-dive\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"react-hooks-deep-dive\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",[[\"$\",\"$L5\",null,{}],[\"$\",\"main\",null,{\"style\":{\"paddingTop\":\"80px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"1100px\",\"margin\":\"0 auto\",\"padding\":\"48px 24px\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 220px\",\"gap\":\"64px\",\"alignItems\":\"start\"},\"className\":\"post-layout\",\"children\":[[\"$\",\"div\",null,{\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog\",\"style\":{\"display\":\"inline-flex\",\"alignItems\":\"center\",\"gap\":\"6px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.5)\",\"textDecoration\":\"none\",\"marginBottom\":\"32px\"},\"children\":\"← All posts\"}],[\"$\",\"header\",null,{\"style\":{\"marginBottom\":\"48px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"8px\",\"flexWrap\":\"wrap\",\"marginBottom\":\"16px\"},\"children\":[[\"$\",\"$L6\",\"study\",{\"href\":\"/blog/tag/study\",\"style\":{\"fontSize\":\"11px\",\"fontWeight\":500,\"color\":\"var(--color-primary, #0071e3)\",\"backgroundColor\":\"rgba(0,113,227,0.1)\",\"borderRadius\":\"6px\",\"padding\":\"3px 8px\",\"textDecoration\":\"none\"},\"children\":\"study\"}]]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"clamp(28px, 4vw, 44px)\",\"fontWeight\":700,\"letterSpacing\":\"-0.04em\",\"lineHeight\":1.15,\"margin\":\"0 0 20px\"},\"children\":\"React Hooks Deep Dive: Real-World Patterns and Pitfalls\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"12px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.4)\"},\"children\":[[\"$\",\"time\",null,{\"dateTime\":\"2026-05-15\",\"children\":\"May 15, 2026\"}],[\"$\",\"span\",null,{\"children\":\"·\"}],[\"$\",\"span\",null,{\"children\":\"5 min read\"}]]}]]}],[\"$\",\"article\",null,{\"className\":\"mdx-prose\",\"children\":\"$L7\"}],[\"$\",\"nav\",null,{\"aria-label\":\"Post navigation\",\"style\":{\"marginTop\":\"64px\",\"paddingTop\":\"32px\",\"borderTop\":\"1px solid rgba(255,255,255,0.08)\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 1fr\",\"gap\":\"24px\"},\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog/rfsoc-xilinx-intro\",\"style\":{\"textDecoration\":\"none\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"← Previous\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"Xilinx RFSoC Platform Overview\"}]]}],[\"$\",\"$L6\",null,{\"href\":\"/blog/prompt-engineering-production-tips-that-actually-work\",\"style\":{\"textDecoration\":\"none\",\"textAlign\":\"right\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"Next →\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"10 Prompt Engineering Tips That Actually Work in Production\"}]]}]]}]]}],[\"$\",\"aside\",null,{\"className\":\"toc-aside\",\"children\":[\"$\",\"$L8\",null,{}]}]]}],[\"$\",\"style\",null,{\"children\":\"$9\"}]]}]],null],null],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\",\"$b\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/755c628ae67952ee.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"className\":\"__variable_52456e\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[\"$\",\"$Ld\",null,{\"children\":[[\"$\",\"$Le\",null,{}],[\"$\",\"main\",null,{\"className\":\"pt-nav\",\"children\":[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"section\",null,{\"style\":{\"minHeight\":\"calc(100vh - 44px)\",\"backgroundColor\":\"#f5f5f7\",\"display\":\"flex\",\"alignItems\":\"center\",\"justifyContent\":\"center\",\"padding\":\"80px 22px\",\"textAlign\":\"center\"},\"aria-label\":\"Page not found\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"480px\"},\"children\":[[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.43\",\"color\":\"#7a7a7a\",\"textTransform\":\"uppercase\",\"letterSpacing\":\"0.08em\",\"marginBottom\":\"16px\"},\"children\":\"404\"}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"40px\",\"fontWeight\":\"600\",\"lineHeight\":\"1.10\",\"letterSpacing\":\"0\",\"color\":\"#1d1d1f\",\"marginBottom\":\"16px\"},\"children\":\"Page not found.\"}],[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"17px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.47\",\"letterSpacing\":\"-0.374px\",\"color\":\"#7a7a7a\",\"marginBottom\":\"40px\"},\"children\":\"The page you are looking for does not exist or has been moved.\"}],[\"$\",\"$L6\",null,{\"href\":\"/\",\"className\":\"btn-primary\",\"children\":\"Go home\"}]]}]}],\"notFoundStyles\":[]}]}],[\"$\",\"footer\",null,{\"className\":\"tile-parchment\",\"style\":{\"paddingTop\":\"64px\",\"paddingLeft\":\"22px\",\"paddingRight\":\"22px\",\"paddingBottom\":\"32px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"980px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"grid\",\"gridTemplateColumns\":\"repeat(4, 1fr)\",\"gap\":\"24px\",\"marginBottom\":\"48px\"},\"className\":\"footer-grid\",\"children\":[[\"$\",\"div\",\"About\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"About\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"About me\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about\",\"className\":\"footer-link\",\"children\":\"About me\"}]}],[\"$\",\"li\",\"Skills\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#skills\",\"className\":\"footer-link\",\"children\":\"Skills\"}]}],[\"$\",\"li\",\"Timeline\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#timeline\",\"className\":\"footer-link\",\"children\":\"Timeline\"}]}]]}]]}],[\"$\",\"div\",\"Projects\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Projects\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"OpenClaw Bridge\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/openclaw-bridge\",\"className\":\"footer-link\",\"children\":\"OpenClaw Bridge\"}]}],[\"$\",\"li\",\"Developer Portfolio\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/allen-portfolio\",\"className\":\"footer-link\",\"children\":\"Developer Portfolio\"}]}],[\"$\",\"li\",\"Study Notes App\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/study-notes\",\"className\":\"footer-link\",\"children\":\"Study Notes App\"}]}]]}]]}],[\"$\",\"div\",\"Study\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Study\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"React\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=React\",\"className\":\"footer-link\",\"children\":\"React\"}]}],[\"$\",\"li\",\"Next.js\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=Next.js\",\"className\":\"footer-link\",\"children\":\"Next.js\"}]}],[\"$\",\"li\",\"JavaScript\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=JavaScript\",\"className\":\"footer-link\",\"children\":\"JavaScript\"}]}],[\"$\",\"li\",\"CSS\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=CSS\",\"className\":\"footer-link\",\"children\":\"CSS\"}]}]]}]]}],[\"$\",\"div\",\"Contact\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Contact\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"Email\",{\"children\":[\"$\",\"a\",null,{\"href\":\"mailto:kjkim4911@gmail.com\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"Email\"}]}],[\"$\",\"li\",\"GitHub\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://github.com/Allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"GitHub\"}]}],[\"$\",\"li\",\"LinkedIn\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://www.linkedin.com/in/allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"LinkedIn\"}]}]]}]]}]]}],[\"$\",\"div\",null,{\"style\":{\"height\":\"1px\",\"backgroundColor\":\"var(--color-hairline)\",\"marginBottom\":\"24px\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"justifyContent\":\"space-between\",\"alignItems\":\"center\",\"flexWrap\":\"wrap\",\"gap\":\"8px\"},\"children\":[[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Copyright 2026 Allen. All rights reserved.\"}],[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Built with Next.js and Tailwind CSS\"}]]}]]}],[\"$\",\"style\",null,{\"children\":\"\\n        .footer-link {\\n          color: var(--color-ink-muted-80);\\n          display: block;\\n          font-size: 12px;\\n          font-weight: 400;\\n          letter-spacing: -0.12px;\\n          line-height: 2.41;\\n          text-decoration: none;\\n        }\\n\\n        .footer-link:hover {\\n          color: var(--color-primary) !important;\\n        }\\n\\n        @media (max-width: 640px) {\\n          .footer-grid {\\n            grid-template-columns: repeat(2, 1fr) !important;\\n          }\\n        }\\n\\n        @media (max-width: 400px) {\\n          .footer-grid {\\n            grid-template-columns: 1fr !important;\\n          }\\n        }\\n      \"}]]}]]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$Lf\"],\"globalErrorComponent\":\"$10\",\"missingSlots\":\"$W11\"}]\n"])</script><script>self.__next_f.push([1,"7:[[\"$\",\"p\",null,{\"children\":\"React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.\"}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"useState Pitfalls\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Pitfall 1: Partial Update of Object State\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"// Wrong pattern — other fields disappear\\nconst [user, setUser] = useState({ name: 'Allen', age: 30 });\\nsetUser({ name: 'Kim Allen' }); // age disappears!\\n\\n// Correct pattern\\nsetUser(prev =\u003e ({ ...prev, name: 'Kim Allen' }));\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Pitfall 2: Stale Closure Values\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"// Problem: count is always 0\\nconst [count, setCount] = useState(0);\\nuseEffect(() =\u003e {\\n  const timer = setInterval(() =\u003e {\\n    setCount(count + 1); // count is always the initial value 0\\n  }, 1000);\\n  return () =\u003e clearInterval(timer);\\n}, []); // empty dependency array — count never updates\\n\\n// Fix: functional update\\nsetCount(prev =\u003e prev + 1);\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Pitfall 3: Expensive Initial State\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"// heavyComputation runs on every render\\nconst [data, setData] = useState(heavyComputation());\\n\\n// Pass initializer function — runs only once\\nconst [data, setData] = useState(() =\u003e heavyComputation());\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"useEffect Comprehensive Guide\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Dependency Array Rules\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"useEffect(() =\u003e { /* runs on every render */ });\\nuseEffect(() =\u003e { /* runs once on mount */ }, []);\\nuseEffect(() =\u003e { /* runs when a or b changes */ }, [a, b]);\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"When Cleanup is Needed\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"useEffect(() =\u003e {\\n  const controller = new AbortController();\\n  \\n  fetch('/api/data', { signal: controller.signal })\\n    .then(r =\u003e r.json())\\n    .then(setData)\\n    .catch(err =\u003e {\\n      if (err.name !== 'AbortError') console.error(err);\\n    });\\n\\n  return () =\u003e controller.abort(); // cancel request on unmount\\n}, []);\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Event Listener Cleanup\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"useEffect(() =\u003e {\\n  const handleResize = () =\u003e setWidth(window.innerWidth);\\n  window.addEventListener('resize', handleResize);\\n  return () =\u003e window.removeEventListener('resize', handleResize);\\n}, []);\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Using useCallback and useMemo Correctly\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"useCallback — Stabilize Function References\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"// Unnecessary useCallback — only overhead for simple functions\\nconst handleClick = useCallback(() =\u003e setCount(c =\u003e c + 1), []);\\n\\n// Needed when: function passed as props to a child component\\nconst ExpensiveChild = memo(({ onSubmit }) =\u003e { /* ... */ });\\n\\nfunction Parent() {\\n  const handleSubmit = useCallback((data) =\u003e {\\n    submitToApi(data);\\n  }, []); // no dependencies if submitToApi is stable\\n  \\n  return \u003cExpensiveChild onSubmit={handleSubmit} /\u003e;\\n}\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"useMemo — Cache Computed Results\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-jsx\",\"children\":\"// Memoize only expensive computations\\nconst sortedList = useMemo(\\n  () =\u003e list.slice().sort((a, b) =\u003e a.date - b.date),\\n  [list]\\n);\\n\\n// Unnecessary useMemo — just use count * 2 directly\\nconst doubled = useMemo(() =\u003e count * 2, [count]);\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Managing Complex State with useReducer\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"Consider \",[\"$\",\"code\",null,{\"children\":\"useReducer\"}],\" when you have 3 or more related \",[\"$\",\"code\",null,{\"children\":\"useState\"}],\"s:\"]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-typescript\",\"children\":\"type State = {\\n  data: User[] | null;\\n  loading: boolean;\\n  error: string | null;\\n};\\n\\ntype Action =\\n  | { type: 'FETCH_START' }\\n  | { type: 'FETCH_SUCCESS'; payload: User[] }\\n  | { type: 'FETCH_ERROR'; error: string };\\n\\nfunction reducer(state: State, action: Action): State {\\n  switch (action.type) {\\n    case 'FETCH_START':\\n      return { ...state, loading: true, error: null };\\n    case 'FETCH_SUCCESS':\\n      return { data: action.payload, loading: false, error: null };\\n    case 'FETCH_ERROR':\\n      return { ...state, loading: false, error: action.error };\\n  }\\n}\\n\\nfunction UserList() {\\n  const [state, dispatch] = useReducer(reducer, {\\n    data: null, loading: false, error: null\\n  });\\n\\n  useEffect(() =\u003e {\\n    dispatch({ type: 'FETCH_START' });\\n    fetchUsers()\\n      .then(data =\u003e dispatch({ type: 'FETCH_SUCCESS', payload: data }))\\n      .catch(err =\u003e dispatch({ type: 'FETCH_ERROR', error: err.message }));\\n  }, []);\\n}\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Custom Hook Design Principles\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Principle 1: Single Responsibility\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-typescript\",\"children\":\"// Bad pattern — too many responsibilities\\nfunction useEverything() {\\n  const user = useUser();\\n  const theme = useTheme();\\n  const locale = useLocale();\\n  // ...\\n}\\n\\n// Good pattern — each with its own role\\nfunction useUser(userId: string) { /* user data only */ }\\nfunction useTheme() { /* theme only */ }\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Principle 2: Reusable Data Fetching Hooks\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-typescript\",\"children\":\"function useFetch\u003cT\u003e(url: string) {\\n  const [state, dispatch] = useReducer(fetchReducer\u003cT\u003e, {\\n    data: null, loading: true, error: null\\n  });\\n\\n  useEffect(() =\u003e {\\n    let cancelled = false;\\n    \\n    fetch(url)\\n      .then(r =\u003e r.json())\\n      .then(data =\u003e {\\n        if (!cancelled) dispatch({ type: 'SUCCESS', data });\\n      })\\n      .catch(err =\u003e {\\n        if (!cancelled) dispatch({ type: 'ERROR', error: err.message });\\n      });\\n\\n    return () =\u003e { cancelled = true; };\\n  }, [url]);\\n\\n  return state;\\n}\\n\\n// Usage\\nfunction UserProfile({ userId }: { userId: string }) {\\n  const { data: user, loading, error } = useFetch\u003cUser\u003e(`/api/users/${userId}`);\\n  \\n  if (loading) return \u003cSpinner /\u003e;\\n  if (error) return \u003cError message={error} /\u003e;\\n  return \u003cdiv\u003e{user?.name}\u003c/div\u003e;\\n}\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Principle 3: Hook Composition\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-typescript\",\"children\":\"function useUserWithPosts(userId: string) {\\n  const { data: user } = useFetch\u003cUser\u003e(`/api/users/${userId}`);\\n  const { data: posts } = useFetch\u003cPost[]\u003e(\\n    user ? `/api/users/${user.id}/posts` : null\\n  );\\n  \\n  return { user, posts };\\n}\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Two Uses of useRef\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"1. DOM Reference\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-tsx\",\"children\":\"function FocusInput() {\\n  const inputRef = useRef\u003cHTMLInputElement\u003e(null);\\n  \\n  return (\\n    \u0026lt;\u003e\\n      \u003cinput ref={inputRef} /\u003e\\n      \u003cbutton onClick={() =\u003e inputRef.current?.focus()}\u003e\\n        Focus\\n      \u003c/button\u003e\\n    \u003c/\u003e\\n  );\\n}\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"2. Storing Values Without Triggering Re-renders\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-tsx\",\"children\":\"function Timer() {\\n  const [seconds, setSeconds] = useState(0);\\n  const timerRef = useRef\u003cnumber | null\u003e(null); // doesn't cause re-renders\\n  \\n  const start = () =\u003e {\\n    timerRef.current = window.setInterval(() =\u003e {\\n      setSeconds(s =\u003e s + 1);\\n    }, 1000);\\n  };\\n  \\n  const stop = () =\u003e {\\n    if (timerRef.current) clearInterval(timerRef.current);\\n  };\\n  \\n  return \u003cdiv\u003e{seconds}s \u003cbutton onClick={start}\u003eStart\u003c/button\u003e \u003cbutton onClick={stop}\u003eStop\u003c/button\u003e\u003c/div\u003e;\\n}\\n\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Performance Optimization Checklist\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"[ ] Use \",[\"$\",\"code\",null,{\"children\":\"useCallback\"}],\" for functions passed to \",[\"$\",\"code\",null,{\"children\":\"memo()\"}],\"-wrapped components\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"[ ] Cache expensive computation results with \",[\"$\",\"code\",null,{\"children\":\"useMemo\"}]]}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"[ ] Check reference equality when putting arrays/objects in dependency arrays\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"[ ] Include functions defined inside \",[\"$\",\"code\",null,{\"children\":\"useEffect\"}],\" in dependencies\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"[ ] Identify unnecessary renders with React DevTools Profiler\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"The key to React Hooks is clearly understanding what each hook does and managing dependency arrays honestly. Enabling the \",[\"$\",\"code\",null,{\"children\":\"exhaustive-deps\"}],\" rule from \",[\"$\",\"code\",null,{\"children\":\"eslint-plugin-react-hooks\"}],\" catches missing dependencies at compile time.\"]}]]\n"])</script><script>self.__next_f.push([1,"f:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"React Hooks Deep Dive: Real-World Patterns and Pitfalls — Allen | Allen\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"frontend developer,React,Next.js,Tailwind CSS,portfolio\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"7\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"React Hooks Deep Dive: Real-World Patterns and Pitfalls\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"11\",{\"property\":\"article:published_time\",\"content\":\"2026-05-15\"}],[\"$\",\"meta\",\"12\",{\"property\":\"article:tag\",\"content\":\"study\"}],[\"$\",\"meta\",\"13\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:title\",\"content\":\"React Hooks Deep Dive: Real-World Patterns and Pitfalls\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:description\",\"content\":\"React Hooks manage state and side effects in functional components. Beyond basic usage, this post addresses real-world problems encountered in performance optimization and complex state management.\"}],[\"$\",\"meta\",\"16\",{\"name\":\"next-size-adjust\"}]]\n4:null\n"])</script></body></html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="en" class="__variable_52456e"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/755c628ae67952ee.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js"/><script src="/_next/static/chunks/fd9d1056-a9394cb017d46d98.js" async=""></script><script src="/_next/static/chunks/117-118f6a419bea4402.js" async=""></script><script src="/_next/static/chunks/main-app-ffa6af37ba9353a2.js" async=""></script><script src="/_next/static/chunks/972-5bbca60610fae4e0.js" async=""></script><script src="/_next/static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js" async=""></script><script src="/_next/static/chunks/app/layout-c52e51a74c5d6c63.js" async=""></script><title>6G NTN (Non-Terrestrial Network) Overview — Allen | Allen</title><meta name="description" content="NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te"/><meta name="author" content="Allen"/><meta name="keywords" content="frontend developer,React,Next.js,Tailwind CSS,portfolio"/><meta name="creator" content="Allen"/><meta name="robots" content="index, follow"/><meta property="og:title" content="6G NTN (Non-Terrestrial Network) Overview"/><meta property="og:description" content="NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2026-05-15"/><meta property="article:tag" content="study"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="6G NTN (Non-Terrestrial Network) Overview"/><meta name="twitter:description" content="NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te"/><meta name="next-size-adjust"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="font-sans antialiased"><nav role="navigation" aria-label="Global navigation" style="position:fixed;top:0;left:0;right:0;z-index:50;height:44px;background-color:var(--color-surface-black);backdrop-filter:none;-webkit-backdrop-filter:none"><div style="max-width:1440px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><a aria-label="Allen Home" style="color:var(--color-on-dark);font-size:17px;font-weight:600;letter-spacing:-0.374px;line-height:1;text-decoration:none;flex-shrink:0" href="/">Allen</a><div aria-hidden="false" style="display:flex;align-items:center;gap:28px" class="hidden-mobile"><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/about">About</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/projects">Projects</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/books">Books</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/blog">Blog</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/study">Study</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/contact">Contact</a></div><div style="display:flex;align-items:center;gap:16px"><button aria-label="Switch to dark mode" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="dark-mode-toggle">☽</button><button aria-label="Switch to Korean (KO)" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="lang-toggle">KO</button><a style="background-color:var(--color-primary);color:var(--color-on-dark);font-size:12px;font-weight:400;letter-spacing:-0.12px;padding:7px 14px;border-radius:9999px;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:center" class="hire-cta" href="/contact">Hire me</a><button aria-label="Open menu" aria-expanded="false" class="hamburger-btn" style="background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px"><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span></button></div></div></nav><style>
+        @media (min-width: 835px) {
+          .hamburger-btn { display: none; }
+        }
+
+        @media (max-width: 834px) {
+          .hidden-mobile {
+            display: none !important;
+          }
+          .hamburger-btn {
+            display: flex;
+          }
+          .mobile-menu {
+            display: block !important;
+          }
+        }
+
+        .nav-desktop-link:hover {
+          color: var(--color-on-dark) !important;
+        }
+
+        .hire-cta:active {
+          transform: scale(0.95);
+        }
+      </style><main class="pt-nav"><div style="position:fixed;top:44px;left:0;right:0;height:2px;z-index:40;background-color:rgba(255,255,255,0.06)"><div style="height:100%;width:0%;background-color:var(--color-primary, #0071e3);transition:width 0.1s linear"></div></div><main style="padding-top:80px;min-height:100vh"><div style="max-width:1100px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 220px;gap:64px;align-items:start" class="post-layout"><div><a style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:32px" href="/blog">← All posts</a><header style="margin-bottom:48px"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><a style="font-size:11px;font-weight:500;color:var(--color-primary, #0071e3);background-color:rgba(0,113,227,0.1);border-radius:6px;padding:3px 8px;text-decoration:none" href="/blog/tag/study">study</a></div><h1 style="font-size:clamp(28px, 4vw, 44px);font-weight:700;letter-spacing:-0.04em;line-height:1.15;margin:0 0 20px">6G NTN (Non-Terrestrial Network) Overview</h1><div style="display:flex;gap:12px;font-size:13px;color:rgba(255,255,255,0.4)"><time dateTime="2026-05-15">May 15, 2026</time><span>·</span><span>6 min read</span></div></header><article class="mdx-prose"><h2>Overview</h2>
+<p>NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace terrestrial networks. NTN standardization began with 5G NR Rel-17, and in 6G, the complete integration of terrestrial and non-terrestrial networks (Unified Terrestrial and Non-Terrestrial Network) is a core objective.</p>
+<hr/>
+<h2>NTN Platform Classification</h2>
+<p>| Platform | Altitude | Coverage Radius | One-Way Propagation Delay |
+|----------|----------|-----------------|--------------------------|
+| LEO Satellite | 200 ~ 2,000 km | ~1,000 km | 1 ~ 10 ms |
+| MEO Satellite | 2,000 ~ 35,786 km | ~5,000 km | 10 ~ 100 ms |
+| GEO Satellite | 35,786 km | ~6,000 km | ~270 ms |
+| HAPS | 20 ~ 50 km (stratosphere) | ~200 km | &lt; 1 ms |
+| UAV / Drone | Below a few hundred meters | A few km | Negligible |</p>
+<hr/>
+<h2>6G NTN Architecture</h2>
+<pre><code>          ┌──────────────────────────────────────────────┐
+          │              6G Core Network (5GC/6GC)        │
+          └──────────┬──────────────────┬────────────────┘
+                     │                  │
+           ┌─────────▼────────┐  ┌──────▼──────────────┐
+           │  Terrestrial RAN │  │   NTN RAN (gNB-sat) │
+           │  (Ground BSs)    │  │  LEO / MEO / GEO    │
+           └─────────┬────────┘  └──────┬──────────────┘
+                     │                  │
+             ┌───────▼──────────────────▼───────┐
+             │         UE / IoT Terminal          │
+             │  (Smartphones, Ships, Aircraft,    │
+             │   IoT devices, etc.)               │
+             └───────────────────────────────────┘
+</code></pre>
+<h3>Key Interfaces</h3>
+<ul>
+<li><strong>Uu (Air Interface)</strong>: UE ↔ Satellite gNB</li>
+<li><strong>F1 / E1</strong>: DU-CU split architecture (processing can be centralized on ground)</li>
+<li><strong>Feeder Link</strong>: Satellite ↔ Ground Station (Gateway)</li>
+<li><strong>Service Link</strong>: Satellite ↔ UE (Terminal)</li>
+<li><strong>ISL (Inter-Satellite Link)</strong>: Direct satellite-to-satellite communication (Starlink style)</li>
+</ul>
+<hr/>
+<h2>Key Technical Challenges</h2>
+<h3>1. Large Propagation Delay</h3>
+<p>LEO one-way delay can reach up to ~10 ms; GEO is ~270 ms, resulting in much larger RTTs compared to terrestrial networks.</p>
+<p><strong>Impact and Countermeasures:</strong></p>
+<pre><code>Problem: HARQ Stop-and-Wait → significant throughput drop
+  └─ LEO (600km) RTT ≈ 4 ms × 2 = ~8 ms
+  └─ GEO RTT ≈ 270 ms × 2 = ~540 ms
+
+Countermeasures:
+  ① Disable HARQ (Rel-17 NTN: extended HARQ retransmission count)
+  ② Allow Extended HARQ Round-Trip Time
+  ③ Delegate retransmission to upper layer ARQ (RLC AM)
+</code></pre>
+<h3>2. Doppler Shift</h3>
+<p>LEO satellites travel at approximately 7.5 km/s, causing frequency shifts of up to tens of kHz.</p>
+<pre><code class="language-python"># Doppler shift calculation example
+def doppler_shift(freq_hz, velocity_ms, angle_deg):
+    &quot;&quot;&quot;
+    freq_hz    : carrier frequency (Hz)
+    velocity_ms: satellite velocity (m/s)
+    angle_deg  : angle between satellite motion and line-of-sight
+    &quot;&quot;&quot;
+    import math
+    c = 3e8  # speed of light (m/s)
+    theta = math.radians(angle_deg)
+    delta_f = freq_hz * (velocity_ms / c) * math.cos(theta)
+    return delta_f
+
+# LEO satellite (7500 m/s), Ka-band (20 GHz), head-on pass
+shift = doppler_shift(20e9, 7500, 0)
+print(f&quot;Max Doppler shift: {shift/1e3:.1f} kHz&quot;)  # ≈ 500 kHz
+</code></pre>
+<p><strong>Countermeasures:</strong></p>
+<ul>
+<li>UE-side or network-side pre-compensation</li>
+<li>Prediction-based correction using satellite ephemeris</li>
+<li>Wide guard-band design</li>
+</ul>
+<h3>3. Timing Advance (TA)</h3>
+<p>TA values hundreds of times larger than terrestrial systems are required.</p>
+<p>| System | Max TA Range |
+|--------|-------------|
+| Terrestrial LTE/NR | ~0.67 ms (up to ~100 km) |
+| LEO NTN (Rel-17) | ~27 ms (600 km altitude) |
+| GEO NTN | ~541 ms |</p>
+<ul>
+<li>3GPP Rel-17: Extended TA range (up to 66,460 Tc steps → extended for NTN)</li>
+<li>UE self pre-compensation based on GNSS introduced</li>
+</ul>
+<hr/>
+<h2>3GPP NTN Standardization Roadmap</h2>
+<pre><code>Rel-15 (2019) ─┐
+               │  NTN study started (TR 38.811)
+Rel-16 (2020) ─┤
+               │  NTN channel models, system parameter study
+Rel-17 (2022) ─┤
+               │  ★ First NTN standardization complete
+               │  - 5G NR NTN (satellite)
+               │  - IoT NTN (NB-IoT / eMTC)
+               │  - HARQ/TA/Doppler handling
+Rel-18 (2024) ─┤
+               │  NTN Enhancement
+               │  - UE Direct-to-Satellite (D2S)
+               │  - Mobility/handover improvement
+               │  - Multi-beam support
+Rel-19 / 6G ──┘
+               ★ Full TN/NTN integration (Unified Network)
+               - AI-based channel prediction
+               - Sub-THz / THz band exploration
+               - Intelligent Inter-Satellite Links (ISL)
+</code></pre>
+<hr/>
+<h2>6G NTN Key Technologies</h2>
+<h3>1. Integrated Access and Backhaul (IAB) in NTN</h3>
+<p>Architecture combining terrestrial base stations and satellites for wireless backhaul.</p>
+<pre><code>[GEO/MEO Satellite]
+     │ Backhaul link (Feeder)
+     ▼
+[LEO Satellite Constellation — ISL]
+     │ Service link
+     ▼
+[HAPS / UAV]
+     │ Last segment
+     ▼
+[Ground UE / IoT Terminal]
+</code></pre>
+<h3>2. AI/ML-Based Satellite Channel Estimation</h3>
+<pre><code class="language-python"># Conceptual AI channel prediction flow
+class NTNChannelPredictor:
+    &quot;&quot;&quot;
+    Satellite ephemeris + measurement feedback → predict next slot channel
+    &quot;&quot;&quot;
+    def predict(self, ephemeris, prev_csi, weather_info):
+        # 1. Pre-compute Doppler/delay from orbit data
+        predicted_delay = self._calc_propagation(ephemeris)
+        predicted_doppler = self._calc_doppler(ephemeris)
+
+        # 2. Predict channel coefficients with ML model
+        channel_coeff = self.model.forward(
+            prev_csi, predicted_delay, predicted_doppler
+        )
+        return channel_coeff
+</code></pre>
+<h3>3. Multi-Beam / Spot-Beam Technology</h3>
+<pre><code>Satellite antenna coverage example (LEO, 600 km altitude)
+
+     Satellite
+      ↓↓↓ (multi spot-beams)
+  ┌───┬───┬───┐
+  │ 1 │ 2 │ 3 │  ← Each beam: ~100 km diameter
+  ├───┼───┼───┤
+  │ 4 │ 5 │ 6 │
+  ├───┼───┼───┤
+  │ 7 │ 8 │ 9 │
+  └───┴───┴───┘
+
+- Frequency Reuse: minimize interference between adjacent beams
+- Beam Hopping: dynamically allocate beam resources based on demand
+- Digital Beamforming: flexible beam formation based on RFSoC
+</code></pre>
+<hr/>
+<h2>NTN vs Terrestrial Network Comparison</h2>
+<p>| Item | Terrestrial 5G | LEO NTN | GEO NTN |
+|------|---------------|---------|---------|
+| Coverage | Limited (urban-centric) | Near-global | Global |
+| Propagation Delay | &lt; 1 ms | 1~10 ms | ~270 ms |
+| Throughput | Several Gbps | Hundreds Mbps~Gbps | Tens~Hundreds Mbps |
+| Handover | Rare and fast | Very frequent (every seconds) | Rare |
+| Doppler | Negligible | Very large | Small |
+| Deployment Cost | High (dense areas) | Low (wide area) | Low (global) |
+| Disaster/Maritime/Aviation | Unavailable | Available | Available |</p>
+<hr/>
+<h2>Military Perspective (Military NTN)</h2>
+<p>6G NTN is emerging as a key technology not only for civilian but also military communications.</p>
+<p>| Element | Description |
+|---------|-------------|
+| <strong>LEO Constellation</strong> | Lower latency and higher survivability vs. single GEO |
+| <strong>Anti-Jamming</strong> | Frequency hopping + spread spectrum + AI-based adaptive waveform |
+| <strong>LPI/LPD</strong> | Ultra-narrow spot beams, short burst transmissions |
+| <strong>Direct Terminal Access</strong> | Tactical terminals ↔ direct satellite access (no ground infrastructure) |
+| <strong>ISL Utilization</strong> | Satellite-to-satellite data relay without ground gateways |</p>
+<hr/>
+<h2>Reference Standards and Documents</h2>
+<ul>
+<li>3GPP TR 38.811 — Study on NR NTN</li>
+<li>3GPP TS 38.300 — NR Overall Description (NTN additions in Rel-17)</li>
+<li>3GPP TR 38.821 — Solutions for NR to support NTN</li>
+<li>ITU-R M.2514 — IMT-2020 Satellite Component</li>
+<li>ETSI TR 103 611 — 5G NTN Use Cases</li>
+</ul></article><nav aria-label="Post navigation" style="margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1fr;gap:24px"><a style="text-decoration:none" href="/blog/ai-agent-evaluation"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">← Previous</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">Evaluating AI Agent Systems: Metrics and Failure Modes</span></a><a style="text-decoration:none;text-align:right" href="/blog/5g-system-architecture"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">Next →</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">5G System Architecture Analysis</span></a></nav></div><aside class="toc-aside"></aside></div><style>
+          .post-layout {
+            grid-template-columns: 1fr 220px;
+          }
+          @media (max-width: 900px) {
+            .post-layout {
+              grid-template-columns: 1fr !important;
+            }
+            .toc-aside {
+              display: none;
+            }
+          }
+          .mdx-prose h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 2.5em 0 0.8em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 2em 0 0.6em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose p {
+            font-size: 16px;
+            line-height: 1.75;
+            margin: 0 0 1.25em;
+            color: rgba(255,255,255,0.82);
+          }
+          .mdx-prose a {
+            color: var(--color-primary, #0071e3);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
+          .mdx-prose pre {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+          }
+          .mdx-prose code {
+            font-family: &#x27;SF Mono&#x27;, &#x27;Fira Code&#x27;, monospace;
+            font-size: 13.5px;
+          }
+          .mdx-prose :not(pre) &gt; code {
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 13px;
+          }
+          .mdx-prose ul, .mdx-prose ol {
+            padding-left: 1.5em;
+            margin: 0 0 1.25em;
+          }
+          .mdx-prose li {
+            font-size: 16px;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 0.4em;
+          }
+          .mdx-prose blockquote {
+            border-left: 3px solid var(--color-primary, #0071e3);
+            margin: 1.5em 0;
+            padding: 12px 20px;
+            background: rgba(0,113,227,0.06);
+            border-radius: 0 8px 8px 0;
+          }
+          .mdx-prose blockquote p {
+            margin: 0;
+            color: rgba(255,255,255,0.7);
+          }
+          .mdx-prose img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1.5em 0;
+          }
+          .mdx-prose hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 2em 0;
+          }
+        </style></main></main><footer class="tile-parchment" style="padding-top:64px;padding-left:22px;padding-right:22px;padding-bottom:32px"><div style="max-width:980px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px;margin-bottom:48px" class="footer-grid"><div><p class="text-caption-strong" style="margin-bottom:12px">About</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/about">About me</a></li><li><a class="footer-link" href="/about#skills">Skills</a></li><li><a class="footer-link" href="/about#timeline">Timeline</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Projects</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/projects/openclaw-bridge">OpenClaw Bridge</a></li><li><a class="footer-link" href="/projects/allen-portfolio">Developer Portfolio</a></li><li><a class="footer-link" href="/projects/study-notes">Study Notes App</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Study</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/study?category=React">React</a></li><li><a class="footer-link" href="/study?category=Next.js">Next.js</a></li><li><a class="footer-link" href="/study?category=JavaScript">JavaScript</a></li><li><a class="footer-link" href="/study?category=CSS">CSS</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Contact</p><ul style="list-style:none;padding:0;margin:0"><li><a href="mailto:kjkim4911@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-link">Email</a></li><li><a href="https://github.com/Allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li><li><a href="https://www.linkedin.com/in/allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li></ul></div></div><div style="height:1px;background-color:var(--color-hairline);margin-bottom:24px"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Copyright 2026 Allen. All rights reserved.</p><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Built with Next.js and Tailwind CSS</p></div></div><style>
+        .footer-link {
+          color: var(--color-ink-muted-80);
+          display: block;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.12px;
+          line-height: 2.41;
+          text-decoration: none;
+        }
+
+        .footer-link:hover {
+          color: var(--color-primary) !important;
+        }
+
+        @media (max-width: 640px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style></footer><script src="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/755c628ae67952ee.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[2846,[],\"\"]\n5:I[3883,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\n6:I[2972,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"\"]\n8:I[5539,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\na:I[4707,[],\"\"]\nc:I[6423,[],\"\"]\nd:I[4152,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"LanguageProvider\"]\ne:I[9445,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"default\"]\n10:I[1060,[],\"\"]\n9:T9ee,"])</script><script>self.__next_f.push([1,"\n          .post-layout {\n            grid-template-columns: 1fr 220px;\n          }\n          @media (max-width: 900px) {\n            .post-layout {\n              grid-template-columns: 1fr !important;\n            }\n            .toc-aside {\n              display: none;\n            }\n          }\n          .mdx-prose h2 {\n            font-size: 24px;\n            font-weight: 700;\n            letter-spacing: -0.03em;\n            margin: 2.5em 0 0.8em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose h3 {\n            font-size: 18px;\n            font-weight: 600;\n            margin: 2em 0 0.6em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose p {\n            font-size: 16px;\n            line-height: 1.75;\n            margin: 0 0 1.25em;\n            color: rgba(255,255,255,0.82);\n          }\n          .mdx-prose a {\n            color: var(--color-primary, #0071e3);\n            text-decoration: underline;\n            text-underline-offset: 3px;\n          }\n          .mdx-prose pre {\n            background: rgba(255,255,255,0.05);\n            border: 1px solid rgba(255,255,255,0.08);\n            border-radius: 10px;\n            padding: 20px;\n            overflow-x: auto;\n            margin: 1.5em 0;\n          }\n          .mdx-prose code {\n            font-family: 'SF Mono', 'Fira Code', monospace;\n            font-size: 13.5px;\n          }\n          .mdx-prose :not(pre) \u003e code {\n            background: rgba(255,255,255,0.08);\n            border-radius: 4px;\n            padding: 2px 6px;\n            font-size: 13px;\n          }\n          .mdx-prose ul, .mdx-prose ol {\n            padding-left: 1.5em;\n            margin: 0 0 1.25em;\n          }\n          .mdx-prose li {\n            font-size: 16px;\n            line-height: 1.75;\n            color: rgba(255,255,255,0.82);\n            margin-bottom: 0.4em;\n          }\n          .mdx-prose blockquote {\n            border-left: 3px solid var(--color-primary, #0071e3);\n            margin: 1.5em 0;\n            padding: 12px 20px;\n            background: rgba(0,113,227,0.06);\n            border-radius: 0 8px 8px 0;\n          }\n          .mdx-prose blockquote p {\n            margin: 0;\n            color: rgba(255,255,255,0.7);\n          }\n          .mdx-prose img {\n            max-width: 100%;\n            border-radius: 10px;\n            margin: 1.5em 0;\n          }\n          .mdx-prose hr {\n            border: none;\n            border-top: 1px solid rgba(255,255,255,0.08);\n            margin: 2em 0;\n          }\n        "])</script><script>self.__next_f.push([1,"b:[\"slug\",\"6g-ntn-overview\",\"d\"]\n11:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L3\",null,{\"buildId\":\"tQQeqY93pI4KdkL63qoNf\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"blog\",\"6g-ntn-overview\"],\"initialTree\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"6g-ntn-overview\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"6g-ntn-overview\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"6g-ntn-overview\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",[[\"$\",\"$L5\",null,{}],[\"$\",\"main\",null,{\"style\":{\"paddingTop\":\"80px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"1100px\",\"margin\":\"0 auto\",\"padding\":\"48px 24px\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 220px\",\"gap\":\"64px\",\"alignItems\":\"start\"},\"className\":\"post-layout\",\"children\":[[\"$\",\"div\",null,{\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog\",\"style\":{\"display\":\"inline-flex\",\"alignItems\":\"center\",\"gap\":\"6px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.5)\",\"textDecoration\":\"none\",\"marginBottom\":\"32px\"},\"children\":\"← All posts\"}],[\"$\",\"header\",null,{\"style\":{\"marginBottom\":\"48px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"8px\",\"flexWrap\":\"wrap\",\"marginBottom\":\"16px\"},\"children\":[[\"$\",\"$L6\",\"study\",{\"href\":\"/blog/tag/study\",\"style\":{\"fontSize\":\"11px\",\"fontWeight\":500,\"color\":\"var(--color-primary, #0071e3)\",\"backgroundColor\":\"rgba(0,113,227,0.1)\",\"borderRadius\":\"6px\",\"padding\":\"3px 8px\",\"textDecoration\":\"none\"},\"children\":\"study\"}]]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"clamp(28px, 4vw, 44px)\",\"fontWeight\":700,\"letterSpacing\":\"-0.04em\",\"lineHeight\":1.15,\"margin\":\"0 0 20px\"},\"children\":\"6G NTN (Non-Terrestrial Network) Overview\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"12px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.4)\"},\"children\":[[\"$\",\"time\",null,{\"dateTime\":\"2026-05-15\",\"children\":\"May 15, 2026\"}],[\"$\",\"span\",null,{\"children\":\"·\"}],[\"$\",\"span\",null,{\"children\":\"6 min read\"}]]}]]}],[\"$\",\"article\",null,{\"className\":\"mdx-prose\",\"children\":\"$L7\"}],[\"$\",\"nav\",null,{\"aria-label\":\"Post navigation\",\"style\":{\"marginTop\":\"64px\",\"paddingTop\":\"32px\",\"borderTop\":\"1px solid rgba(255,255,255,0.08)\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 1fr\",\"gap\":\"24px\"},\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog/ai-agent-evaluation\",\"style\":{\"textDecoration\":\"none\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"← Previous\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"Evaluating AI Agent Systems: Metrics and Failure Modes\"}]]}],[\"$\",\"$L6\",null,{\"href\":\"/blog/5g-system-architecture\",\"style\":{\"textDecoration\":\"none\",\"textAlign\":\"right\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"Next →\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"5G System Architecture Analysis\"}]]}]]}]]}],[\"$\",\"aside\",null,{\"className\":\"toc-aside\",\"children\":[\"$\",\"$L8\",null,{}]}]]}],[\"$\",\"style\",null,{\"children\":\"$9\"}]]}]],null],null],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\",\"$b\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/755c628ae67952ee.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"className\":\"__variable_52456e\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[\"$\",\"$Ld\",null,{\"children\":[[\"$\",\"$Le\",null,{}],[\"$\",\"main\",null,{\"className\":\"pt-nav\",\"children\":[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"section\",null,{\"style\":{\"minHeight\":\"calc(100vh - 44px)\",\"backgroundColor\":\"#f5f5f7\",\"display\":\"flex\",\"alignItems\":\"center\",\"justifyContent\":\"center\",\"padding\":\"80px 22px\",\"textAlign\":\"center\"},\"aria-label\":\"Page not found\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"480px\"},\"children\":[[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.43\",\"color\":\"#7a7a7a\",\"textTransform\":\"uppercase\",\"letterSpacing\":\"0.08em\",\"marginBottom\":\"16px\"},\"children\":\"404\"}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"40px\",\"fontWeight\":\"600\",\"lineHeight\":\"1.10\",\"letterSpacing\":\"0\",\"color\":\"#1d1d1f\",\"marginBottom\":\"16px\"},\"children\":\"Page not found.\"}],[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"17px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.47\",\"letterSpacing\":\"-0.374px\",\"color\":\"#7a7a7a\",\"marginBottom\":\"40px\"},\"children\":\"The page you are looking for does not exist or has been moved.\"}],[\"$\",\"$L6\",null,{\"href\":\"/\",\"className\":\"btn-primary\",\"children\":\"Go home\"}]]}]}],\"notFoundStyles\":[]}]}],[\"$\",\"footer\",null,{\"className\":\"tile-parchment\",\"style\":{\"paddingTop\":\"64px\",\"paddingLeft\":\"22px\",\"paddingRight\":\"22px\",\"paddingBottom\":\"32px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"980px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"grid\",\"gridTemplateColumns\":\"repeat(4, 1fr)\",\"gap\":\"24px\",\"marginBottom\":\"48px\"},\"className\":\"footer-grid\",\"children\":[[\"$\",\"div\",\"About\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"About\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"About me\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about\",\"className\":\"footer-link\",\"children\":\"About me\"}]}],[\"$\",\"li\",\"Skills\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#skills\",\"className\":\"footer-link\",\"children\":\"Skills\"}]}],[\"$\",\"li\",\"Timeline\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#timeline\",\"className\":\"footer-link\",\"children\":\"Timeline\"}]}]]}]]}],[\"$\",\"div\",\"Projects\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Projects\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"OpenClaw Bridge\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/openclaw-bridge\",\"className\":\"footer-link\",\"children\":\"OpenClaw Bridge\"}]}],[\"$\",\"li\",\"Developer Portfolio\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/allen-portfolio\",\"className\":\"footer-link\",\"children\":\"Developer Portfolio\"}]}],[\"$\",\"li\",\"Study Notes App\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/study-notes\",\"className\":\"footer-link\",\"children\":\"Study Notes App\"}]}]]}]]}],[\"$\",\"div\",\"Study\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Study\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"React\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=React\",\"className\":\"footer-link\",\"children\":\"React\"}]}],[\"$\",\"li\",\"Next.js\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=Next.js\",\"className\":\"footer-link\",\"children\":\"Next.js\"}]}],[\"$\",\"li\",\"JavaScript\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=JavaScript\",\"className\":\"footer-link\",\"children\":\"JavaScript\"}]}],[\"$\",\"li\",\"CSS\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=CSS\",\"className\":\"footer-link\",\"children\":\"CSS\"}]}]]}]]}],[\"$\",\"div\",\"Contact\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Contact\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"Email\",{\"children\":[\"$\",\"a\",null,{\"href\":\"mailto:kjkim4911@gmail.com\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"Email\"}]}],[\"$\",\"li\",\"GitHub\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://github.com/Allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"GitHub\"}]}],[\"$\",\"li\",\"LinkedIn\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://www.linkedin.com/in/allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"LinkedIn\"}]}]]}]]}]]}],[\"$\",\"div\",null,{\"style\":{\"height\":\"1px\",\"backgroundColor\":\"var(--color-hairline)\",\"marginBottom\":\"24px\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"justifyContent\":\"space-between\",\"alignItems\":\"center\",\"flexWrap\":\"wrap\",\"gap\":\"8px\"},\"children\":[[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Copyright 2026 Allen. All rights reserved.\"}],[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Built with Next.js and Tailwind CSS\"}]]}]]}],[\"$\",\"style\",null,{\"children\":\"\\n        .footer-link {\\n          color: var(--color-ink-muted-80);\\n          display: block;\\n          font-size: 12px;\\n          font-weight: 400;\\n          letter-spacing: -0.12px;\\n          line-height: 2.41;\\n          text-decoration: none;\\n        }\\n\\n        .footer-link:hover {\\n          color: var(--color-primary) !important;\\n        }\\n\\n        @media (max-width: 640px) {\\n          .footer-grid {\\n            grid-template-columns: repeat(2, 1fr) !important;\\n          }\\n        }\\n\\n        @media (max-width: 400px) {\\n          .footer-grid {\\n            grid-template-columns: 1fr !important;\\n          }\\n        }\\n      \"}]]}]]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$Lf\"],\"globalErrorComponent\":\"$10\",\"missingSlots\":\"$W11\"}]\n"])</script><script>self.__next_f.push([1,"7:[[\"$\",\"h2\",null,{\"children\":\"Overview\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace terrestrial networks. NTN standardization began with 5G NR Rel-17, and in 6G, the complete integration of terrestrial and non-terrestrial networks (Unified Terrestrial and Non-Terrestrial Network) is a core objective.\"}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"NTN Platform Classification\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"| Platform | Altitude | Coverage Radius | One-Way Propagation Delay |\\n|----------|----------|-----------------|--------------------------|\\n| LEO Satellite | 200 ~ 2,000 km | ~1,000 km | 1 ~ 10 ms |\\n| MEO Satellite | 2,000 ~ 35,786 km | ~5,000 km | 10 ~ 100 ms |\\n| GEO Satellite | 35,786 km | ~6,000 km | ~270 ms |\\n| HAPS | 20 ~ 50 km (stratosphere) | ~200 km | \u003c 1 ms |\\n| UAV / Drone | Below a few hundred meters | A few km | Negligible |\"}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"6G NTN Architecture\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"          ┌──────────────────────────────────────────────┐\\n          │              6G Core Network (5GC/6GC)        │\\n          └──────────┬──────────────────┬────────────────┘\\n                     │                  │\\n           ┌─────────▼────────┐  ┌──────▼──────────────┐\\n           │  Terrestrial RAN │  │   NTN RAN (gNB-sat) │\\n           │  (Ground BSs)    │  │  LEO / MEO / GEO    │\\n           └─────────┬────────┘  └──────┬──────────────┘\\n                     │                  │\\n             ┌───────▼──────────────────▼───────┐\\n             │         UE / IoT Terminal          │\\n             │  (Smartphones, Ships, Aircraft,    │\\n             │   IoT devices, etc.)               │\\n             └───────────────────────────────────┘\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Key Interfaces\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Uu (Air Interface)\"}],\": UE ↔ Satellite gNB\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"F1 / E1\"}],\": DU-CU split architecture (processing can be centralized on ground)\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Feeder Link\"}],\": Satellite ↔ Ground Station (Gateway)\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Service Link\"}],\": Satellite ↔ UE (Terminal)\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"ISL (Inter-Satellite Link)\"}],\": Direct satellite-to-satellite communication (Starlink style)\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Key Technical Challenges\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"1. Large Propagation Delay\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"LEO one-way delay can reach up to ~10 ms; GEO is ~270 ms, resulting in much larger RTTs compared to terrestrial networks.\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"strong\",null,{\"children\":\"Impact and Countermeasures:\"}]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"Problem: HARQ Stop-and-Wait → significant throughput drop\\n  └─ LEO (600km) RTT ≈ 4 ms × 2 = ~8 ms\\n  └─ GEO RTT ≈ 270 ms × 2 = ~540 ms\\n\\nCountermeasures:\\n  ① Disable HARQ (Rel-17 NTN: extended HARQ retransmission count)\\n  ② Allow Extended HARQ Round-Trip Time\\n  ③ Delegate retransmission to upper layer ARQ (RLC AM)\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"2. Doppler Shift\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"LEO satellites travel at approximately 7.5 km/s, causing frequency shifts of up to tens of kHz.\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-python\",\"children\":\"# Doppler shift calculation example\\ndef doppler_shift(freq_hz, velocity_ms, angle_deg):\\n    \\\"\\\"\\\"\\n    freq_hz    : carrier frequency (Hz)\\n    velocity_ms: satellite velocity (m/s)\\n    angle_deg  : angle between satellite motion and line-of-sight\\n    \\\"\\\"\\\"\\n    import math\\n    c = 3e8  # speed of light (m/s)\\n    theta = math.radians(angle_deg)\\n    delta_f = freq_hz * (velocity_ms / c) * math.cos(theta)\\n    return delta_f\\n\\n# LEO satellite (7500 m/s), Ka-band (20 GHz), head-on pass\\nshift = doppler_shift(20e9, 7500, 0)\\nprint(f\\\"Max Doppler shift: {shift/1e3:.1f} kHz\\\")  # ≈ 500 kHz\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"strong\",null,{\"children\":\"Countermeasures:\"}]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"UE-side or network-side pre-compensation\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"Prediction-based correction using satellite ephemeris\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"Wide guard-band design\"}],\"\\n\"]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"3. Timing Advance (TA)\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"TA values hundreds of times larger than terrestrial systems are required.\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"| System | Max TA Range |\\n|--------|-------------|\\n| Terrestrial LTE/NR | ~0.67 ms (up to ~100 km) |\\n| LEO NTN (Rel-17) | ~27 ms (600 km altitude) |\\n| GEO NTN | ~541 ms |\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"3GPP Rel-17: Extended TA range (up to 66,460 Tc steps → extended for NTN)\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"UE self pre-compensation based on GNSS introduced\"}],\"\\n\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"3GPP NTN Standardization Roadmap\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"Rel-15 (2019) ─┐\\n               │  NTN study started (TR 38.811)\\nRel-16 (2020) ─┤\\n               │  NTN channel models, system parameter study\\nRel-17 (2022) ─┤\\n               │  ★ First NTN standardization complete\\n               │  - 5G NR NTN (satellite)\\n               │  - IoT NTN (NB-IoT / eMTC)\\n               │  - HARQ/TA/Doppler handling\\nRel-18 (2024) ─┤\\n               │  NTN Enhancement\\n               │  - UE Direct-to-Satellite (D2S)\\n               │  - Mobility/handover improvement\\n               │  - Multi-beam support\\nRel-19 / 6G ──┘\\n               ★ Full TN/NTN integration (Unified Network)\\n               - AI-based channel prediction\\n               - Sub-THz / THz band exploration\\n               - Intelligent Inter-Satellite Links (ISL)\\n\"}]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"6G NTN Key Technologies\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"1. Integrated Access and Backhaul (IAB) in NTN\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Architecture combining terrestrial base stations and satellites for wireless backhaul.\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"[GEO/MEO Satellite]\\n     │ Backhaul link (Feeder)\\n     ▼\\n[LEO Satellite Constellation — ISL]\\n     │ Service link\\n     ▼\\n[HAPS / UAV]\\n     │ Last segment\\n     ▼\\n[Ground UE / IoT Terminal]\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"2. AI/ML-Based Satellite Channel Estimation\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-python\",\"children\":\"# Conceptual AI channel prediction flow\\nclass NTNChannelPredictor:\\n    \\\"\\\"\\\"\\n    Satellite ephemeris + measurement feedback → predict next slot channel\\n    \\\"\\\"\\\"\\n    def predict(self, ephemeris, prev_csi, weather_info):\\n        # 1. Pre-compute Doppler/delay from orbit data\\n        predicted_delay = self._calc_propagation(ephemeris)\\n        predicted_doppler = self._calc_doppler(ephemeris)\\n\\n        # 2. Predict channel coefficients with ML model\\n        channel_coeff = self.model.forward(\\n            prev_csi, predicted_delay, predicted_doppler\\n        )\\n        return channel_coeff\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"3. Multi-Beam / Spot-Beam Technology\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"Satellite antenna coverage example (LEO, 600 km altitude)\\n\\n     Satellite\\n      ↓↓↓ (multi spot-beams)\\n  ┌───┬───┬───┐\\n  │ 1 │ 2 │ 3 │  ← Each beam: ~100 km diameter\\n  ├───┼───┼───┤\\n  │ 4 │ 5 │ 6 │\\n  ├───┼───┼───┤\\n  │ 7 │ 8 │ 9 │\\n  └───┴───┴───┘\\n\\n- Frequency Reuse: minimize interference between adjacent beams\\n- Beam Hopping: dynamically allocate beam resources based on demand\\n- Digital Beamforming: flexible beam formation based on RFSoC\\n\"}]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"NTN vs Terrestrial Network Comparison\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"| Item | Terrestrial 5G | LEO NTN | GEO NTN |\\n|------|---------------|---------|---------|\\n| Coverage | Limited (urban-centric) | Near-global | Global |\\n| Propagation Delay | \u003c 1 ms | 1~10 ms | ~270 ms |\\n| Throughput | Several Gbps | Hundreds Mbps~Gbps | Tens~Hundreds Mbps |\\n| Handover | Rare and fast | Very frequent (every seconds) | Rare |\\n| Doppler | Negligible | Very large | Small |\\n| Deployment Cost | High (dense areas) | Low (wide area) | Low (global) |\\n| Disaster/Maritime/Aviation | Unavailable | Available | Available |\"}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Military Perspective (Military NTN)\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"6G NTN is emerging as a key technology not only for civilian but also military communications.\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"| Element | Description |\\n|---------|-------------|\\n| \",[\"$\",\"strong\",null,{\"children\":\"LEO Constellation\"}],\" | Lower latency and higher survivability vs. single GEO |\\n| \",[\"$\",\"strong\",null,{\"children\":\"Anti-Jamming\"}],\" | Frequency hopping + spread spectrum + AI-based adaptive waveform |\\n| \",[\"$\",\"strong\",null,{\"children\":\"LPI/LPD\"}],\" | Ultra-narrow spot beams, short burst transmissions |\\n| \",[\"$\",\"strong\",null,{\"children\":\"Direct Terminal Access\"}],\" | Tactical terminals ↔ direct satellite access (no ground infrastructure) |\\n| \",[\"$\",\"strong\",null,{\"children\":\"ISL Utilization\"}],\" | Satellite-to-satellite data relay without ground gateways |\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Reference Standards and Documents\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"3GPP TR 38.811 — Study on NR NTN\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"3GPP TS 38.300 — NR Overall Description (NTN additions in Rel-17)\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"3GPP TR 38.821 — Solutions for NR to support NTN\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"ITU-R M.2514 — IMT-2020 Satellite Component\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"ETSI TR 103 611 — 5G NTN Use Cases\"}],\"\\n\"]}]]\n"])</script><script>self.__next_f.push([1,"f:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"6G NTN (Non-Terrestrial Network) Overview — Allen | Allen\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"frontend developer,React,Next.js,Tailwind CSS,portfolio\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"7\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"6G NTN (Non-Terrestrial Network) Overview\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"11\",{\"property\":\"article:published_time\",\"content\":\"2026-05-15\"}],[\"$\",\"meta\",\"12\",{\"property\":\"article:tag\",\"content\":\"study\"}],[\"$\",\"meta\",\"13\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:title\",\"content\":\"6G NTN (Non-Terrestrial Network) Overview\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:description\",\"content\":\"NTN (Non-Terrestrial Network) is a communication infrastructure that utilizes non-terrestrial platforms such as satellites, HAPS (High Altitude Platform Stations), and UAVs to complement or replace te\"}],[\"$\",\"meta\",\"16\",{\"name\":\"next-size-adjust\"}]]\n4:null\n"])</script></body></html>

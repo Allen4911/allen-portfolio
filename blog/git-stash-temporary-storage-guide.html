@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="en" class="__variable_52456e"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" as="image" href="assets/git-stash-concept.png"/><link rel="preload" as="image" href="assets/git-stash-commands.png"/><link rel="preload" as="image" href="assets/git-stash-workflows.png"/><link rel="stylesheet" href="/_next/static/css/755c628ae67952ee.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js"/><script src="/_next/static/chunks/fd9d1056-a9394cb017d46d98.js" async=""></script><script src="/_next/static/chunks/117-118f6a419bea4402.js" async=""></script><script src="/_next/static/chunks/main-app-ffa6af37ba9353a2.js" async=""></script><script src="/_next/static/chunks/972-5bbca60610fae4e0.js" async=""></script><script src="/_next/static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js" async=""></script><script src="/_next/static/chunks/app/layout-c52e51a74c5d6c63.js" async=""></script><title>Git Stash — A Complete Guide to Temporarily Saving Your Work — Allen | Allen</title><meta name="description" content="Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you&#x27;ve been working on the wrong branch? Git Stash is the tool that saves "/><meta name="author" content="Allen"/><meta name="keywords" content="frontend developer,React,Next.js,Tailwind CSS,portfolio"/><meta name="creator" content="Allen"/><meta name="robots" content="index, follow"/><meta property="og:title" content="Git Stash — A Complete Guide to Temporarily Saving Your Work"/><meta property="og:description" content="Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you&#x27;ve been working on the wrong branch? Git Stash is the tool that saves "/><meta property="og:type" content="article"/><meta property="article:published_time" content="2026-05-15"/><meta property="article:tag" content="problem-solving"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Git Stash — A Complete Guide to Temporarily Saving Your Work"/><meta name="twitter:description" content="Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you&#x27;ve been working on the wrong branch? Git Stash is the tool that saves "/><meta name="next-size-adjust"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="font-sans antialiased"><nav role="navigation" aria-label="Global navigation" style="position:fixed;top:0;left:0;right:0;z-index:50;height:44px;background-color:var(--color-surface-black);backdrop-filter:none;-webkit-backdrop-filter:none"><div style="max-width:1440px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px"><a aria-label="Allen Home" style="color:var(--color-on-dark);font-size:17px;font-weight:600;letter-spacing:-0.374px;line-height:1;text-decoration:none;flex-shrink:0" href="/">Allen</a><div aria-hidden="false" style="display:flex;align-items:center;gap:28px" class="hidden-mobile"><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/about">About</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/projects">Projects</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/books">Books</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/blog">Blog</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/study">Study</a><a style="color:rgba(255,255,255,0.72);font-size:12px;font-weight:400;letter-spacing:-0.12px;line-height:1;text-decoration:none" class="nav-desktop-link" href="/contact">Contact</a></div><div style="display:flex;align-items:center;gap:16px"><button aria-label="Switch to dark mode" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="dark-mode-toggle">☽</button><button aria-label="Switch to Korean (KO)" style="background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;color:rgba(255,255,255,0.72);font-size:11px;font-weight:600;letter-spacing:0.5px;padding:3px 7px;cursor:pointer;line-height:1" class="lang-toggle">KO</button><a style="background-color:var(--color-primary);color:var(--color-on-dark);font-size:12px;font-weight:400;letter-spacing:-0.12px;padding:7px 14px;border-radius:9999px;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:center" class="hire-cta" href="/contact">Hire me</a><button aria-label="Open menu" aria-expanded="false" class="hamburger-btn" style="background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px"><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span><span style="display:block;width:18px;height:1px;background-color:var(--color-on-dark);opacity:1;transform:none;transition:transform 0.2s ease, opacity 0.2s ease"></span></button></div></div></nav><style>
+        @media (min-width: 835px) {
+          .hamburger-btn { display: none; }
+        }
+
+        @media (max-width: 834px) {
+          .hidden-mobile {
+            display: none !important;
+          }
+          .hamburger-btn {
+            display: flex;
+          }
+          .mobile-menu {
+            display: block !important;
+          }
+        }
+
+        .nav-desktop-link:hover {
+          color: var(--color-on-dark) !important;
+        }
+
+        .hire-cta:active {
+          transform: scale(0.95);
+        }
+      </style><main class="pt-nav"><div style="position:fixed;top:44px;left:0;right:0;height:2px;z-index:40;background-color:rgba(255,255,255,0.06)"><div style="height:100%;width:0%;background-color:var(--color-primary, #0071e3);transition:width 0.1s linear"></div></div><main style="padding-top:80px;min-height:100vh"><div style="max-width:1100px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 220px;gap:64px;align-items:start" class="post-layout"><div><a style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:32px" href="/blog">← All posts</a><header style="margin-bottom:48px"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><a style="font-size:11px;font-weight:500;color:var(--color-primary, #0071e3);background-color:rgba(0,113,227,0.1);border-radius:6px;padding:3px 8px;text-decoration:none" href="/blog/tag/problem-solving">problem-solving</a></div><h1 style="font-size:clamp(28px, 4vw, 44px);font-weight:700;letter-spacing:-0.04em;line-height:1.15;margin:0 0 20px">Git Stash — A Complete Guide to Temporarily Saving Your Work</h1><div style="display:flex;gap:12px;font-size:13px;color:rgba(255,255,255,0.4)"><time dateTime="2026-05-15">May 15, 2026</time><span>·</span><span>6 min read</span></div></header><article class="mdx-prose"><p>Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you&#x27;ve been working on the wrong branch? <strong>Git Stash</strong> is the tool that saves you in these situations.</p>
+<p>In this guide, we&#x27;ll cover everything you need to know about <code>git stash</code> — from basic commands to advanced workflows and real-world scenarios.</p>
+<hr/>
+<h2>What Is Git Stash?</h2>
+<p>Git Stash is a built-in Git feature that <strong>temporarily saves uncommitted changes</strong> (both staged and unstaged) without creating a commit. Think of it as a clipboard for your working directory — you can stash your changes, do something else, and come back to restore them later.</p>
+<p><img src="assets/git-stash-concept.png" alt="Git Stash Concept"/></p>
+<h3>When Should You Use It?</h3>
+<p>| Scenario | Why Stash Helps |
+|----------|-----------------|
+| Emergency bug fix mid-feature | Switch branches without losing progress |
+| Working on the wrong branch | Move changes to the correct branch |
+| Pulling remote updates with local changes | Avoid merge conflicts during <code>git pull</code> |
+| Applying the same fix across multiple branches | Reuse stashed changes on different branches |</p>
+<hr/>
+<h2>Essential Git Stash Commands</h2>
+<h3>1. Saving Changes</h3>
+<pre><code class="language-bash"># Basic stash (no message)
+# git stash
+
+# Recommended: stash with a descriptive message
+# git stash save &quot;WIP: user authentication form validation&quot;
+
+# Include untracked (new) files
+# git stash -u
+
+# Stash specific files only
+# git stash push -m &quot;fix: header alignment&quot; src/header.css
+</code></pre>
+<p>Always use descriptive messages — your future self will thank you when looking at a list of stashes.</p>
+<h3>2. Listing Stashes</h3>
+<pre><code class="language-bash"># git stash list
+</code></pre>
+<p>Output example:</p>
+<pre><code>stash@{0}: On feature/login: WIP: user authentication form validation
+stash@{1}: On main: fix: temporary navbar workaround
+stash@{2}: On develop: WIP: API integration draft
+</code></pre>
+<p>Each stash is indexed starting from <code>{0}</code> (most recent).</p>
+<h3>3. Viewing Stash Contents</h3>
+<pre><code class="language-bash"># Summary of changes
+# git stash show
+
+# Full diff (detailed view)
+# git stash show -p
+
+# View a specific stash
+# git stash show -p stash@{2}
+</code></pre>
+<h3>4. Restoring Changes</h3>
+<p>There are two ways to restore stashed changes:</p>
+<pre><code class="language-bash"># Pop: restore AND delete the stash
+# git stash pop
+
+# Apply: restore but KEEP the stash
+# git stash apply
+
+# Restore a specific stash
+# git stash pop stash@{1}
+# git stash apply stash@{2}
+</code></pre>
+<p><strong>Pro tip:</strong> Use <code>apply</code> first for safety. If everything looks good, manually <code>drop</code> the stash afterward.</p>
+<h3>5. Deleting Stashes</h3>
+<pre><code class="language-bash"># Delete a specific stash
+# git stash drop stash@{0}
+
+# Delete ALL stashes (careful!)
+# git stash clear
+</code></pre>
+<p><img src="assets/git-stash-commands.png" alt="Git Stash Commands"/></p>
+<hr/>
+<h2>Advanced Features</h2>
+<h3>Create a Branch from a Stash</h3>
+<p>If your stashed changes have diverged too much from the current branch, you can create a new branch directly from a stash:</p>
+<pre><code class="language-bash"># git stash branch new-feature-branch stash@{0}
+</code></pre>
+<p>This creates the branch, checks it out, applies the stash, and drops it — all in one command.</p>
+<h3>Stash Only Staged Changes</h3>
+<pre><code class="language-bash"># git stash --keep-index
+</code></pre>
+<p>This stashes everything but keeps your staged (indexed) changes in the working directory.</p>
+<hr/>
+<h2>Real-World Workflows</h2>
+<h3>Scenario 1: Emergency Bug Fix</h3>
+<p>You&#x27;re working on a new feature when a critical bug is reported:</p>
+<pre><code class="language-bash"># Save current work
+# git stash save &quot;WIP: shopping cart feature&quot;
+
+# Switch to main and fix the bug
+# git checkout main
+# git checkout -b hotfix/payment-error
+
+# ... fix the bug, commit, merge ...
+
+# Return to your feature branch
+# git checkout feature/shopping-cart
+# git stash pop
+</code></pre>
+<h3>Scenario 2: Wrong Branch</h3>
+<p>You accidentally started coding on <code>main</code> instead of your feature branch:</p>
+<pre><code class="language-bash"># Stash the accidental changes
+# git stash save &quot;Oops: started on wrong branch&quot;
+
+# Switch to the correct branch
+# git checkout feature/user-profile
+
+# Restore the changes here
+# git stash pop
+</code></pre>
+<h3>Scenario 3: Clean Pull</h3>
+<p>You have local changes but need to pull the latest remote updates:</p>
+<pre><code class="language-bash"># Stash local changes
+# git stash save &quot;WIP: before pull&quot;
+
+# Pull latest changes
+# git pull origin main
+
+# Restore your work
+# git stash pop
+
+# Resolve any conflicts if needed
+</code></pre>
+<h3>Scenario 4: Apply Fix Across Multiple Branches</h3>
+<p>You made a fix that needs to go to both <code>develop</code> and <code>staging</code>:</p>
+<pre><code class="language-bash"># Stash the fix
+# git stash save &quot;fix: API timeout config&quot;
+
+# Apply to develop (keep stash)
+# git checkout develop
+# git stash apply
+# git add . &amp;&amp; git commit -m &quot;fix: API timeout config&quot;
+
+# Apply to staging (pop to clean up)
+# git checkout staging
+# git stash pop
+# git add . &amp;&amp; git commit -m &quot;fix: API timeout config&quot;
+</code></pre>
+<p><img src="assets/git-stash-workflows.png" alt="Git Stash Workflows"/></p>
+<hr/>
+<h2>Common Mistakes and How to Avoid Them</h2>
+<h3>1. Forgotten Stashes</h3>
+<p>Stashes can pile up and be forgotten. Regularly check your stash list:</p>
+<pre><code class="language-bash"># git stash list
+</code></pre>
+<h3>2. Accidental <code>pop</code> with Conflicts</h3>
+<p>If <code>git stash pop</code> causes conflicts, the stash is <strong>not</strong> deleted. Resolve the conflicts, then manually drop it:</p>
+<pre><code class="language-bash"># After resolving conflicts:
+# git add .
+# git stash drop
+</code></pre>
+<h3>3. &quot;Missing&quot; Files After Stash</h3>
+<p>New (untracked) files won&#x27;t be stashed by default. Use the <code>-u</code> flag:</p>
+<pre><code class="language-bash"># git stash -u
+</code></pre>
+<h3>4. Stash Accumulation</h3>
+<p>Too many stashes become unmanageable. Follow these best practices:</p>
+<ul>
+<li>Use meaningful messages for every stash</li>
+<li>Pop or drop stashes as soon as you&#x27;re done with them</li>
+<li>Run <code>git stash list</code> periodically to audit</li>
+<li>Use <code>git stash clear</code> when you&#x27;re sure nothing is needed</li>
+</ul>
+<hr/>
+<h2>Quick Reference</h2>
+<p>| Command | Description |
+|---------|-------------|
+| <code>git stash save &quot;msg&quot;</code> | Save with message |
+| <code>git stash -u</code> | Include untracked files |
+| <code>git stash list</code> | Show all stashes |
+| <code>git stash show -p</code> | View stash diff |
+| <code>git stash pop</code> | Restore and delete |
+| <code>git stash apply</code> | Restore and keep |
+| <code>git stash drop stash@&amp;#123;n}</code> | Delete specific stash |
+| <code>git stash clear</code> | Delete all stashes |
+| <code>git stash branch &lt;name&gt;</code> | Create branch from stash |
+| <code>git stash push -m &quot;msg&quot; &lt;file&gt;</code> | Stash specific file |</p>
+<hr/>
+<h2>Conclusion</h2>
+<p>Git Stash is one of those tools that seems minor until you need it — and then it becomes a lifesaver. Whether you&#x27;re juggling multiple tasks, fixing urgent bugs, or just cleaning up before a pull, stash keeps your workflow smooth and your changes safe.</p>
+<p><strong>Key takeaways:</strong></p>
+<ul>
+<li>Always use descriptive messages with <code>git stash save &quot;msg&quot;</code></li>
+<li>Prefer <code>apply</code> over <code>pop</code> for safety</li>
+<li>Include untracked files with <code>-u</code> when needed</li>
+<li>Audit and clean your stash list regularly</li>
+<li>Use <code>git stash branch</code> when changes have diverged significantly</li>
+</ul></article><nav aria-label="Post navigation" style="margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1fr;gap:24px"><a style="text-decoration:none" href="/blog/git-tags-version-management-and-releases"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">← Previous</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">Git Tags — Version Management and Releases</span></a><a style="text-decoration:none;text-align:right" href="/blog/cursor-ai-vs-github-copilot-which-ai-coding-assistant-is-actually-worth-it"><span style="font-size:11px;color:rgba(255,255,255,0.4);display:block;margin-bottom:6px">Next →</span><span style="font-size:14px;font-weight:500;color:var(--color-on-dark)">cursor ai vs github copilot which ai coding assistant is actually worth it</span></a></nav></div><aside class="toc-aside"></aside></div><style>
+          .post-layout {
+            grid-template-columns: 1fr 220px;
+          }
+          @media (max-width: 900px) {
+            .post-layout {
+              grid-template-columns: 1fr !important;
+            }
+            .toc-aside {
+              display: none;
+            }
+          }
+          .mdx-prose h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 2.5em 0 0.8em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 2em 0 0.6em;
+            scroll-margin-top: 80px;
+          }
+          .mdx-prose p {
+            font-size: 16px;
+            line-height: 1.75;
+            margin: 0 0 1.25em;
+            color: rgba(255,255,255,0.82);
+          }
+          .mdx-prose a {
+            color: var(--color-primary, #0071e3);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
+          .mdx-prose pre {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+          }
+          .mdx-prose code {
+            font-family: &#x27;SF Mono&#x27;, &#x27;Fira Code&#x27;, monospace;
+            font-size: 13.5px;
+          }
+          .mdx-prose :not(pre) &gt; code {
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 13px;
+          }
+          .mdx-prose ul, .mdx-prose ol {
+            padding-left: 1.5em;
+            margin: 0 0 1.25em;
+          }
+          .mdx-prose li {
+            font-size: 16px;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 0.4em;
+          }
+          .mdx-prose blockquote {
+            border-left: 3px solid var(--color-primary, #0071e3);
+            margin: 1.5em 0;
+            padding: 12px 20px;
+            background: rgba(0,113,227,0.06);
+            border-radius: 0 8px 8px 0;
+          }
+          .mdx-prose blockquote p {
+            margin: 0;
+            color: rgba(255,255,255,0.7);
+          }
+          .mdx-prose img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1.5em 0;
+          }
+          .mdx-prose hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 2em 0;
+          }
+        </style></main></main><footer class="tile-parchment" style="padding-top:64px;padding-left:22px;padding-right:22px;padding-bottom:32px"><div style="max-width:980px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px;margin-bottom:48px" class="footer-grid"><div><p class="text-caption-strong" style="margin-bottom:12px">About</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/about">About me</a></li><li><a class="footer-link" href="/about#skills">Skills</a></li><li><a class="footer-link" href="/about#timeline">Timeline</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Projects</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/projects/openclaw-bridge">OpenClaw Bridge</a></li><li><a class="footer-link" href="/projects/allen-portfolio">Developer Portfolio</a></li><li><a class="footer-link" href="/projects/study-notes">Study Notes App</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Study</p><ul style="list-style:none;padding:0;margin:0"><li><a class="footer-link" href="/study?category=React">React</a></li><li><a class="footer-link" href="/study?category=Next.js">Next.js</a></li><li><a class="footer-link" href="/study?category=JavaScript">JavaScript</a></li><li><a class="footer-link" href="/study?category=CSS">CSS</a></li></ul></div><div><p class="text-caption-strong" style="margin-bottom:12px">Contact</p><ul style="list-style:none;padding:0;margin:0"><li><a href="mailto:kjkim4911@gmail.com" target="_blank" rel="noopener noreferrer" class="footer-link">Email</a></li><li><a href="https://github.com/Allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a></li><li><a href="https://www.linkedin.com/in/allen4911" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li></ul></div></div><div style="height:1px;background-color:var(--color-hairline);margin-bottom:24px"></div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Copyright 2026 Allen. All rights reserved.</p><p class="text-fine-print" style="color:var(--color-ink-muted-48)">Built with Next.js and Tailwind CSS</p></div></div><style>
+        .footer-link {
+          color: var(--color-ink-muted-80);
+          display: block;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -0.12px;
+          line-height: 2.41;
+          text-decoration: none;
+        }
+
+        .footer-link:hover {
+          color: var(--color-primary) !important;
+        }
+
+        @media (max-width: 640px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      </style></footer><script src="/_next/static/chunks/webpack-1ea91829fe3ee8c4.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/755c628ae67952ee.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[2846,[],\"\"]\n5:I[3883,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\n6:I[2972,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"\"]\n8:I[5539,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"308\",\"static/chunks/app/blog/%5Bslug%5D/page-74e3dd0385b4a957.js\"],\"default\"]\na:I[4707,[],\"\"]\nc:I[6423,[],\"\"]\nd:I[4152,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"LanguageProvider\"]\ne:I[9445,[\"972\",\"static/chunks/972-5bbca60610fae4e0.js\",\"185\",\"static/chunks/app/layout-c52e51a74c5d6c63.js\"],\"default\"]\n10:I[1060,[],\"\"]\n9:T9ee,"])</script><script>self.__next_f.push([1,"\n          .post-layout {\n            grid-template-columns: 1fr 220px;\n          }\n          @media (max-width: 900px) {\n            .post-layout {\n              grid-template-columns: 1fr !important;\n            }\n            .toc-aside {\n              display: none;\n            }\n          }\n          .mdx-prose h2 {\n            font-size: 24px;\n            font-weight: 700;\n            letter-spacing: -0.03em;\n            margin: 2.5em 0 0.8em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose h3 {\n            font-size: 18px;\n            font-weight: 600;\n            margin: 2em 0 0.6em;\n            scroll-margin-top: 80px;\n          }\n          .mdx-prose p {\n            font-size: 16px;\n            line-height: 1.75;\n            margin: 0 0 1.25em;\n            color: rgba(255,255,255,0.82);\n          }\n          .mdx-prose a {\n            color: var(--color-primary, #0071e3);\n            text-decoration: underline;\n            text-underline-offset: 3px;\n          }\n          .mdx-prose pre {\n            background: rgba(255,255,255,0.05);\n            border: 1px solid rgba(255,255,255,0.08);\n            border-radius: 10px;\n            padding: 20px;\n            overflow-x: auto;\n            margin: 1.5em 0;\n          }\n          .mdx-prose code {\n            font-family: 'SF Mono', 'Fira Code', monospace;\n            font-size: 13.5px;\n          }\n          .mdx-prose :not(pre) \u003e code {\n            background: rgba(255,255,255,0.08);\n            border-radius: 4px;\n            padding: 2px 6px;\n            font-size: 13px;\n          }\n          .mdx-prose ul, .mdx-prose ol {\n            padding-left: 1.5em;\n            margin: 0 0 1.25em;\n          }\n          .mdx-prose li {\n            font-size: 16px;\n            line-height: 1.75;\n            color: rgba(255,255,255,0.82);\n            margin-bottom: 0.4em;\n          }\n          .mdx-prose blockquote {\n            border-left: 3px solid var(--color-primary, #0071e3);\n            margin: 1.5em 0;\n            padding: 12px 20px;\n            background: rgba(0,113,227,0.06);\n            border-radius: 0 8px 8px 0;\n          }\n          .mdx-prose blockquote p {\n            margin: 0;\n            color: rgba(255,255,255,0.7);\n          }\n          .mdx-prose img {\n            max-width: 100%;\n            border-radius: 10px;\n            margin: 1.5em 0;\n          }\n          .mdx-prose hr {\n            border: none;\n            border-top: 1px solid rgba(255,255,255,0.08);\n            margin: 2em 0;\n          }\n        "])</script><script>self.__next_f.push([1,"b:[\"slug\",\"git-stash-temporary-storage-guide\",\"d\"]\n11:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L3\",null,{\"buildId\":\"tQQeqY93pI4KdkL63qoNf\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"blog\",\"git-stash-temporary-storage-guide\"],\"initialTree\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"git-stash-temporary-storage-guide\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"git-stash-temporary-storage-guide\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"blog\",{\"children\":[[\"slug\",\"git-stash-temporary-storage-guide\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",[[\"$\",\"$L5\",null,{}],[\"$\",\"main\",null,{\"style\":{\"paddingTop\":\"80px\",\"minHeight\":\"100vh\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"1100px\",\"margin\":\"0 auto\",\"padding\":\"48px 24px\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 220px\",\"gap\":\"64px\",\"alignItems\":\"start\"},\"className\":\"post-layout\",\"children\":[[\"$\",\"div\",null,{\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog\",\"style\":{\"display\":\"inline-flex\",\"alignItems\":\"center\",\"gap\":\"6px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.5)\",\"textDecoration\":\"none\",\"marginBottom\":\"32px\"},\"children\":\"← All posts\"}],[\"$\",\"header\",null,{\"style\":{\"marginBottom\":\"48px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"8px\",\"flexWrap\":\"wrap\",\"marginBottom\":\"16px\"},\"children\":[[\"$\",\"$L6\",\"problem-solving\",{\"href\":\"/blog/tag/problem-solving\",\"style\":{\"fontSize\":\"11px\",\"fontWeight\":500,\"color\":\"var(--color-primary, #0071e3)\",\"backgroundColor\":\"rgba(0,113,227,0.1)\",\"borderRadius\":\"6px\",\"padding\":\"3px 8px\",\"textDecoration\":\"none\"},\"children\":\"problem-solving\"}]]}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"clamp(28px, 4vw, 44px)\",\"fontWeight\":700,\"letterSpacing\":\"-0.04em\",\"lineHeight\":1.15,\"margin\":\"0 0 20px\"},\"children\":\"Git Stash — A Complete Guide to Temporarily Saving Your Work\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"gap\":\"12px\",\"fontSize\":\"13px\",\"color\":\"rgba(255,255,255,0.4)\"},\"children\":[[\"$\",\"time\",null,{\"dateTime\":\"2026-05-15\",\"children\":\"May 15, 2026\"}],[\"$\",\"span\",null,{\"children\":\"·\"}],[\"$\",\"span\",null,{\"children\":\"6 min read\"}]]}]]}],[\"$\",\"article\",null,{\"className\":\"mdx-prose\",\"children\":\"$L7\"}],[\"$\",\"nav\",null,{\"aria-label\":\"Post navigation\",\"style\":{\"marginTop\":\"64px\",\"paddingTop\":\"32px\",\"borderTop\":\"1px solid rgba(255,255,255,0.08)\",\"display\":\"grid\",\"gridTemplateColumns\":\"1fr 1fr\",\"gap\":\"24px\"},\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/blog/git-tags-version-management-and-releases\",\"style\":{\"textDecoration\":\"none\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"← Previous\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"Git Tags — Version Management and Releases\"}]]}],[\"$\",\"$L6\",null,{\"href\":\"/blog/cursor-ai-vs-github-copilot-which-ai-coding-assistant-is-actually-worth-it\",\"style\":{\"textDecoration\":\"none\",\"textAlign\":\"right\"},\"children\":[[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"11px\",\"color\":\"rgba(255,255,255,0.4)\",\"display\":\"block\",\"marginBottom\":\"6px\"},\"children\":\"Next →\"}],[\"$\",\"span\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":500,\"color\":\"var(--color-on-dark)\"},\"children\":\"cursor ai vs github copilot which ai coding assistant is actually worth it\"}]]}]]}]]}],[\"$\",\"aside\",null,{\"className\":\"toc-aside\",\"children\":[\"$\",\"$L8\",null,{}]}]]}],[\"$\",\"style\",null,{\"children\":\"$9\"}]]}]],null],null],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\",\"$b\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"blog\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/755c628ae67952ee.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"className\":\"__variable_52456e\",\"children\":[\"$\",\"body\",null,{\"className\":\"font-sans antialiased\",\"children\":[\"$\",\"$Ld\",null,{\"children\":[[\"$\",\"$Le\",null,{}],[\"$\",\"main\",null,{\"className\":\"pt-nav\",\"children\":[\"$\",\"$La\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"section\",null,{\"style\":{\"minHeight\":\"calc(100vh - 44px)\",\"backgroundColor\":\"#f5f5f7\",\"display\":\"flex\",\"alignItems\":\"center\",\"justifyContent\":\"center\",\"padding\":\"80px 22px\",\"textAlign\":\"center\"},\"aria-label\":\"Page not found\",\"children\":[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"480px\"},\"children\":[[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"14px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.43\",\"color\":\"#7a7a7a\",\"textTransform\":\"uppercase\",\"letterSpacing\":\"0.08em\",\"marginBottom\":\"16px\"},\"children\":\"404\"}],[\"$\",\"h1\",null,{\"style\":{\"fontSize\":\"40px\",\"fontWeight\":\"600\",\"lineHeight\":\"1.10\",\"letterSpacing\":\"0\",\"color\":\"#1d1d1f\",\"marginBottom\":\"16px\"},\"children\":\"Page not found.\"}],[\"$\",\"p\",null,{\"style\":{\"fontSize\":\"17px\",\"fontWeight\":\"400\",\"lineHeight\":\"1.47\",\"letterSpacing\":\"-0.374px\",\"color\":\"#7a7a7a\",\"marginBottom\":\"40px\"},\"children\":\"The page you are looking for does not exist or has been moved.\"}],[\"$\",\"$L6\",null,{\"href\":\"/\",\"className\":\"btn-primary\",\"children\":\"Go home\"}]]}]}],\"notFoundStyles\":[]}]}],[\"$\",\"footer\",null,{\"className\":\"tile-parchment\",\"style\":{\"paddingTop\":\"64px\",\"paddingLeft\":\"22px\",\"paddingRight\":\"22px\",\"paddingBottom\":\"32px\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"maxWidth\":\"980px\",\"margin\":\"0 auto\"},\"children\":[[\"$\",\"div\",null,{\"style\":{\"display\":\"grid\",\"gridTemplateColumns\":\"repeat(4, 1fr)\",\"gap\":\"24px\",\"marginBottom\":\"48px\"},\"className\":\"footer-grid\",\"children\":[[\"$\",\"div\",\"About\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"About\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"About me\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about\",\"className\":\"footer-link\",\"children\":\"About me\"}]}],[\"$\",\"li\",\"Skills\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#skills\",\"className\":\"footer-link\",\"children\":\"Skills\"}]}],[\"$\",\"li\",\"Timeline\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/about#timeline\",\"className\":\"footer-link\",\"children\":\"Timeline\"}]}]]}]]}],[\"$\",\"div\",\"Projects\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Projects\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"OpenClaw Bridge\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/openclaw-bridge\",\"className\":\"footer-link\",\"children\":\"OpenClaw Bridge\"}]}],[\"$\",\"li\",\"Developer Portfolio\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/allen-portfolio\",\"className\":\"footer-link\",\"children\":\"Developer Portfolio\"}]}],[\"$\",\"li\",\"Study Notes App\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/projects/study-notes\",\"className\":\"footer-link\",\"children\":\"Study Notes App\"}]}]]}]]}],[\"$\",\"div\",\"Study\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Study\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"React\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=React\",\"className\":\"footer-link\",\"children\":\"React\"}]}],[\"$\",\"li\",\"Next.js\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=Next.js\",\"className\":\"footer-link\",\"children\":\"Next.js\"}]}],[\"$\",\"li\",\"JavaScript\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=JavaScript\",\"className\":\"footer-link\",\"children\":\"JavaScript\"}]}],[\"$\",\"li\",\"CSS\",{\"children\":[\"$\",\"$L6\",null,{\"href\":\"/study?category=CSS\",\"className\":\"footer-link\",\"children\":\"CSS\"}]}]]}]]}],[\"$\",\"div\",\"Contact\",{\"children\":[[\"$\",\"p\",null,{\"className\":\"text-caption-strong\",\"style\":{\"marginBottom\":\"12px\"},\"children\":\"Contact\"}],[\"$\",\"ul\",null,{\"style\":{\"listStyle\":\"none\",\"padding\":0,\"margin\":0},\"children\":[[\"$\",\"li\",\"Email\",{\"children\":[\"$\",\"a\",null,{\"href\":\"mailto:kjkim4911@gmail.com\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"Email\"}]}],[\"$\",\"li\",\"GitHub\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://github.com/Allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"GitHub\"}]}],[\"$\",\"li\",\"LinkedIn\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://www.linkedin.com/in/allen4911\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"footer-link\",\"children\":\"LinkedIn\"}]}]]}]]}]]}],[\"$\",\"div\",null,{\"style\":{\"height\":\"1px\",\"backgroundColor\":\"var(--color-hairline)\",\"marginBottom\":\"24px\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"justifyContent\":\"space-between\",\"alignItems\":\"center\",\"flexWrap\":\"wrap\",\"gap\":\"8px\"},\"children\":[[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Copyright 2026 Allen. All rights reserved.\"}],[\"$\",\"p\",null,{\"className\":\"text-fine-print\",\"style\":{\"color\":\"var(--color-ink-muted-48)\"},\"children\":\"Built with Next.js and Tailwind CSS\"}]]}]]}],[\"$\",\"style\",null,{\"children\":\"\\n        .footer-link {\\n          color: var(--color-ink-muted-80);\\n          display: block;\\n          font-size: 12px;\\n          font-weight: 400;\\n          letter-spacing: -0.12px;\\n          line-height: 2.41;\\n          text-decoration: none;\\n        }\\n\\n        .footer-link:hover {\\n          color: var(--color-primary) !important;\\n        }\\n\\n        @media (max-width: 640px) {\\n          .footer-grid {\\n            grid-template-columns: repeat(2, 1fr) !important;\\n          }\\n        }\\n\\n        @media (max-width: 400px) {\\n          .footer-grid {\\n            grid-template-columns: 1fr !important;\\n          }\\n        }\\n      \"}]]}]]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$Lf\"],\"globalErrorComponent\":\"$10\",\"missingSlots\":\"$W11\"}]\n"])</script><script>self.__next_f.push([1,"7:[[\"$\",\"p\",null,{\"children\":[\"Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you've been working on the wrong branch? \",[\"$\",\"strong\",null,{\"children\":\"Git Stash\"}],\" is the tool that saves you in these situations.\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"In this guide, we'll cover everything you need to know about \",[\"$\",\"code\",null,{\"children\":\"git stash\"}],\" — from basic commands to advanced workflows and real-world scenarios.\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"What Is Git Stash?\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"Git Stash is a built-in Git feature that \",[\"$\",\"strong\",null,{\"children\":\"temporarily saves uncommitted changes\"}],\" (both staged and unstaged) without creating a commit. Think of it as a clipboard for your working directory — you can stash your changes, do something else, and come back to restore them later.\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"img\",null,{\"src\":\"assets/git-stash-concept.png\",\"alt\":\"Git Stash Concept\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"When Should You Use It?\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"| Scenario | Why Stash Helps |\\n|----------|-----------------|\\n| Emergency bug fix mid-feature | Switch branches without losing progress |\\n| Working on the wrong branch | Move changes to the correct branch |\\n| Pulling remote updates with local changes | Avoid merge conflicts during \",[\"$\",\"code\",null,{\"children\":\"git pull\"}],\" |\\n| Applying the same fix across multiple branches | Reuse stashed changes on different branches |\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Essential Git Stash Commands\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"1. Saving Changes\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Basic stash (no message)\\n# git stash\\n\\n# Recommended: stash with a descriptive message\\n# git stash save \\\"WIP: user authentication form validation\\\"\\n\\n# Include untracked (new) files\\n# git stash -u\\n\\n# Stash specific files only\\n# git stash push -m \\\"fix: header alignment\\\" src/header.css\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Always use descriptive messages — your future self will thank you when looking at a list of stashes.\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"2. Listing Stashes\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# git stash list\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Output example:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"children\":\"stash@{0}: On feature/login: WIP: user authentication form validation\\nstash@{1}: On main: fix: temporary navbar workaround\\nstash@{2}: On develop: WIP: API integration draft\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"Each stash is indexed starting from \",[\"$\",\"code\",null,{\"children\":\"{0}\"}],\" (most recent).\"]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"3. Viewing Stash Contents\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Summary of changes\\n# git stash show\\n\\n# Full diff (detailed view)\\n# git stash show -p\\n\\n# View a specific stash\\n# git stash show -p stash@{2}\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"4. Restoring Changes\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"There are two ways to restore stashed changes:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Pop: restore AND delete the stash\\n# git stash pop\\n\\n# Apply: restore but KEEP the stash\\n# git stash apply\\n\\n# Restore a specific stash\\n# git stash pop stash@{1}\\n# git stash apply stash@{2}\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Pro tip:\"}],\" Use \",[\"$\",\"code\",null,{\"children\":\"apply\"}],\" first for safety. If everything looks good, manually \",[\"$\",\"code\",null,{\"children\":\"drop\"}],\" the stash afterward.\"]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"5. Deleting Stashes\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Delete a specific stash\\n# git stash drop stash@{0}\\n\\n# Delete ALL stashes (careful!)\\n# git stash clear\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"img\",null,{\"src\":\"assets/git-stash-commands.png\",\"alt\":\"Git Stash Commands\"}]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Advanced Features\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Create a Branch from a Stash\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"If your stashed changes have diverged too much from the current branch, you can create a new branch directly from a stash:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# git stash branch new-feature-branch stash@{0}\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"This creates the branch, checks it out, applies the stash, and drops it — all in one command.\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Stash Only Staged Changes\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# git stash --keep-index\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"This stashes everything but keeps your staged (indexed) changes in the working directory.\"}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Real-World Workflows\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Scenario 1: Emergency Bug Fix\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"You're working on a new feature when a critical bug is reported:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Save current work\\n# git stash save \\\"WIP: shopping cart feature\\\"\\n\\n# Switch to main and fix the bug\\n# git checkout main\\n# git checkout -b hotfix/payment-error\\n\\n# ... fix the bug, commit, merge ...\\n\\n# Return to your feature branch\\n# git checkout feature/shopping-cart\\n# git stash pop\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Scenario 2: Wrong Branch\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"You accidentally started coding on \",[\"$\",\"code\",null,{\"children\":\"main\"}],\" instead of your feature branch:\"]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Stash the accidental changes\\n# git stash save \\\"Oops: started on wrong branch\\\"\\n\\n# Switch to the correct branch\\n# git checkout feature/user-profile\\n\\n# Restore the changes here\\n# git stash pop\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Scenario 3: Clean Pull\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"You have local changes but need to pull the latest remote updates:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Stash local changes\\n# git stash save \\\"WIP: before pull\\\"\\n\\n# Pull latest changes\\n# git pull origin main\\n\\n# Restore your work\\n# git stash pop\\n\\n# Resolve any conflicts if needed\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"Scenario 4: Apply Fix Across Multiple Branches\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"You made a fix that needs to go to both \",[\"$\",\"code\",null,{\"children\":\"develop\"}],\" and \",[\"$\",\"code\",null,{\"children\":\"staging\"}],\":\"]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# Stash the fix\\n# git stash save \\\"fix: API timeout config\\\"\\n\\n# Apply to develop (keep stash)\\n# git checkout develop\\n# git stash apply\\n# git add . \u0026\u0026 git commit -m \\\"fix: API timeout config\\\"\\n\\n# Apply to staging (pop to clean up)\\n# git checkout staging\\n# git stash pop\\n# git add . \u0026\u0026 git commit -m \\\"fix: API timeout config\\\"\\n\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"img\",null,{\"src\":\"assets/git-stash-workflows.png\",\"alt\":\"Git Stash Workflows\"}]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Common Mistakes and How to Avoid Them\"}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"1. Forgotten Stashes\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Stashes can pile up and be forgotten. Regularly check your stash list:\"}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# git stash list\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":[\"2. Accidental \",[\"$\",\"code\",null,{\"children\":\"pop\"}],\" with Conflicts\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"If \",[\"$\",\"code\",null,{\"children\":\"git stash pop\"}],\" causes conflicts, the stash is \",[\"$\",\"strong\",null,{\"children\":\"not\"}],\" deleted. Resolve the conflicts, then manually drop it:\"]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# After resolving conflicts:\\n# git add .\\n# git stash drop\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"3. \\\"Missing\\\" Files After Stash\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"New (untracked) files won't be stashed by default. Use the \",[\"$\",\"code\",null,{\"children\":\"-u\"}],\" flag:\"]}],\"\\n\",[\"$\",\"pre\",null,{\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash\",\"children\":\"# git stash -u\\n\"}]}],\"\\n\",[\"$\",\"h3\",null,{\"children\":\"4. Stash Accumulation\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Too many stashes become unmanageable. Follow these best practices:\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"Use meaningful messages for every stash\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"Pop or drop stashes as soon as you're done with them\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Run \",[\"$\",\"code\",null,{\"children\":\"git stash list\"}],\" periodically to audit\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Use \",[\"$\",\"code\",null,{\"children\":\"git stash clear\"}],\" when you're sure nothing is needed\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Quick Reference\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"| Command | Description |\\n|---------|-------------|\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash save \\\"msg\\\"\"}],\" | Save with message |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash -u\"}],\" | Include untracked files |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash list\"}],\" | Show all stashes |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash show -p\"}],\" | View stash diff |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash pop\"}],\" | Restore and delete |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash apply\"}],\" | Restore and keep |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash drop stash@\u0026#123;n}\"}],\" | Delete specific stash |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash clear\"}],\" | Delete all stashes |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash branch \u003cname\u003e\"}],\" | Create branch from stash |\\n| \",[\"$\",\"code\",null,{\"children\":\"git stash push -m \\\"msg\\\" \u003cfile\u003e\"}],\" | Stash specific file |\"]}],\"\\n\",[\"$\",\"hr\",null,{}],\"\\n\",[\"$\",\"h2\",null,{\"children\":\"Conclusion\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"Git Stash is one of those tools that seems minor until you need it — and then it becomes a lifesaver. Whether you're juggling multiple tasks, fixing urgent bugs, or just cleaning up before a pull, stash keeps your workflow smooth and your changes safe.\"}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"strong\",null,{\"children\":\"Key takeaways:\"}]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Always use descriptive messages with \",[\"$\",\"code\",null,{\"children\":\"git stash save \\\"msg\\\"\"}]]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Prefer \",[\"$\",\"code\",null,{\"children\":\"apply\"}],\" over \",[\"$\",\"code\",null,{\"children\":\"pop\"}],\" for safety\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Include untracked files with \",[\"$\",\"code\",null,{\"children\":\"-u\"}],\" when needed\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"Audit and clean your stash list regularly\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"Use \",[\"$\",\"code\",null,{\"children\":\"git stash branch\"}],\" when changes have diverged significantly\"]}],\"\\n\"]}]]\n"])</script><script>self.__next_f.push([1,"f:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"Git Stash — A Complete Guide to Temporarily Saving Your Work — Allen | Allen\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you've been working on the wrong branch? Git Stash is the tool that saves \"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"frontend developer,React,Next.js,Tailwind CSS,portfolio\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Allen\"}],[\"$\",\"meta\",\"7\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Git Stash — A Complete Guide to Temporarily Saving Your Work\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you've been working on the wrong branch? Git Stash is the tool that saves \"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"11\",{\"property\":\"article:published_time\",\"content\":\"2026-05-15\"}],[\"$\",\"meta\",\"12\",{\"property\":\"article:tag\",\"content\":\"problem-solving\"}],[\"$\",\"meta\",\"13\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:title\",\"content\":\"Git Stash — A Complete Guide to Temporarily Saving Your Work\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:description\",\"content\":\"Have you ever been deep in the middle of coding a feature, only to get an urgent request to fix a production bug? Or realized you've been working on the wrong branch? Git Stash is the tool that saves \"}],[\"$\",\"meta\",\"16\",{\"name\":\"next-size-adjust\"}]]\n4:null\n"])</script></body></html>
