@@ -1,0 +1,39 @@
+{
+  "name": "allen-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest"
+  },
+  "dependencies": {
+    "embla-carousel-react": "^8.6.0",
+    "next": "14.2.29",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-markdown": "^9.1.0",
+    "reading-time": "^1.5.0",
+    "rehype-highlight": "^7",
+    "rehype-slug": "^6",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.29",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "postcss": "^8",
+    "tailwindcss": "^3",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,60 @@
+  ▲ Next.js 14.2.29
+  - Local:        http://localhost:3001
+  - Network:      http://0.0.0.0:3001
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 17.3s
+ ○ Compiling /projects ...
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-x64-musl isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-win32-ia32-msvc isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-arm64-gnu isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-x64-gnu isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-darwin-x64 isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-arm64-musl isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-win32-arm64-msvc isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-darwin-arm64 isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-x64-musl isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-win32-ia32-msvc isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-win32-arm64-msvc isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-x64-gnu isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-arm64-musl isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-darwin-arm64 isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-darwin-x64 isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Managed item /mnt/c/work/allen-portfolio/node_modules/@next/swc-linux-arm64-gnu isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
+ ✓ Compiled /projects in 22.1s (1241 modules)
+ GET / 200 in 22827ms
+ GET /projects 200 in 22827ms
+ GET /projects 200 in 10847ms
+ GET / 200 in 105ms
+ ✓ Compiled /about in 437ms (1231 modules)
+ GET /about 200 in 732ms
+ ✓ Compiled /study in 494ms (1240 modules)
+ GET /study 200 in 787ms
+ GET / 200 in 138ms
+ ✓ Compiled /projects/[id] in 502ms (1247 modules)
+ GET /about 200 in 137ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 618ms (1249 modules)
+ GET / 200 in 190ms
+ GET / 200 in 97ms
+ GET /study 200 in 103ms
+ ○ Compiling /study/[slug] ...
+ ✓ Compiled /study/[slug] in 2.9s (2209 modules)
+ GET /study/5g-system-architecture 200 in 351ms
+ GET / 200 in 163ms
+ ○ Compiling /admin/login ...
+ ✓ Compiled /admin/login in 885ms (2213 modules)
+ GET /admin/login 200 in 1232ms
+ ○ Compiling /api/admin/login ...
+ ✓ Compiled /api/admin/login in 627ms (1155 modules)
+ POST /api/admin/login 200 in 1252ms
+ ○ Compiling /admin/study ...
+ ✓ Compiled /admin/study in 665ms (2249 modules)
+ ✓ Compiled /api/study in 449ms (1161 modules)
+ GET /api/study 200 in 677ms
+ GET /api/study 200 in 92ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 564ms (1123 modules)
+ GET / 200 in 218ms
+ GET / 200 in 103ms

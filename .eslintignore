@@ -1,0 +1,5 @@
+legacy-pages/
+src/components/UploadModal.jsx
+src/components/UploadModal.css
+src/i18n/
+src/utils/markdown.js

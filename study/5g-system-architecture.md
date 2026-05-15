@@ -1,0 +1,379 @@
+---
+title: "5G 시스템 구조 분석"
+date: "2026-03-09"
+tags: ["5G", "LTE", "Protocol", "Network", "Embedded", "Modem"]
+summary: "5G NR 시스템의 전체 아키텍처를 분석합니다. 5GC(코어), gNB(기지국), UE(단말) 구조와 주요 인터페이스, 프로토콜 스택, 네트워크 슬라이싱, 빔포밍까지 실무 관점에서 정리합니다."
+---
+
+# 5G 시스템 구조 분석
+
+## 개요
+
+5G NR(New Radio)은 3GPP Rel-15(2018)에서 첫 표준이 확정된 차세대 이동통신 시스템입니다. LTE 대비 다음의 목표를 추구합니다.
+
+| 지표 | LTE (4G) | 5G NR 목표 |
+|------|----------|-----------|
+| 최대 다운링크 속도 | ~1 Gbps | 20 Gbps |
+| 사용자 경험 속도 | ~10 Mbps | 100 Mbps |
+| 지연 (E2E) | ~10 ms | < 1 ms |
+| 연결 밀도 | 10⁵ /km² | 10⁶ /km² |
+| 이동성 | 350 km/h | 500 km/h |
+| 에너지 효율 | 기준 | 100배 개선 |
+
+---
+
+## 전체 시스템 아키텍처
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         5G 시스템 전체 구조                      │
+│                                                                 │
+│  ┌──────────┐    Uu     ┌─────────────┐   N2/N3   ┌──────────┐ │
+│  │   UE     │◄─────────►│   gNB (RAN) │◄──────────►│  5GC     │ │
+│  │ (단말)   │           │             │           │ (코어망)  │ │
+│  └──────────┘           └──────┬──────┘           └──────────┘ │
+│                                │                               │
+│                           Xn (gNB간)                           │
+│                                │                               │
+│                         ┌──────▼──────┐                        │
+│                         │  이웃 gNB   │                        │
+│                         └─────────────┘                        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1. 5G 코어 (5GC: 5G Core Network)
+
+5GC는 기존 LTE의 EPC(Evolved Packet Core) 대비 **서비스 기반 아키텍처(SBA)** 를 채택합니다. 모든 기능이 마이크로서비스 형태로 분리됩니다.
+
+### 주요 네트워크 기능 (NF)
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                    Service Based Interface (SBI)               │
+│                    (HTTP/2 + JSON/Protobuf)                    │
+├────────┬────────┬────────┬────────┬────────┬────────┬─────────┤
+│  AMF   │  SMF   │  UPF   │  PCF   │  UDM   │  NRF   │  AUSF  │
+│ 이동성  │ 세션   │ 패킷   │ 정책   │ 가입자 │ 기능   │ 인증   │
+│ 관리   │ 관리   │ 포워딩 │ 제어   │ 데이터 │ 등록   │        │
+└────────┴────────┴────────┴────────┴────────┴────────┴─────────┘
+```
+
+| NF | 역할 | LTE 대응 |
+|----|------|---------|
+| AMF | 이동성/접속/보안 관리 | MME |
+| SMF | PDU 세션 관리, IP 할당 | SGW-C + PGW-C |
+| UPF | 사용자 평면 패킷 포워딩 | SGW-U + PGW-U |
+| PCF | 정책/QoS 제어 | PCRF |
+| UDM | 가입자 프로파일 저장 | HSS |
+| NRF | NF 등록/검색 (Service Mesh) | 없음 (신규) |
+| AUSF | 인증 서버 | HSS 일부 |
+| NSSF | 네트워크 슬라이스 선택 | 없음 (신규) |
+
+### Control Plane / User Plane 분리 (CUPS)
+
+```
+Control Plane:    UE ─── AMF ─── SMF ─── PCF/UDM
+                              (시그널링 경로)
+
+User Plane:       UE ─── UPF ─── DN (인터넷/IMS)
+                              (데이터 경로)
+
+→ UPF를 엣지(MEC)에 배치 가능 → 초저지연 서비스
+```
+
+---
+
+## 2. gNB (Next Generation NodeB) 구조
+
+### CU / DU / RU 분리 (Open RAN)
+
+```
+┌────────────────────────────────────────────────────────┐
+│                    gNB 기능 분리                        │
+│                                                        │
+│  ┌─────────────────┐                                   │
+│  │    gNB-CU        │  ← RRC, PDCP (F1 인터페이스)    │
+│  │ (Centralized Unit)│    여러 DU를 중앙 관리          │
+│  └────────┬────────┘                                   │
+│           │ F1-C / F1-U                                │
+│  ┌────────▼────────┐                                   │
+│  │    gNB-DU        │  ← RLC, MAC, 일부 PHY            │
+│  │ (Distributed Unit)│   지리적으로 분산 가능           │
+│  └────────┬────────┘                                   │
+│           │ Open Fronthaul (eCPRI)                     │
+│  ┌────────▼────────┐                                   │
+│  │    RU            │  ← RF, 안테나, 일부 PHY (FFT 등) │
+│  │ (Radio Unit)     │   안테나 현장 설치               │
+│  └─────────────────┘                                   │
+└────────────────────────────────────────────────────────┘
+```
+
+### 프로토콜 스택 (NR)
+
+```
+Control Plane (UE ↔ AMF):          User Plane (UE ↔ UPF):
+
+  ┌──────────┐                        ┌──────────┐
+  │   NAS    │  ← 이동성/세션 관리     │   IP     │  ← 사용자 데이터
+  ├──────────┤                        ├──────────┤
+  │   RRC    │  ← 무선 자원 제어       │   SDAP   │  ← QoS Flow 매핑
+  ├──────────┤                        ├──────────┤
+  │   PDCP   │  ← 암호화, 헤더압축     │   PDCP   │  ← 암호화, ROHC
+  ├──────────┤                        ├──────────┤
+  │   RLC    │  ← ARQ, 분할/재조합     │   RLC    │
+  ├──────────┤                        ├──────────┤
+  │   MAC    │  ← 스케줄링, HARQ       │   MAC    │
+  ├──────────┤                        ├──────────┤
+  │   PHY    │  ← OFDM, 변조/복조      │   PHY    │
+  └──────────┘                        └──────────┘
+```
+
+---
+
+## 3. 물리 계층 (PHY) 핵심 특성
+
+### NR 뉴머롤로지 (Numerology)
+
+5G NR은 서브캐리어 간격을 유연하게 설정할 수 있습니다.
+
+| μ | SCS (kHz) | 슬롯 당 심볼 | 슬롯 길이 | 주요 용도 |
+|---|-----------|------------|---------|---------|
+| 0 | 15 | 14 | 1 ms | FR1, LTE 호환 |
+| 1 | 30 | 14 | 0.5 ms | FR1 일반 NR |
+| 2 | 60 | 14 | 0.25 ms | FR1/FR2 |
+| 3 | 120 | 14 | 0.125 ms | FR2 (mmWave) |
+| 4 | 240 | 14 | 0.0625 ms | FR2 참조 신호 |
+
+```python
+def slot_duration_us(mu):
+    """NR 슬롯 길이 계산"""
+    scs_kHz = 15 * (2 ** mu)        # 서브캐리어 간격
+    slot_per_subframe = 2 ** mu      # 서브프레임당 슬롯 수
+    slot_duration = 1000 / slot_per_subframe  # us 단위
+    return scs_kHz, slot_duration
+
+for mu in range(5):
+    scs, dur = slot_duration_us(mu)
+    print(f"μ={mu}: SCS={scs:4d} kHz, 슬롯={dur:.4f} ms")
+
+# μ=0: SCS=  15 kHz, 슬롯=1.0000 ms
+# μ=1: SCS=  30 kHz, 슬롯=0.5000 ms
+# μ=2: SCS=  60 kHz, 슬롯=0.2500 ms
+# μ=3: SCS= 120 kHz, 슬롯=0.1250 ms
+# μ=4: SCS= 240 kHz, 슬롯=0.0625 ms
+```
+
+### 주파수 범위 (FR)
+
+```
+FR1 (Sub-6 GHz): 410 MHz ~ 7.125 GHz
+  - 기존 LTE 대역 재사용 가능
+  - 광역 커버리지 유리
+  - 최대 대역폭: 100 MHz
+
+FR2 (mmWave): 24.25 GHz ~ 52.6 GHz
+  - 초광대역 (최대 400 MHz / 반송파)
+  - 초고속 가능 (수십 Gbps)
+  - 감쇠 크고 회절 어려움 → 빔포밍 필수
+```
+
+---
+
+## 4. Massive MIMO & 빔포밍
+
+### 안테나 구성
+
+```
+LTE (4G): 4T4R 또는 8T8R 안테나
+
+5G NR (Massive MIMO):
+  ┌─────────────────────────────┐
+  │  ● ● ● ● ● ● ● ● (8열)    │
+  │  ● ● ● ● ● ● ● ●           │ → 전형적: 64TRX (8×8 패널)
+  │  ● ● ● ● ● ● ● ●           │   최대: 256TRX
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ●           │
+  │  ● ● ● ● ● ● ● ● (8행)    │
+  └─────────────────────────────┘
+```
+
+### 빔포밍 종류
+
+```
+아날로그 빔포밍:
+  [ADC/DAC]─[위상 이동기]─[안테나]
+  → 단순, 저비용, 단일 빔만 가능
+
+디지털 빔포밍:
+  각 안테나에 독립 ADC/DAC
+  [디지털 처리]─[ADC/DAC]─[안테나]
+  → 다중 빔 동시 형성, 유연, 고비용
+
+하이브리드 빔포밍 (5G NR 주류):
+  [디지털 프리코더]─[아날로그 위상 이동기]─[안테나 서브어레이]
+  → 절충안: 소수 디지털 체인 + 다수 아날로그 이동기
+```
+
+```python
+import numpy as np
+
+def hybrid_beamforming_weight(N_antenna, N_beam, angles_deg):
+    """
+    N_antenna: 안테나 수
+    N_beam:    동시 빔 수
+    angles_deg: 각 빔의 방향 (도)
+    """
+    d = 0.5  # 안테나 간격 (파장 기준)
+    W = np.zeros((N_antenna, N_beam), dtype=complex)
+
+    for i, theta in enumerate(angles_deg):
+        theta_rad = np.deg2rad(theta)
+        # 아날로그 스티어링 벡터
+        steering = np.exp(1j * 2 * np.pi * d *
+                          np.arange(N_antenna) * np.sin(theta_rad))
+        W[:, i] = steering / np.sqrt(N_antenna)
+
+    return W
+
+# 8 안테나, 3개 빔 (-30°, 0°, +30°)
+W = hybrid_beamforming_weight(8, 3, [-30, 0, 30])
+print(f"빔포밍 가중치 행렬 크기: {W.shape}")  # (8, 3)
+```
+
+---
+
+## 5. 네트워크 슬라이싱 (Network Slicing)
+
+하나의 물리 인프라를 논리적으로 분리하여 서비스별 맞춤 네트워크를 제공합니다.
+
+```
+물리 인프라 (공통)
+┌───────────────────────────────────────────────────┐
+│  Compute   Storage   Network   RAN   Core          │
+└───────────────────────────────────────────────────┘
+                    ↕ 가상화 (NFV/SDN)
+┌──────────────┬──────────────┬──────────────────────┐
+│  슬라이스 1   │  슬라이스 2   │     슬라이스 3        │
+│  eMBB        │  URLLC       │     mMTC             │
+│  (광대역)     │  (초저지연)   │  (대규모 IoT)         │
+│              │              │                       │
+│ ↑ 20 Gbps   │ ↓ <1 ms     │ ↑ 10⁶ dev/km²        │
+│  스마트폰    │  자율주행     │  센서/미터            │
+│  AR/VR       │  원격수술     │  스마트시티           │
+└──────────────┴──────────────┴──────────────────────┘
+```
+
+### S-NSSAI (Single-Network Slice Selection Assistance Information)
+
+```
+S-NSSAI = SST (8비트) + SD (24비트, 선택)
+
+표준 SST 값:
+  SST=1: eMBB (Enhanced Mobile Broadband)
+  SST=2: URLLC (Ultra-Reliable Low Latency)
+  SST=3: MIoT (Massive IoT)
+  SST=4: V2X (Vehicle-to-Everything)
+```
+
+---
+
+## 6. QoS 구조
+
+### 5QI (5G QoS Identifier)
+
+```
+QoS Flow ─── PDCP 암호화 ─── RLC ─── MAC ─── PHY
+
+5QI 예시:
+  5QI=1:  GBR,  회화형 음성,     지연=100ms, 손실=10⁻²
+  5QI=5:  Non-GBR, IMS 시그널링, 지연=100ms, 손실=10⁻⁶
+  5QI=9:  Non-GBR, 인터넷 데이터,지연=300ms, 손실=10⁻⁶
+  5QI=80: Non-GBR, 저지연 게임,  지연=10ms,  손실=10⁻⁶
+```
+
+---
+
+## 7. 5G 보안 구조
+
+```
+5G 인증 절차 (5G-AKA / EAP-AKA'):
+
+ UE            AUSF          UDM            AMF
+  │                                           │
+  │────── Registration Request ──────────────►│
+  │                           │◄──────────────│
+  │                           │  Nudm_UEAuth  │
+  │                           │  (SUPI/SUCI)  │
+  │             │◄────────────│               │
+  │             │  Auth Vec   │               │
+  │◄────────────┤             │               │
+  │  Auth Req   │                             │
+  │  (RAND,AUTN)│                             │
+  │────────────►│                             │
+  │  Auth Resp  │                             │
+  │  (RES*)     │                             │
+  │             │──────── Auth Confirm ───────►│
+  │             │                             │
+  └─── 키 합의 완료 (Kseaf → Kamf → Krrc/Kup) ┘
+
+암호화 알고리즘:
+  - NR: NEA0(없음), NEA1(SNOW 3G), NEA2(AES-128), NEA3(ZUC)
+  - 무결성: NIA1(SNOW 3G), NIA2(HMAC-SHA-256 기반), NIA3(ZUC)
+```
+
+---
+
+## 8. 모뎀 SW 개발 관점
+
+### 레이어별 개발 포인트
+
+```
+PHY Layer:
+  - LDPC/Polar 채널 코딩 구현
+  - HARQ 프로세스 관리
+  - 빔 관리 (Beam Measurement/Report/Switch)
+  - UCI(업링크 제어 정보) 인코딩
+
+MAC Layer:
+  - 스케줄러 인터페이스 (UL/DL grant 처리)
+  - BSR(Buffer Status Report) 생성
+  - SR(Scheduling Request) 트리거
+  - Timing Advance 관리
+
+RLC Layer:
+  - AM 모드: ARQ 재전송 윈도우 관리
+  - Segmentation/Reassembly 처리
+  - PDCP duplication 지원
+
+PDCP Layer:
+  - ROHC 헤더 압축 (IP/UDP/RTP)
+  - 암호화/복호화 (AES-CTR, SNOW 3G)
+  - 무결성 검증 (Control Plane)
+  - Out-of-order delivery 처리
+```
+
+### 3GPP Rel별 주요 5G 기능
+
+| Release | 주요 기능 |
+|---------|---------|
+| Rel-15 (2018) | 5G NR 1차 표준, NSA/SA, eMBB 중심 |
+| Rel-16 (2020) | URLLC, V2X, IAB, NR-U, 포지셔닝 |
+| Rel-17 (2022) | NTN, Reduced Capability (RedCap), Sidelink 강화 |
+| Rel-18 (2024) | 5G-Advanced, AI/ML 무선, XR 최적화 |
+| Rel-19 / 6G | TN/NTN 통합, Sub-THz 탐색 |
+
+---
+
+## 참고 표준
+
+- 3GPP TS 38.300 — NR Overall Description
+- 3GPP TS 38.401 — NG-RAN Architecture
+- 3GPP TS 23.501 — System Architecture for 5G
+- 3GPP TS 38.211/212/213/214 — NR Physical Layer
+- 3GPP TS 38.321 — NR MAC Protocol
+- 3GPP TS 38.322 — NR RLC Protocol
+- 3GPP TS 38.323 — NR PDCP Protocol
