@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Allen Blog</title>
+    <link>https://allen-portfolio.vercel.app</link>
+    <description>Thoughts on software engineering, product development, and learning.</description>
+    <language>en</language>
+    <atom:link href="https://allen-portfolio.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title><![CDATA[Hello, World — Starting My Dev Blog]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/hello-world</link>
+      <guid>https://allen-portfolio.vercel.app/blog/hello-world</guid>
+      <description><![CDATA[The first post on my portfolio blog, covering what I plan to write about and why.]]></description>
+      <pubDate>Sat, 16 May 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[5 Next.js App Router Tips I Wish I Knew Earlier]]></title>
+      <link>https://allen-portfolio.vercel.app/blog/nextjs-app-router-tips</link>
+      <guid>https://allen-portfolio.vercel.app/blog/nextjs-app-router-tips</guid>
+      <description><![CDATA[Practical patterns for layouts, loading states, and data fetching in the App Router.]]></description>
+      <pubDate>Sun, 10 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
