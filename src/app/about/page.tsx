@@ -105,15 +105,13 @@ export default function AboutPage() {
               Allen Kim
             </h1>
             <p className="text-body" style={{ marginBottom: '16px' }}>
-              {"18년간 통신 시스템을 설계해온 엔지니어가 프론트엔드 개발로 전환했습니다. 임베디드부터 프로토콜 스택까지 수직 통합된 경험을 바탕으로, 동작 원리를 이해하는 개발자로서 깔끔한 인터페이스와 견고한 시스템을 만듭니다."}
+              AI 팀 자동화와 Agentic AI Workflow를 중심으로, 사람과 AI가 협업하는 멀티 에이전트 시스템을 설계합니다.
             </p>
             <p
               className="text-body"
               style={{ color: 'var(--color-ink-muted-48)', marginBottom: '32px' }}
             >
-              Currently focused on React and Next.js ecosystems, building tools that help
-              developers work smarter — including AI-powered CLI tooling and team coordination
-              systems.
+              Redis, GitHub, Obsidian, Claude Code 기반의 자동화 환경 위에서 효율적인 워크플로우와 안정적인 개발 시스템을 구축하고 있습니다. 복잡한 기술을 단순한 흐름으로 연결하고, 깔끔한 인터페이스와 견고한 구조를 만드는 것을 지향합니다.
             </p>
             <a href="/resume.pdf" className="btn-primary" style={{ display: 'inline-flex' }}>
               Download Resume
