@@ -1,254 +1,80 @@
-import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getAllPosts, getPost, getAdjacentPosts } from '@/lib/blog'
-import TableOfContents from '@/components/blog/TableOfContents'
-import ReadingProgress from '@/components/blog/ReadingProgress'
+import BlogLayout from '@/components/blog/BlogLayout'
+import BlogSidebar from '@/components/blog/BlogSidebar'
+import { blogPosts } from '@/data/blogPosts'
 
-interface Props {
-  params: { slug: string }
+export function generateStaticParams() {
+  return blogPosts.map((p) => ({ slug: p.slug }))
 }
 
-export async function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }))
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPost(params.slug)
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = blogPosts.find((p) => p.slug === params.slug)
   if (!post) return {}
-  return {
-    title: `${post.title} — Allen`,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: 'article',
-      publishedTime: post.date,
-      tags: post.tags,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
-    },
-  }
+  return { title: post.title, description: post.excerpt }
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPost(params.slug)
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = blogPosts.find((p) => p.slug === params.slug)
   if (!post) notFound()
 
-  const { prev, next } = getAdjacentPosts(params.slug)
-
-  const dateStr = post.date
-    ? new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-    : ''
-
   return (
-    <>
-      <ReadingProgress />
-      <main style={{ paddingTop: '80px', minHeight: '100vh' }}>
-        <div
-          style={{
-            maxWidth: '1100px',
-            margin: '0 auto',
-            padding: '48px 24px',
-            display: 'grid',
-            gridTemplateColumns: '1fr 220px',
-            gap: '64px',
-            alignItems: 'start',
-          }}
-          className="post-layout"
-        >
-          <div>
-            <Link
-              href="/blog"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: '13px',
-                color: 'rgba(255,255,255,0.5)',
-                textDecoration: 'none',
-                marginBottom: '32px',
-              }}
-            >
-              ← All posts
-            </Link>
+    <div data-testid="blog-post-page">
+      <div className="max-w-[1080px] mx-auto px-6 pt-8 pb-4">
+        <nav className="text-[12px] text-[#7a7a7a] dark:text-[#8a8a8e]">
+          <a href="/blog" className="hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors">Blog</a>
+          <span className="mx-1.5">›</span>
+          <span className="text-[#1d1d1f] dark:text-white">{post.category}</span>
+        </nav>
+      </div>
 
-            <header style={{ marginBottom: '48px' }}>
-              {post.tags.length > 0 && (
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
-                  {post.tags.map((tag) => (
-                    <Link
-                      key={tag}
-                      href={`/blog/tag/${tag}`}
-                      style={{
-                        fontSize: '11px',
-                        fontWeight: 500,
-                        color: 'var(--color-primary, #0071e3)',
-                        backgroundColor: 'rgba(0,113,227,0.1)',
-                        borderRadius: '6px',
-                        padding: '3px 8px',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      {tag}
-                    </Link>
-                  ))}
-                </div>
-              )}
-
-              <h1
-                style={{
-                  fontSize: 'clamp(28px, 4vw, 44px)',
-                  fontWeight: 700,
-                  letterSpacing: '-0.04em',
-                  lineHeight: 1.15,
-                  margin: '0 0 20px',
-                }}
-              >
-                {post.title}
-              </h1>
-
-              <div style={{ display: 'flex', gap: '12px', fontSize: '13px', color: 'rgba(255,255,255,0.4)' }}>
-                <time dateTime={post.date}>{dateStr}</time>
-                <span>·</span>
-                <span>{post.readingTime}</span>
-              </div>
-            </header>
-
-            <article className="mdx-prose">
-              <MDXRemote source={post.content} />
-            </article>
-
-            <nav
-              aria-label="Post navigation"
-              style={{
-                marginTop: '64px',
-                paddingTop: '32px',
-                borderTop: '1px solid rgba(255,255,255,0.08)',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '24px',
-              }}
-            >
-              {prev ? (
-                <Link href={`/blog/${prev.slug}`} style={{ textDecoration: 'none' }}>
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', display: 'block', marginBottom: '6px' }}>
-                    ← Previous
-                  </span>
-                  <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-on-dark)' }}>{prev.title}</span>
-                </Link>
-              ) : (
-                <div />
-              )}
-              {next ? (
-                <Link href={`/blog/${next.slug}`} style={{ textDecoration: 'none', textAlign: 'right' }}>
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', display: 'block', marginBottom: '6px' }}>
-                    Next →
-                  </span>
-                  <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-on-dark)' }}>{next.title}</span>
-                </Link>
-              ) : (
-                <div />
-              )}
-            </nav>
+      <BlogLayout
+        sidebar={
+          <div className="sticky top-24">
+            <BlogSidebar
+              readingTimeMinutes={post.readingTime}
+              wordCount={post.wordCount}
+              githubUrl={post.githubUrl}
+              showNewsletter
+            />
+          </div>
+        }
+      >
+        <article data-testid="blog-article" className="max-w-[680px]">
+          <div className="mb-6">
+            <span className="text-[11px] font-[600] uppercase tracking-[0.08em] text-[#0066cc] dark:text-[#2997ff]">
+              {post.category}
+            </span>
+            <h1 className="font-display text-[34px] font-[600] tracking-[-0.374px] leading-[1.24] mt-2 mb-3 text-[#1d1d1f] dark:text-white">
+              {post.title}
+            </h1>
+            <div className="flex items-center gap-3 text-[13px] text-[#7a7a7a] dark:text-[#8a8a8e]">
+              <span>{post.date}</span>
+              <span>·</span>
+              <span>{post.readingTime} min read</span>
+            </div>
           </div>
 
-          <aside className="toc-aside">
-            <TableOfContents />
-          </aside>
-        </div>
+          <div className="border-t border-[#e0e0e0] dark:border-[#3a3a3c] pt-6">
+            <p className="text-[17px] leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] dark:text-white">
+              {post.excerpt}
+            </p>
+            <p className="mt-4 text-[15px] text-[#7a7a7a] dark:text-[#8a8a8e]">
+              (본문 콘텐츠는 MDX 연동 후 추가 예정)
+            </p>
+          </div>
 
-        <style>{`
-          .post-layout {
-            grid-template-columns: 1fr 220px;
-          }
-          @media (max-width: 900px) {
-            .post-layout {
-              grid-template-columns: 1fr !important;
-            }
-            .toc-aside {
-              display: none;
-            }
-          }
-          .mdx-prose h2 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin: 2.5em 0 0.8em;
-            scroll-margin-top: 80px;
-          }
-          .mdx-prose h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 2em 0 0.6em;
-            scroll-margin-top: 80px;
-          }
-          .mdx-prose p {
-            font-size: 16px;
-            line-height: 1.75;
-            margin: 0 0 1.25em;
-            color: rgba(255,255,255,0.82);
-          }
-          .mdx-prose a {
-            color: var(--color-primary, #0071e3);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-          }
-          .mdx-prose pre {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-            padding: 20px;
-            overflow-x: auto;
-            margin: 1.5em 0;
-          }
-          .mdx-prose code {
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 13.5px;
-          }
-          .mdx-prose :not(pre) > code {
-            background: rgba(255,255,255,0.08);
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-size: 13px;
-          }
-          .mdx-prose ul, .mdx-prose ol {
-            padding-left: 1.5em;
-            margin: 0 0 1.25em;
-          }
-          .mdx-prose li {
-            font-size: 16px;
-            line-height: 1.75;
-            color: rgba(255,255,255,0.82);
-            margin-bottom: 0.4em;
-          }
-          .mdx-prose blockquote {
-            border-left: 3px solid var(--color-primary, #0071e3);
-            margin: 1.5em 0;
-            padding: 12px 20px;
-            background: rgba(0,113,227,0.06);
-            border-radius: 0 8px 8px 0;
-          }
-          .mdx-prose blockquote p {
-            margin: 0;
-            color: rgba(255,255,255,0.7);
-          }
-          .mdx-prose img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin: 1.5em 0;
-          }
-          .mdx-prose hr {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin: 2em 0;
-          }
-        `}</style>
-      </main>
-    </>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[12px] font-[500] px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#2a2a2c] text-[#7a7a7a] dark:text-[#8a8a8e]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
+      </BlogLayout>
+    </div>
   )
 }

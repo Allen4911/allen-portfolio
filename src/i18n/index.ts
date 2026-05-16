@@ -12,7 +12,7 @@ const translations = {
     },
     hero: {
       tagline: 'Frontend Developer',
-      name: 'Allen',
+      name: 'Allen Kim',
       subtitle: 'I build clean, fast, and thoughtful web experiences.',
       description:
         'Specializing in React and Next.js, with an eye for design systems, accessibility, and performance. Currently exploring AI-driven developer tooling.',
@@ -53,7 +53,7 @@ const translations = {
       linkedin: 'LinkedIn',
     },
     footer: {
-      copyright: '© 2026 Allen. All rights reserved.',
+      copyright: '© 2026 Allen Kim. All rights reserved.',
       built_with: 'Built with Next.js + Tailwind CSS',
       columns: { about: 'About', projects: 'Projects', study: 'Study', contact: 'Contact' },
       links: {
@@ -65,7 +65,7 @@ const translations = {
     },
     about: {
       title: 'About',
-      subtitle: 'Allen',
+      subtitle: 'Allen Kim',
       bio: '18+ years of telecom engineering, now building modern web tools and AI-powered developer tooling.',
       bio_extended:
         'Currently focused on React and Next.js ecosystems, building tools that help developers work smarter — including AI-powered CLI tooling and team coordination systems.',
@@ -92,7 +92,7 @@ const translations = {
     },
     hero: {
       tagline: '프론트엔드 개발자',
-      name: 'Allen',
+      name: 'Allen Kim',
       subtitle: '깔끔하고 빠르고 사려 깊은 웹 경험을 만듭니다.',
       description:
         'React와 Next.js를 중심으로, 디자인 시스템·접근성·성능에 집중하고 있습니다. 현재는 AI 기반 개발자 도구를 탐구 중입니다.',
@@ -130,7 +130,7 @@ const translations = {
       linkedin: 'LinkedIn',
     },
     footer: {
-      copyright: '© 2026 Allen. All rights reserved.',
+      copyright: '© 2026 Allen Kim. All rights reserved.',
       built_with: 'Next.js + Tailwind CSS로 제작',
       columns: { about: '소개', projects: '프로젝트', study: '학습', contact: '연락' },
       links: {
@@ -142,7 +142,7 @@ const translations = {
     },
     about: {
       title: '소개',
-      subtitle: 'Allen',
+      subtitle: 'Allen Kim',
       bio: '통신 분야 18년 경력을 바탕으로 현대 웹 개발과 AI 도구를 만드는 개발자입니다.',
       bio_extended:
         '현재 React와 Next.js 생태계에 집중하며, AI 기반 CLI 도구와 팀 조율 시스템을 포함한 개발자 생산성 도구를 만들고 있습니다.',

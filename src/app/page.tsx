@@ -8,7 +8,7 @@ import { studyNotes } from '@/data/study'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Allen - Frontend Developer',
+  title: 'Allen Kim - Frontend Developer',
   description:
     'Frontend Developer specializing in React, Next.js, and modern web experiences. Building clean, performant interfaces.',
 }

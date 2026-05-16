@@ -1,82 +1,76 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { getAllPosts, getAllTags } from '@/lib/blog'
-import PostCard from '@/components/blog/PostCard'
+import BlogLayout from '@/components/blog/BlogLayout'
+import BlogSidebar from '@/components/blog/BlogSidebar'
+import { blogPosts, blogCategories, trendingPosts } from '@/data/blogPosts'
 
-export const metadata: Metadata = {
-  title: 'Blog — Allen',
-  description: 'Thoughts on software engineering, product development, and learning.',
-  openGraph: {
-    title: 'Blog — Allen',
-    description: 'Thoughts on software engineering, product development, and learning.',
-    type: 'website',
-  },
+export const metadata = {
+  title: 'Blog',
+  description: 'AI 엔지니어링, 개발 경험, 그리고 배움의 기록',
 }
 
 export default function BlogPage() {
-  const posts = getAllPosts()
-  const tags = getAllTags()
+  const sidebarCategories = blogCategories.map((c) => ({
+    id: c.id,
+    label: c.label,
+    slug: c.slug,
+    count: c.count,
+  }))
 
   return (
-    <main style={{ paddingTop: '80px', minHeight: '100vh' }}>
-      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '48px 24px' }}>
-        <header style={{ marginBottom: '48px' }}>
-          <h1
-            style={{
-              fontSize: 'clamp(32px, 5vw, 52px)',
-              fontWeight: 700,
-              letterSpacing: '-0.04em',
-              margin: '0 0 16px',
-            }}
-          >
-            Blog
-          </h1>
-          <p style={{ fontSize: '17px', color: 'var(--color-text-secondary, rgba(255,255,255,0.6))', margin: 0 }}>
-            Thoughts on software, products, and what I&apos;m learning.
-          </p>
-        </header>
-
-        {tags.length > 0 && (
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '40px' }}>
-            {tags.map((tag) => (
-              <Link
-                key={tag}
-                href={`/blog/tag/${tag}`}
-                style={{
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  color: 'rgba(255,255,255,0.6)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  borderRadius: '9999px',
-                  padding: '5px 12px',
-                  textDecoration: 'none',
-                  transition: 'border-color 0.15s, color 0.15s',
-                }}
-                className="tag-link"
-              >
-                #{tag}
-              </Link>
-            ))}
-          </div>
-        )}
-
-        {posts.length === 0 ? (
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '16px' }}>No posts yet. Check back soon.</p>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
-        )}
+    <div data-testid="blog-page">
+      <div className="max-w-[1080px] mx-auto px-6 pt-12 pb-8">
+        <h1 className="font-display text-[40px] font-[600] tracking-[-0.4px] leading-[1.1] text-[#1d1d1f] dark:text-white">
+          Blog
+        </h1>
+        <p className="mt-2.5 text-[17px] text-[#7a7a7a] dark:text-[#8a8a8e]">
+          AI 엔지니어링, 개발 경험, 그리고 배움의 기록
+        </p>
       </div>
 
-      <style>{`
-        .tag-link:hover {
-          border-color: rgba(255,255,255,0.4) !important;
-          color: rgba(255,255,255,0.9) !important;
+      <BlogLayout
+        sidebar={
+          <BlogSidebar
+            categories={sidebarCategories}
+            trendingPosts={trendingPosts}
+            showNewsletter
+          />
         }
-      `}</style>
-    </main>
+      >
+        <ul className="flex flex-col gap-8" data-testid="post-list">
+          {blogPosts.map((post) => (
+            <li
+              key={post.id}
+              data-testid={`post-card-${post.id}`}
+              className="p-6 rounded-[8px] border border-[#e0e0e0] dark:border-[#3a3a3c] bg-white dark:bg-[#1c1c1e] hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <span className="text-[11px] font-[600] uppercase tracking-[0.08em] text-[#0066cc] dark:text-[#2997ff]">
+                  {post.category}
+                </span>
+                <span className="text-[12px] text-[#7a7a7a] dark:text-[#8a8a8e]">{post.date}</span>
+              </div>
+              <h2 className="font-display text-[20px] font-[600] leading-[1.25] mb-2 text-[#1d1d1f] dark:text-white">
+                {post.title}
+              </h2>
+              <p className="text-[14px] text-[#7a7a7a] dark:text-[#8a8a8e] leading-[1.57]">
+                {post.excerpt}
+              </p>
+              <div className="mt-3.5 flex items-center gap-2 flex-wrap">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[11px] font-[500] px-2.5 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#2a2a2c] text-[#7a7a7a] dark:text-[#8a8a8e]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <span className="ml-auto text-[12px] text-[#7a7a7a] dark:text-[#8a8a8e]">
+                  {post.readingTime} min read
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </BlogLayout>
+    </div>
   )
 }

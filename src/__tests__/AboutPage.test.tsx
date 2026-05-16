@@ -18,9 +18,9 @@ jest.mock('../components/sections/SkillsGrid', () => {
 })
 
 describe('AboutPage — P2-2 profile photo', () => {
-  test('renders profile image with alt="Allen"', () => {
+  test('renders profile image with alt="Allen Kim"', () => {
     render(<AboutPage />)
-    const img = screen.getByAltText('Allen')
+    const img = screen.getByAltText('Allen Kim')
     expect(img).toBeInTheDocument()
     expect(img.tagName).toBe('IMG')
     expect(img).toHaveAttribute('src', expect.stringContaining('profile'))

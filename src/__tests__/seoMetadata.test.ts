@@ -2,7 +2,7 @@ import { metadata } from '../app/layout'
 
 describe('SEO metadata — layout.tsx', () => {
   test('og:title is set', () => {
-    expect((metadata.openGraph as { title: string }).title).toBe('Allen - Frontend Developer')
+    expect((metadata.openGraph as { title: string }).title).toBe('Allen Kim - Frontend Developer')
   })
 
   test('og:description is set', () => {

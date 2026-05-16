@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 블로그 사이드바 UI — 수아 목업</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1d1d1f;
+    --ink-muted: #7a7a7a;
+    --ink-muted-light: #cccccc;
+    --primary: #0066cc;
+    --canvas: #ffffff;
+    --canvas-parchment: #f5f5f7;
+    --hairline: #e0e0e0;
+    --radius: 8px;
+    --font: -apple-system, "SF Pro Text", system-ui, sans-serif;
+    --font-display: "SF Pro Display", -apple-system, system-ui, sans-serif;
+  }
+  .dark {
+    --ink: #ffffff;
+    --ink-muted: #8a8a8e;
+    --ink-muted-light: #48484a;
+    --primary: #2997ff;
+    --canvas: #000000;
+    --canvas-parchment: #1c1c1e;
+    --hairline: #3a3a3c;
+  }
+
+  body { font-family: var(--font); background: var(--canvas); color: var(--ink); font-size: 15px; }
+
+  /* NAV */
+  nav {
+    height: 48px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; border-bottom: 1px solid var(--hairline);
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .dark nav { background: rgba(0,0,0,0.85); }
+  .nav-logo { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 13px; color: var(--ink-muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--primary); font-weight: 500; }
+  .dark-toggle {
+    cursor: pointer; background: var(--canvas-parchment); border: 1px solid var(--hairline);
+    border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--ink-muted);
+  }
+
+  /* HERO */
+  .hero { padding: 48px 24px 32px; max-width: 1080px; margin: 0 auto; }
+  .hero h1 { font-family: var(--font-display); font-size: 40px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.1; }
+  .hero p { margin-top: 10px; font-size: 17px; color: var(--ink-muted); }
+
+  /* CATEGORY TABS */
+  .category-tabs { max-width: 1080px; margin: 0 auto; padding: 0 24px 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tab {
+    padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    background: var(--canvas-parchment); color: var(--ink-muted); cursor: pointer; border: none;
+    transition: all 0.15s;
+  }
+  .tab:hover { background: var(--hairline); color: var(--ink); }
+  .tab.active { background: var(--ink); color: var(--canvas); }
+
+  /* MAIN LAYOUT */
+  .page-body { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; display: grid; grid-template-columns: 2fr 320px; gap: 64px; }
+
+  /* POST CARDS */
+  .post-list { display: flex; flex-direction: column; gap: 32px; }
+  .post-card {
+    padding: 24px; border-radius: var(--radius); border: 1px solid var(--hairline);
+    background: var(--canvas); transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
+  }
+  .post-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .dark .post-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+  .post-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .post-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); }
+  .post-date { font-size: 12px; color: var(--ink-muted); }
+  .post-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; line-height: 1.25; margin-bottom: 8px; }
+  .post-excerpt { font-size: 14px; color: var(--ink-muted); line-height: 1.57; }
+  .post-footer { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px;
+    background: var(--canvas-parchment); color: var(--ink-muted);
+  }
+  .read-time { font-size: 12px; color: var(--ink-muted); margin-left: auto; align-self: center; }
+
+  /* SIDEBAR */
+  aside { padding-top: 4px; }
+  .sidebar-section { border-top: 1px solid var(--hairline); padding: 20px 0 4px; }
+  .sidebar-section:first-child { border-top: none; }
+  .sidebar-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-muted); margin-bottom: 12px; display: block;
+  }
+
+  /* Categories */
+  .cat-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cat-chip {
+    font-size: 12px; padding: 4px 10px; border-radius: 20px;
+    background: var(--canvas-parchment); color: var(--ink); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 4px; transition: background 0.15s;
+  }
+  .cat-chip:hover { background: var(--hairline); }
+  .cat-chip.active { background: var(--ink); color: var(--canvas); }
+  .cat-count { font-size: 10px; color: var(--ink-muted); }
+  .cat-chip.active .cat-count { color: var(--ink-muted-light); }
+
+  /* Trending */
+  .trending-list { display: flex; flex-direction: column; gap: 12px; }
+  .trending-item { display: flex; align-items: flex-start; gap: 12px; }
+  .trending-rank { font-size: 22px; font-weight: 700; color: var(--hairline); line-height: 1; min-width: 24px; }
+  .trending-title { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.4; cursor: pointer; }
+  .trending-title:hover { color: var(--primary); }
+
+  /* Newsletter */
+  .newsletter-desc { font-size: 12px; color: var(--ink-muted); margin-bottom: 8px; }
+  .newsletter-input {
+    width: 100%; padding: 8px 12px; font-size: 13px; border-radius: var(--radius);
+    border: 1px solid var(--hairline); background: var(--canvas); color: var(--ink);
+    outline: none; margin-bottom: 8px;
+  }
+  .newsletter-input:focus { border-color: var(--primary); }
+  .newsletter-btn {
+    width: 100%; padding: 8px 12px; font-size: 13px; font-weight: 600;
+    border-radius: var(--radius); border: none; background: var(--ink); color: var(--canvas);
+    cursor: pointer; transition: opacity 0.15s;
+  }
+  .newsletter-btn:hover { opacity: 0.8; }
+
+  /* Annotation */
+  .annotation {
+    margin: 24px 0 0; padding: 12px 16px; border-left: 3px solid var(--primary);
+    background: var(--canvas-parchment); border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 12px; color: var(--ink-muted); line-height: 1.6;
+  }
+  .annotation strong { color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .page-body { grid-template-columns: 1fr; }
+    aside { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Allen Kim</a>
+  <div class="nav-links">
+    <a href="#">Projects</a>
+    <a href="#" class="active">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+  <button class="dark-toggle" onclick="document.body.parentElement.classList.toggle('dark')">🌙 Dark</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Blog</h1>
+  <p>AI 엔지니어링, 개발 경험, 그리고 배움의 기록</p>
+</div>
+
+<!-- CATEGORY TABS -->
+<div class="category-tabs">
+  <button class="tab active">All</button>
+  <button class="tab">AI / LLM</button>
+  <button class="tab">Next.js</button>
+  <button class="tab">DevOps</button>
+  <button class="tab">Open Source</button>
+</div>
+
+<!-- PAGE BODY: main + sidebar -->
+<div class="page-body">
+
+  <!-- POST LIST -->
+  <main class="post-list">
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-category">AI / LLM</span>
+        <span class="post-date">2026-05-14</span>
+      </div>
+      <h2 class="post-title">Claude API와 Prompt Caching으로 토큰 비용 60% 절감하기</h2>
+      <p class="post-excerpt">실제 프로덕션에서 Anthropic SDK의 prompt caching을 적용해 운영 비용을 대폭 줄인 경험을 공유합니다. cache_control 설정부터 캐시 히트율 모니터링까지 단계별로 정리했습니다.</p>
+      <div class="post-footer">
+        <span class="tag">Claude API</span>
+        <span class="tag">Prompt Caching</span>
+        <span class="tag">Cost Optimization</span>
+        <span class="read-time">8 min read</span>
+      </div>
+    </article>
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-category">Next.js</span>
+        <span class="post-date">2026-05-10</span>
+      </div>
+      <h2 class="post-title">Next.js 15 App Router에서 다크모드 완벽 구현 (Tailwind + TDD)</h2>
+      <p class="post-excerpt">tailwind darkMode: 'class' 설정부터 SSR hydration mismatch 방지, DarkModeToggle 컴포넌트 TDD 작성까지. 실제 allen-portfolio 구현 사례를 바탕으로 정리했습니다.</p>
+      <div class="post-footer">
+        <span class="tag">Next.js</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">TDD</span>
+        <span class="read-time">6 min read</span>
+      </div>
+    </article>
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span class="post-category">Open Source</span>
+        <span class="post-date">2026-05-02</span>
+      </div>
+      <h2 class="post-title">OpenClaw: Telegram → Claude CLI 브릿지 오픈소스 공개</h2>
+      <p class="post-excerpt">텔레그램으로 Claude Code 팀 에이전트를 원격 지휘하는 브릿지 시스템을 오픈소스로 공개했습니다. tmux + Redis IPC 기반의 멀티 에이전트 아키텍처를 설명합니다.</p>
+      <div class="post-footer">
+        <span class="tag">OpenClaw</span>
+        <span class="tag">Claude</span>
+        <span class="tag">Telegram</span>
+        <span class="read-time">10 min read</span>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Categories</span>
+      <div class="cat-chips">
+        <span class="cat-chip active">All <span class="cat-count">12</span></span>
+        <span class="cat-chip">AI / LLM <span class="cat-count">5</span></span>
+        <span class="cat-chip">Next.js <span class="cat-count">3</span></span>
+        <span class="cat-chip">DevOps <span class="cat-count">2</span></span>
+        <span class="cat-chip">Open Source <span class="cat-count">2</span></span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Trending</span>
+      <div class="trending-list">
+        <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <span class="trending-title">Claude API Prompt Caching으로 비용 절감</span>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <span class="trending-title">Next.js 다크모드 완벽 구현 가이드</span>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <span class="trending-title">OpenClaw 멀티 에이전트 아키텍처</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">Newsletter</span>
+      <p class="newsletter-desc">AI 엔지니어링 인사이트, 주 1회.</p>
+      <input class="newsletter-input" type="email" placeholder="you@example.com">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+
+    <div class="annotation">
+      <strong>수아 설계 노트</strong><br>
+      목록 페이지: Categories + Trending + Newsletter 표시<br>
+      상세 페이지: Reading Stats + ToC + Series + Recommended + GitHub<br>
+      모바일(〈768px): 사이드바 숨김, ToC → 드로어 대체
+    </div>
+
+  </aside>
+
+</div>
+
+</body>
+</html>
