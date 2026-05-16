@@ -95,21 +95,6 @@ export default function HeroSection() {
 
           {/* Visual column */}
           <div className="hero-visual">
-            {/* Profile photo */}
-            <div className="hero-photo-wrap">
-              <img
-                src="/data/profile.webp"
-                alt="Allen Kim"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '18px',
-                  display: 'block',
-                }}
-              />
-            </div>
-
             {/* Code mock */}
             <div
               className="product-frame hero-product"
@@ -188,14 +173,6 @@ export default function HeroSection() {
           width: 100%;
           max-width: 400px;
         }
-        .hero-photo-wrap {
-          width: 160px;
-          height: 160px;
-          border-radius: 9999px;
-          overflow: hidden;
-          margin: 0 auto 0;
-          border: 1px solid var(--color-hairline);
-        }
 
         /* Desktop (md: 768px+): 2-column side by side */
         @media (min-width: 768px) {
@@ -215,13 +192,7 @@ export default function HeroSection() {
           .hero-visual {
             max-width: none;
           }
-          .hero-photo-wrap {
-            width: 100%;
-            height: 320px;
-            border-radius: 18px;
-            margin: 0;
-          }
-          .hero-lead {
+.hero-lead {
             max-width: 520px;
           }
         }
