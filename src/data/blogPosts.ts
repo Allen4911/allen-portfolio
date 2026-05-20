@@ -66,3 +66,19 @@ export const trendingPosts = blogPosts.map((p, i) => ({
   href: `/blog/${p.slug}`,
   views: [1240, 890, 670][i],
 }))
+
+export const recentPosts = blogPosts.slice(0, 3).map((p) => ({
+  id: p.id,
+  title: p.title,
+  href: `/blog/${p.slug}`,
+  date: p.date,
+}))
+
+export const blogTags = [
+  { id: '1', label: 'Claude API', slug: 'claude-api', count: 2 },
+  { id: '2', label: 'Next.js', slug: 'nextjs', count: 1 },
+  { id: '3', label: 'TDD', slug: 'tdd', count: 1 },
+  { id: '4', label: 'OpenClaw', slug: 'openclaw', count: 1 },
+  { id: '5', label: 'Tailwind', slug: 'tailwind', count: 1 },
+  { id: '6', label: 'Open Source', slug: 'open-source', count: 1 },
+]
