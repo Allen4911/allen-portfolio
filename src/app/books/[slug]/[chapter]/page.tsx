@@ -2,7 +2,11 @@ import { notFound } from 'next/navigation'
 import booksData from '../../../../../public/data/books.json'
 import BookLayout from '@/components/books/BookLayout'
 
-const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/Allen4911/Book/main'
+const GITHUB_REPO = 'Allen4911/Book'
+const GITHUB_REF = 'main'
+// Build-time only. Provided via env when running `next build`; never shipped to
+// the client (the rendered HTML is baked into the static export).
+const GITHUB_TOKEN = process.env.BOOK_GITHUB_TOKEN || process.env.GITHUB_TOKEN
 
 export async function generateStaticParams() {
   const params: { slug: string; chapter: string }[] = []
@@ -38,9 +42,17 @@ function buildFlatList(chapters: { id: string; children?: { id: string }[] }[]) 
 }
 
 async function fetchMarkdown(repoFolder, filename) {
-  const url = `${GITHUB_RAW_BASE}/${repoFolder}/${filename}`
+  // Private repo → read via the GitHub Contents API with a build-time token.
+  // `Accept: application/vnd.github.raw` returns the file body directly.
+  const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${repoFolder}/${filename}?ref=${GITHUB_REF}`
   try {
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+    const res = await fetch(url, {
+      headers: {
+        Accept: 'application/vnd.github.raw',
+        ...(GITHUB_TOKEN ? { Authorization: `token ${GITHUB_TOKEN}` } : {}),
+      },
+      next: { revalidate: 3600 },
+    })
     if (!res.ok) return `> 콘텐츠를 불러올 수 없습니다. (${res.status})`
     return res.text()
   } catch {

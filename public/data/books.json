@@ -1,104 +1,8 @@
 [
   {
-    "slug": "my-secretary",
-    "title": "나만의 AI 비서 만들기",
-    "description": "Windows 11 + WSL + Claude CLI + Telegram으로 24시간 AI 팀을 구성하는 실전 가이드",
-    "cover": null,
-    "lang": "ko",
-    "author": "Allen Kim",
-    "views": 0,
-    "likes": 0,
-    "repoFolder": "My-secretary/pages",
-    "chapters": [
-      {
-        "id": "01-introduction",
-        "label": "01. 들어가며",
-        "file": "01-introduction.md",
-        "children": [
-          { "id": "01-1-purpose", "label": "01-1. 이 책의 목적", "file": "01-1-purpose.md" },
-          { "id": "01-2-what-is-ai-secretary", "label": "01-2. AI 비서란 무엇인가", "file": "01-2-what-is-ai-secretary.md" },
-          { "id": "01-3-openclaw-overview", "label": "01-3. Openclaw 소개", "file": "01-3-openclaw-overview.md" }
-        ]
-      },
-      {
-        "id": "02-setup",
-        "label": "02. 환경 설정",
-        "file": "02-setup.md",
-        "children": [
-          { "id": "02-1-prerequisites", "label": "02-1. 사전 준비사항", "file": "02-1-prerequisites.md" },
-          { "id": "02-2-wsl-setup", "label": "02-2. WSL 설치 및 환경 설정", "file": "02-2-wsl-setup.md" },
-          { "id": "02-3-install-openclaw", "label": "02-3. Openclaw 설치", "file": "02-5-install-openclaw.md" },
-          { "id": "02-4-claude-cli", "label": "02-4. Claude CLI 연동", "file": "02-6-claude-cli.md" },
-          { "id": "02-5-telegram-bot", "label": "02-5. Telegram 봇 설정", "file": "02-7-telegram-bot.md" },
-          { "id": "02-6-first-test", "label": "02-6. 설치 완료 확인 및 첫 번째 테스트", "file": "02-8-first-test.md" }
-        ]
-      },
-      {
-        "id": "03-basic-usage",
-        "label": "03. 기본 사용법",
-        "file": "03-basic-usage.md",
-        "children": [
-          { "id": "03-1-first-message", "label": "03-1. 첫 번째 메시지 보내기", "file": "03-1-first-message.md" },
-          { "id": "03-2-command-structure", "label": "03-2. 명령어 구조 이해하기", "file": "03-2-command-structure.md" },
-          { "id": "03-3-channels-targets", "label": "03-3. 채널과 타겟 설정", "file": "03-3-channels-targets.md" }
-        ]
-      },
-      {
-        "id": "04-team-setup",
-        "label": "04. 팀 구성하기",
-        "file": "04-team-setup.md",
-        "children": [
-          { "id": "04-1-tmux-team", "label": "04-1. TMUX 팀 세션 만들기", "file": "04-1-tmux-team.md" },
-          { "id": "04-2-team-roles", "label": "04-2. 팀원 역할 정의", "file": "04-2-team-roles.md" },
-          { "id": "04-3-bridge-plugin", "label": "04-3. 브릿지 플러그인 설치", "file": "04-3-bridge-plugin.md" },
-          { "id": "04-4-message-routing", "label": "04-4. 팀원에게 메시지 라우팅", "file": "04-4-message-routing.md" }
-        ]
-      },
-      {
-        "id": "05-automation",
-        "label": "05. 실전 자동화",
-        "file": "05-automation.md",
-        "children": [
-          { "id": "05-1-task-automation", "label": "05-1. 반복 작업 자동화", "file": "05-1-task-automation.md" },
-          { "id": "05-2-scheduling", "label": "05-2. 스케줄 설정", "file": "05-2-scheduling.md" },
-          { "id": "05-3-hooks", "label": "05-3. 훅(Hook) 활용하기", "file": "05-3-hooks.md" }
-        ]
-      },
-      {
-        "id": "06-advanced",
-        "label": "06. 고급 활용",
-        "file": "06-advanced.md",
-        "children": [
-          { "id": "06-1-long-term-memory", "label": "06-1. 장기 기억 시스템 구축", "file": "06-1-long-term-memory.md" },
-          { "id": "06-2-bot-mode", "label": "06-2. Bot Mode 커스터마이징", "file": "06-2-bot-mode.md" },
-          { "id": "06-3-workflow-design", "label": "06-3. 워크플로우 설계", "file": "06-3-workflow-design.md" }
-        ]
-      },
-      {
-        "id": "07-operations",
-        "label": "07. 운영 및 관리",
-        "file": "07-operations.md",
-        "children": [
-          { "id": "07-1-token-optimization", "label": "07-1. 토큰 최적화 (RTK)", "file": "07-1-token-optimization.md" },
-          { "id": "07-2-security", "label": "07-2. 보안 설정", "file": "07-2-security.md" },
-          { "id": "07-3-troubleshooting", "label": "07-3. 문제 해결", "file": "07-3-troubleshooting.md" }
-        ]
-      },
-      {
-        "id": "08-conclusion",
-        "label": "08. 마치며",
-        "file": "08-conclusion.md",
-        "children": [
-          { "id": "08-1-future", "label": "08-1. 앞으로의 발전 방향", "file": "08-1-future.md" },
-          { "id": "08-2-community", "label": "08-2. 커뮤니티 참여", "file": "08-2-community.md" }
-        ]
-      }
-    ]
-  },
-  {
     "slug": "claude-team-agent",
-    "title": "Claude Code 팀 에이전트 운용 가이드",
-    "description": "Remote-Control로 멀티에이전트를 원격에서 지휘하는 실전 가이드 — 모바일 앱, TMUX, gstack, GSD, Superpowers 완전 통합",
+    "title": "클로드 코드 멀티에이전트 팀 자동화 완성 가이드",
+    "description": "Windows·macOS·Docker 위에서 Claude Code 6인 에이전트 팀을 구성하고 Remote-Control로 운용하는 실전 가이드",
     "cover": null,
     "lang": "ko",
     "author": "Allen Kim",
@@ -107,104 +11,914 @@
     "repoFolder": "Claude/pages",
     "chapters": [
       {
-        "id": "01-introduction",
-        "label": "1장. 들어가며",
+        "id": "ch-01",
+        "label": "01. 들어가며",
         "file": "01-1-purpose.md",
         "children": [
-          { "id": "01-1-purpose", "label": "1-1. 이 책의 목적과 대상 독자", "file": "01-1-purpose.md" },
-          { "id": "01-2-what-is-remote-control", "label": "1-2. Remote-Control 팀 에이전트란 무엇인가", "file": "01-2-what-is-remote-control.md" },
-          { "id": "01-3-architecture-overview", "label": "1-3. 전체 아키텍처 미리 보기", "file": "01-3-architecture-overview.md" }
+          {
+            "id": "01-1-purpose",
+            "label": "01-1. 이 책의 목적과 대상 독자",
+            "file": "01-1-purpose.md"
+          },
+          {
+            "id": "01-2-what-is-remote-control",
+            "label": "01-2. Remote-Control 팀 에이전트란 무엇인가",
+            "file": "01-2-what-is-remote-control.md"
+          },
+          {
+            "id": "01-3-architecture-overview",
+            "label": "01-3. 전체 아키텍처 미리 보기",
+            "file": "01-3-architecture-overview.md"
+          },
+          {
+            "id": "01-4-requirements",
+            "label": "01-4. 개발 환경 및 최소 사양",
+            "file": "01-4-requirements.md"
+          }
         ]
       },
       {
-        "id": "02-ubuntu-setup",
-        "label": "2장. Ubuntu 환경에서 Claude & TMUX 설치",
+        "id": "ch-02",
+        "label": "02. 환경 설치 및 기반 구성",
         "file": "02-1-ubuntu-install.md",
         "children": [
-          { "id": "02-1-ubuntu-install", "label": "2-1. Ubuntu 설치 — WSL2 또는 네이티브 선택", "file": "02-1-ubuntu-install.md" },
-          { "id": "02-2-prerequisites", "label": "2-2. 필수 패키지 설치 (Node.js, npm, git)", "file": "02-2-prerequisites.md" },
-          { "id": "02-3-claude-install", "label": "2-3. Claude Code 설치 및 인증", "file": "02-3-claude-install.md" },
-          { "id": "02-4-tmux-install", "label": "2-4. TMUX 설치 및 기본 명령어", "file": "02-4-tmux-install.md" }
+          {
+            "id": "02-1-ubuntu-install",
+            "label": "02-1. 환경 설치 — 플랫폼 선택",
+            "file": "02-1-ubuntu-install.md"
+          },
+          {
+            "id": "02-2-windows-wsl2",
+            "label": "02-2. Windows: WSL2 환경 구성 + Docker Desktop",
+            "file": "02-2-windows-wsl2.md"
+          },
+          {
+            "id": "02-3-macos",
+            "label": "02-3. macOS: 설치 완전 가이드 + Docker Desktop",
+            "file": "02-3-macos.md"
+          },
+          {
+            "id": "02-4-docker-concept",
+            "label": "02-4. Docker 이해와 컨테이너 기동",
+            "file": "02-4-docker-concept.md"
+          },
+          {
+            "id": "02-5-docker-setup",
+            "label": "02-5. 컨테이너에 Claude Code 설치·실행",
+            "file": "02-5-docker-setup.md"
+          },
+          {
+            "id": "02-6-tmux-install",
+            "label": "02-6. 컨테이너 내부 tmux 설치 + Claude Code 원격제어 설정",
+            "file": "02-6-tmux-install.md"
+          }
         ]
       },
       {
-        "id": "03-multi-agent",
-        "label": "3장. Claude Code와 TMUX로 멀티에이전트 구성",
+        "id": "ch-03",
+        "label": "03. Claude Code와 TMUX로 멀티에이전트 구성",
         "file": "03-1-tmux-structure.md",
         "children": [
-          { "id": "03-1-tmux-structure", "label": "3-1. TMUX 세션·윈도우·파인 구조 이해", "file": "03-1-tmux-structure.md" },
-          { "id": "03-2-team-layout", "label": "3-2. 팀 에이전트 레이아웃 설계 (6파인 구성 예시)", "file": "03-2-team-layout.md" },
-          { "id": "03-3-auto-launch", "label": "3-3. 각 파인에 Claude Code 자동 실행 스크립트", "file": "03-3-auto-launch.md" },
-          { "id": "03-4-claude-md-roles", "label": "3-4. CLAUDE.md로 팀원 역할 정의", "file": "03-4-claude-md-roles.md" },
-          { "id": "03-5-setup-script", "label": "3-5. 팀 셋업 스크립트 작성 및 실행", "file": "03-5-setup-script.md" }
+          {
+            "id": "03-1-tmux-structure",
+            "label": "03-1. TMUX 세션·윈도우·파인 구조",
+            "file": "03-1-tmux-structure.md"
+          },
+          {
+            "id": "03-2-team-layout",
+            "label": "03-2. 팀 에이전트 레이아웃 설계",
+            "file": "03-2-team-layout.md"
+          },
+          {
+            "id": "03-3-auto-launch",
+            "label": "03-3. 각 파인에 Claude Code 자동 실행",
+            "file": "03-3-auto-launch.md"
+          },
+          {
+            "id": "03-4-claude-md-roles",
+            "label": "03-4. CLAUDE.md로 팀원 역할 정의",
+            "file": "03-4-claude-md-roles.md"
+          },
+          {
+            "id": "03-5-setup-script",
+            "label": "03-5. 팀 셋업 스크립트 작성",
+            "file": "03-5-setup-script.md"
+          }
         ]
       },
       {
-        "id": "04-remote-control",
-        "label": "4장. Claude Code Remote-Control 기능 설정 및 사용",
+        "id": "ch-04",
+        "label": "04. Claude Code Remote-Control 기능 설정 및 사용",
         "file": "04-1-remote-control-overview.md",
         "children": [
-          { "id": "04-1-remote-control-overview", "label": "4-1. Remote-Control 개요 및 아키텍처", "file": "04-1-remote-control-overview.md" },
-          { "id": "04-2-activation", "label": "4-2. 활성화 방법 3가지 (settings.json / /config / CLI 플래그)", "file": "04-2-activation.md" },
-          { "id": "04-3-server-mode", "label": "4-3. 서버 모드 실행 및 Spawn 모드 선택", "file": "04-3-server-mode.md" },
-          { "id": "04-4-session-naming", "label": "4-4. 세션 이름 설정 및 관리", "file": "04-4-session-naming.md" },
-          { "id": "04-5-stream-json", "label": "4-5. Stream JSON으로 프로그래밍 방식 제어", "file": "04-5-stream-json.md" },
-          { "id": "04-6-security", "label": "4-6. 보안 설정 및 인증 요구사항", "file": "04-6-security.md" }
+          {
+            "id": "04-1-remote-control-overview",
+            "label": "04-1. Remote-Control 개요",
+            "file": "04-1-remote-control-overview.md"
+          },
+          {
+            "id": "04-2-activation",
+            "label": "04-2. Remote Control 활성화 방법 3가지",
+            "file": "04-2-activation.md"
+          },
+          {
+            "id": "04-3-server-mode",
+            "label": "04-3. 서버 모드 및 Spawn 모드",
+            "file": "04-3-server-mode.md"
+          },
+          {
+            "id": "04-4-session-naming",
+            "label": "04-4. 세션 이름 설정",
+            "file": "04-4-session-naming.md"
+          },
+          {
+            "id": "04-5-stream-json",
+            "label": "04-5. Stream JSON 제어",
+            "file": "04-5-stream-json.md"
+          },
+          {
+            "id": "04-6-security",
+            "label": "04-6. 보안 설정 및 인증 요구사항",
+            "file": "04-6-security.md"
+          }
         ]
       },
       {
-        "id": "05-mobile",
-        "label": "5장. 휴대폰 Claude 앱에서 Remote-Control 사용",
+        "id": "ch-05",
+        "label": "05. 휴대폰 Claude 앱에서 Remote-Control 사용",
         "file": "05-1-mobile-install.md",
         "children": [
-          { "id": "05-1-mobile-install", "label": "5-1. Claude 모바일 앱 설치 및 계정 연결", "file": "05-1-mobile-install.md" },
-          { "id": "05-2-qr-connect", "label": "5-2. QR 코드로 세션 연결하기", "file": "05-2-qr-connect.md" },
-          { "id": "05-3-session-list", "label": "5-3. 세션 목록에서 팀 에이전트 선택", "file": "05-3-session-list.md" },
-          { "id": "05-4-mobile-control", "label": "5-4. 모바일에서 지시 전달 및 도구 승인", "file": "05-4-mobile-control.md" },
-          { "id": "05-5-push-notification", "label": "5-5. 푸시 알림으로 작업 완료 확인", "file": "05-5-push-notification.md" }
+          {
+            "id": "05-1-mobile-install",
+            "label": "05-1. Claude 모바일 앱 설치 및 계정 연결",
+            "file": "05-1-mobile-install.md"
+          },
+          {
+            "id": "05-2-qr-connect",
+            "label": "05-2. QR 코드로 세션 연결하기",
+            "file": "05-2-qr-connect.md"
+          },
+          {
+            "id": "05-3-session-list",
+            "label": "05-3. 세션 목록에서 팀 에이전트 선택",
+            "file": "05-3-session-list.md"
+          },
+          {
+            "id": "05-4-mobile-control",
+            "label": "05-4. 모바일에서 지시 전달 및 도구 승인",
+            "file": "05-4-mobile-control.md"
+          },
+          {
+            "id": "05-5-push-notification",
+            "label": "05-5. 푸시 알림으로 작업 완료 확인",
+            "file": "05-5-push-notification.md"
+          }
         ]
       },
       {
-        "id": "06-tools",
-        "label": "6장. 핵심 도구 설치 및 활용",
+        "id": "ch-06",
+        "label": "06. 핵심 도구 설치 및 활용",
         "file": "06-1-gstack.md",
         "children": [
-          { "id": "06-1-gstack", "label": "6-1. gstack — Claude Code 플러그인 스택 관리", "file": "06-1-gstack.md" },
-          { "id": "06-2-superpowers", "label": "6-2. superpowers — 스킬 기반 워크플로우 자동화", "file": "06-2-superpowers.md" },
-          { "id": "06-3-gsd", "label": "6-3. gsd — Get Stuff Done 프로젝트 관리", "file": "06-3-gsd.md" },
-          { "id": "06-4-rtk", "label": "6-4. RTK — Rust Token Killer 토큰 최적화", "file": "06-4-rtk.md" }
+          {
+            "id": "06-1-gstack",
+            "label": "06-1. gstack — Claude Code 플러그인 스택 관리",
+            "file": "06-1-gstack.md"
+          },
+          {
+            "id": "06-2-superpowers",
+            "label": "06-2. superpowers — 스킬 기반 워크플로우 자동화",
+            "file": "06-2-superpowers.md"
+          },
+          {
+            "id": "06-3-gsd",
+            "label": "06-3. gsd — Get Shit Done 프로젝트 관리",
+            "file": "06-3-gsd.md"
+          },
+          {
+            "id": "06-4-rtk",
+            "label": "06-4. RTK — Rust Token Killer 토큰 최적화",
+            "file": "06-4-rtk.md"
+          },
+          {
+            "id": "06-5-mcp",
+            "label": "06-5. MCP 연동 및 외부 도구 연결",
+            "file": "06-5-mcp.md"
+          }
         ]
       },
       {
-        "id": "07-team-ops",
-        "label": "7장. 실전 팀 에이전트 운용",
+        "id": "ch-07",
+        "label": "07. 실전 팀 에이전트 운용",
         "file": "07-1-team-flow.md",
         "children": [
-          { "id": "07-1-team-flow", "label": "7-1. 팀 지시 흐름 설계 (사용자 → 팀장 → 팀원)", "file": "07-1-team-flow.md" },
-          { "id": "07-2-bot-mode", "label": "7-2. Bot Mode 활용 (채널·메시지 라우팅)", "file": "07-2-bot-mode.md" },
-          { "id": "07-3-task-distribution", "label": "7-3. 업무 분담 전략 (PM·디자이너·개발자·리뷰어)", "file": "07-3-task-distribution.md" },
-          { "id": "07-4-triple-crown", "label": "7-4. Triple Crown 전략 — gstack + GSD + Superpowers 통합", "file": "07-4-triple-crown.md" },
-          { "id": "07-5-workflow-examples", "label": "7-5. 자동화 워크플로우 예시", "file": "07-5-workflow-examples.md" }
+          {
+            "id": "07-1-team-flow",
+            "label": "07-1. 팀 지시 흐름 설계",
+            "file": "07-1-team-flow.md"
+          },
+          {
+            "id": "07-2-bot-mode",
+            "label": "07-2. Bot Mode 활용",
+            "file": "07-2-bot-mode.md"
+          },
+          {
+            "id": "07-3-task-distribution",
+            "label": "07-3. 업무 분담 전략",
+            "file": "07-3-task-distribution.md"
+          },
+          {
+            "id": "07-4-triple-crown",
+            "label": "07-4. Triple Crown 전략 — gstack + GSD + Superpowers 통합 워크플로우",
+            "file": "07-4-triple-crown.md"
+          },
+          {
+            "id": "07-5-workflow-examples",
+            "label": "07-5. 자동화 워크플로우 예시",
+            "file": "07-5-workflow-examples.md"
+          }
         ]
       },
       {
-        "id": "08-operations",
-        "label": "8장. 운영 및 문제 해결",
-        "file": "08-1-auth-troubleshooting.md",
+        "id": "ch-08",
+        "label": "08. 고급 운용 기법",
+        "file": "08-1-real-world.md",
         "children": [
-          { "id": "08-1-auth-troubleshooting", "label": "8-1. Remote-Control 인증 오류 해결", "file": "08-1-auth-troubleshooting.md" },
-          { "id": "08-2-tmux-recovery", "label": "8-2. TMUX 세션 복구 및 재연결", "file": "08-2-tmux-recovery.md" },
-          { "id": "08-3-token-optimization", "label": "8-3. 토큰 최적화 심화", "file": "08-3-token-optimization.md" },
-          { "id": "08-4-conflict-prevention", "label": "8-4. 멀티에이전트 충돌 방지", "file": "08-4-conflict-prevention.md" }
+          {
+            "id": "08-1-real-world",
+            "label": "08-1. 실제 멀티에이전트 운영 사례",
+            "file": "08-1-real-world.md"
+          },
+          {
+            "id": "08-2-github-actions",
+            "label": "08-2. GitHub Actions 기반 자동화",
+            "file": "08-2-github-actions.md"
+          },
+          {
+            "id": "08-3-context-management",
+            "label": "08-3. 컨텍스트 관리 기법",
+            "file": "08-3-context-management.md"
+          },
+          {
+            "id": "08-4-conflict-prevention",
+            "label": "08-4. 멀티에이전트 충돌 방지",
+            "file": "08-4-conflict-prevention.md"
+          },
+          {
+            "id": "08-5-redis-state-sharing",
+            "label": "08-5. Redis 에이전트 상태공유",
+            "file": "08-5-redis-state-sharing.md"
+          }
         ]
       },
       {
-        "id": "09-conclusion",
-        "label": "9장. 마치며",
-        "file": "09-1-future.md",
+        "id": "ch-09",
+        "label": "09. 운영 및 문제 해결",
+        "file": "09-1-auth-troubleshooting.md",
         "children": [
-          { "id": "09-1-future", "label": "9-1. 앞으로의 발전 방향", "file": "09-1-future.md" },
-          { "id": "09-2-community", "label": "9-2. 커뮤니티 참여", "file": "09-2-community.md" }
+          {
+            "id": "09-1-auth-troubleshooting",
+            "label": "09-1. Remote-Control 인증 오류 해결",
+            "file": "09-1-auth-troubleshooting.md"
+          },
+          {
+            "id": "09-2-tmux-recovery",
+            "label": "09-2. TMUX 세션 복구 및 재연결",
+            "file": "09-2-tmux-recovery.md"
+          },
+          {
+            "id": "09-3-token-optimization",
+            "label": "09-3. 토큰 최적화 심화",
+            "file": "09-3-token-optimization.md"
+          },
+          {
+            "id": "09-4-auto-recovery",
+            "label": "09-4. 자동복구 스크립트",
+            "file": "09-4-auto-recovery.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-10",
+        "label": "10. 마치며",
+        "file": "10-1-future.md",
+        "children": [
+          {
+            "id": "10-1-future",
+            "label": "10-1. 앞으로의 발전 방향",
+            "file": "10-1-future.md"
+          },
+          {
+            "id": "10-2-community",
+            "label": "10-2. 커뮤니티 참여",
+            "file": "10-2-community.md"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "my-secretary",
+    "title": "텔레그램으로 만드는 나만의 AI 비서",
+    "description": "매일 아침 뉴스·영어회화·한미 주식 브리핑까지 — ChatGPT 자동화 완전 가이드",
+    "cover": null,
+    "lang": "ko",
+    "author": "Allen Kim",
+    "views": 0,
+    "likes": 0,
+    "repoFolder": "My-secretary/pages",
+    "chapters": [
+      {
+        "id": "ch-01",
+        "label": "01. AI 비서가 바꾸는 하루 — 왜 지금 AI 비서인가",
+        "file": "01-1-morning-scenario.md",
+        "children": [
+          {
+            "id": "01-1-morning-scenario",
+            "label": "01-1. 아침에 눈뜨면 비서가 브리핑하는 하루",
+            "file": "01-1-morning-scenario.md"
+          },
+          {
+            "id": "01-2-why-now-korea",
+            "label": "01-2. 왜 지금인가 — 한국 ChatGPT 사용 환경",
+            "file": "01-2-why-now-korea.md"
+          },
+          {
+            "id": "01-3-secretary-overview",
+            "label": "01-3. 이 책으로 만들 비서의 전체 그림",
+            "file": "01-3-secretary-overview.md"
+          },
+          {
+            "id": "01-4-cost-guide",
+            "label": "01-4. 준비물과 비용 한눈에 보기",
+            "file": "01-4-cost-guide.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-02",
+        "label": "02. 시작 준비 — 설치와 환경 구성",
+        "file": "02-1-prerequisites.md",
+        "children": [
+          {
+            "id": "02-1-prerequisites",
+            "label": "02-1. 사전 준비 — 필요한 것, 필요 없는 것",
+            "file": "02-1-prerequisites.md"
+          },
+          {
+            "id": "02-2-wsl2-install",
+            "label": "02-2. Windows WSL2 설치",
+            "file": "02-2-wsl2-install.md"
+          },
+          {
+            "id": "02-3-openclaw-install",
+            "label": "02-3. OpenClaw 설치 및 초기 설정",
+            "file": "02-3-openclaw-install.md"
+          },
+          {
+            "id": "02-4-telegram-bot",
+            "label": "02-4. 텔레그램 봇 만들기 — BotFather부터 연동까지",
+            "file": "02-4-telegram-bot.md"
+          },
+          {
+            "id": "02-5-first-test",
+            "label": "02-5. 설치 완료 확인 — \"Hello\" 첫 테스트",
+            "file": "02-5-first-test.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-03",
+        "label": "03. AI 두뇌 연결 — ChatGPT 붙이기",
+        "file": "03-1-connection-methods.md",
+        "children": [
+          {
+            "id": "03-1-connection-methods",
+            "label": "03-1. 두 가지 연결 방식 비교 — 무엇을 고를까",
+            "file": "03-1-connection-methods.md"
+          },
+          {
+            "id": "03-2-oauth-login",
+            "label": "03-2. 방식 A: ChatGPT 계정 로그인(OAuth) 연결",
+            "file": "03-2-oauth-login.md"
+          },
+          {
+            "id": "03-3-api-key",
+            "label": "03-3. 방식 B: API 키 연결 — 사용량 과금",
+            "file": "03-3-api-key.md"
+          },
+          {
+            "id": "03-4-fallback",
+            "label": "03-4. 쿼터 초과·오류 시 폴백 설정",
+            "file": "03-4-fallback.md"
+          },
+          {
+            "id": "03-5-first-chat-test",
+            "label": "03-5. 연결 확인과 첫 대화 테스트",
+            "file": "03-5-first-chat-test.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-04",
+        "label": "04. 첫 비서와 대화하기 — 텔레그램 기본 사용",
+        "file": "04-1-basic-messaging.md",
+        "children": [
+          {
+            "id": "04-1-basic-messaging",
+            "label": "04-1. 메시지 주고받기 기본",
+            "file": "04-1-basic-messaging.md"
+          },
+          {
+            "id": "04-2-command-patterns",
+            "label": "04-2. 자주 쓰는 명령·질의 패턴",
+            "file": "04-2-command-patterns.md"
+          },
+          {
+            "id": "04-3-context-memory",
+            "label": "04-3. 대화 맥락과 기억의 기초",
+            "file": "04-3-context-memory.md"
+          },
+          {
+            "id": "04-4-safety-guide",
+            "label": "04-4. 안전하게 쓰기 — 개인정보·민감정보 주의",
+            "file": "04-4-safety-guide.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-05",
+        "label": "05. 아침 9시 뉴스 브리핑 자동화",
+        "file": "05-1-news-sources.md",
+        "children": [
+          {
+            "id": "05-1-news-sources",
+            "label": "05-1. 오전 뉴스 브리핑 자동화 — 뉴스 소스 정하기: RSS vs 네이버 뉴스 API",
+            "file": "05-1-news-sources.md"
+          },
+          {
+            "id": "05-2-rss-pipeline",
+            "label": "05-2. RSS로 시작하기 — feedparser 파이프라인",
+            "file": "05-2-rss-pipeline.md"
+          },
+          {
+            "id": "05-3-naver-news-api",
+            "label": "05-3. 네이버 뉴스 API 연결 — 무료 25,000건/일",
+            "file": "05-3-naver-news-api.md"
+          },
+          {
+            "id": "05-4-chatgpt-summary",
+            "label": "05-4. ChatGPT로 뉴스 요약 + 텔레그램 전송",
+            "file": "05-4-chatgpt-summary.md"
+          },
+          {
+            "id": "05-5-scheduling",
+            "label": "05-5. 오전 뉴스 브리핑 자동화 완성 — 매일 09:00 자동 실행 스케줄링",
+            "file": "05-5-scheduling.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-06",
+        "label": "06. 매일 영어회화 비서",
+        "file": "06-1-english-design.md",
+        "children": [
+          {
+            "id": "06-1-english-design",
+            "label": "06-1. 오늘의 표현·회화 자동 생성 설계",
+            "file": "06-1-english-design.md"
+          },
+          {
+            "id": "06-2-custom-prompt",
+            "label": "06-2. 난이도·주제 맞춤 프롬프트",
+            "file": "06-2-custom-prompt.md"
+          },
+          {
+            "id": "06-3-combined-briefing",
+            "label": "06-3. 뉴스 브리핑과 묶어 보내기 (09:00 통합)",
+            "file": "06-3-combined-briefing.md"
+          },
+          {
+            "id": "06-4-review-log",
+            "label": "06-4. 복습·기록 남기기",
+            "file": "06-4-review-log.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-07",
+        "label": "07. 주식 비서 — 한·미 장 브리핑과 변동 알림",
+        "file": "07-1-what-to-monitor.md",
+        "children": [
+          {
+            "id": "07-1-what-to-monitor",
+            "label": "07-1. 무엇을 알림받을까 — 시세 조회 vs 실시간 알림",
+            "file": "07-1-what-to-monitor.md"
+          },
+          {
+            "id": "07-2-pykrx",
+            "label": "07-2. 한국 주식: PyKRX로 시세 조회 — 계좌 불필요",
+            "file": "07-2-pykrx.md"
+          },
+          {
+            "id": "07-3-kis-api",
+            "label": "07-3. 한국 주식: KIS Open API — 실시간 시세와 알림",
+            "file": "07-3-kis-api.md"
+          },
+          {
+            "id": "07-4-us-stocks",
+            "label": "07-4. 미국 주식: Alpha Vantage / Finnhub",
+            "file": "07-4-us-stocks.md"
+          },
+          {
+            "id": "07-5-briefing-automation",
+            "label": "07-5. 장 시작·마감 브리핑 자동화",
+            "file": "07-5-briefing-automation.md"
+          },
+          {
+            "id": "07-6-stock-alerts",
+            "label": "07-6. 보유·관심 종목 변동 이벤트 알림",
+            "file": "07-6-stock-alerts.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-08",
+        "label": "08. 나만의 비서로 키우기 — 커스터마이징",
+        "file": "08-1-schedule-settings.md",
+        "children": [
+          {
+            "id": "08-1-schedule-settings",
+            "label": "08-1. 스케줄·알림 시간 바꾸기",
+            "file": "08-1-schedule-settings.md"
+          },
+          {
+            "id": "08-2-persona-settings",
+            "label": "08-2. 비서 말투·역할 설정",
+            "file": "08-2-persona-settings.md"
+          },
+          {
+            "id": "08-3-memory-usage",
+            "label": "08-3. 기억(메모리) 활용",
+            "file": "08-3-memory-usage.md"
+          },
+          {
+            "id": "08-4-notification-control",
+            "label": "08-4. 여러 알림 묶고 끄기",
+            "file": "08-4-notification-control.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-09",
+        "label": "09. 운영·보안·문제 해결",
+        "file": "09-1-api-key-security.md",
+        "children": [
+          {
+            "id": "09-1-api-key-security",
+            "label": "09-1. API 키·토큰 안전 관리",
+            "file": "09-1-api-key-security.md"
+          },
+          {
+            "id": "09-2-cost-management",
+            "label": "09-2. 비용 관리 — 쿼터·과금 모니터링",
+            "file": "09-2-cost-management.md"
+          },
+          {
+            "id": "09-3-troubleshooting",
+            "label": "09-3. 자주 나는 오류와 해결",
+            "file": "09-3-troubleshooting.md"
+          },
+          {
+            "id": "09-4-backup-recovery",
+            "label": "09-4. 백업과 복구",
+            "file": "09-4-backup-recovery.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-10",
+        "label": "10. 더 나아가기",
+        "file": "10-1-other-scenarios.md",
+        "children": [
+          {
+            "id": "10-1-other-scenarios",
+            "label": "10-1. 다른 비서 시나리오 — 일정·날씨·환율 등",
+            "file": "10-1-other-scenarios.md"
+          },
+          {
+            "id": "10-2-expansion-ideas",
+            "label": "10-2. 비서 확장 아이디어",
+            "file": "10-2-expansion-ideas.md"
+          },
+          {
+            "id": "10-3-community",
+            "label": "10-3. 커뮤니티와 자료",
+            "file": "10-3-community.md"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "llmwiki",
+    "title": "클로드 코드 멀티에이전트 팀 지식관리 완성 가이드",
+    "description": "LLMWiki로 팀의 지식을 사라지지 않는 장기 기억으로 — 자동 학습하는 AI 개발팀 구축",
+    "cover": null,
+    "lang": "ko",
+    "author": "Allen Kim",
+    "views": 0,
+    "likes": 0,
+    "repoFolder": "LLMWiki/pages",
+    "chapters": [
+      {
+        "id": "ch-01",
+        "label": "01. 왜 AI 팀은 기억을 잃어버리는가",
+        "file": "01-1-why-knowledge.md",
+        "children": [
+          {
+            "id": "01-1-why-knowledge",
+            "label": "01-1. 전편 복습과 한계: 멀티에이전트 팀의 지식 휘발 문제",
+            "file": "01-1-why-knowledge.md"
+          },
+          {
+            "id": "01-2-what-is-llmwiki",
+            "label": "01-2. LLMWiki란 무엇인가 — 팀의 외부 장기기억",
+            "file": "01-2-what-is-llmwiki.md"
+          },
+          {
+            "id": "01-2-session-end",
+            "label": "01-2. 세션이 종료되면 모든 지식이 사라진다",
+            "file": "01-2-session-end.md"
+          },
+          {
+            "id": "01-3-repeated-research",
+            "label": "01-3. 반복되는 조사와 동일한 실수",
+            "file": "01-3-repeated-research.md"
+          },
+          {
+            "id": "01-3-overview",
+            "label": "01-3. 이 책에서 만들 것: 전체 구조 미리 보기",
+            "file": "01-3-overview.md"
+          },
+          {
+            "id": "01-4-no-memory-limit",
+            "label": "01-4. 장기 기억이 없는 AI 팀의 한계",
+            "file": "01-4-no-memory-limit.md"
+          },
+          {
+            "id": "01-4-prerequisites",
+            "label": "01-4. 사전 준비: Obsidian·디렉토리·전편 팀 환경",
+            "file": "01-4-prerequisites.md"
+          },
+          {
+            "id": "01-5-system-overview",
+            "label": "01-5. 이 책에서 만들 시스템 전체 구조",
+            "file": "01-5-system-overview.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-02",
+        "label": "02. 실전 사례로 이해하는 LLMWiki",
+        "file": "02-1-atomic-note.md",
+        "children": [
+          {
+            "id": "02-1-atomic-note",
+            "label": "02-1. Atomic Note: 1파일 1개념 원칙",
+            "file": "02-1-atomic-note.md"
+          },
+          {
+            "id": "02-2-frontmatter",
+            "label": "02-2. YAML Frontmatter로 메타데이터 관리",
+            "file": "02-2-frontmatter.md"
+          },
+          {
+            "id": "02-3-bidirectional-links",
+            "label": "02-3. 양방향 링크([[wikilink]])와 지식 그래프",
+            "file": "02-3-bidirectional-links.md"
+          },
+          {
+            "id": "02-4-importance-score",
+            "label": "02-4. importance 점수와 지식 우선순위",
+            "file": "02-4-importance-score.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-03",
+        "label": "03. LLMWiki 아키텍처 이해",
+        "file": "03-1-pipeline-overview.md",
+        "children": [
+          {
+            "id": "03-1-pipeline-overview",
+            "label": "03-1. 파이프라인 전체 흐름: inbox에서 memory까지",
+            "file": "03-1-pipeline-overview.md"
+          },
+          {
+            "id": "03-2-researcher",
+            "label": "03-2. researcher: 개념 추출과 기존 지식 검색",
+            "file": "03-2-researcher.md"
+          },
+          {
+            "id": "03-3-writer",
+            "label": "03-3. writer: atomic note 생성과 자동 링크",
+            "file": "03-3-writer.md"
+          },
+          {
+            "id": "03-4-organizer-memory",
+            "label": "03-4. organizer·memory-manager: 정리와 INDEX 갱신",
+            "file": "03-4-organizer-memory.md"
+          },
+          {
+            "id": "03-5-git-automation",
+            "label": "03-5. git 커밋 자동화로 지식 버전 관리",
+            "file": "03-5-git-automation.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-04",
+        "label": "04. LLMWiki 설치와 초기 구성",
+        "file": "04-1-concepts-taxonomy.md",
+        "children": [
+          {
+            "id": "04-1-concepts-taxonomy",
+            "label": "4-1. concepts 9분류 체계",
+            "file": "04-1-concepts-taxonomy.md"
+          },
+          {
+            "id": "04-2-inbox-sources",
+            "label": "4-2. inbox·sources: 원본의 수명주기",
+            "file": "04-2-inbox-sources.md"
+          },
+          {
+            "id": "04-3-memory-index",
+            "label": "4-3. memory/INDEX.md: 세션 시작 첫 로드",
+            "file": "04-3-memory-index.md"
+          },
+          {
+            "id": "04-4-other-dirs",
+            "label": "4-4. people·projects·archive·templates",
+            "file": "04-4-other-dirs.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-05",
+        "label": "05. 지식의 최소 단위 만들기",
+        "file": "05-1-inbox-watch.md",
+        "children": [
+          {
+            "id": "05-1-inbox-watch",
+            "label": "05-1. inbox-watch.sh: 10초 폴링 감시자",
+            "file": "05-1-inbox-watch.md"
+          },
+          {
+            "id": "05-2-systemd-service",
+            "label": "05-2. systemd 서비스로 상시 실행",
+            "file": "05-2-systemd-service.md"
+          },
+          {
+            "id": "05-3-input-types",
+            "label": "05-3. 입력 유형별 처리 전략 (PDF·YouTube·LLM 대화·웹 아티클)",
+            "file": "05-3-input-types.md"
+          },
+          {
+            "id": "05-4-conflict-detection",
+            "label": "05-4. 충돌 감지와 question 병기",
+            "file": "05-4-conflict-detection.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-06",
+        "label": "06. Knowledge Pipeline 구축",
+        "file": "06-1-boot-layer.md",
+        "children": [
+          {
+            "id": "06-1-boot-layer",
+            "label": "06-1. work/memory: 얇은 부팅 레이어",
+            "file": "06-1-boot-layer.md"
+          },
+          {
+            "id": "06-2-ssot",
+            "label": "06-2. LLMWiKi: 본문 단일 진실 원천(SSOT)",
+            "file": "06-2-ssot.md"
+          },
+          {
+            "id": "06-3-boot-sequence",
+            "label": "06-3. 새 세션 부팅 순서 (INDEX→CLAUDE.md→pipeline→inbox)",
+            "file": "06-3-boot-sequence.md"
+          },
+          {
+            "id": "06-4-pointer-daily",
+            "label": "06-4. 포인터와 daily 로그로 맥락 잇기",
+            "file": "06-4-pointer-daily.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-07",
+        "label": "07. 디렉토리 구조 설계",
+        "file": "07-1-member-routing.md",
+        "children": [
+          {
+            "id": "07-1-member-routing",
+            "label": "7-1. 팀원별 전용 라우팅",
+            "file": "07-1-member-routing.md"
+          },
+          {
+            "id": "07-2-agent-roles",
+            "label": "7-2. agents/: 7명 역할·권한·전문영역",
+            "file": "07-2-agent-roles.md"
+          },
+          {
+            "id": "07-3-reporting-system",
+            "label": "7-3. CLAUDE.md에 보고 체계 명문화",
+            "file": "07-3-reporting-system.md"
+          },
+          {
+            "id": "07-4-team-integration",
+            "label": "7-4. 전편 팀 환경과의 통합",
+            "file": "07-4-team-integration.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-08",
+        "label": "08. Inbox 자동 처리 시스템",
+        "file": "08-1-project-log.md",
+        "children": [
+          {
+            "id": "08-1-project-log",
+            "label": "8-1. project-log 처리 4단계",
+            "file": "08-1-project-log.md"
+          },
+          {
+            "id": "08-2-impl-patterns",
+            "label": "8-2. 구현 산출물 → implementation·Patterns",
+            "file": "08-2-impl-patterns.md"
+          },
+          {
+            "id": "08-3-review-failures",
+            "label": "8-3. 리뷰·실패 기록 → review·failures",
+            "file": "08-3-review-failures.md"
+          },
+          {
+            "id": "08-4-design-system",
+            "label": "8-4. 디자인 산출물 → design-system",
+            "file": "08-4-design-system.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-09",
+        "label": "09. 2계층 메모리 시스템 구축",
+        "file": "09-1-backlink-search.md",
+        "children": [
+          {
+            "id": "09-1-backlink-search",
+            "label": "09-1. backlink로 지식 탐색하기",
+            "file": "09-1-backlink-search.md"
+          },
+          {
+            "id": "09-2-importance-recalc",
+            "label": "09-2. importance 재계산과 우선순위 유지",
+            "file": "09-2-importance-recalc.md"
+          },
+          {
+            "id": "09-3-orphan-notes",
+            "label": "09-3. orphan 노트 관리",
+            "file": "09-3-orphan-notes.md"
+          },
+          {
+            "id": "09-4-graph-growth",
+            "label": "09-4. 지식 그래프의 성장 관찰",
+            "file": "09-4-graph-growth.md"
+          }
+        ]
+      },
+      {
+        "id": "ch-10",
+        "label": "10. Claude Code 멀티에이전트 팀과 연계",
+        "file": "10-1-kanban-integration.md",
+        "children": [
+          {
+            "id": "10-1-kanban-integration",
+            "label": "10-1. 칸반 보드 연동 (처리 시작→Inbox, 완료→Done)",
+            "file": "10-1-kanban-integration.md"
+          },
+          {
+            "id": "10-2-maintenance",
+            "label": "10-2. 유지보수와 정합성 검증",
+            "file": "10-2-maintenance.md"
+          },
+          {
+            "id": "10-3-conclusion",
+            "label": "10-3. 확장 방향과 마무리",
+            "file": "10-3-conclusion.md"
+          }
         ]
       }
     ]
