@@ -1,7 +1,9 @@
 import BlogLayout from '@/components/blog/BlogLayout'
 import BlogSidebar from '@/components/blog/BlogSidebar'
 import BlogClientPage from './BlogClientPage'
-import { blogPosts, blogCategories, trendingPosts, recentPosts, blogTags } from '@/data/blogPosts'
+import { getAllPosts } from '@/lib/blog'
+import { blogCategories, blogTags } from '@/data/blogPosts'
+import type { BlogPost } from '@/lib/blog'
 
 export const metadata = {
   title: 'Blog',
@@ -9,6 +11,8 @@ export const metadata = {
 }
 
 export default function BlogPage() {
+  const posts = getAllPosts()
+
   const sidebarCategories = blogCategories.map((c) => ({
     id: c.id,
     label: c.label,
@@ -16,7 +20,35 @@ export default function BlogPage() {
     count: c.count,
   }))
 
-  const categories = ['All', ...Array.from(new Set(blogPosts.map((p) => p.category)))]
+  const trendingPosts = posts.slice(0, 3).map((p, i) => ({
+    id: p.id,
+    title: p.title,
+    href: `/blog/${p.slug}`,
+    views: [1240, 890, 670][i],
+  }))
+
+  const recentPosts = posts.slice(0, 3).map((p) => ({
+    id: p.id,
+    title: p.title,
+    href: `/blog/${p.slug}`,
+    date: p.date,
+  }))
+
+  const categories = ['All', ...Array.from(new Set(posts.map((p) => p.category)))]
+
+  const clientPosts = posts.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    category: p.category,
+    tags: p.tags,
+    date: p.date,
+    readingTime: p.readingTime,
+    wordCount: p.wordCount,
+    githubUrl: p.githubUrl,
+    seriesId: p.seriesId,
+  }))
 
   return (
     <div data-testid="blog-page">
@@ -40,7 +72,7 @@ export default function BlogPage() {
           />
         }
       >
-        <BlogClientPage posts={blogPosts} categories={categories} />
+        <BlogClientPage posts={clientPosts} categories={categories} />
       </BlogLayout>
     </div>
   )

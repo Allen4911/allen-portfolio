@@ -55,4 +55,50 @@ describe('BlogClientPage', () => {
     expect(screen.getByRole('button', { name: 'Next.js' })).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute('aria-pressed', 'false')
   })
+
+  describe('search', () => {
+    it('renders a search input', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      expect(screen.getByRole('searchbox')).toBeInTheDocument()
+    })
+
+    it('filters posts by title keyword', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Claude API' } })
+      const postList = screen.getByTestId('blog-post-list')
+      expect(postList.children.length).toBe(1)
+      expect(screen.getByText(/Claude API와 Prompt Caching/)).toBeInTheDocument()
+    })
+
+    it('filters posts by excerpt keyword', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'tmux' } })
+      const postList = screen.getByTestId('blog-post-list')
+      expect(postList.children.length).toBe(1)
+      expect(screen.getByRole('heading', { name: /OpenClaw/ })).toBeInTheDocument()
+    })
+
+    it('shows all posts when search is cleared', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Claude' } })
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: '' } })
+      const postList = screen.getByTestId('blog-post-list')
+      expect(postList.children.length).toBe(blogPosts.length)
+    })
+
+    it('is case-insensitive', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'claude api' } })
+      const postList = screen.getByTestId('blog-post-list')
+      expect(postList.children.length).toBe(1)
+    })
+
+    it('combines search with category filter', () => {
+      render(<BlogClientPage posts={blogPosts} categories={categories} />)
+      fireEvent.click(screen.getByRole('button', { name: 'AI / LLM' }))
+      fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'Claude' } })
+      const postList = screen.getByTestId('blog-post-list')
+      expect(postList.children.length).toBe(1)
+    })
+  })
 })

@@ -104,7 +104,7 @@ export default function Footer() {
           }}
         >
           <p className="text-fine-print" style={{ color: 'var(--color-ink-muted-48)' }}>
-            Copyright 2026 Allen Kim. All rights reserved.
+            Copyright 2026 Allen. All rights reserved.
           </p>
           <p className="text-fine-print" style={{ color: 'var(--color-ink-muted-48)' }}>
             Built with Next.js and Tailwind CSS

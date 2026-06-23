@@ -36,7 +36,7 @@ export default function HeroSection() {
               className="text-hero-display"
               style={{ marginBottom: '20px' }}
             >
-              Allen Kim
+              Allen
             </h1>
 
             <p

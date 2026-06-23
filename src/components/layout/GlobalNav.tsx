@@ -61,7 +61,7 @@ export default function GlobalNav() {
         >
           <Link
             href="/"
-            aria-label="Allen Kim Home"
+            aria-label="Allen Home"
             style={{
               color: 'var(--color-on-dark)',
               fontSize: '17px',

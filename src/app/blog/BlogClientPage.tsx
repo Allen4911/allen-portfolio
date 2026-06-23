@@ -11,14 +11,41 @@ interface BlogClientPageProps {
 
 export default function BlogClientPage({ posts, categories }: BlogClientPageProps) {
   const [activeCategory, setActiveCategory] = useState('All')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'All') return posts
-    return posts.filter((p) => p.category === activeCategory)
-  }, [posts, activeCategory])
+    let result = activeCategory === 'All' ? posts : posts.filter((p) => p.category === activeCategory)
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter(
+        (p) => p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q)
+      )
+    }
+    return result
+  }, [posts, activeCategory, searchQuery])
 
   return (
     <>
+      <input
+        type="search"
+        role="searchbox"
+        placeholder="제목 또는 내용으로 검색..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        aria-label="Search blog posts"
+        style={{
+          width: '100%',
+          padding: '10px 16px',
+          borderRadius: '10px',
+          border: '1px solid #e0e0e0',
+          fontSize: '14px',
+          color: '#1d1d1f',
+          marginBottom: '20px',
+          outline: 'none',
+          boxSizing: 'border-box',
+        }}
+      />
+
       <div
         style={{
           display: 'flex',

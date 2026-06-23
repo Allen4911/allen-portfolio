@@ -229,7 +229,7 @@ export default function AboutPage() {
                     className="text-caption-strong"
                     style={{ color: 'var(--color-primary)', textDecoration: 'none' }}
                   >
-                    WikiDocs에서 읽기 →
+                    Blog에서 읽기 →
                   </a>
                 )}
               </div>

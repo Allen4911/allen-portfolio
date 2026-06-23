@@ -1,20 +1,40 @@
 import { notFound } from 'next/navigation'
 import BlogLayout from '@/components/blog/BlogLayout'
 import BlogSidebar from '@/components/blog/BlogSidebar'
-import { blogPosts } from '@/data/blogPosts'
+import { getAllPosts, getPostBySlug } from '@/lib/blog'
 
-export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }))
+export async function generateStaticParams() {
+  return getAllPosts().map((p) => ({ slug: p.slug }))
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug)
+  const post = getPostBySlug(params.slug)
   if (!post) return {}
-  return { title: post.title, description: post.excerpt }
+
+  const title = post.seoTitle ?? post.title
+  const description = post.metaDescription ?? post.excerpt
+  const image = post.ogImage
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      ...(image ? { images: [{ url: image, width: 1200, height: 500, alt: title }] } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      ...(image ? { images: [image] } : {}),
+    },
+  }
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug)
+  const post = getPostBySlug(params.slug)
   if (!post) notFound()
 
   return (
@@ -55,12 +75,16 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="border-t border-[#e0e0e0] dark:border-[#3a3a3c] pt-6">
-            <p className="text-[17px] leading-[1.47] tracking-[-0.374px] text-[#1d1d1f] dark:text-white">
-              {post.excerpt}
-            </p>
-            <p className="mt-4 text-[15px] text-[#7a7a7a] dark:text-[#8a8a8e]">
-              (본문 콘텐츠는 MDX 연동 후 추가 예정)
-            </p>
+            <div
+              className="prose prose-lg max-w-none text-[#1d1d1f] dark:text-white"
+              data-testid="blog-content"
+            >
+              {post.content.split('\n').map((line, i) => (
+                <p key={i} className="text-[17px] leading-[1.47] tracking-[-0.374px] mb-4">
+                  {line}
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-2">

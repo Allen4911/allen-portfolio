@@ -4,7 +4,7 @@
 
   <!-- Top nav bar -->
   <rect width="620" height="52" fill="#fff" opacity="0.85"/>
-  <text x="32" y="31" fill="#1d1d1f" font-size="14" font-family="system-ui, -apple-system, sans-serif" font-weight="600">Allen Kim</text>
+  <text x="32" y="31" fill="#1d1d1f" font-size="14" font-family="system-ui, -apple-system, sans-serif" font-weight="600">Allen</text>
   <text x="420" y="31" fill="#1d1d1f" font-size="11" font-family="system-ui, sans-serif">Projects</text>
   <text x="480" y="31" fill="#1d1d1f" font-size="11" font-family="system-ui, sans-serif">Skills</text>
   <text x="530" y="31" fill="#1d1d1f" font-size="11" font-family="system-ui, sans-serif">Contact</text>
@@ -12,7 +12,7 @@
   <!-- Hero section -->
   <rect x="0" y="52" width="620" height="160" fill="#1d1d1f"/>
   <text x="310" y="110" text-anchor="middle" fill="#a1a1a6" font-size="12" font-family="system-ui, sans-serif" letter-spacing="2">DEVELOPER · AI BUILDER</text>
-  <text x="310" y="148" text-anchor="middle" fill="#fff" font-size="30" font-family="system-ui, -apple-system, sans-serif" font-weight="600">Allen Kim</text>
+  <text x="310" y="148" text-anchor="middle" fill="#fff" font-size="30" font-family="system-ui, -apple-system, sans-serif" font-weight="600">Allen</text>
   <text x="310" y="174" text-anchor="middle" fill="#a1a1a6" font-size="12" font-family="system-ui, sans-serif">AI 팀 운용 전문가 · Full-Stack Developer</text>
 
   <!-- Action button -->
