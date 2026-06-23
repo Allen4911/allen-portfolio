@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 380" width="1040" height="380" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif">
+  <defs>
+    <linearGradient id="bgr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1040" height="380" rx="10" fill="url(#bgr)"/>
+  <rect x="0" y="0" width="1040" height="3" fill="#10b981" opacity="0.85"/>
+  <text x="520" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#f0f6fc">비서가 맡는 네 가지 역할</text>
+
+  <!-- center -->
+  <circle cx="520" cy="205" r="58" fill="#161b22" stroke="#10b981" stroke-width="2"/>
+  <text x="520" y="200" text-anchor="middle" font-size="30">🤖</text>
+  <text x="520" y="232" text-anchor="middle" font-size="15" font-weight="700" fill="#10b981">AI 비서</text>
+
+  <!-- 4 role cards -->
+  <g>
+    <rect x="70" y="90" width="270" height="100" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="100" y="130" font-size="26">📰</text>
+    <text x="140" y="125" font-size="16" font-weight="600" fill="#f0f6fc">뉴스 큐레이터</text>
+    <text x="140" y="150" font-size="12.5" fill="#8b949e">매일 아침 헤드라인 3~5건 요약</text>
+    <text x="140" y="170" font-size="12.5" fill="#8b949e">09:00 텔레그램 브리핑</text>
+
+    <rect x="700" y="90" width="270" height="100" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="730" y="130" font-size="26">🇺🇸</text>
+    <text x="770" y="125" font-size="16" font-weight="600" fill="#f0f6fc">영어 선생님</text>
+    <text x="770" y="150" font-size="12.5" fill="#8b949e">오늘의 표현 + 예문 + 해설</text>
+    <text x="770" y="170" font-size="12.5" fill="#8b949e">하루 하나씩 부담 없이</text>
+
+    <rect x="70" y="220" width="270" height="100" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="100" y="260" font-size="26">📈</text>
+    <text x="140" y="255" font-size="16" font-weight="600" fill="#f0f6fc">주식 알리미</text>
+    <text x="140" y="280" font-size="12.5" fill="#8b949e">장 시작·마감 시세 브리핑</text>
+    <text x="140" y="300" font-size="12.5" fill="#8b949e">관심 종목 변동 알림</text>
+
+    <rect x="700" y="220" width="270" height="100" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="730" y="260" font-size="26">💬</text>
+    <text x="770" y="255" font-size="16" font-weight="600" fill="#f0f6fc">즉석 질문 창구</text>
+    <text x="770" y="280" font-size="12.5" fill="#8b949e">이메일 초안·용어 설명 등</text>
+    <text x="770" y="300" font-size="12.5" fill="#8b949e">아무 때나 ChatGPT처럼</text>
+  </g>
+
+  <!-- spokes -->
+  <g stroke="#30363d" stroke-width="1.5">
+    <line x1="340" y1="140" x2="466" y2="190"/>
+    <line x1="700" y1="140" x2="574" y2="190"/>
+    <line x1="340" y1="270" x2="466" y2="220"/>
+    <line x1="700" y1="270" x2="574" y2="220"/>
+  </g>
+</svg>

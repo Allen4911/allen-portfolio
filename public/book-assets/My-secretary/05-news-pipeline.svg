@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 300" width="1040" height="300" font-family="'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif">
+  <defs>
+    <linearGradient id="bgn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1040" height="300" rx="10" fill="url(#bgn)"/>
+  <rect x="0" y="0" width="1040" height="3" fill="#22d3ee" opacity="0.85"/>
+  <text x="520" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#f0f6fc">아침 9시 뉴스 브리핑 자동화 흐름</text>
+
+  <g>
+    <rect x="40" y="95" width="220" height="110" rx="14" fill="#161b22" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="150" y="138" text-anchor="middle" font-size="30">📡</text>
+    <text x="150" y="172" text-anchor="middle" font-size="15" font-weight="600" fill="#f0f6fc">뉴스 수집</text>
+    <text x="150" y="193" text-anchor="middle" font-size="12.5" fill="#8b949e">RSS · 네이버 뉴스 API</text>
+
+    <rect x="320" y="95" width="220" height="110" rx="14" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
+    <text x="430" y="138" text-anchor="middle" font-size="30">🧠</text>
+    <text x="430" y="172" text-anchor="middle" font-size="15" font-weight="600" fill="#f0f6fc">ChatGPT 요약</text>
+    <text x="430" y="193" text-anchor="middle" font-size="12.5" fill="#8b949e">헤드라인 3~5건 정리</text>
+
+    <rect x="600" y="95" width="220" height="110" rx="14" fill="#161b22" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="710" y="138" text-anchor="middle" font-size="30">📨</text>
+    <text x="710" y="172" text-anchor="middle" font-size="15" font-weight="600" fill="#f0f6fc">텔레그램 전송</text>
+    <text x="710" y="193" text-anchor="middle" font-size="12.5" fill="#8b949e">내 채팅으로 브리핑</text>
+
+    <rect x="880" y="95" width="120" height="110" rx="14" fill="url(#bgn)" stroke="#f59e0b" stroke-width="2"/>
+    <text x="940" y="138" text-anchor="middle" font-size="30">⏰</text>
+    <text x="940" y="172" text-anchor="middle" font-size="15" font-weight="600" fill="#fbbf24">매일 09:00</text>
+    <text x="940" y="193" text-anchor="middle" font-size="12.5" fill="#8b949e">스케줄 실행</text>
+  </g>
+
+  <g>
+    <polygon points="260,150 320,150 312,143 312,157" fill="#22d3ee"/>
+    <polygon points="540,150 600,150 592,143 592,157" fill="#10b981"/>
+    <line x1="260" y1="150" x2="318" y2="150" stroke="#30363d" stroke-width="2"/>
+    <line x1="540" y1="150" x2="598" y2="150" stroke="#30363d" stroke-width="2"/>
+    <line x1="820" y1="150" x2="878" y2="150" stroke="#30363d" stroke-width="2" stroke-dasharray="4 3"/>
+    <polygon points="820,150 878,150 870,143 870,157" fill="#f59e0b"/>
+  </g>
+
+  <text x="520" y="255" text-anchor="middle" font-size="13" fill="#6e7681">수집 → 요약 → 전송, 이 파이프라인을 매일 아침 9시에 자동 실행하도록 스케줄링합니다</text>
+</svg>
