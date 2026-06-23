@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import SkillsGrid from '@/components/sections/SkillsGrid'
 
 export const metadata = {
@@ -9,18 +8,25 @@ export const metadata = {
 
 const publications = [
   {
-    title: '나만의 AI 비서 만들기: Openclaw 실전 가이드',
+    title: '클로드 코드 멀티에이전트 팀 자동화 완성 가이드',
     description:
-      '스마트폰 하나로 6인 AI 팀을 원격 지휘하는 실전 가이드. Openclaw + Claude CLI + Telegram 브릿지 구축, TMUX 멀티에이전트 팀 운용, 장기 기억 시스템, 토큰 최적화(RTK)까지 단계별 수록.',
-    url: 'https://wikidocs.net/book/19639',
-    status: '출판됨',
+      'Windows·macOS·Docker 위에서 Claude Code 6인 에이전트 팀을 구성하고 Remote-Control로 원격 지휘. 환경 구축, 팀 레이아웃, 자동 실행, 핵심 도구(gstack·GSD·superpowers), 실전 운용까지 10장 수록.',
+    url: '/books/claude-team-agent',
+    status: '전자책',
   },
   {
-    title: 'Claude Code 팀 에이전트 운용 가이드',
+    title: '텔레그램으로 만드는 나만의 AI 비서',
     description:
-      'Remote-Control로 멀티에이전트를 원격 지휘. Claude Code + TMUX 기반 팀 에이전트 구성, gstack/superpowers/GSD 통합 워크플로우, Triple Crown 전략 및 실전 운용 노하우.',
-    url: null,
-    status: '집필 중',
+      '매일 아침 뉴스·영어회화·한미 주식 브리핑을 텔레그램으로 받는 ChatGPT 자동화 가이드. OpenClaw + ChatGPT(OAuth/API) 연결, 뉴스·주식 파이프라인, 09:00 스케줄링까지 단계별 수록.',
+    url: '/books/my-secretary',
+    status: '전자책 · WikiDocs',
+  },
+  {
+    title: '클로드 코드 멀티에이전트 팀 지식관리 완성 가이드',
+    description:
+      'LLMWiki로 팀의 지식을 사라지지 않는 장기 기억으로. Atomic Note·Knowledge Pipeline·2계층 메모리·팀 산출물 자동 지식화로 스스로 학습하는 AI 개발팀을 구축하는 후속편.',
+    url: '/books/llmwiki',
+    status: '전자책',
   },
 ]
 
@@ -28,7 +34,7 @@ const timeline = [
   {
     year: '2023 –',
     title: 'AI Developer Tooling & Technical Writing',
-    description: 'Claude CLI 기반 멀티에이전트 팀 시스템 구축. 전자책 2권 저술 — 나만의 AI 비서 만들기(WikiDocs 출판), Claude Code 팀 에이전트 운용 가이드(집필 중).',
+    description: 'Claude CLI 기반 멀티에이전트 팀 시스템 구축. 전자책 3권 저술 — 멀티에이전트 팀 자동화 완성 가이드, 나만의 AI 비서 만들기, 팀 지식관리 완성 가이드.',
   },
   {
     year: '2020 –',
@@ -66,33 +72,12 @@ export default function AboutPage() {
             maxWidth: '780px',
             margin: '0 auto',
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1fr',
             gap: '64px',
             alignItems: 'center',
           }}
           className="about-hero-grid"
         >
-          {/* Profile photo */}
-          <div
-            style={{
-              aspectRatio: '1/1',
-              borderRadius: '18px',
-              backgroundColor: 'var(--color-canvas-parchment)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Image
-              src="/data/profile.webp"
-              alt="Allen Kim"
-              width={400}
-              height={400}
-              data-testid="about-profile-image"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '18px', display: 'block' }}
-            />
-          </div>
-
           {/* Bio */}
           <div>
             <p
@@ -102,7 +87,7 @@ export default function AboutPage() {
               About
             </p>
             <h1 className="text-display-lg" style={{ marginBottom: '20px' }}>
-              Allen Kim
+              Allen
             </h1>
             <p className="text-body" style={{ marginBottom: '16px' }}>
               AI 팀 자동화와 Agentic AI Workflow를 중심으로, 사람과 AI가 협업하는 멀티 에이전트 시스템을 설계합니다.
