@@ -3,52 +3,100 @@
 @tailwind utilities;
 
 :root {
-  /* Color tokens */
-  --color-primary: #0066cc;
-  --color-primary-focus: #0071e3;
-  --color-primary-on-dark: #2997ff;
-  --color-ink: #1d1d1f;
-  --color-body-muted: #cccccc;
-  --color-ink-muted-80: #333333;
-  --color-ink-muted-48: #7a7a7a;
-  --color-divider-soft: #f0f0f0;
-  --color-hairline: #e0e0e0;
-  --color-canvas: #ffffff;
-  --color-canvas-parchment: #f5f5f7;
-  --color-surface-pearl: #fafafc;
-  --color-surface-tile-1: #272729;
-  --color-surface-tile-2: #2a2a2c;
-  --color-surface-tile-3: #252527;
+  /* ── Acctual Color Tokens (14색) ── */
+  --color-paper-white: #ffffff;
+  --color-cool-mist: #f7fafc;
+  --color-stone-edge: #afb0b1;
+  --color-graphite-mute: #8d8d8d;
+  --color-charcoal-whisper: #1e1e1e;
+  --color-midnight-ink: #0f0f0f;
+  --color-onyx-button: #0d111b;
+  --color-tinted-shadow: #242628;
+  --color-invoice-blue: #0098f2;
+  --color-magenta-tile: #f200ca;
+  --color-iris-glow: #6d56fc;
+  --color-wash-sky: #cfeafa;
+  --color-wash-lilac: #e1e0fc;
+  --color-wash-petal: #f6d2f4;
+
+  /* ── Typography ── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-handwritten: var(--font-caveat), cursive;
+
+  --text-caption: 12px;    --leading-caption: 1.2;
+  --text-body-sm: 14px;    --leading-body-sm: 1.43;
+  --text-body: 16px;       --leading-body: 1.5;
+  --text-subheading: 20px; --leading-subheading: 1.4;  --tracking-subheading: -0.24px;
+  --text-heading: 32px;    --leading-heading: 1.25;    --tracking-heading: -0.64px;
+  --text-heading-lg: 40px; --leading-heading-lg: 1.21; --tracking-heading-lg: -1.2px;
+  --text-display: 64px;    --leading-display: 1.13;    --tracking-display: -2.4px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* ── Spacing ── */
+  --spacing-4: 4px;   --spacing-8: 8px;   --spacing-16: 16px;
+  --spacing-20: 20px; --spacing-24: 24px; --spacing-32: 32px;
+  --spacing-40: 40px; --spacing-48: 48px; --spacing-64: 64px;
+  --spacing-80: 80px; --spacing-96: 96px; --spacing-100: 100px;
+
+  /* ── Border Radius ── */
+  --radius-tags: 1250px;
+  --radius-cards: 20px;
+  --radius-images: 32px;
+  --radius-inputs: 12px;
+  --radius-buttons: 100px;
+
+  /* ── Shadows ── */
+  --shadow-subtle: rgba(0, 0, 0, 0.06) 0px 2.5px 2.5px 0px;
+  --shadow-cta: rgb(36, 38, 40) 0px 0px 0px 1px, rgba(27, 28, 29, 0.48) 0px 1px 2px 0px;
+
+  /* ── Layout ── */
+  --page-max-width: 1200px;
+  --section-gap: 64px;
+  --card-padding: 24px;
+  --element-gap: 16px;
+  --nav-height: 44px;
+
+  /* ── Legacy aliases — Phase2 bridge (서연 컴포넌트 리팩터 전까지) ── */
+  --color-primary: var(--color-invoice-blue);
+  --color-primary-focus: var(--color-invoice-blue);
+  --color-primary-on-dark: var(--color-invoice-blue);
+  --color-ink: var(--color-midnight-ink);
+  --color-body-muted: var(--color-graphite-mute);
+  --color-ink-muted-80: var(--color-charcoal-whisper);
+  --color-ink-muted-48: var(--color-graphite-mute);
+  --color-divider-soft: var(--color-stone-edge);
+  --color-hairline: var(--color-stone-edge);
+  --color-canvas: var(--color-cool-mist);
+  --color-canvas-parchment: var(--color-cool-mist);
+  --color-surface-pearl: var(--color-paper-white);
+  --color-surface-tile-1: var(--color-onyx-button);
+  --color-surface-tile-2: var(--color-onyx-button);
+  --color-surface-tile-3: var(--color-onyx-button);
   --color-surface-black: #000000;
   --color-on-dark: #ffffff;
-
-  /* Spacing tokens */
-  --spacing-section: 80px;
-  --spacing-card: 24px;
-
-  /* Shadow */
-  --shadow-product: rgba(0, 0, 0, 0.22) 3px 5px 30px;
-
-  /* Nav */
-  --nav-height: 44px;
+  --spacing-section: var(--spacing-64);
+  --spacing-card: var(--card-padding);
+  --shadow-product: var(--shadow-subtle);
 }
 
 @layer base {
   html {
-    font-size: 17px;
+    color-scheme: light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   body {
-    font-family: 'SF Pro Display', var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    font-feature-settings: 'ss03';
-    color: var(--color-ink);
-    background-color: var(--color-canvas);
-    font-size: 17px;
-    line-height: 1.47;
-    letter-spacing: -0.374px;
+    font-family: var(--font-sans);
+    color: var(--color-midnight-ink);
+    background-color: var(--color-cool-mist);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    letter-spacing: 0;
   }
 
   * {
@@ -157,31 +205,33 @@
   }
 
   /* Button components */
+  /* Acctual Primary CTA — onyx pill, no hover lift */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-primary);
+    background-color: var(--color-onyx-button);
     color: #ffffff;
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.47;
-    letter-spacing: -0.374px;
-    padding: 11px 22px;
-    border-radius: 9999px;
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-body-sm);
+    letter-spacing: 0;
+    padding: 13px 24px;
+    border-radius: var(--radius-buttons);
     border: none;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    box-shadow: var(--shadow-cta);
     text-decoration: none;
     white-space: nowrap;
+    transition: background-color 0.15s ease;
   }
 
-  .btn-primary:active {
-    transform: scale(0.95);
+  .btn-primary:hover {
+    background-color: #080b12;
   }
 
   .btn-primary:focus-visible {
-    outline: 2px solid var(--color-primary-focus);
+    outline: 2px solid var(--color-invoice-blue);
     outline-offset: 2px;
   }
 
@@ -274,26 +324,26 @@
   }
 
   .tile-dark {
-    background-color: var(--color-surface-tile-1);
-    color: var(--color-on-dark);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
     padding: var(--spacing-section) 0;
   }
 
   .tile-dark-2 {
-    background-color: var(--color-surface-tile-2);
-    color: var(--color-on-dark);
+    background-color: var(--color-canvas-parchment);
+    color: var(--color-ink);
     padding: var(--spacing-section) 0;
   }
 
   .tile-dark-3 {
-    background-color: var(--color-surface-tile-3);
-    color: var(--color-on-dark);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
     padding: var(--spacing-section) 0;
   }
 
   /* Utility card */
   .card-utility {
-    background-color: var(--color-canvas);
+    background-color: var(--color-surface-pearl);
     border: 1px solid var(--color-hairline);
     border-radius: 18px;
     padding: var(--spacing-card);
@@ -332,6 +382,89 @@
 
   .link-on-dark:hover {
     text-decoration: underline;
+  }
+
+  /* ── Acctual type scale utilities ── */
+  .text-acctual-display {
+    font-size: var(--text-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-acctual-heading-lg {
+    font-size: var(--text-heading-lg);
+    line-height: var(--leading-heading-lg);
+    letter-spacing: var(--tracking-heading-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-acctual-heading {
+    font-size: var(--text-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-acctual-subheading {
+    font-size: var(--text-subheading);
+    line-height: var(--leading-subheading);
+    letter-spacing: var(--tracking-subheading);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-acctual-body {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-acctual-body-sm {
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-body-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-acctual-caption {
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+  }
+
+  /* ── Acctual surface utilities ── */
+  .surface-canvas { background-color: var(--color-cool-mist); }
+
+  .surface-card {
+    background-color: var(--color-paper-white);
+    border-radius: var(--radius-cards);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .surface-wash-sky   { background-color: var(--color-wash-sky); }
+  .surface-wash-lilac { background-color: var(--color-wash-lilac); }
+  .surface-wash-petal { background-color: var(--color-wash-petal); }
+
+  /* Eyebrow tag — Invoice Blue, no container */
+  .eyebrow-tag {
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-invoice-blue);
+    letter-spacing: 0;
+  }
+
+  /* Accent link — Invoice Blue */
+  .link-accent {
+    color: var(--color-invoice-blue);
+    text-decoration: none;
+  }
+
+  .link-accent:hover {
+    text-decoration: underline;
+  }
+
+  /* Handwritten testimonial attribution — Caveat only */
+  .font-handwritten {
+    font-family: var(--font-handwritten);
+    font-weight: var(--font-weight-semibold);
   }
 }
 
@@ -443,8 +576,7 @@
 }
 
 .book-card:hover {
-  box-shadow: var(--shadow-product);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtle);
 }
 
 .toc-chapter {

@@ -9,7 +9,7 @@ export default function ContactSection() {
         <div>
           <p
             className="text-tagline"
-            style={{ color: 'var(--color-primary-on-dark)', marginBottom: '16px' }}
+            style={{ color: 'var(--color-primary)', marginBottom: '16px' }}
           >
             Contact
           </p>
@@ -20,7 +20,7 @@ export default function ContactSection() {
 
           <p
             className="text-body"
-            style={{ color: 'var(--color-body-muted)', marginBottom: '40px' }}
+            style={{ color: 'var(--color-charcoal-whisper)', marginBottom: '40px' }}
           >
             Open to new opportunities, collaborations, and interesting conversations.
           </p>
@@ -40,7 +40,7 @@ export default function ContactSection() {
               href="https://github.com/Allen4911"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary-dark"
+              className="btn-secondary"
             >
               GitHub
             </a>

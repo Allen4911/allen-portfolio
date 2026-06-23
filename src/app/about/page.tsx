@@ -94,7 +94,7 @@ export default function AboutPage() {
             </p>
             <p
               className="text-body"
-              style={{ color: 'var(--color-ink-muted-48)', marginBottom: '32px' }}
+              style={{ color: 'var(--color-charcoal-whisper)', marginBottom: '32px' }}
             >
               Redis, GitHub, Obsidian, Claude Code 기반의 자동화 환경 위에서 효율적인 워크플로우와 안정적인 개발 시스템을 구축하고 있습니다. 복잡한 기술을 단순한 흐름으로 연결하고, 깔끔한 인터페이스와 견고한 구조를 만드는 것을 지향합니다.
             </p>
@@ -115,7 +115,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: '780px', margin: '0 auto' }}>
           <p
             className="text-tagline"
-            style={{ color: 'var(--color-primary-on-dark)', marginBottom: '16px', textAlign: 'center' }}
+            style={{ color: 'var(--color-primary)', marginBottom: '16px', textAlign: 'center' }}
           >
             Journey
           </p>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 <div style={{ paddingTop: '4px' }}>
                   <span
                     className="text-caption-strong"
-                    style={{ color: 'var(--color-primary-on-dark)' }}
+                    style={{ color: 'var(--color-primary)' }}
                   >
                     {item.year}
                   </span>
@@ -149,7 +149,7 @@ export default function AboutPage() {
                       style={{
                         width: '1px',
                         height: 'calc(100% - 24px)',
-                        backgroundColor: '#3a3a3c',
+                        backgroundColor: 'var(--color-hairline)',
                         marginTop: '12px',
                       }}
                     />
@@ -161,7 +161,7 @@ export default function AboutPage() {
                   <h3 className="text-body-strong" style={{ marginBottom: '8px' }}>
                     {item.title}
                   </h3>
-                  <p className="text-body" style={{ color: 'var(--color-body-muted)' }}>
+                  <p className="text-body" style={{ color: 'var(--color-charcoal-whisper)' }}>
                     {item.description}
                   </p>
                 </div>
@@ -218,7 +218,7 @@ export default function AboutPage() {
                     {pub.status}
                   </span>
                 </div>
-                <p className="text-body" style={{ color: 'var(--color-ink-muted-48)' }}>
+                <p className="text-body" style={{ color: 'var(--color-charcoal-whisper)' }}>
                   {pub.description}
                 </p>
                 {pub.url && (

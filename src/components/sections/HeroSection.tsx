@@ -48,9 +48,10 @@ export default function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  backgroundColor: 'var(--color-primary)',
-                  color: '#ffffff',
-                  fontWeight: '700',
+                  backgroundColor: 'transparent',
+                  border: '1px solid var(--color-hairline)',
+                  color: 'var(--color-ink)',
+                  fontWeight: '500',
                   fontSize: '13px',
                   letterSpacing: '0.02em',
                   padding: '4px 12px',
@@ -71,7 +72,7 @@ export default function HeroSection() {
 
             <p
               className="text-body"
-              style={{ color: 'var(--color-ink-muted-48)', marginBottom: '32px', maxWidth: '480px' }}
+              style={{ color: 'var(--color-charcoal-whisper)', marginBottom: '32px', maxWidth: '480px' }}
             >
               React, Next.js, design systems, accessibility, and AI-assisted developer workflows.
             </p>

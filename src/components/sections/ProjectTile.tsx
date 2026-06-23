@@ -1,22 +1,16 @@
 import Link from 'next/link'
 import Tag from '@/components/ui/Tag'
 
-function ProjectVisual({ project, isDark }) {
-  const surface = isDark ? 'var(--color-ink)' : 'var(--color-surface-pearl)'
-  const border = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'
-  const muted = isDark ? 'var(--color-body-muted)' : 'var(--color-ink-muted-48)'
-  const ink = isDark ? 'var(--color-on-dark)' : 'var(--color-ink)'
-  const innerCardBg = isDark ? 'var(--color-surface-tile-3)' : 'var(--color-canvas)'
-
+function ProjectVisual({ project }) {
   if (project.image) {
     return (
       <div
-        className={`product-frame ${isDark ? 'product-frame-dark' : ''}`}
+        className="product-frame"
         style={{
           width: '100%',
           maxWidth: '620px',
           margin: '0 auto 40px',
-          backgroundColor: surface,
+          backgroundColor: 'var(--color-surface-pearl)',
           overflow: 'hidden',
         }}
         aria-hidden="true"
@@ -32,12 +26,12 @@ function ProjectVisual({ project, isDark }) {
 
   return (
     <div
-      className={`product-frame ${isDark ? 'product-frame-dark' : ''}`}
+      className="product-frame"
       style={{
         width: '100%',
         maxWidth: '620px',
         margin: '0 auto 40px',
-        backgroundColor: surface,
+        backgroundColor: 'var(--color-surface-pearl)',
       }}
       aria-hidden="true"
     >
@@ -51,7 +45,7 @@ function ProjectVisual({ project, isDark }) {
       >
         <div
           style={{
-            borderRight: `1px solid ${border}`,
+            borderRight: '1px solid rgba(0,0,0,0.08)',
             padding: '28px',
             display: 'flex',
             flexDirection: 'column',
@@ -60,12 +54,12 @@ function ProjectVisual({ project, isDark }) {
           }}
         >
           <div>
-            <p className="text-caption" style={{ color: muted, marginBottom: '10px' }}>
+            <p className="text-caption" style={{ color: 'var(--color-ink-muted-48)', marginBottom: '10px' }}>
               Featured project
             </p>
             <p
               style={{
-                color: ink,
+                color: 'var(--color-ink)',
                 fontSize: '34px',
                 fontWeight: 600,
                 lineHeight: 1.1,
@@ -76,7 +70,7 @@ function ProjectVisual({ project, isDark }) {
               {project.icon}
             </p>
           </div>
-          <p className="text-caption" style={{ color: muted }}>
+          <p className="text-caption" style={{ color: 'var(--color-ink-muted-48)' }}>
             {project.result}
           </p>
         </div>
@@ -94,22 +88,22 @@ function ProjectVisual({ project, isDark }) {
             <div
               key={copy}
               style={{
-                border: `1px solid ${border}`,
+                border: '1px solid rgba(0,0,0,0.08)',
                 borderRadius: '11px',
                 padding: '16px',
-                backgroundColor: innerCardBg,
+                backgroundColor: 'var(--color-canvas)',
               }}
             >
               <p
                 className="text-caption-strong"
                 style={{
-                  color: i === 0 ? muted : 'var(--color-primary)',
+                  color: i === 0 ? 'var(--color-ink-muted-48)' : 'var(--color-primary)',
                   marginBottom: '6px',
                 }}
               >
                 {i === 0 ? 'Problem' : 'Solution'}
               </p>
-              <p className="text-caption" style={{ color: ink, margin: 0 }}>
+              <p className="text-caption" style={{ color: 'var(--color-ink)', margin: 0 }}>
                 {copy}
               </p>
             </div>
@@ -121,12 +115,7 @@ function ProjectVisual({ project, isDark }) {
 }
 
 export default function ProjectTile({ project, index }) {
-  const isDark = index % 2 !== 0
-  const isParchment = !isDark && index % 3 === 2
-
-  const tileClass = isDark ? 'tile-dark' : isParchment ? 'tile-parchment' : 'tile-light'
-  const descColor = isDark ? 'var(--color-body-muted)' : 'var(--color-ink-muted-48)'
-  const categoryColor = isDark ? 'var(--color-primary-on-dark)' : 'var(--color-primary)'
+  const tileClass = index % 2 === 0 ? 'tile-light' : 'tile-parchment'
 
   return (
     <section
@@ -142,7 +131,7 @@ export default function ProjectTile({ project, index }) {
         }}
       >
         <div>
-          <p className="text-tagline" style={{ color: categoryColor, marginBottom: '12px' }}>
+          <p className="text-tagline" style={{ color: 'var(--color-primary)', marginBottom: '12px' }}>
             {project.category}
           </p>
 
@@ -155,7 +144,7 @@ export default function ProjectTile({ project, index }) {
 
           <p
             className="text-lead project-tile-desc"
-            style={{ color: descColor, margin: '0 auto 32px', maxWidth: '720px' }}
+            style={{ color: 'var(--color-charcoal-whisper)', margin: '0 auto 32px', maxWidth: '720px' }}
           >
             {project.description}
           </p>
@@ -170,13 +159,13 @@ export default function ProjectTile({ project, index }) {
             }}
           >
             {project.tech.map((t) => (
-              <Tag key={t} variant={isDark ? 'outline-dark' : 'outline'}>
+              <Tag key={t} variant="outline">
                 {t}
               </Tag>
             ))}
           </div>
 
-          <ProjectVisual project={project} isDark={isDark} />
+          <ProjectVisual project={project} />
 
           <div
             style={{
@@ -194,7 +183,7 @@ export default function ProjectTile({ project, index }) {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={isDark ? 'btn-secondary-dark' : 'btn-secondary'}
+                className="btn-secondary"
               >
                 Live Demo
               </a>
@@ -203,7 +192,7 @@ export default function ProjectTile({ project, index }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={isDark ? 'btn-secondary-dark' : 'btn-secondary'}
+                className="btn-secondary"
               >
                 GitHub
               </a>

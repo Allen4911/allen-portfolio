@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           >
             Projects
           </h1>
-          <p className="text-lead projects-hero-sub" style={{ color: 'var(--color-ink-muted-48)' }}>
+          <p className="text-lead projects-hero-sub" style={{ color: 'var(--color-charcoal-whisper)' }}>
             {"Things I've built — problems I found and chose to solve."}
           </p>
         </div>

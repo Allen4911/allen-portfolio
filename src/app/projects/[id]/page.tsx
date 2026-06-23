@@ -22,10 +22,10 @@ export default function ProjectDetailPage({ params }) {
 
   return (
     <>
-      {/* Back link + dark hero */}
+      {/* Back link + hero */}
       <section
+        className="tile-parchment"
         style={{
-          backgroundColor: '#272729',
           padding: '80px 22px',
         }}
         aria-label={`Project: ${project.title}`}
@@ -38,7 +38,7 @@ export default function ProjectDetailPage({ params }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              color: '#2997ff',
+              color: 'var(--color-invoice-blue)',
               fontSize: '14px',
               letterSpacing: '-0.224px',
               textDecoration: 'none',
@@ -56,7 +56,7 @@ export default function ProjectDetailPage({ params }) {
               fontWeight: '600',
               lineHeight: '1.19',
               letterSpacing: '0.231px',
-              color: '#2997ff',
+              color: 'var(--color-invoice-blue)',
               marginBottom: '12px',
             }}
           >
@@ -70,7 +70,7 @@ export default function ProjectDetailPage({ params }) {
               fontWeight: '600',
               lineHeight: '1.07',
               letterSpacing: '-0.28px',
-              color: '#ffffff',
+              color: 'var(--color-ink)',
               marginBottom: '20px',
             }}
             className="detail-title"
@@ -85,7 +85,7 @@ export default function ProjectDetailPage({ params }) {
               fontWeight: '400',
               lineHeight: '1.14',
               letterSpacing: '0.196px',
-              color: '#cccccc',
+              color: 'var(--color-charcoal-whisper)',
               marginBottom: '40px',
             }}
             className="detail-subtitle"
@@ -99,11 +99,11 @@ export default function ProjectDetailPage({ params }) {
               width: '100%',
               aspectRatio: '16/9',
               borderRadius: '18px',
-              backgroundColor: '#1a1a1c',
+              backgroundColor: 'var(--color-canvas-parchment)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: 'rgba(0,0,0,0.22) 3px 5px 30px',
+              boxShadow: 'var(--shadow-subtle)',
               marginBottom: '40px',
             }}
           >
@@ -111,7 +111,7 @@ export default function ProjectDetailPage({ params }) {
               style={{
                 fontSize: '64px',
                 fontWeight: '700',
-                color: '#3a3a3c',
+                color: 'var(--color-ink-muted-48)',
                 fontFamily: 'monospace',
                 letterSpacing: '-2px',
               }}
@@ -137,7 +137,7 @@ export default function ProjectDetailPage({ params }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary-dark"
+                className="btn-secondary"
               >
                 GitHub
               </a>
@@ -147,7 +147,7 @@ export default function ProjectDetailPage({ params }) {
                 href={project.readmeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary-dark"
+                className="btn-secondary"
               >
                 View README
               </a>
@@ -215,7 +215,7 @@ export default function ProjectDetailPage({ params }) {
                       fontWeight: '600',
                       lineHeight: '1.29',
                       letterSpacing: '-0.224px',
-                      color: '#0066cc',
+                      color: 'var(--color-invoice-blue)',
                       marginBottom: '6px',
                     }}
                   >

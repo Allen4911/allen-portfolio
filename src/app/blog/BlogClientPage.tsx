@@ -64,15 +64,15 @@ export default function BlogClientPage({ posts, categories }: BlogClientPageProp
             style={{
               padding: '8px 16px',
               borderRadius: '9999px',
-              border: activeCategory === cat ? '2px solid #0071e3' : '1px solid #e0e0e0',
-              backgroundColor: activeCategory === cat ? '#f0f7ff' : '#ffffff',
-              color: activeCategory === cat ? '#0066cc' : '#1d1d1f',
+              border: activeCategory === cat ? '2px solid var(--color-invoice-blue)' : '1px solid #e0e0e0',
+              backgroundColor: '#ffffff',
+              color: activeCategory === cat ? 'var(--color-invoice-blue)' : '#1d1d1f',
               fontSize: '13px',
               fontWeight: activeCategory === cat ? 600 : 400,
               letterSpacing: '-0.08px',
               cursor: 'pointer',
               outline: 'none',
-              transition: 'border 0.15s ease, background 0.15s ease',
+              transition: 'border 0.15s ease, color 0.15s ease',
             }}
           >
             {cat}
@@ -173,14 +173,7 @@ export default function BlogClientPage({ posts, categories }: BlogClientPageProp
 
       <style>{`
         .blog-post-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        @media (prefers-color-scheme: dark) {
-          .blog-post-card {
-            border-color: #3a3a3c !important;
-            background-color: #1c1c1e !important;
-          }
+          box-shadow: var(--shadow-subtle);
         }
       `}</style>
     </>

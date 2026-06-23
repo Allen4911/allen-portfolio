@@ -23,10 +23,10 @@ export default function StudyNotePage({ params }) {
 
   return (
     <>
-      {/* Dark hero header */}
+      {/* Hero header */}
       <section
+        className="tile-parchment"
         style={{
-          backgroundColor: '#272729',
           padding: '80px 22px',
         }}
         aria-label={`Study note: ${note.title}`}
@@ -39,7 +39,7 @@ export default function StudyNotePage({ params }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              color: '#2997ff',
+              color: 'var(--color-invoice-blue)',
               fontSize: '14px',
               letterSpacing: '-0.224px',
               textDecoration: 'none',
@@ -60,9 +60,9 @@ export default function StudyNotePage({ params }) {
               flexWrap: 'wrap',
             }}
           >
-            <Tag variant="outline-dark">{note.category}</Tag>
-            <span style={{ fontSize: '12px', color: '#cccccc' }}>{note.readingTime}</span>
-            <span style={{ fontSize: '12px', color: '#7a7a7a' }}>{note.date}</span>
+            <Tag variant="outline">{note.category}</Tag>
+            <span style={{ fontSize: '12px', color: 'var(--color-ink-muted-48)' }}>{note.readingTime}</span>
+            <span style={{ fontSize: '12px', color: 'var(--color-ink-muted-48)' }}>{note.date}</span>
           </div>
 
           {/* Title */}
@@ -72,7 +72,7 @@ export default function StudyNotePage({ params }) {
               fontWeight: '600',
               lineHeight: '1.10',
               letterSpacing: '0',
-              color: '#ffffff',
+              color: 'var(--color-ink)',
               marginBottom: '20px',
             }}
             className="note-title"
@@ -87,7 +87,7 @@ export default function StudyNotePage({ params }) {
               fontWeight: '400',
               lineHeight: '1.47',
               letterSpacing: '-0.374px',
-              color: '#cccccc',
+              color: 'var(--color-ink-muted-48)',
             }}
           >
             {note.excerpt}

@@ -5,7 +5,7 @@ interface SkillsGridProps {
 }
 
 const levelBadge: Record<string, { bg: string; color: string }> = {
-  Advanced: { bg: 'var(--color-primary)', color: 'var(--color-on-dark)' },
+  Advanced: { bg: 'var(--color-canvas-parchment)', color: 'var(--color-invoice-blue)' },
   Intermediate: { bg: 'var(--color-hairline)', color: 'var(--color-ink)' },
   Beginner: { bg: 'var(--color-divider-soft)', color: 'var(--color-ink-muted-48)' },
 }
@@ -23,7 +23,7 @@ export default function SkillsGrid({ id }: SkillsGridProps) {
           <h2 className="text-display-lg" style={{ marginBottom: '12px' }}>
             Skills
           </h2>
-          <p className="text-body" style={{ color: 'var(--color-ink-muted-48)' }}>
+          <p className="text-body" style={{ color: 'var(--color-charcoal-whisper)' }}>
             Technologies I work with daily.
           </p>
         </div>

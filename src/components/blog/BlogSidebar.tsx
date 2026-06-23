@@ -234,7 +234,7 @@ export default function BlogSidebar({
               <li key={tutorial.id}>
                 <Link
                   href={tutorial.href}
-                  className="group block hover:-translate-y-0.5 transition-transform duration-200"
+                  className="group block transition-colors duration-150"
                 >
                   <div className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white group-hover:text-[#0066cc] dark:group-hover:text-[#2997ff] transition-colors duration-150 leading-snug mb-1">
                     {tutorial.title}
@@ -344,7 +344,7 @@ export default function BlogSidebar({
               height="10"
               viewBox="0 0 10 10"
               fill="none"
-              className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-150"
+              className="opacity-40 group-hover:opacity-100 transition-opacity duration-150"
               aria-hidden="true"
             >
               <path d="M1 9L9 1M9 1H3M9 1v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

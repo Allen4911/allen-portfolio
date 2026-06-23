@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLanguage } from '@/contexts/LanguageContext'
-import DarkModeToggle from '@/components/ui/DarkModeToggle'
 
 const navLinks = [
   { label: 'About', href: '/about' },
@@ -17,15 +16,8 @@ const navLinks = [
 
 export default function GlobalNav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const { locale, toggleLanguage } = useLanguage()
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 4)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -43,9 +35,7 @@ export default function GlobalNav() {
           right: 0,
           zIndex: 50,
           height: '44px',
-          backgroundColor: scrolled ? 'rgba(0,0,0,0.86)' : 'var(--color-surface-black)',
-          backdropFilter: scrolled ? 'saturate(180%) blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'saturate(180%) blur(20px)' : 'none',
+          backgroundColor: '#ffffff',
         }}
       >
         <div
@@ -63,7 +53,7 @@ export default function GlobalNav() {
             href="/"
             aria-label="Allen Home"
             style={{
-              color: 'var(--color-on-dark)',
+              color: '#0d111b',
               fontSize: '17px',
               fontWeight: 600,
               letterSpacing: '-0.374px',
@@ -85,7 +75,7 @@ export default function GlobalNav() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  color: pathname === link.href ? 'var(--color-on-dark)' : 'rgba(255,255,255,0.72)',
+                  color: '#0f0f0f',
                   fontSize: '12px',
                   fontWeight: 400,
                   letterSpacing: '-0.12px',
@@ -100,16 +90,14 @@ export default function GlobalNav() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <DarkModeToggle />
-
             <button
               onClick={toggleLanguage}
               aria-label={locale === 'en' ? 'Switch to Korean (KO)' : 'Switch to English (EN)'}
               style={{
                 background: 'none',
-                border: '1px solid rgba(255,255,255,0.3)',
+                border: '1px solid rgba(0,0,0,0.2)',
                 borderRadius: '4px',
-                color: 'rgba(255,255,255,0.72)',
+                color: '#0f0f0f',
                 fontSize: '11px',
                 fontWeight: 600,
                 letterSpacing: '0.5px',
@@ -125,8 +113,8 @@ export default function GlobalNav() {
             <Link
               href="/contact"
               style={{
-                backgroundColor: 'var(--color-primary)',
-                color: 'var(--color-on-dark)',
+                backgroundColor: 'var(--color-onyx-button)',
+                color: '#ffffff',
                 fontSize: '12px',
                 fontWeight: 400,
                 letterSpacing: '-0.12px',
@@ -164,7 +152,7 @@ export default function GlobalNav() {
                     display: 'block',
                     width: '18px',
                     height: '1px',
-                    backgroundColor: 'var(--color-on-dark)',
+                    backgroundColor: '#0f0f0f',
                     opacity: menuOpen && line === 1 ? 0 : 1,
                     transform:
                       menuOpen && line === 0
@@ -191,9 +179,7 @@ export default function GlobalNav() {
             left: 0,
             right: 0,
             zIndex: 49,
-            backgroundColor: 'rgba(0,0,0,0.95)',
-            backdropFilter: 'saturate(180%) blur(20px)',
-            WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+            backgroundColor: '#ffffff',
             padding: '16px 22px 24px',
           }}
           className="mobile-menu"
@@ -204,14 +190,14 @@ export default function GlobalNav() {
               href={link.href}
               style={{
                 display: 'block',
-                color: 'var(--color-on-dark)',
+                color: '#0f0f0f',
                 fontSize: '17px',
                 fontWeight: 400,
                 letterSpacing: '-0.374px',
                 lineHeight: 1.47,
                 padding: '10px 0',
                 textDecoration: 'none',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                borderBottom: '1px solid rgba(0,0,0,0.08)',
               }}
             >
               {link.label}
@@ -238,7 +224,7 @@ export default function GlobalNav() {
         }
 
         .nav-desktop-link:hover {
-          color: var(--color-on-dark) !important;
+          color: #0d111b !important;
         }
 
         .hire-cta:active {

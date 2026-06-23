@@ -17,7 +17,7 @@ export default function BooksSection({ id }: BooksSectionProps) {
           <h2 className="text-display-lg" style={{ marginBottom: '12px' }}>
             Books
           </h2>
-          <p className="text-body" style={{ color: 'var(--color-ink-muted-48)' }}>
+          <p className="text-body" style={{ color: 'var(--color-charcoal-whisper)' }}>
             직접 읽고 정리한 책 노트
           </p>
         </div>

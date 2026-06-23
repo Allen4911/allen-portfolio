@@ -102,7 +102,7 @@ export default function StudyClientPage({ notes, categories }) {
             style={{
               padding: '8px 16px',
               borderRadius: '9999px',
-              border: activeCategory === cat ? '2px solid #0071e3' : '1px solid #e0e0e0',
+              border: activeCategory === cat ? '2px solid var(--color-invoice-blue)' : '1px solid #e0e0e0',
               backgroundColor: activeCategory === cat ? '#ffffff' : '#ffffff',
               color: '#1d1d1f',
               fontSize: '14px',
