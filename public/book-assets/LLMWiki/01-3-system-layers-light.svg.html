@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="720" height="360">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f5f5f7"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="56" fill="#0066cc"/>
+  <text x="450" y="28" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="19" font-weight="bold" fill="white" text-anchor="middle">3계층 시스템 전체 아키텍처</text>
+  <text x="450" y="47" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#cce0ff" text-anchor="middle">아래층이 완성되어야 위층을 올릴 수 있다 · Layer 1 → Layer 2 → Layer 3</text>
+
+  <!-- ===== LEFT PANEL: 3 Layers ===== -->
+
+  <!-- Layer 3 box: 팀 연계 -->
+  <rect x="15" y="68" width="540" height="88" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <!-- Left strip -->
+  <rect x="15" y="68" width="72" height="88" rx="8" fill="#7c3aed"/>
+  <rect x="75" y="68" width="12" height="88" fill="#7c3aed"/>
+  <text x="51" y="107" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="bold">Layer</text>
+  <text x="51" y="128" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="bold">3</text>
+  <!-- Content -->
+  <text x="320" y="91" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="15" font-weight="bold" fill="#4c1d95" text-anchor="middle">팀 연계</text>
+  <text x="430" y="91" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#7c3aed" text-anchor="middle">7 · 8장</text>
+  <text x="320" y="111" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#5b21b6" text-anchor="middle">멀티에이전트 팀과 LLMWiki 통합</text>
+  <!-- Sub items -->
+  <rect x="100" y="124" width="130" height="22" rx="4" fill="#c4b5fd" opacity="0.5"/>
+  <text x="165" y="139" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#4c1d95" text-anchor="middle">팀원별 라우팅 (7장)</text>
+  <rect x="245" y="124" width="150" height="22" rx="4" fill="#c4b5fd" opacity="0.5"/>
+  <text x="320" y="139" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#4c1d95" text-anchor="middle">산출물 자동 지식화 (8장)</text>
+  <rect x="410" y="124" width="130" height="22" rx="4" fill="#c4b5fd" opacity="0.5"/>
+  <text x="475" y="139" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#4c1d95" text-anchor="middle">리뷰·ADR → 지식화</text>
+
+  <!-- Arrow 2 → 3 -->
+  <line x1="285" y1="168" x2="285" y2="161" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="320" y="178" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#9ca3af" text-anchor="middle">Layer 1·2 완성 후</text>
+
+  <!-- Layer 2 box: 자동 파이프라인 -->
+  <rect x="15" y="178" width="540" height="88" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <rect x="15" y="178" width="72" height="88" rx="8" fill="#059669"/>
+  <rect x="75" y="178" width="12" height="88" fill="#059669"/>
+  <text x="51" y="217" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="bold">Layer</text>
+  <text x="51" y="238" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="bold">2</text>
+  <text x="310" y="201" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="15" font-weight="bold" fill="#064e3b" text-anchor="middle">자동 파이프라인</text>
+  <text x="435" y="201" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#059669" text-anchor="middle">3 · 5 · 6장</text>
+  <text x="310" y="221" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#065f46" text-anchor="middle">inbox → researcher → writer → organizer → git</text>
+  <rect x="100" y="234" width="130" height="22" rx="4" fill="#a7f3d0" opacity="0.6"/>
+  <text x="165" y="249" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#064e3b" text-anchor="middle">파이프라인 스크립트 (3장)</text>
+  <rect x="245" y="234" width="130" height="22" rx="4" fill="#a7f3d0" opacity="0.6"/>
+  <text x="310" y="249" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#064e3b" text-anchor="middle">inbox-watch.sh (5장)</text>
+  <rect x="390" y="234" width="150" height="22" rx="4" fill="#a7f3d0" opacity="0.6"/>
+  <text x="465" y="249" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#064e3b" text-anchor="middle">2계층 메모리 연결 (6장)</text>
+
+  <!-- Arrow 1 → 2 -->
+  <line x1="285" y1="278" x2="285" y2="271" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="320" y="288" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#9ca3af" text-anchor="middle">Layer 1 완성 후</text>
+
+  <!-- Layer 1 box: LLMWiki 저장소 -->
+  <rect x="15" y="288" width="540" height="88" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <rect x="15" y="288" width="72" height="88" rx="8" fill="#d97706"/>
+  <rect x="75" y="288" width="12" height="88" fill="#d97706"/>
+  <text x="51" y="327" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="bold">Layer</text>
+  <text x="51" y="348" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" font-weight="bold">1</text>
+  <text x="310" y="311" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="15" font-weight="bold" fill="#78350f" text-anchor="middle">LLMWiki 저장소</text>
+  <text x="430" y="311" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#d97706" text-anchor="middle">2 · 4장</text>
+  <text x="310" y="331" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#92400e" text-anchor="middle">Atomic Note · YAML Frontmatter · 양방향 링크 · importance</text>
+  <rect x="100" y="344" width="130" height="22" rx="4" fill="#fde68a" opacity="0.7"/>
+  <text x="165" y="359" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#78350f" text-anchor="middle">핵심 개념 4가지 (2장)</text>
+  <rect x="245" y="344" width="150" height="22" rx="4" fill="#fde68a" opacity="0.7"/>
+  <text x="320" y="359" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#78350f" text-anchor="middle">9개 카테고리 디렉토리 (4장)</text>
+  <rect x="410" y="344" width="130" height="22" rx="4" fill="#fde68a" opacity="0.7"/>
+  <text x="475" y="359" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#78350f" text-anchor="middle">INDEX.md 관리</text>
+
+  <!-- Bottom note -->
+  <text x="285" y="400" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">★ 기초(1장) 위에 저장소(2~4) → 파이프라인(3·5·6) → 팀연계(7·8) → 검색·운영(9~10)</text>
+
+  <!-- ===== RIGHT PANEL: Chapter Roadmap ===== -->
+  <rect x="573" y="68" width="312" height="22" rx="4" fill="#e5e7eb"/>
+  <text x="729" y="83" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" font-weight="bold" fill="#374151" text-anchor="middle">장별 로드맵</text>
+
+  <!-- Chapter rows (9 rows × 38px = 342px, y=90 to y=432) -->
+  <!-- Row headers -->
+  <text x="598" y="103" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9.5" fill="#9ca3af" text-anchor="middle">장</text>
+  <text x="729" y="103" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9.5" fill="#9ca3af" text-anchor="middle">핵심 산출물 / 완료 기준</text>
+
+  <!-- ch02 Layer1 -->
+  <rect x="573" y="107" width="4" height="34" rx="2" fill="#d97706"/>
+  <rect x="573" y="107" width="312" height="34" fill="#fffbeb" rx="3"/>
+  <rect x="573" y="107" width="4" height="34" fill="#d97706"/>
+  <text x="596" y="120" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#78350f">02장</text>
+  <text x="596" y="135" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#92400e">Atomic Note 개념 · 첫 노트 직접 작성</text>
+
+  <!-- ch03 Layer2 -->
+  <rect x="573" y="143" width="4" height="34" rx="2" fill="#059669"/>
+  <rect x="573" y="143" width="312" height="34" fill="#f0fdf4" rx="3"/>
+  <rect x="573" y="143" width="4" height="34" fill="#059669"/>
+  <text x="596" y="156" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#064e3b">03장</text>
+  <text x="596" y="171" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#065f46">Knowledge Pipeline · inbox 자동 처리</text>
+
+  <!-- ch04 Layer1 -->
+  <rect x="573" y="179" width="4" height="34" rx="2" fill="#d97706"/>
+  <rect x="573" y="179" width="312" height="34" fill="#fffbeb" rx="3"/>
+  <rect x="573" y="179" width="4" height="34" fill="#d97706"/>
+  <text x="596" y="192" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#78350f">04장</text>
+  <text x="596" y="207" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#92400e">9개 카테고리 디렉토리 · LLMWiki/ 완성</text>
+
+  <!-- ch05 Layer2 -->
+  <rect x="573" y="215" width="4" height="34" rx="2" fill="#059669"/>
+  <rect x="573" y="215" width="312" height="34" fill="#f0fdf4" rx="3"/>
+  <rect x="573" y="215" width="4" height="34" fill="#059669"/>
+  <text x="596" y="228" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#064e3b">05장</text>
+  <text x="596" y="243" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#065f46">inbox-watch.sh · 10초 폴링 상시 작동</text>
+
+  <!-- ch06 Layer2 -->
+  <rect x="573" y="251" width="4" height="34" rx="2" fill="#059669"/>
+  <rect x="573" y="251" width="312" height="34" fill="#f0fdf4" rx="3"/>
+  <rect x="573" y="251" width="4" height="34" fill="#059669"/>
+  <text x="596" y="264" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#064e3b">06장</text>
+  <text x="596" y="279" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#065f46">2계층 메모리 · 자동 컨텍스트 복원</text>
+
+  <!-- ch07 Layer3 -->
+  <rect x="573" y="287" width="4" height="34" rx="2" fill="#7c3aed"/>
+  <rect x="573" y="287" width="312" height="34" fill="#f5f3ff" rx="3"/>
+  <rect x="573" y="287" width="4" height="34" fill="#7c3aed"/>
+  <text x="596" y="300" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#4c1d95">07장</text>
+  <text x="596" y="315" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#5b21b6">팀원별 라우팅 · inbox 경로 분리</text>
+
+  <!-- ch08 Layer3 -->
+  <rect x="573" y="323" width="4" height="34" rx="2" fill="#7c3aed"/>
+  <rect x="573" y="323" width="312" height="34" fill="#f5f3ff" rx="3"/>
+  <rect x="573" y="323" width="4" height="34" fill="#7c3aed"/>
+  <text x="596" y="336" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#4c1d95">08장</text>
+  <text x="596" y="351" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#5b21b6">팀 산출물 → 지식화 · 리뷰→Patterns/</text>
+
+  <!-- ch09 ops -->
+  <rect x="573" y="359" width="4" height="34" rx="2" fill="#6b7280"/>
+  <rect x="573" y="359" width="312" height="34" fill="#f9fafb" rx="3"/>
+  <rect x="573" y="359" width="4" height="34" fill="#6b7280"/>
+  <text x="596" y="372" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#374151">09장</text>
+  <text x="596" y="387" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#4b5563">검색·backlink · 연관 개념 탐색</text>
+
+  <!-- ch10 ops -->
+  <rect x="573" y="395" width="4" height="34" rx="2" fill="#6b7280"/>
+  <rect x="573" y="395" width="312" height="34" fill="#f9fafb" rx="3"/>
+  <rect x="573" y="395" width="4" height="34" fill="#6b7280"/>
+  <text x="596" y="408" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#374151">10장</text>
+  <text x="596" y="423" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#4b5563">칸반 연동·정합성 검증 · 운영 자동화</text>
+
+  <!-- Legend -->
+  <rect x="573" y="432" width="8" height="8" rx="2" fill="#d97706"/>
+  <text x="585" y="441" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#78350f">Layer 1</text>
+  <rect x="628" y="432" width="8" height="8" rx="2" fill="#059669"/>
+  <text x="640" y="441" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b">Layer 2</text>
+  <rect x="683" y="432" width="8" height="8" rx="2" fill="#7c3aed"/>
+  <text x="695" y="441" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#4c1d95">Layer 3</text>
+  <rect x="738" y="432" width="8" height="8" rx="2" fill="#6b7280"/>
+  <text x="750" y="441" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#374151">검색·운영</text>
+</svg>

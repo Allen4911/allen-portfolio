@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 900 500" font-family="Gulim, Noto Sans CJK KR, Arial, sans-serif">
+<rect width="900" height="500" fill="#f5f5f7"/>
+
+<!-- 제목 -->
+<rect x="20" y="16" width="860" height="46" rx="10" fill="#0066cc"/>
+<text x="450" y="34" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">concepts/ 9분류 결정 흐름도</text>
+<text x="450" y="52" text-anchor="middle" font-size="11" fill="#cce0ff">새 개념이 들어올 때 — 어느 폴더에 넣을까?</text>
+
+<!-- 시작 -->
+<rect x="320" y="76" width="260" height="40" rx="20" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+<text x="450" y="101" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">새 개념 파일 생성</text>
+
+<!-- 화살표 -->
+<line x1="450" y1="116" x2="450" y2="136" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- 질문 박스 -->
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0066cc"/></marker>
+</defs>
+<rect x="290" y="138" width="320" height="38" rx="8" fill="#e8f4ff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="450" y="162" text-anchor="middle" font-size="13" fill="#0066cc" font-weight="bold">이 개념은 무엇에 관한 것인가?</text>
+
+<!-- 9개 카테고리 박스 (3행 3열) -->
+<!-- Row 1 -->
+<rect x="20" y="200" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="105" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">AI/</text>
+<text x="105" y="243" text-anchor="middle" font-size="10" fill="#7a7a7a">LLM·에이전트 원리</text>
+<text x="105" y="258" text-anchor="middle" font-size="10" fill="#7a7a7a">RAG·컨텍스트·쿼리</text>
+
+<rect x="210" y="200" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="295" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Business/</text>
+<text x="295" y="243" text-anchor="middle" font-size="10" fill="#7a7a7a">도메인·비즈니스</text>
+<text x="295" y="258" text-anchor="middle" font-size="10" fill="#7a7a7a">제품·서비스 맥락</text>
+
+<rect x="400" y="200" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="485" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Design/</text>
+<text x="485" y="243" text-anchor="middle" font-size="10" fill="#7a7a7a">UI·시각·인쇄 설계</text>
+<text x="485" y="258" text-anchor="middle" font-size="10" fill="#7a7a7a">SVG·색상·레이아웃</text>
+
+<!-- Row 2 -->
+<rect x="20" y="286" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="105" y="311" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Memory/</text>
+<text x="105" y="329" text-anchor="middle" font-size="10" fill="#7a7a7a">지식 구조 설계 원칙</text>
+<text x="105" y="344" text-anchor="middle" font-size="10" fill="#7a7a7a">atomic note·그래프</text>
+
+<rect x="210" y="286" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="295" y="311" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Patterns/</text>
+<text x="295" y="329" text-anchor="middle" font-size="10" fill="#7a7a7a">재사용 엔지니어링</text>
+<text x="295" y="344" text-anchor="middle" font-size="10" fill="#7a7a7a">패턴·안티패턴</text>
+
+<rect x="400" y="286" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="485" y="311" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Programming/</text>
+<text x="485" y="329" text-anchor="middle" font-size="10" fill="#7a7a7a">언어·프레임워크</text>
+<text x="485" y="344" text-anchor="middle" font-size="10" fill="#7a7a7a">알고리즘</text>
+
+<!-- Row 3 -->
+<rect x="590" y="200" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="675" y="225" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Testing/</text>
+<text x="675" y="243" text-anchor="middle" font-size="10" fill="#7a7a7a">테스트 전략·도구</text>
+<text x="675" y="258" text-anchor="middle" font-size="10" fill="#7a7a7a">TDD·E2E·단위</text>
+
+<rect x="590" y="286" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="675" y="311" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Tools/</text>
+<text x="675" y="329" text-anchor="middle" font-size="10" fill="#7a7a7a">팀 사용 도구 지식</text>
+<text x="675" y="344" text-anchor="middle" font-size="10" fill="#7a7a7a">Obsidian·LangChain</text>
+
+<rect x="305" y="372" width="170" height="68" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="390" y="397" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">Workflows/</text>
+<text x="390" y="415" text-anchor="middle" font-size="10" fill="#7a7a7a">반복 작업 흐름</text>
+<text x="390" y="430" text-anchor="middle" font-size="10" fill="#7a7a7a">파이프라인·자동화</text>
+
+<!-- 연결선: 질문 → 각 카테고리 -->
+<line x1="290" y1="157" x2="105" y2="200" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="340" y1="176" x2="295" y2="200" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="430" y1="176" x2="485" y2="200" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="610" y1="157" x2="675" y2="200" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="105" y1="268" x2="105" y2="286" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="295" y1="268" x2="295" y2="286" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="485" y1="268" x2="485" y2="286" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="675" y1="268" x2="675" y2="286" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="390" y1="176" x2="390" y2="372" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="4,3"/>
+
+<!-- 원칙 -->
+<rect x="20" y="460" width="860" height="28" rx="6" fill="#f0f0f0"/>
+<text x="450" y="479" text-anchor="middle" font-size="11" fill="#7a7a7a">💡 1파일 = 1개념 (atomic note) — 파일이 작고 독립적일수록 LLM이 정확하게 읽고 연결할 수 있습니다</text>
+</svg>

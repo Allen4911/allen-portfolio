@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="720" height="360">
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f5f5f7"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="56" fill="#0066cc"/>
+  <text x="450" y="28" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="19" font-weight="bold" fill="white" text-anchor="middle">importance 점수 — 세션 시작 시 로드 우선순위</text>
+  <text x="450" y="47" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#cce0ff" text-anchor="middle">노트가 1000개여도 컨텍스트는 유한 · importance가 높은 순서로 INDEX.md에 포함</text>
+
+  <!-- ===== LEFT SECTION: Bar chart of notes by importance ===== -->
+  <!-- Section header -->
+  <text x="20" y="78" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" font-weight="bold" fill="#374151">LLMWiki 전체 노트 (importance 순 정렬)</text>
+
+  <!-- Context window threshold line -->
+  <line x1="15" y1="310" x2="430" y2="310" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="18" y="323" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#ef4444">── 컨텍스트 한계 (importance 0.5)</text>
+
+  <!-- Y axis label -->
+  <text x="20" y="95" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9.5" fill="#6b7280">importance</text>
+  <text x="20" y="107" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af">1.0</text>
+  <text x="20" y="157" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af">0.8</text>
+  <text x="20" y="207" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af">0.6</text>
+  <text x="20" y="257" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af">0.4</text>
+  <text x="20" y="307" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af">0.2</text>
+
+  <!-- Bar chart: each bar = one note, sorted descending by importance -->
+  <!-- Bar 1: 배포-절차 importance=1.0 (green, included) -->
+  <rect x="50" y="108" width="34" height="200" rx="3" fill="#059669"/>
+  <text x="67" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="#374151" text-anchor="middle" transform="rotate(-40,67,320)">배포-절차</text>
+  <text x="67" y="102" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b" text-anchor="middle">1.0</text>
+
+  <!-- Bar 2: api-rate-limit importance=0.9 (green, included) -->
+  <rect x="90" y="128" width="34" height="180" rx="3" fill="#059669"/>
+  <text x="107" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="#374151" text-anchor="middle" transform="rotate(-40,107,320)">api-rate-limit</text>
+  <text x="107" y="122" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b" text-anchor="middle">0.9</text>
+
+  <!-- Bar 3: catch-any-antipattern importance=0.85 (green, included) -->
+  <rect x="130" y="138" width="34" height="170" rx="3" fill="#059669"/>
+  <text x="147" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#374151" text-anchor="middle" transform="rotate(-40,147,320)">catch-any...</text>
+  <text x="147" y="132" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b" text-anchor="middle">0.85</text>
+
+  <!-- Bar 4: error-response-200 importance=0.8 (light green, included) -->
+  <rect x="170" y="148" width="34" height="160" rx="3" fill="#34d399"/>
+  <text x="187" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#374151" text-anchor="middle" transform="rotate(-40,187,320)">error-resp-200</text>
+  <text x="187" y="142" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b" text-anchor="middle">0.8</text>
+
+  <!-- Bar 5: exponential-backoff importance=0.75 (light green, included) -->
+  <rect x="210" y="158" width="34" height="150" rx="3" fill="#34d399"/>
+  <text x="227" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#374151" text-anchor="middle" transform="rotate(-40,227,320)">exponential-...</text>
+  <text x="227" y="152" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#065f46" text-anchor="middle">0.75</text>
+
+  <!-- Bar 6: typescript-strict importance=0.65 (light green border case) -->
+  <rect x="250" y="178" width="34" height="130" rx="3" fill="#6ee7b7"/>
+  <text x="267" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#374151" text-anchor="middle" transform="rotate(-40,267,320)">ts-strict-null</text>
+  <text x="267" y="172" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#065f46" text-anchor="middle">0.65</text>
+
+  <!-- === THRESHOLD LINE AT y=310 (importance=0.5) === -->
+  <!-- Bar 7: old-library-usage importance=0.4 (gray, excluded) -->
+  <rect x="290" y="228" width="34" height="80" rx="3" fill="#d1d5db"/>
+  <text x="307" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#9ca3af" text-anchor="middle" transform="rotate(-40,307,320)">old-library-v1</text>
+  <text x="307" y="222" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle">0.4</text>
+
+  <!-- Bar 8: archived-decision importance=0.1 (gray, excluded) -->
+  <rect x="330" y="288" width="34" height="20" rx="3" fill="#d1d5db"/>
+  <text x="347" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#9ca3af" text-anchor="middle" transform="rotate(-40,347,320)">archived-dec...</text>
+  <text x="347" y="282" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle">0.1</text>
+
+  <!-- Labels -->
+  <rect x="50" y="108" width="215" height="12" rx="2" fill="#d1fae5" opacity="0.5"/>
+  <text x="158" y="119" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#064e3b" text-anchor="middle">✅ INDEX.md 포함 (≥0.5)</text>
+  <rect x="288" y="228" width="80" height="12" rx="2" fill="#f3f4f6" opacity="0.8"/>
+  <text x="328" y="239" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle">⏭ 생략</text>
+
+  <!-- Arrow between sections -->
+  <text x="450" y="215" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="28" fill="#0066cc" text-anchor="middle">→</text>
+  <text x="450" y="237" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">memory-manager</text>
+  <text x="450" y="251" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">세션 시작 시 생성</text>
+
+  <!-- ===== RIGHT SECTION: INDEX.md preview ===== -->
+  <rect x="475" y="68" width="415" height="372" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <!-- Header -->
+  <rect x="475" y="68" width="415" height="38" rx="8" fill="#f8fafc"/>
+  <rect x="475" y="88" width="415" height="18" fill="#f8fafc"/>
+  <text x="490" y="88" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#374151">📄 LLMWiki/memory/INDEX.md</text>
+  <text x="870" y="88" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9.5" fill="#9ca3af" text-anchor="end">2026-06-14 갱신</text>
+  <text x="490" y="102" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">세션 시작 시 첫 번째로 읽히는 파일 — 팀원 컨텍스트 부팅</text>
+
+  <!-- Section 1: 최우선 -->
+  <rect x="485" y="112" width="395" height="24" rx="4" fill="#d1fae5"/>
+  <text x="495" y="128" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#064e3b">## 최우선 (importance ≥ 0.8)</text>
+
+  <!-- Entries -->
+  <text x="495" y="151" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[배포-절차]]</text>
+  <text x="565" y="151" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— 스테이징 → 프로덕션 2단계 롤백 방법</text>
+  <rect x="840" y="141" width="40" height="16" rx="3" fill="#d1fae5"/>
+  <text x="860" y="153" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#059669" text-anchor="middle">1.0</text>
+
+  <text x="495" y="170" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[api-rate-limit]]</text>
+  <text x="577" y="170" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— 300req/min · 에러 200 응답</text>
+  <rect x="840" y="160" width="40" height="16" rx="3" fill="#d1fae5"/>
+  <text x="860" y="172" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#059669" text-anchor="middle">0.9</text>
+
+  <text x="495" y="189" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[catch-any-antipattern]]</text>
+  <text x="623" y="189" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— catch(any) 금지 · 타입 소실</text>
+  <rect x="840" y="179" width="40" height="16" rx="3" fill="#d1fae5"/>
+  <text x="860" y="191" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#059669" text-anchor="middle">0.85</text>
+
+  <text x="495" y="208" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[error-response-200]]</text>
+  <text x="607" y="208" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— 200 OK 에러 감지법</text>
+  <rect x="840" y="198" width="40" height="16" rx="3" fill="#d1fae5"/>
+  <text x="860" y="210" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#059669" text-anchor="middle">0.8</text>
+
+  <!-- Section 2: 주요 -->
+  <rect x="485" y="218" width="395" height="24" rx="4" fill="#dbeafe"/>
+  <text x="495" y="234" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#1e40af">## 주요 (importance 0.6 ~ 0.8)</text>
+
+  <text x="495" y="257" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[exponential-backoff]]</text>
+  <text x="613" y="257" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— 재시도 공식 · 최대 5회</text>
+  <rect x="840" y="247" width="40" height="16" rx="3" fill="#dbeafe"/>
+  <text x="860" y="259" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#1d4ed8" text-anchor="middle">0.75</text>
+
+  <text x="495" y="276" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[typescript-strict-null]]</text>
+  <text x="621" y="276" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#374151">— strictNullChecks 필수</text>
+  <rect x="840" y="266" width="40" height="16" rx="3" fill="#dbeafe"/>
+  <text x="860" y="278" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="#1d4ed8" text-anchor="middle">0.65</text>
+
+  <!-- Divider + below threshold section -->
+  <line x1="485" y1="290" x2="880" y2="290" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="485" y="295" width="395" height="24" rx="4" fill="#f3f4f6"/>
+  <text x="495" y="311" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#9ca3af">## 생략 (importance &lt; 0.5) — 필요 시 직접 검색</text>
+
+  <text x="495" y="333" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">[[old-library-v1]]  importance: 0.4  → ⏭ 생략</text>
+  <text x="495" y="352" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">[[archived-decision]]  importance: 0.1  → ⏭ 생략</text>
+  <text x="495" y="371" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#d1d5db">... (해당 없는 노트 다수 생략)</text>
+
+  <!-- Footer: recalculation note -->
+  <rect x="485" y="393" width="395" height="38" rx="4" fill="#fef9c3" stroke="#fbbf24" stroke-width="1"/>
+  <text x="683" y="408" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#78350f" text-anchor="middle" font-weight="bold">⟳ importance 자동 재계산</text>
+  <text x="683" y="425" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#92400e" text-anchor="middle">Backlink 수 ↑ → 점수 상승 · 오랜 미참조 → Recency decay</text>
+
+</svg>

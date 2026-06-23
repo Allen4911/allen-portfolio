@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 900 500" font-family="Gulim, Noto Sans CJK KR, Arial, sans-serif">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0066cc"/></marker>
+  <marker id="arrg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c7c7cc"/></marker>
+</defs>
+<rect width="900" height="500" fill="#f5f5f7"/>
+
+<!-- 제목 -->
+<rect x="20" y="14" width="860" height="46" rx="10" fill="#0066cc"/>
+<text x="450" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">7명 역할 · 지휘체계 · LLMWiki 연결</text>
+<text x="450" y="50" text-anchor="middle" font-size="11" fill="#cce0ff">agents/ 7개 파일 — 역할·권한·전문영역 + LLMWiki 산출 폴더</text>
+
+<!-- Allen -->
+<rect x="320" y="76" width="260" height="52" rx="10" fill="#1d1d1f"/>
+<text x="450" y="98" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Allen (실제 사용자)</text>
+<text x="450" y="116" text-anchor="middle" font-size="10" fill="#c7c7cc">Orchestrator · Telegram 지시 · 최종 의사결정</text>
+
+<!-- Allen → 쭌 화살표 -->
+<line x1="450" y1="128" x2="450" y2="148" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+<text x="458" y="142" font-size="9" fill="#0066cc">Telegram</text>
+
+<!-- 쭌 -->
+<rect x="290" y="150" width="320" height="52" rx="10" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>
+<text x="450" y="172" text-anchor="middle" font-size="14" font-weight="bold" fill="#0066cc">쭌 (Pane 0, Opus 4.8)</text>
+<text x="450" y="190" text-anchor="middle" font-size="10" fill="#7a7a7a">Context Manager · 5분 체크루프 · memory/ 갱신</text>
+
+<!-- 쭌 → 민준 화살표 -->
+<line x1="450" y1="202" x2="450" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+<text x="458" y="216" font-size="9" fill="#0066cc">pane-send.sh</text>
+
+<!-- 민준 -->
+<rect x="270" y="224" width="360" height="52" rx="10" fill="#ffffff" stroke="#0066cc" stroke-width="2.5"/>
+<text x="450" y="246" text-anchor="middle" font-size="14" font-weight="bold" fill="#0066cc">민준 (Pane 1, Opus 4.8)</text>
+<text x="450" y="264" text-anchor="middle" font-size="10" fill="#7a7a7a">PM · Architect · 칸반 관리 · projects/ 산출</text>
+
+<!-- 민준 → 팀원 4개 화살표 -->
+<line x1="310" y1="276" x2="100" y2="312" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="370" y1="276" x2="280" y2="312" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="530" y1="276" x2="620" y2="312" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="590" y1="276" x2="800" y2="312" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- 지훈 -->
+<rect x="20" y="314" width="180" height="72" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="110" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">지훈 (Pane 2)</text>
+<text x="110" y="352" text-anchor="middle" font-size="10" fill="#7a7a7a">Researcher</text>
+<text x="110" y="368" text-anchor="middle" font-size="10" fill="#7a7a7a">Sonnet 4.6</text>
+<rect x="30" y="374" width="160" height="18" rx="4" fill="#e8f4ff"/>
+<text x="110" y="386" text-anchor="middle" font-size="9" fill="#0066cc">→ research/</text>
+
+<!-- 수아 -->
+<rect x="210" y="314" width="180" height="72" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="300" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">수아 (Pane 3)</text>
+<text x="300" y="352" text-anchor="middle" font-size="10" fill="#7a7a7a">Designer</text>
+<text x="300" y="368" text-anchor="middle" font-size="10" fill="#7a7a7a">Sonnet 4.6</text>
+<rect x="220" y="374" width="160" height="18" rx="4" fill="#e8f4ff"/>
+<text x="300" y="386" text-anchor="middle" font-size="9" fill="#0066cc">→ design-system/</text>
+
+<!-- 서연 -->
+<rect x="510" y="314" width="180" height="72" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="600" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">서연 (Pane 4)</text>
+<text x="600" y="352" text-anchor="middle" font-size="10" fill="#7a7a7a">Engineer</text>
+<text x="600" y="368" text-anchor="middle" font-size="10" fill="#7a7a7a">Sonnet 4.6</text>
+<rect x="520" y="374" width="160" height="18" rx="4" fill="#e8f4ff"/>
+<text x="600" y="386" text-anchor="middle" font-size="9" fill="#0066cc">→ implementation/</text>
+
+<!-- 태양 -->
+<rect x="700" y="314" width="180" height="72" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="790" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">태양 (Pane 5)</text>
+<text x="790" y="352" text-anchor="middle" font-size="10" fill="#7a7a7a">Reviewer</text>
+<text x="790" y="368" text-anchor="middle" font-size="10" fill="#7a7a7a">Sonnet 4.6</text>
+<rect x="710" y="374" width="160" height="18" rx="4" fill="#e8f4ff"/>
+<text x="790" y="386" text-anchor="middle" font-size="9" fill="#0066cc">→ review/ + failures/</text>
+
+<!-- 하단 보고 방향 표시 -->
+<rect x="20" y="406" width="860" height="28" rx="6" fill="#f0f0f0"/>
+<text x="450" y="424" text-anchor="middle" font-size="11" fill="#7a7a7a">보고: 팀원 → 민준(pane-send) → 쭌(pane-send) → Allen(openclaw telegram) · 건너뜀 금지</text>
+
+<!-- LLMWiki 연결 표시 (오른쪽 상단) -->
+<rect x="686" y="152" width="190" height="66" rx="8" fill="#f8f8f8" stroke="#c7c7cc" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="781" y="172" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a7a7a">쭌 LLMWiki 산출</text>
+<text x="781" y="190" text-anchor="middle" font-size="10" fill="#7a7a7a">memory/ · daily/</text>
+<text x="781" y="208" text-anchor="middle" font-size="10" fill="#c7c7cc">INDEX.md 갱신</text>
+<line x1="610" y1="176" x2="686" y2="185" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrg)"/>
+
+<!-- 민준 LLMWiki 연결 표시 -->
+<rect x="686" y="226" width="190" height="48" rx="8" fill="#f8f8f8" stroke="#c7c7cc" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="781" y="246" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a7a7a">민준 LLMWiki 산출</text>
+<text x="781" y="264" text-anchor="middle" font-size="10" fill="#7a7a7a">projects/ · decisions/</text>
+<line x1="630" y1="250" x2="686" y2="250" stroke="#c7c7cc" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrg)"/>
+
+<!-- 하단 범례 -->
+<rect x="20" y="444" width="420" height="42" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<rect x="30" y="454" width="12" height="12" rx="2" fill="#0066cc"/>
+<text x="50" y="465" font-size="10" fill="#0066cc">Opus 4.8</text>
+<text x="50" y="479" font-size="10" fill="#7a7a7a">높은 판단력 요구 역할 (쭌·민준)</text>
+<rect x="200" y="454" width="12" height="12" rx="2" fill="#ffffff" stroke="#0066cc" stroke-width="1"/>
+<text x="220" y="465" font-size="10" fill="#0066cc">Sonnet 4.6</text>
+<text x="220" y="479" font-size="10" fill="#7a7a7a">전문 실행 역할 (지훈·수아·서연·태양)</text>
+</svg>

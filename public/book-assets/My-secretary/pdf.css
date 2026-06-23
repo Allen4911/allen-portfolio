@@ -1,0 +1,41 @@
+/* PDF 출력 시 체크박스 렌더링 — WikiDocs task-list-item */
+
+input[type=checkbox] {
+    -webkit-appearance: checkbox;
+    appearance: checkbox;
+    width: 1em;
+    height: 1em;
+    border: 1px solid #444;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.35em;
+    background-color: #fff;
+    cursor: default;
+}
+
+input[type=checkbox]:checked {
+    background-color: #2b6cb0;
+    border-color: #2b6cb0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M10 3L5 8.5 2 5.5 1 6.5l4 4 6-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.75em;
+}
+
+/* task-list 들여쓰기 정리 */
+li.task-list-item {
+    list-style: none;
+    margin-left: -1.5em;
+}
+
+@media print {
+    input[type=checkbox] {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+    input[type=checkbox]:checked {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}

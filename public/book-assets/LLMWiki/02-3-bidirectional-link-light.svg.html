@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="720" height="360">
+  <defs>
+    <marker id="arrowB" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#0066cc"/>
+    </marker>
+    <marker id="arrowG" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#059669"/>
+    </marker>
+    <marker id="arrowL" markerWidth="9" markerHeight="6" refX="1" refY="3" orient="auto">
+      <polygon points="9 0, 0 3, 9 6" fill="#0066cc"/>
+    </marker>
+    <marker id="arrowGr" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f5f5f7"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="56" fill="#0066cc"/>
+  <text x="450" y="28" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="19" font-weight="bold" fill="white" text-anchor="middle">양방향 링크([[wikilink]])와 Backlink 자동 생성</text>
+  <text x="450" y="47" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#cce0ff" text-anchor="middle">A가 B를 [[B]]로 참조하면 · B의 Backlink 목록에 A가 자동 등록된다</text>
+
+  <!-- ===== TOP SECTION: Two note boxes with bidirectional link ===== -->
+
+  <!-- Note A: rate-limit-handling.md -->
+  <rect x="15" y="68" width="345" height="148" rx="8" fill="white" stroke="#bfdbfe" stroke-width="2"/>
+  <rect x="15" y="68" width="345" height="36" rx="8" fill="#dbeafe"/>
+  <rect x="15" y="88" width="345" height="16" fill="#dbeafe"/>
+  <text x="30" y="90" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#1e40af">rate-limit-handling.md</text>
+  <text x="30" y="108" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#1d4ed8">📄 Backlinks: (없음 ← 나는 참조받지 않음)</text>
+
+  <!-- Body text with [[link]] -->
+  <text x="30" y="132" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#374151">이 API는 300req/min 제한.</text>
+  <text x="30" y="153" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#374151">초과 시</text>
+  <!-- Highlighted [[link]] text -->
+  <rect x="85" y="141" width="200" height="18" rx="3" fill="#dbeafe"/>
+  <text x="89" y="154" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#1d4ed8">[[error-response-200|에러가 200으로 온다]]</text>
+  <text x="30" y="174" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#374151">재시도는 [[exponential-backoff]] 사용.</text>
+  <text x="30" y="195" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">→ 이 노트가 B를 참조한다</text>
+
+  <!-- Bidirectional arrows in center -->
+  <!-- Forward arrow: A → B (참조) -->
+  <line x1="365" y1="128" x2="536" y2="128" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowB)"/>
+  <text x="451" y="120" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#1d4ed8" text-anchor="middle">[[link]] 참조</text>
+  <!-- Backward arrow: B → A (backlink) -->
+  <line x1="536" y1="148" x2="365" y2="148" stroke="#059669" stroke-width="2" marker-end="url(#arrowG)"/>
+  <text x="451" y="168" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">Backlink 자동 등록</text>
+
+  <!-- Note B: error-response-200.md -->
+  <rect x="540" y="68" width="345" height="148" rx="8" fill="white" stroke="#bbf7d0" stroke-width="2"/>
+  <rect x="540" y="68" width="345" height="36" rx="8" fill="#d1fae5"/>
+  <rect x="540" y="88" width="345" height="16" fill="#d1fae5"/>
+  <text x="555" y="90" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#064e3b">error-response-200.md</text>
+
+  <!-- Backlinks section (auto-generated) -->
+  <rect x="555" y="102" width="315" height="26" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="563" y="119" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#059669" font-weight="bold">📎 Backlinks (자동 생성): rate-limit-handling ✅</text>
+
+  <text x="555" y="145" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#374151">에러 응답이 200 OK로 오는 이유:</text>
+  <text x="555" y="165" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">API 설계 오류로 성공·실패 구분 없이</text>
+  <text x="555" y="183" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">200 반환. body에서 error 코드 파싱 필요.</text>
+  <text x="555" y="204" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">← A가 나를 참조하면 내 Backlink에 자동 등록</text>
+
+  <!-- ===== BOTTOM SECTION: Backlink cascade example + orphan warning ===== -->
+  <!-- Divider -->
+  <line x1="15" y1="230" x2="885" y2="230" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Left: Backlink cascade example -->
+  <text x="20" y="248" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" font-weight="bold" fill="#374151">Backlink이 쌓이면 importance가 올라간다</text>
+
+  <!-- catch-any-antipattern node (big = many backlinks) -->
+  <rect x="15" y="258" width="200" height="90" rx="8" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+  <text x="115" y="278" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#78350f" text-anchor="middle">catch-any-antipattern.md</text>
+  <text x="115" y="295" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#92400e" text-anchor="middle">📎 Backlinks (3개):</text>
+  <text x="115" y="311" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#92400e" text-anchor="middle">code-review-checklist</text>
+  <text x="115" y="326" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#92400e" text-anchor="middle">type-erasure-antipattern</text>
+  <text x="115" y="341" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#92400e" text-anchor="middle">typescript-strict-mode</text>
+
+  <!-- Arrow indicating importance rise -->
+  <text x="225" y="305" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="22" fill="#f59e0b" text-anchor="middle">→</text>
+  <rect x="245" y="275" width="130" height="50" rx="6" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="310" y="300" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#78350f" text-anchor="middle" font-weight="bold">importance</text>
+  <text x="310" y="320" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="16" fill="#d97706" text-anchor="middle" font-weight="bold">0.7 → 0.85</text>
+  <text x="310" y="356" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">참조 3개 추가 → 중요도 자동 상승</text>
+
+  <!-- Right: Wikilink syntax box -->
+  <rect x="465" y="238" width="420" height="196" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+  <rect x="465" y="238" width="420" height="30" rx="8" fill="#f1f5f9"/>
+  <rect x="465" y="252" width="420" height="16" fill="#f1f5f9"/>
+  <text x="675" y="257" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" font-weight="bold" fill="#374151" text-anchor="middle">[[wikilink]] 문법 3가지</text>
+
+  <!-- syntax 1 -->
+  <text x="480" y="285" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151" font-weight="bold">① 기본 링크</text>
+  <rect x="480" y="292" width="390" height="20" rx="3" fill="#f8fafc"/>
+  <text x="488" y="307" font-family="'Courier New',Consolas,monospace" font-size="11" fill="#1d4ed8">[[rate-limit-handling]]</text>
+  <text x="700" y="307" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#9ca3af">파일명 = 링크</text>
+
+  <!-- syntax 2 -->
+  <text x="480" y="330" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151" font-weight="bold">② 표시 텍스트 지정</text>
+  <rect x="480" y="337" width="390" height="20" rx="3" fill="#f8fafc"/>
+  <text x="488" y="352" font-family="'Courier New',Consolas,monospace" font-size="11" fill="#1d4ed8">[[error-response-200|에러가 200으로 온다]]</text>
+
+  <!-- syntax 3 -->
+  <text x="480" y="374" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151" font-weight="bold">③ 섹션 직접 링크</text>
+  <rect x="480" y="381" width="390" height="20" rx="3" fill="#f8fafc"/>
+  <text x="488" y="396" font-family="'Courier New',Consolas,monospace" font-size="11" fill="#1d4ed8">[[exponential-backoff#계산식]]</text>
+
+  <!-- Orphan warning -->
+  <rect x="480" y="407" width="390" height="22" rx="4" fill="#fef9c3" stroke="#fbbf24" stroke-width="1"/>
+  <text x="675" y="422" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#78350f" text-anchor="middle">⚠ orphan 노트 (backlink=0) → 그래프에서 고립, 검색에서 소외</text>
+
+</svg>

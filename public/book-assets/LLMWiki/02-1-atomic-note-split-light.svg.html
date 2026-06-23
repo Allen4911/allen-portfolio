@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="720" height="360">
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f5f5f7"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="56" fill="#0066cc"/>
+  <text x="450" y="28" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="19" font-weight="bold" fill="white" text-anchor="middle">Atomic Note: 1파일 1개념 원칙 — 분할 전후 비교</text>
+  <text x="450" y="47" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#cce0ff" text-anchor="middle">분리 기준 — "이 내용을 다른 노트에서 독립 참조할 일이 있는가?"</text>
+
+  <!-- ===== LEFT: BEFORE (❌ 분할 전) ===== -->
+
+  <!-- Label badge -->
+  <rect x="15" y="66" width="130" height="26" rx="5" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="80" y="83" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#dc2626" text-anchor="middle">❌ 분할 전</text>
+
+  <!-- Big monolithic file card -->
+  <rect x="15" y="96" width="390" height="300" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+
+  <!-- File header -->
+  <rect x="15" y="96" width="390" height="40" rx="8" fill="#fca5a5"/>
+  <rect x="15" y="116" width="390" height="20" fill="#fca5a5"/>
+  <!-- File icon -->
+  <rect x="30" y="105" width="16" height="20" rx="2" fill="white" opacity="0.7"/>
+  <text x="52" y="122" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="13" font-weight="bold" fill="white">rate-limit-and-errors.md</text>
+
+  <!-- Mixed content rows -->
+  <!-- Row 1 -->
+  <rect x="25" y="143" width="370" height="56" rx="5" fill="white" opacity="0.7" stroke="#fecaca" stroke-width="1"/>
+  <text x="48" y="164" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" fill="#dc2626">⚠</text>
+  <text x="66" y="164" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#374151" font-weight="bold">rate limit 300req/min</text>
+  <text x="66" y="183" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">API 호출 제한 수치</text>
+
+  <!-- Row 2 -->
+  <rect x="25" y="204" width="370" height="56" rx="5" fill="white" opacity="0.7" stroke="#fecaca" stroke-width="1"/>
+  <text x="48" y="225" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" fill="#dc2626">⚠</text>
+  <text x="66" y="225" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#374151" font-weight="bold">에러 응답이 200으로 온다</text>
+  <text x="66" y="244" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">비정상 응답 형식</text>
+
+  <!-- Row 3 -->
+  <rect x="25" y="265" width="370" height="56" rx="5" fill="white" opacity="0.7" stroke="#fecaca" stroke-width="1"/>
+  <text x="48" y="286" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" fill="#dc2626">⚠</text>
+  <text x="66" y="286" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#374151" font-weight="bold">retry 전략</text>
+  <text x="66" y="305" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">재시도 횟수·조건</text>
+
+  <!-- Row 4 -->
+  <rect x="25" y="326" width="370" height="56" rx="5" fill="white" opacity="0.7" stroke="#fecaca" stroke-width="1"/>
+  <text x="48" y="347" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" fill="#dc2626">⚠</text>
+  <text x="66" y="347" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12" fill="#374151" font-weight="bold">지수 백오프 공식</text>
+  <text x="66" y="366" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#9ca3af">알고리즘·구현</text>
+
+  <!-- Warning note -->
+  <text x="210" y="413" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#dc2626" text-anchor="middle">4개 개념 혼재 → 부분 참조·재사용 불가</text>
+
+  <!-- ===== CENTER ARROW ===== -->
+  <rect x="410" y="228" width="80" height="36" rx="8" fill="#0066cc"/>
+  <text x="450" y="251" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="22" fill="white" text-anchor="middle">→</text>
+  <text x="450" y="290" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">분리</text>
+
+  <!-- ===== RIGHT: AFTER (✅ 분할 후) ===== -->
+
+  <!-- Label badge -->
+  <rect x="495" y="66" width="130" height="26" rx="5" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="560" y="83" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="12.5" font-weight="bold" fill="#059669" text-anchor="middle">✅ 분할 후</text>
+
+  <!-- Card 1: rate-limit-300rpm.md -->
+  <rect x="495" y="96" width="390" height="67" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="495" y="96" width="6" height="67" rx="3" fill="#059669"/>
+  <rect x="800" y="96" width="85" height="67" rx="6" fill="#d1fae5"/>
+  <text x="512" y="117" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#064e3b">rate-limit-300rpm.md</text>
+  <text x="512" y="136" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">API 호출 제한은 분당 300회</text>
+  <text x="512" y="152" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">category: Programming · importance: 0.8</text>
+  <text x="843" y="130" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">독립</text>
+  <text x="843" y="146" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">참조 가능</text>
+
+  <!-- Card 2: error-response-200.md -->
+  <rect x="495" y="170" width="390" height="67" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="495" y="170" width="6" height="67" rx="3" fill="#059669"/>
+  <rect x="800" y="170" width="85" height="67" rx="6" fill="#d1fae5"/>
+  <text x="512" y="191" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#064e3b">error-response-200.md</text>
+  <text x="512" y="210" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">에러가 200으로 오는 이유와 감지법</text>
+  <text x="512" y="226" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">category: Patterns · importance: 0.85</text>
+  <text x="843" y="204" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">독립</text>
+  <text x="843" y="220" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">참조 가능</text>
+
+  <!-- Card 3: retry-strategy.md -->
+  <rect x="495" y="244" width="390" height="67" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="495" y="244" width="6" height="67" rx="3" fill="#059669"/>
+  <rect x="800" y="244" width="85" height="67" rx="6" fill="#d1fae5"/>
+  <text x="512" y="265" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#064e3b">retry-strategy.md</text>
+  <text x="512" y="284" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">재시도 전략 선택 기준</text>
+  <text x="512" y="300" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">category: Patterns · importance: 0.7</text>
+  <text x="843" y="278" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">독립</text>
+  <text x="843" y="294" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">참조 가능</text>
+
+  <!-- Card 4: exponential-backoff.md -->
+  <rect x="495" y="318" width="390" height="67" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <rect x="495" y="318" width="6" height="67" rx="3" fill="#059669"/>
+  <rect x="800" y="318" width="85" height="67" rx="6" fill="#d1fae5"/>
+  <text x="512" y="339" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" font-weight="bold" fill="#064e3b">exponential-backoff.md</text>
+  <text x="512" y="358" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11" fill="#374151">지수 백오프 공식과 구현</text>
+  <text x="512" y="374" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#6b7280">category: Patterns · importance: 0.75</text>
+  <text x="843" y="352" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">독립</text>
+  <text x="843" y="368" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="#059669" text-anchor="middle">참조 가능</text>
+
+  <!-- Bottom note for right side -->
+  <text x="690" y="413" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10.5" fill="#059669" text-anchor="middle">4개 Atomic Note → 각각 독립 검색·연결·재사용 가능</text>
+
+</svg>

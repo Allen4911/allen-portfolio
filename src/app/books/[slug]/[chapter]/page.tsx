@@ -54,7 +54,11 @@ async function fetchMarkdown(repoFolder, filename) {
       next: { revalidate: 3600 },
     })
     if (!res.ok) return `> 콘텐츠를 불러올 수 없습니다. (${res.status})`
-    return res.text()
+    const text = await res.text()
+    // Rewrite relative image paths (../assets/, ./assets/, assets/) to the
+    // static copies in public/book-assets/<folder>/ so they resolve on the site.
+    const bookFolder = repoFolder.split('/')[0]
+    return text.replace(/(!\[[^\]]*\]\()(?:\.\.\/|\.\/)?assets\//g, `$1/book-assets/${bookFolder}/`)
   } catch {
     return '> 네트워크 오류로 콘텐츠를 불러올 수 없습니다.'
   }

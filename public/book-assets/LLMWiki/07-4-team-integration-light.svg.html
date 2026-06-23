@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 900 500" font-family="Gulim, Noto Sans CJK KR, Arial, sans-serif">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0066cc"/></marker>
+  <marker id="arrg" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c7c7cc"/></marker>
+</defs>
+<rect width="900" height="500" fill="#f5f5f7"/>
+
+<!-- 제목 -->
+<rect x="20" y="14" width="860" height="46" rx="10" fill="#0066cc"/>
+<text x="450" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">전편 팀 환경 + LLMWiki 통합 전체 구조</text>
+<text x="450" y="50" text-anchor="middle" font-size="11" fill="#cce0ff">팀이 일하면 자동으로 지식이 LLMWiki에 쌓이는 구조</text>
+
+<!-- 왼쪽: 전편 팀 환경 박스 -->
+<rect x="20" y="76" width="330" height="330" rx="10" fill="#f8f8f8" stroke="#c7c7cc" stroke-width="1.5"/>
+<rect x="20" y="76" width="330" height="32" rx="10" fill="#e8e8ed"/>
+<rect x="20" y="94" width="330" height="14" fill="#e8e8ed"/>
+<text x="185" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d1d1f">전편 팀 환경 (TMUX team1)</text>
+
+<!-- 6 panes -->
+<rect x="36" y="120" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="81" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">쭌 P0</text>
+<text x="81" y="154" text-anchor="middle" font-size="9" fill="#7a7a7a">Opus 4.8</text>
+
+<rect x="140" y="120" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="185" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">민준 P1</text>
+<text x="185" y="154" text-anchor="middle" font-size="9" fill="#7a7a7a">Opus 4.8</text>
+
+<rect x="244" y="120" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="289" y="138" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">지훈 P2</text>
+<text x="289" y="154" text-anchor="middle" font-size="9" fill="#7a7a7a">Sonnet 4.6</text>
+
+<rect x="36" y="180" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="81" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">수아 P3</text>
+<text x="81" y="214" text-anchor="middle" font-size="9" fill="#7a7a7a">Sonnet 4.6</text>
+
+<rect x="140" y="180" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="185" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">서연 P4</text>
+<text x="185" y="214" text-anchor="middle" font-size="9" fill="#7a7a7a">Sonnet 4.6</text>
+
+<rect x="244" y="180" width="90" height="44" rx="6" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="289" y="198" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">태양 P5</text>
+<text x="289" y="214" text-anchor="middle" font-size="9" fill="#7a7a7a">Sonnet 4.6</text>
+
+<!-- Redis IPC -->
+<rect x="36" y="244" width="298" height="34" rx="6" fill="#ffffff" stroke="#c7c7cc" stroke-width="1"/>
+<text x="185" y="258" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a7a7a">Redis IPC</text>
+<text x="185" y="272" text-anchor="middle" font-size="10" fill="#7a7a7a">pane-send.sh · 팀원 간 메시지 전달</text>
+
+<!-- OpenClaw -->
+<rect x="36" y="292" width="142" height="34" rx="6" fill="#ffffff" stroke="#c7c7cc" stroke-width="1"/>
+<text x="107" y="314" text-anchor="middle" font-size="10" fill="#7a7a7a">OpenClaw (Telegram)</text>
+
+<!-- setup-team.sh -->
+<rect x="192" y="292" width="142" height="34" rx="6" fill="#ffffff" stroke="#c7c7cc" stroke-width="1"/>
+<text x="263" y="314" text-anchor="middle" font-size="10" fill="#7a7a7a">setup-team.sh</text>
+
+<!-- "+" 라벨 -->
+<text x="356" y="248" text-anchor="middle" font-size="28" font-weight="bold" fill="#0066cc">+</text>
+
+<!-- 가운데: inbox/ 연결 지점 -->
+<rect x="370" y="140" width="160" height="200" rx="10" fill="#e8f4ff" stroke="#0066cc" stroke-width="2"/>
+<text x="450" y="168" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">inbox/</text>
+<text x="450" y="188" text-anchor="middle" font-size="10" fill="#7a7a7a">팀 환경 ↔ LLMWiki</text>
+<text x="450" y="204" text-anchor="middle" font-size="10" fill="#7a7a7a">연결 접점</text>
+<line x1="430" y1="214" x2="470" y2="214" stroke="#c7c7cc" stroke-width="1"/>
+<text x="450" y="232" text-anchor="middle" font-size="10" fill="#7a7a7a">project-log 투입</text>
+<text x="450" y="248" text-anchor="middle" font-size="9" font-family="Courier New, monospace" fill="#0066cc">assignee: 서연</text>
+<text x="450" y="264" text-anchor="middle" font-size="9" font-family="Courier New, monospace" fill="#0066cc">type: project-log</text>
+<line x1="430" y1="274" x2="470" y2="274" stroke="#c7c7cc" stroke-width="1"/>
+<text x="450" y="292" text-anchor="middle" font-size="10" fill="#0066cc">inbox-watch.sh</text>
+<text x="450" y="308" text-anchor="middle" font-size="9" fill="#7a7a7a">10초 폴링 감지</text>
+<text x="450" y="326" text-anchor="middle" font-size="9" fill="#7a7a7a">자동 처리 시작</text>
+
+<!-- 화살표: pane → inbox -->
+<line x1="350" y1="240" x2="370" y2="240" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- 오른쪽: LLMWiki 파이프라인 -->
+<rect x="550" y="76" width="330" height="330" rx="10" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+<rect x="550" y="76" width="330" height="32" rx="10" fill="#0066cc" opacity="0.12"/>
+<rect x="550" y="94" width="330" height="14" fill="#0066cc" opacity="0.12"/>
+<text x="715" y="98" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">LLMWiki 파이프라인</text>
+
+<!-- 파이프라인 단계 -->
+<rect x="570" y="120" width="290" height="34" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="715" y="143" text-anchor="middle" font-size="11" fill="#0066cc">① researcher — 기존 지식 검색·분석</text>
+
+<line x1="715" y1="154" x2="715" y2="168" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<rect x="570" y="170" width="290" height="34" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="715" y="193" text-anchor="middle" font-size="11" fill="#0066cc">② writer — atomic note 생성·링크</text>
+
+<line x1="715" y1="204" x2="715" y2="218" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<rect x="570" y="220" width="290" height="34" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="715" y="243" text-anchor="middle" font-size="11" fill="#0066cc">③ organizer — 분류·이동·정리</text>
+
+<line x1="715" y1="254" x2="715" y2="268" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<rect x="570" y="270" width="290" height="34" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="715" y="293" text-anchor="middle" font-size="11" fill="#0066cc">④ memory-manager — INDEX·git commit</text>
+
+<!-- 산출 폴더들 -->
+<line x1="715" y1="304" x2="715" y2="322" stroke="#0066cc" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="570" y="324" width="290" height="64" rx="6" fill="#f8f8f8" stroke="#c7c7cc" stroke-width="1"/>
+<text x="715" y="346" text-anchor="middle" font-size="10" fill="#1d1d1f">concepts/ · research/ · implementation/</text>
+<text x="715" y="362" text-anchor="middle" font-size="10" fill="#1d1d1f">design-system/ · review/ · failures/</text>
+<text x="715" y="378" text-anchor="middle" font-size="10" fill="#0066cc">memory/INDEX.md 갱신</text>
+
+<!-- 화살표: inbox → LLMWiki -->
+<line x1="530" y1="240" x2="550" y2="240" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- 하단: 통합 전후 비교 -->
+<rect x="20" y="424" width="860" height="58" rx="8" fill="#f0f0f0"/>
+<text x="450" y="444" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d1d1f">통합 효과</text>
+<text x="230" y="462" text-anchor="middle" font-size="10" fill="#7a7a7a">통합 전: 작업 결과 → 대화 종료 시 소실</text>
+<text x="230" y="476" text-anchor="middle" font-size="10" fill="#7a7a7a">팀원 기억에만 존재 · 다음 세션 맥락 없음</text>
+<line x1="450" y1="448" x2="450" y2="478" stroke="#c7c7cc" stroke-width="1"/>
+<text x="670" y="462" text-anchor="middle" font-size="10" fill="#0066cc">통합 후: 작업 결과 → LLMWiki 자동 영속</text>
+<text x="670" y="476" text-anchor="middle" font-size="10" fill="#0066cc">다음 세션 INDEX.md로 즉시 복원</text>
+</svg>

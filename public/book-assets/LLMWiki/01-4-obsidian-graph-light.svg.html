@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" width="720" height="360">
+
+  <!-- Background -->
+  <rect width="900" height="450" fill="#f5f5f7"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="56" fill="#0066cc"/>
+  <text x="450" y="28" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="19" font-weight="bold" fill="white" text-anchor="middle">Obsidian Graph View 개념 연결망</text>
+  <text x="450" y="47" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="11.5" fill="#cce0ff" text-anchor="middle">LLMWiki 안에서 개념들이 어떻게 연결되는가 · 실제 노트 이름 사용</text>
+
+  <!-- ===== EDGES (draw first so nodes appear on top) ===== -->
+  <!-- atomic-note → yaml-frontmatter -->
+  <line x1="450" y1="230" x2="350" y2="150" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- atomic-note → importance-score -->
+  <line x1="450" y1="230" x2="540" y2="145" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- atomic-note → 2layer-memory -->
+  <line x1="450" y1="230" x2="325" y2="300" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- atomic-note → backlink -->
+  <line x1="450" y1="230" x2="425" y2="345" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- atomic-note → knowledge-pipeline -->
+  <line x1="450" y1="230" x2="195" y2="200" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- atomic-note → rate-limit-handling -->
+  <line x1="450" y1="230" x2="645" y2="175" stroke="#d1d5db" stroke-width="1"/>
+  <!-- yaml-frontmatter → context-restore -->
+  <line x1="350" y1="150" x2="275" y2="168" stroke="#c4b5fd" stroke-width="1"/>
+  <!-- 2layer-memory → context-restore -->
+  <line x1="325" y1="300" x2="275" y2="168" stroke="#c4b5fd" stroke-width="1"/>
+  <!-- 2layer-memory → work-memory -->
+  <line x1="325" y1="300" x2="230" y2="375" stroke="#c4b5fd" stroke-width="1"/>
+  <!-- work-memory → inbox-watch -->
+  <line x1="230" y1="375" x2="165" y2="315" stroke="#bfdbfe" stroke-width="1"/>
+  <!-- knowledge-pipeline → inbox-watch -->
+  <line x1="195" y1="200" x2="165" y2="315" stroke="#93c5fd" stroke-width="1.5"/>
+  <!-- knowledge-pipeline → claude-code-team -->
+  <line x1="195" y1="200" x2="138" y2="150" stroke="#6ee7b7" stroke-width="1"/>
+  <!-- claude-code-team → agent-routing -->
+  <line x1="138" y1="150" x2="118" y2="258" stroke="#6ee7b7" stroke-width="1"/>
+  <!-- agent-routing → inbox-watch -->
+  <line x1="118" y1="258" x2="165" y2="315" stroke="#6ee7b7" stroke-width="1"/>
+  <!-- rate-limit-handling → catch-any-antipattern -->
+  <line x1="645" y1="175" x2="715" y2="255" stroke="#fca5a5" stroke-width="1.5"/>
+  <!-- catch-any-antipattern → error-response-200 -->
+  <line x1="715" y1="255" x2="655" y2="345" stroke="#fca5a5" stroke-width="1"/>
+  <!-- tmux-panes → pane-send -->
+  <line x1="755" y1="285" x2="760" y2="375" stroke="#fcd34d" stroke-width="1"/>
+  <!-- tmux-panes → pane-identity -->
+  <line x1="755" y1="285" x2="760" y2="188" stroke="#fcd34d" stroke-width="1"/>
+  <!-- redis-pubsub → async-pattern -->
+  <line x1="565" y1="395" x2="488" y2="392" stroke="#67e8f9" stroke-width="1"/>
+  <!-- backlink → obsidian-graph -->
+  <line x1="425" y1="345" x2="555" y2="425" stroke="#c4b5fd" stroke-width="1"/>
+  <!-- atomic-note → redis-pubsub (cross-cluster) -->
+  <line x1="450" y1="230" x2="565" y2="395" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- error-response-200 → backlink -->
+  <line x1="655" y1="345" x2="425" y2="345" stroke="#d1d5db" stroke-width="1"/>
+
+  <!-- ===== NODES ===== -->
+
+  <!-- 1. atomic-note (central, Memory/purple) -->
+  <circle cx="450" cy="230" r="36" fill="#7c3aed" opacity="0.15" stroke="#7c3aed" stroke-width="2.5"/>
+  <circle cx="450" cy="230" r="32" fill="#7c3aed"/>
+  <text x="450" y="225" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="bold">atomic</text>
+  <text x="450" y="238" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="10" fill="white" text-anchor="middle" font-weight="bold">-note</text>
+
+  <!-- 2. yaml-frontmatter (Memory/purple) -->
+  <circle cx="350" cy="150" r="26" fill="#8b5cf6"/>
+  <text x="350" y="145" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">yaml</text>
+  <text x="350" y="158" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">frontmatter</text>
+
+  <!-- 3. importance-score (Memory/purple) -->
+  <circle cx="540" cy="145" r="26" fill="#8b5cf6"/>
+  <text x="540" y="140" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">importance</text>
+  <text x="540" y="153" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">score</text>
+
+  <!-- 4. 2layer-memory (Memory/purple) -->
+  <circle cx="325" cy="300" r="26" fill="#8b5cf6"/>
+  <text x="325" y="295" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">2layer</text>
+  <text x="325" y="308" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">memory</text>
+
+  <!-- 5. backlink (Memory/purple) -->
+  <circle cx="425" cy="345" r="22" fill="#a78bfa"/>
+  <text x="425" y="349" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9.5" fill="white" text-anchor="middle">backlink</text>
+
+  <!-- 6. context-restore (Memory/purple) -->
+  <circle cx="275" cy="168" r="22" fill="#a78bfa"/>
+  <text x="275" y="163" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">context</text>
+  <text x="275" y="175" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">restore</text>
+
+  <!-- 7. work-memory (Memory/purple) -->
+  <circle cx="230" cy="375" r="22" fill="#a78bfa"/>
+  <text x="230" y="370" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">work</text>
+  <text x="230" y="382" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">memory</text>
+
+  <!-- 8. rate-limit-handling (Patterns/red) -->
+  <circle cx="645" cy="175" r="26" fill="#dc2626"/>
+  <text x="645" y="170" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">rate-limit</text>
+  <text x="645" y="183" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">handling</text>
+
+  <!-- 9. catch-any-antipattern (Patterns/red) -->
+  <circle cx="715" cy="255" r="26" fill="#dc2626"/>
+  <text x="715" y="250" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">catch-any</text>
+  <text x="715" y="262" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">antipattern</text>
+
+  <!-- 10. error-response-200 (Patterns/red) -->
+  <circle cx="655" cy="345" r="20" fill="#ef4444"/>
+  <text x="655" y="340" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">error</text>
+  <text x="655" y="352" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">resp-200</text>
+
+  <!-- 11. inbox-watch (Workflows/blue) -->
+  <circle cx="165" cy="315" r="26" fill="#1d4ed8"/>
+  <text x="165" y="310" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">inbox</text>
+  <text x="165" y="323" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">watch</text>
+
+  <!-- 12. knowledge-pipeline (Workflows/blue) -->
+  <circle cx="195" cy="200" r="28" fill="#1d4ed8"/>
+  <text x="195" y="195" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">knowledge</text>
+  <text x="195" y="208" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">pipeline</text>
+
+  <!-- 13. pane-send (Tools/amber) -->
+  <circle cx="760" cy="375" r="20" fill="#d97706"/>
+  <text x="760" y="370" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">pane</text>
+  <text x="760" y="382" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">send</text>
+
+  <!-- 14. tmux-panes (Tools/amber) -->
+  <circle cx="755" cy="285" r="24" fill="#d97706"/>
+  <text x="755" y="280" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">tmux</text>
+  <text x="755" y="293" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="9" fill="white" text-anchor="middle">panes</text>
+
+  <!-- 15. claude-code-team (AI/green) -->
+  <circle cx="138" cy="150" r="26" fill="#059669"/>
+  <text x="138" y="145" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">claude-code</text>
+  <text x="138" y="158" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">team</text>
+
+  <!-- 16. agent-routing (AI/green) -->
+  <circle cx="118" cy="258" r="22" fill="#059669"/>
+  <text x="118" y="253" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">agent</text>
+  <text x="118" y="265" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">routing</text>
+
+  <!-- 17. redis-pubsub (Programming/cyan) -->
+  <circle cx="565" cy="395" r="20" fill="#0891b2"/>
+  <text x="565" y="390" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">redis</text>
+  <text x="565" y="402" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">pubsub</text>
+
+  <!-- 18. async-pattern (Programming/cyan) -->
+  <circle cx="488" cy="392" r="20" fill="#0891b2"/>
+  <text x="488" y="387" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">async</text>
+  <text x="488" y="399" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">pattern</text>
+
+  <!-- 19. pane-identity (Tools/amber) -->
+  <circle cx="760" cy="188" r="20" fill="#d97706"/>
+  <text x="760" y="183" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">pane</text>
+  <text x="760" y="195" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">identity</text>
+
+  <!-- 20. obsidian-graph (Memory/purple) -->
+  <circle cx="555" cy="425" r="20" fill="#a78bfa"/>
+  <text x="555" y="420" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">obsidian</text>
+  <text x="555" y="432" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="white" text-anchor="middle">graph</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="840" y="68" width="50" height="180" rx="6" fill="white" opacity="0.8" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="865" y="83" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8.5" fill="#374151" text-anchor="middle" font-weight="bold">분류</text>
+  <circle cx="853" cy="100" r="6" fill="#7c3aed"/>
+  <text x="863" y="103" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">Memory</text>
+  <circle cx="853" cy="118" r="6" fill="#dc2626"/>
+  <text x="863" y="121" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">Patterns</text>
+  <circle cx="853" cy="136" r="6" fill="#1d4ed8"/>
+  <text x="863" y="139" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">Workflows</text>
+  <circle cx="853" cy="154" r="6" fill="#d97706"/>
+  <text x="863" y="157" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">Tools</text>
+  <circle cx="853" cy="172" r="6" fill="#059669"/>
+  <text x="863" y="175" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">AI</text>
+  <circle cx="853" cy="190" r="6" fill="#0891b2"/>
+  <text x="863" y="193" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="8" fill="#4b5563">Programming</text>
+  <text x="865" y="238" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="7.5" fill="#9ca3af" text-anchor="middle">크기 = 연결수</text>
+
+  <!-- note: dashed line means cross-cluster ref -->
+  <line x1="845" y1="217" x2="879" y2="217" stroke="#9ca3af" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="865" y="228" font-family="Gulim,'Noto Sans CJK KR',Arial,sans-serif" font-size="7.5" fill="#9ca3af" text-anchor="middle">약한 참조</text>
+</svg>

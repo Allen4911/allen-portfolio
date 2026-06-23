@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 900 450" font-family="Gulim, Noto Sans CJK KR, Arial, sans-serif">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0066cc"/></marker>
+</defs>
+<rect width="900" height="450" fill="#f5f5f7"/>
+
+<!-- 제목 -->
+<rect x="20" y="14" width="860" height="46" rx="10" fill="#0066cc"/>
+<text x="450" y="34" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">LLMWiki 개념도 — 팀 작업물이 지식 베이스로 자동 누적</text>
+<text x="450" y="52" text-anchor="middle" font-size="11" fill="#cce0ff">팀원은 그냥 일하면 된다 · 파이프라인이 지식을 자동으로 추출·저장·연결한다</text>
+
+<!-- === 상단: 기존 방식 vs LLMWiki 방식 비교 === -->
+<!-- 기존 방식 -->
+<rect x="20" y="72" width="270" height="70" rx="8" fill="#fff5f5" stroke="#ff3b30" stroke-width="1.5"/>
+<text x="155" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="#cc0000">기존 방식 (MEMORY.md)</text>
+<text x="155" y="111" text-anchor="middle" font-size="10" fill="#7a7a7a">팀원 작업 → 결과만 남김</text>
+<text x="155" y="127" text-anchor="middle" font-size="10" fill="#cc0000">지식은 세션과 함께 사라짐 ✗</text>
+
+<!-- 화살표 → LLMWiki -->
+<text x="305" y="112" text-anchor="middle" font-size="18" fill="#0066cc">→</text>
+
+<!-- LLMWiki 방식 -->
+<rect x="330" y="72" width="400" height="70" rx="8" fill="#e8f4ff" stroke="#0066cc" stroke-width="2"/>
+<text x="530" y="93" text-anchor="middle" font-size="11" font-weight="bold" fill="#0066cc">LLMWiki 방식</text>
+<text x="530" y="111" text-anchor="middle" font-size="10" fill="#1d1d1f">팀원 작업 → 결과 + 지식 자동 추출</text>
+<text x="530" y="127" text-anchor="middle" font-size="10" fill="#0066cc">LLMWiki 저장 → 다음 세션에서 재사용 ✓</text>
+
+<!-- LLMWiki 결과 안내 -->
+<rect x="745" y="72" width="135" height="70" rx="8" fill="#f0fff4" stroke="#34c759" stroke-width="1.5"/>
+<text x="812" y="93" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a7a30">지식 축적</text>
+<text x="812" y="110" text-anchor="middle" font-size="9" fill="#7a7a7a">세션 간 보존</text>
+<text x="812" y="126" text-anchor="middle" font-size="9" fill="#7a7a7a">검색 가능</text>
+<text x="812" y="138" text-anchor="middle" font-size="9" fill="#7a7a7a">연결망 형성</text>
+
+<!-- === 파이프라인 흐름 (중단) === -->
+<rect x="20" y="155" width="860" height="28" rx="6" fill="#f0f0f5"/>
+<text x="450" y="173" text-anchor="middle" font-size="10" font-weight="bold" fill="#6666aa">자동 파이프라인 흐름 (팀원 작업 후 자동 실행)</text>
+
+<!-- Pipeline steps -->
+<!-- inbox -->
+<rect x="20" y="192" width="130" height="60" rx="7" fill="#ffffff" stroke="#c7c7cc" stroke-width="1.5"/>
+<text x="85" y="212" text-anchor="middle" font-size="10" font-weight="bold" fill="#1d1d1f">inbox/</text>
+<text x="85" y="228" text-anchor="middle" font-size="9" fill="#7a7a7a">팀원이 넣는</text>
+<text x="85" y="242" text-anchor="middle" font-size="9" fill="#7a7a7a">원본 파일</text>
+
+<line x1="150" y1="222" x2="168" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- researcher -->
+<rect x="170" y="192" width="130" height="60" rx="7" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="235" y="212" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">researcher</text>
+<text x="235" y="228" text-anchor="middle" font-size="9" fill="#7a7a7a">개념 추출</text>
+<text x="235" y="242" text-anchor="middle" font-size="9" fill="#7a7a7a">기존 노트 검색</text>
+
+<line x1="300" y1="222" x2="318" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- writer -->
+<rect x="320" y="192" width="130" height="60" rx="7" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="385" y="212" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">writer</text>
+<text x="385" y="228" text-anchor="middle" font-size="9" fill="#7a7a7a">Atomic Note 생성</text>
+<text x="385" y="242" text-anchor="middle" font-size="9" fill="#7a7a7a">자동 링크 연결</text>
+
+<line x1="450" y1="222" x2="468" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- organizer -->
+<rect x="470" y="192" width="130" height="60" rx="7" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="535" y="212" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">organizer</text>
+<text x="535" y="228" text-anchor="middle" font-size="9" fill="#7a7a7a">카테고리 분류</text>
+<text x="535" y="242" text-anchor="middle" font-size="9" fill="#7a7a7a">중복 감지</text>
+
+<line x1="600" y1="222" x2="618" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- memory-manager -->
+<rect x="620" y="192" width="130" height="60" rx="7" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="685" y="209" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#0066cc">memory-manager</text>
+<text x="685" y="225" text-anchor="middle" font-size="9" fill="#7a7a7a">INDEX.md 갱신</text>
+<text x="685" y="241" text-anchor="middle" font-size="9" fill="#7a7a7a">importance 재계산</text>
+
+<line x1="750" y1="222" x2="768" y2="222" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- git commit -->
+<rect x="770" y="192" width="110" height="60" rx="7" fill="#f0fff4" stroke="#34c759" stroke-width="1.5"/>
+<text x="825" y="212" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a7a30">git commit</text>
+<text x="825" y="228" text-anchor="middle" font-size="9" fill="#7a7a7a">버전 저장</text>
+<text x="825" y="244" text-anchor="middle" font-size="9" fill="#7a7a7a">지식도 코드처럼</text>
+
+<!-- === 하단: 4대 원리 === -->
+<rect x="20" y="268" width="860" height="24" rx="6" fill="#0066cc" opacity="0.1"/>
+<text x="450" y="284" text-anchor="middle" font-size="10" font-weight="bold" fill="#0066cc">LLMWiki 4대 핵심 원리</text>
+
+<!-- 원리 1: Atomic Note -->
+<rect x="20" y="299" width="205" height="134" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<rect x="20" y="299" width="205" height="28" rx="8" fill="#0066cc" opacity="0.12"/>
+<rect x="20" y="313" width="205" height="14" fill="#0066cc" opacity="0.12"/>
+<text x="122" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#0066cc">원리 1: Atomic Note</text>
+<text x="30" y="342" font-size="10" fill="#1d1d1f">1파일 = 1개념</text>
+<text x="30" y="360" font-size="9" fill="#7a7a7a">개념을 쪼개어 독립 파일로</text>
+<text x="30" y="376" font-size="9" fill="#7a7a7a">검색·연결·재사용 최적화</text>
+<text x="30" y="396" font-size="8.5" fill="#888899">rate-limit-handling.md</text>
+<text x="30" y="410" font-size="8.5" fill="#888899">catch-any-antipattern.md</text>
+<text x="30" y="424" font-size="8.5" fill="#888899">error-response-200.md</text>
+
+<!-- 원리 2: YAML Frontmatter -->
+<rect x="235" y="299" width="205" height="134" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<rect x="235" y="299" width="205" height="28" rx="8" fill="#0066cc" opacity="0.12"/>
+<rect x="235" y="313" width="205" height="14" fill="#0066cc" opacity="0.12"/>
+<text x="337" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#0066cc">원리 2: YAML 메타데이터</text>
+<text x="245" y="342" font-size="10" fill="#1d1d1f">기계가 읽는 구조화 정보</text>
+<text x="245" y="360" font-size="9" fill="#888899">title · category · tags</text>
+<text x="245" y="376" font-size="9" fill="#888899">importance: 0.85</text>
+<text x="245" y="392" font-size="9" fill="#888899">created · source</text>
+<text x="245" y="412" font-size="9" fill="#7a7a7a">중요도 순 세션 로드</text>
+<text x="245" y="428" font-size="9" fill="#7a7a7a">컨텍스트 효율 최적화</text>
+
+<!-- 원리 3: 양방향 링크 -->
+<rect x="450" y="299" width="205" height="134" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<rect x="450" y="299" width="205" height="28" rx="8" fill="#0066cc" opacity="0.12"/>
+<rect x="450" y="313" width="205" height="14" fill="#0066cc" opacity="0.12"/>
+<text x="552" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#0066cc">원리 3: 양방향 링크</text>
+<text x="460" y="342" font-size="10" fill="#1d1d1f">[[개념명]] 연결망</text>
+<text x="460" y="360" font-size="9" fill="#7a7a7a">[[rate-limit]] 참조 시</text>
+<text x="460" y="376" font-size="9" fill="#7a7a7a">양쪽 노트에서 연결 확인</text>
+<text x="460" y="396" font-size="9" fill="#7a7a7a">backlink로 역추적 가능</text>
+<text x="460" y="412" font-size="9" fill="#7a7a7a">지식이 그물망으로 성장</text>
+<text x="460" y="428" font-size="8.5" fill="#888899">Obsidian Graph View</text>
+
+<!-- 원리 4: 자동 파이프라인 -->
+<rect x="665" y="299" width="215" height="134" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<rect x="665" y="299" width="215" height="28" rx="8" fill="#0066cc" opacity="0.12"/>
+<rect x="665" y="313" width="215" height="14" fill="#0066cc" opacity="0.12"/>
+<text x="772" y="318" text-anchor="middle" font-size="11" font-weight="bold" fill="#0066cc">원리 4: 자동 파이프라인</text>
+<text x="675" y="342" font-size="10" fill="#1d1d1f">팀원은 그냥 일하면 됨</text>
+<text x="675" y="360" font-size="9" fill="#7a7a7a">inbox/ 에 파일 투입</text>
+<text x="675" y="376" font-size="9" fill="#7a7a7a">→ 10초마다 자동 감지</text>
+<text x="675" y="392" font-size="9" fill="#7a7a7a">→ 파이프라인 자동 실행</text>
+<text x="675" y="408" font-size="9" fill="#7a7a7a">→ 지식 자동 적립</text>
+<text x="675" y="428" font-size="8.5" fill="#888899">inbox-watch.sh (5장)</text>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="352" viewBox="0 0 900 440" font-family="Gulim, Noto Sans CJK KR, Arial, sans-serif">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0066cc"/></marker>
+  <marker id="arrr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#cc3300"/></marker>
+</defs>
+<rect width="900" height="440" fill="#f5f5f7"/>
+
+<!-- 제목 -->
+<rect x="20" y="14" width="860" height="46" rx="10" fill="#0066cc"/>
+<text x="450" y="32" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">보고 체계 흐름도 — pane-send vs claude-send</text>
+<text x="450" y="50" text-anchor="middle" font-size="11" fill="#cce0ff">단방향 보고: 팀원 → 민준 → 쭌 → Allen</text>
+
+<!-- 왼쪽 제목: 올바른 흐름 -->
+<rect x="20" y="76" width="410" height="28" rx="6" fill="#e8f4ff" stroke="#0066cc" stroke-width="1"/>
+<text x="225" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">✓ 올바른 보고 흐름</text>
+
+<!-- 올바른 흐름: 팀원 -->
+<rect x="60" y="118" width="320" height="44" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="220" y="136" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">팀원 (서연·지훈·수아·태양)</text>
+<text x="220" y="153" text-anchor="middle" font-size="10" fill="#7a7a7a">작업 완료 보고</text>
+
+<!-- 올바른: 화살표 + 스크립트 -->
+<line x1="220" y1="162" x2="220" y2="186" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="120" y="166" width="200" height="18" rx="4" fill="#e8f4ff"/>
+<text x="220" y="179" text-anchor="middle" font-size="10" fill="#0066cc" font-family="Courier New, monospace">pane-send.sh → Pane 1</text>
+
+<!-- 올바른: 민준 -->
+<rect x="60" y="188" width="320" height="44" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="220" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">민준 (Pane 1, PM)</text>
+<text x="220" y="223" text-anchor="middle" font-size="10" fill="#7a7a7a">보고 수집 · Phase 판단</text>
+
+<line x1="220" y1="232" x2="220" y2="256" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="120" y="236" width="200" height="18" rx="4" fill="#e8f4ff"/>
+<text x="220" y="249" text-anchor="middle" font-size="10" fill="#0066cc" font-family="Courier New, monospace">pane-send.sh → Pane 0</text>
+
+<!-- 올바른: 쭌 -->
+<rect x="60" y="258" width="320" height="44" rx="8" fill="#ffffff" stroke="#0066cc" stroke-width="1.5"/>
+<text x="220" y="276" text-anchor="middle" font-size="12" font-weight="bold" fill="#0066cc">쭌 (Pane 0, 팀장)</text>
+<text x="220" y="293" text-anchor="middle" font-size="10" fill="#7a7a7a">Phase 단위 보고 수신·정리</text>
+
+<line x1="220" y1="302" x2="220" y2="326" stroke="#0066cc" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="100" y="306" width="240" height="18" rx="4" fill="#e8f4ff"/>
+<text x="220" y="319" text-anchor="middle" font-size="10" fill="#0066cc" font-family="Courier New, monospace">openclaw telegram → Allen</text>
+
+<!-- 올바른: Allen -->
+<rect x="60" y="328" width="320" height="44" rx="8" fill="#1d1d1f"/>
+<text x="220" y="350" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">Allen (실제 사용자)</text>
+<text x="220" y="367" text-anchor="middle" font-size="10" fill="#c7c7cc">최종 보고 수신</text>
+
+<!-- 구분선 -->
+<line x1="450" y1="76" x2="450" y2="390" stroke="#c7c7cc" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+<!-- 오른쪽 제목: 잘못된 흐름 -->
+<rect x="470" y="76" width="410" height="28" rx="6" fill="#fff0ed" stroke="#cc3300" stroke-width="1"/>
+<text x="675" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc3300">✗ 잘못된 사례 (역할 혼선)</text>
+
+<!-- 잘못된 흐름 -->
+<rect x="510" y="118" width="320" height="44" rx="8" fill="#ffffff" stroke="#cc3300" stroke-width="1.5"/>
+<text x="670" y="136" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc3300">쭌이 민준에게 내부 위임</text>
+<text x="670" y="153" text-anchor="middle" font-size="10" fill="#7a7a7a">claude-send.sh를 실수로 사용</text>
+
+<line x1="670" y1="162" x2="670" y2="186" stroke="#cc3300" stroke-width="2" marker-end="url(#arrr)"/>
+<rect x="570" y="166" width="200" height="18" rx="4" fill="#fff0ed"/>
+<text x="670" y="179" text-anchor="middle" font-size="10" fill="#cc3300" font-family="Courier New, monospace">[telegram:56518471] 프리픽스</text>
+
+<rect x="510" y="188" width="320" height="44" rx="8" fill="#ffffff" stroke="#cc3300" stroke-width="1.5"/>
+<text x="670" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc3300">민준이 Bot Mode 발동</text>
+<text x="670" y="223" text-anchor="middle" font-size="10" fill="#7a7a7a">텔레그램 응답 중계 역할 혼선</text>
+
+<line x1="670" y1="232" x2="670" y2="256" stroke="#cc3300" stroke-width="2" marker-end="url(#arrr)"/>
+
+<rect x="510" y="258" width="320" height="44" rx="8" fill="#fff0ed" stroke="#cc3300" stroke-width="1.5"/>
+<text x="670" y="276" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc3300">민준이 Allen에게 직접 텔레그램</text>
+<text x="670" y="293" text-anchor="middle" font-size="10" fill="#7a7a7a">❌ 건너뛰기 · 역할 외 행동</text>
+
+<!-- 핵심 규칙 -->
+<rect x="470" y="320" width="410" height="60" rx="8" fill="#fff8e8" stroke="#cc6600" stroke-width="1"/>
+<text x="675" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#cc6600">⚠️ 혼용 금지 규칙</text>
+<text x="675" y="358" text-anchor="middle" font-size="10" fill="#7a7a7a">내부 팀 통신 → pane-send.sh (Bot Mode 미발동)</text>
+<text x="675" y="374" text-anchor="middle" font-size="10" fill="#7a7a7a">Allen 텔레그램 → claude-send.sh (쭌만 사용)</text>
+
+<!-- 하단 -->
+<rect x="20" y="400" width="860" height="28" rx="6" fill="#f0f0f0"/>
+<text x="450" y="419" text-anchor="middle" font-size="11" fill="#7a7a7a">💡 발신자 태그 필수: 【서연 보고】, 【민준 보고】 — 누가 보낸 보고인지 한눈에 식별</text>
+</svg>
