@@ -97,7 +97,7 @@ function ProjectVisual({ project, index }) {
               key={copy}
               style={{
                 border: '1px solid rgba(0,0,0,0.08)',
-                borderRadius: '11px',
+                borderRadius: 'var(--radius-cards)',
                 padding: '16px',
                 backgroundColor: 'var(--color-canvas)',
               }}

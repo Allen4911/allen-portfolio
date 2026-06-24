@@ -210,7 +210,7 @@ export default function AboutPage() {
                       fontWeight: '600',
                       padding: '4px 10px',
                       borderRadius: '100px',
-                      backgroundColor: pub.status === '출판됨' ? 'var(--color-primary)' : '#e0e0e0',
+                      backgroundColor: pub.status === '출판됨' ? 'var(--color-onyx-button)' : '#e0e0e0',
                       color: pub.status === '출판됨' ? '#ffffff' : 'var(--color-ink-muted-48)',
                       whiteSpace: 'nowrap',
                     }}
