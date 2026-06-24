@@ -109,7 +109,7 @@ export default function BlogClientPage({ posts, categories }: BlogClientPageProp
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
-                      color: '#0066cc',
+                      color: '#0098f2',
                     }}
                   >
                     {post.category}

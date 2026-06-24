@@ -1,7 +1,15 @@
 import Link from 'next/link'
 import Tag from '@/components/ui/Tag'
 
-function ProjectVisual({ project }) {
+const washColors = [
+  'var(--color-wash-sky)',
+  'var(--color-wash-lilac)',
+  'var(--color-wash-petal)',
+]
+
+function ProjectVisual({ project, index }) {
+  const wash = washColors[index % 3]
+
   if (project.image) {
     return (
       <div
@@ -10,7 +18,7 @@ function ProjectVisual({ project }) {
           width: '100%',
           maxWidth: '620px',
           margin: '0 auto 40px',
-          backgroundColor: 'var(--color-surface-pearl)',
+          backgroundColor: wash,
           overflow: 'hidden',
         }}
         aria-hidden="true"
@@ -31,7 +39,7 @@ function ProjectVisual({ project }) {
         width: '100%',
         maxWidth: '620px',
         margin: '0 auto 40px',
-        backgroundColor: 'var(--color-surface-pearl)',
+        backgroundColor: wash,
       }}
       aria-hidden="true"
     >
@@ -131,7 +139,7 @@ export default function ProjectTile({ project, index }) {
         }}
       >
         <div>
-          <p className="text-tagline" style={{ color: 'var(--color-primary)', marginBottom: '12px' }}>
+          <p className="eyebrow-tag" style={{ marginBottom: '12px' }}>
             {project.category}
           </p>
 
@@ -165,7 +173,7 @@ export default function ProjectTile({ project, index }) {
             ))}
           </div>
 
-          <ProjectVisual project={project} />
+          <ProjectVisual project={project} index={index} />
 
           <div
             style={{

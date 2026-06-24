@@ -34,7 +34,7 @@ module.exports = {
         /* ── Legacy aliases — Phase2 bridge ── */
         primary:           '#0098f2',
         'primary-focus':   '#0098f2',
-        'primary-on-dark': '#0098f2',
+
         ink:               '#0f0f0f',
         body:              '#0f0f0f',
         'body-on-dark':    '#ffffff',

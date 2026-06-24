@@ -74,7 +74,7 @@ export default function ReactMarkdownRenderer({ content }) {
           a: ({ href, children }) => (
             <a
               href={href}
-              style={{ color: '#0066cc', textDecoration: 'underline' }}
+              style={{ color: '#0f0f0f', textDecoration: 'underline' }}
               target={href?.startsWith('http') ? '_blank' : undefined}
               rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
             >
@@ -92,7 +92,7 @@ export default function ReactMarkdownRenderer({ content }) {
                     borderRadius: '4px',
                     fontSize: '14px',
                     fontFamily: 'Menlo, Consolas, "Courier New", monospace',
-                    color: '#0066cc',
+                    color: '#0d111b',
                   }}
                 >
                   {children}
@@ -162,7 +162,7 @@ export default function ReactMarkdownRenderer({ content }) {
           blockquote: ({ children }) => (
             <blockquote
               style={{
-                borderLeft: '3px solid #0066cc',
+                borderLeft: '3px solid #afb0b1',
                 paddingLeft: '20px',
                 marginLeft: '0',
                 marginBottom: '16px',

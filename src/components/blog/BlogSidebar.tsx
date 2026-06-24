@@ -163,7 +163,7 @@ export default function BlogSidebar({
                         ? 'pl-3 toc-level-3 text-[13px]'
                         : 'toc-level-2',
                       activeHeading === item.id
-                        ? 'active text-[#0066cc] dark:text-[#2997ff] font-[500]'
+                        ? 'active text-[#0d111b] dark:text-white font-[500]'
                         : 'text-[#7a7a7a] dark:text-[#8a8a8e] hover:text-[#1d1d1f] dark:hover:text-white',
                     ].join(' ')}
                   >
@@ -195,7 +195,7 @@ export default function BlogSidebar({
                 >
                   <span className={[
                     'mt-0.5 min-w-[18px] text-[11px] font-[600] tabular-nums',
-                    item.current ? 'text-[#0066cc] dark:text-[#2997ff]' : 'text-[#cccccc] dark:text-[#48484a]',
+                    item.current ? 'text-[#0d111b] dark:text-white' : 'text-[#cccccc] dark:text-[#48484a]',
                   ].join(' ')}>
                     {String(item.index).padStart(2, '0')}
                   </span>
@@ -236,7 +236,7 @@ export default function BlogSidebar({
                   href={tutorial.href}
                   className="group block transition-colors duration-150"
                 >
-                  <div className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white group-hover:text-[#0066cc] dark:group-hover:text-[#2997ff] transition-colors duration-150 leading-snug mb-1">
+                  <div className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white group-hover:text-[#0d111b] dark:group-hover:text-white transition-colors duration-150 leading-snug mb-1">
                     {tutorial.title}
                   </div>
                   <div className="flex items-center gap-2">
@@ -269,7 +269,7 @@ export default function BlogSidebar({
                 <a
                   href={post.href}
                   data-testid={`trending-post-${i + 1}`}
-                  className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors duration-150 leading-snug"
+                  className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white hover:text-[#0d111b] dark:hover:text-white transition-colors duration-150 leading-snug"
                 >
                   {post.title}
                 </a>
@@ -290,7 +290,7 @@ export default function BlogSidebar({
                   data-testid={`recent-post-${post.id}`}
                   className="group block"
                 >
-                  <div className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white group-hover:text-[#0066cc] dark:group-hover:text-[#2997ff] transition-colors duration-150 leading-snug mb-0.5">
+                  <div className="text-[13px] font-[500] text-[#1d1d1f] dark:text-white group-hover:text-[#0d111b] dark:group-hover:text-white transition-colors duration-150 leading-snug mb-0.5">
                     {post.title}
                   </div>
                   <div className="text-[11px] text-[#7a7a7a] dark:text-[#8a8a8e]">{post.date}</div>
@@ -326,7 +326,7 @@ export default function BlogSidebar({
             data-testid="github-link"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[13px] text-[#1d1d1f] dark:text-white hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors duration-150 group"
+            className="inline-flex items-center gap-2 text-[13px] text-[#1d1d1f] dark:text-white hover:text-[#0d111b] dark:hover:text-white transition-colors duration-150 group"
           >
             <svg
               width="16"
@@ -375,7 +375,7 @@ export default function BlogSidebar({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full px-3 py-2 text-[13px] rounded-md border border-[#e0e0e0] dark:border-[#3a3a3c] bg-white dark:bg-[#1c1c1e] text-[#1d1d1f] dark:text-white placeholder:text-[#cccccc] dark:placeholder:text-[#48484a] focus:outline-none focus:border-[#0066cc] dark:focus:border-[#2997ff] transition-colors duration-150"
+                className="w-full px-3 py-2 text-[13px] rounded-md border border-[#e0e0e0] dark:border-[#3a3a3c] bg-white dark:bg-[#1c1c1e] text-[#1d1d1f] dark:text-white placeholder:text-[#cccccc] dark:placeholder:text-[#48484a] focus:outline-none focus:border-[#0d111b] dark:focus:border-[#ffffff] transition-colors duration-150"
               />
               <button
                 data-testid="newsletter-submit"

@@ -25,10 +25,7 @@ export default function HeroSection() {
         <div className="hero-inner">
           {/* Text column */}
           <div className="hero-text">
-            <p
-              className="text-tagline"
-              style={{ color: 'var(--color-primary)', marginBottom: '12px' }}
-            >
+            <p className="eyebrow-tag" style={{ marginBottom: '12px' }}>
               Frontend Developer
             </p>
 

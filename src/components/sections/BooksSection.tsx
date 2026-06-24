@@ -1,5 +1,11 @@
 import { books } from '@/data/books'
 
+const washColors = [
+  'var(--color-wash-sky)',
+  'var(--color-wash-lilac)',
+  'var(--color-wash-petal)',
+]
+
 interface BooksSectionProps {
   id?: string
 }
@@ -14,6 +20,7 @@ export default function BooksSection({ id }: BooksSectionProps) {
     >
       <div style={{ maxWidth: '980px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <p className="eyebrow-tag" style={{ marginBottom: '12px' }}>Publications</p>
           <h2 className="text-display-lg" style={{ marginBottom: '12px' }}>
             Books
           </h2>
@@ -29,7 +36,7 @@ export default function BooksSection({ id }: BooksSectionProps) {
             gap: '24px',
           }}
         >
-          {books.map((book) => (
+          {books.map((book, i) => (
             <div
               key={book.id}
               className="card-utility"
@@ -39,9 +46,9 @@ export default function BooksSection({ id }: BooksSectionProps) {
                 style={{
                   width: '100%',
                   aspectRatio: '3/4',
-                  borderRadius: '8px',
+                  borderRadius: 'var(--radius-images)',
                   overflow: 'hidden',
-                  backgroundColor: 'var(--color-canvas-parchment)',
+                  backgroundColor: washColors[i % 3],
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

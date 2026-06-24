@@ -30,7 +30,7 @@ export const skills: Skill[] = [
 ]
 
 export const levelColors: Record<SkillLevel, LevelColor> = {
-  Advanced: { bg: '#0066cc', text: '#ffffff' },
+  Advanced: { bg: '#0d111b', text: '#ffffff' },
   Intermediate: { bg: '#e0e0e0', text: '#1d1d1f' },
   Beginner: { bg: '#f5f5f7', text: '#7a7a7a' },
 }

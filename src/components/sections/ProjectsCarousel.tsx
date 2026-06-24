@@ -124,7 +124,7 @@ export default function ProjectsCarousel({ projects }) {
               borderRadius: '4px',
               border: 'none',
               backgroundColor: selectedIndex === index
-                ? 'var(--color-primary)'
+                ? 'var(--color-invoice-blue)'
                 : 'var(--color-hairline)',
               cursor: 'pointer',
               padding: 0,

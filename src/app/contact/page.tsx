@@ -43,16 +43,7 @@ export default function ContactPage() {
         aria-label="Contact"
       >
         <div style={{ maxWidth: '600px', width: '100%' }}>
-          <p
-            style={{
-              fontSize: '21px',
-              fontWeight: '600',
-              lineHeight: '1.19',
-              letterSpacing: '0.231px',
-              color: '#0066cc',
-              marginBottom: '12px',
-            }}
-          >
+          <p className="eyebrow-tag" style={{ marginBottom: '12px' }}>
             Contact
           </p>
 
@@ -129,7 +120,7 @@ export default function ContactPage() {
                     fontWeight: '600',
                     lineHeight: '1.29',
                     letterSpacing: '-0.224px',
-                    color: '#0066cc',
+                    color: '#0d111b',
                     minWidth: '60px',
                     textAlign: 'right',
                   }}

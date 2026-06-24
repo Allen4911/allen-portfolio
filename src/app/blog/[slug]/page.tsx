@@ -41,7 +41,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     <div data-testid="blog-post-page">
       <div className="max-w-[1080px] mx-auto px-6 pt-8 pb-4">
         <nav className="text-[12px] text-[#7a7a7a] dark:text-[#8a8a8e]">
-          <a href="/blog" className="hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors">Blog</a>
+          <a href="/blog" className="hover:text-[#0d111b] dark:hover:text-white transition-colors">Blog</a>
           <span className="mx-1.5">›</span>
           <span className="text-[#1d1d1f] dark:text-white">{post.category}</span>
         </nav>
@@ -61,7 +61,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       >
         <article data-testid="blog-article" className="max-w-[680px]">
           <div className="mb-6">
-            <span className="text-[11px] font-[600] uppercase tracking-[0.08em] text-[#0066cc] dark:text-[#2997ff]">
+            <span className="text-[11px] font-[600] uppercase tracking-[0.08em] text-[#0098f2]">
               {post.category}
             </span>
             <h1 className="font-display text-[34px] font-[600] tracking-[-0.374px] leading-[1.24] mt-2 mb-3 text-[#1d1d1f] dark:text-white">

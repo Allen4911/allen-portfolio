@@ -5,7 +5,7 @@
 export default function Tag({ children, variant = 'default', className = '' }) {
   const variantClasses = {
     default: 'bg-[#f5f5f7] text-[#7a7a7a]',
-    primary: 'bg-[#0066cc] text-white',
+    primary: 'bg-[#0d111b] text-white',
     dark: 'bg-[#272729] text-[#cccccc]',
     outline: 'border border-[#e0e0e0] text-[#7a7a7a] bg-transparent',
     'outline-dark': 'border border-[#3a3a3c] text-[#cccccc] bg-transparent',

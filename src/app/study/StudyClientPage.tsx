@@ -31,7 +31,7 @@ export default function StudyClientPage({ notes, categories }) {
         aria-label="Study notes header"
       >
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <p className="text-tagline" style={{ color: '#0066cc', marginBottom: '12px' }}>
+          <p className="eyebrow-tag" style={{ marginBottom: '12px' }}>
             Learning Log
           </p>
           <h1
@@ -180,8 +180,8 @@ export default function StudyClientPage({ notes, categories }) {
         }
 
         .search-input:focus {
-          border-color: #0066cc !important;
-          box-shadow: 0 0 0 2px rgba(0,102,204,0.12);
+          border-color: #0d111b !important;
+          box-shadow: 0 0 0 2px rgba(13,17,27,0.12);
         }
 
         .filter-btn:active {
